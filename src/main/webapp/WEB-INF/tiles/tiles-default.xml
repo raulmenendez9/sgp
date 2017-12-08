@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<!-- Definición de Tile original que se basa en el archivo "_template.jsp" 
+		este archivo debe tener definiciones de atributos "titulo", "menu_navegacion", 
+		"content" y "menu_usuario" por lo menos -->
+	<definition name="defaultTemplate" template="WEB-INF/template/_template.jsp">
+		<put-attribute name="titulo" value="SCONTA" />
+		<put-attribute name="menu_navegacion" value="/WEB-INF/menu/menu_navegacion.jsp" />
+		<put-attribute name="menu_usuario" value="/WEB-INF/menu/menu_usuario.jsp" />
+		<put-attribute name="content" value="/WEB-INF/template/defaultContent.jsp" />
+		<put-attribute name="content_javascript" value="" />
+
+	</definition>
+	<!--Definición de controlador "inicio": Esta definición es la que busca 
+		el controlador por el atributo "name" Si un controlador tiene 'return "inicio";' 
+		abrirá los elementos que le corresponden Extends "defaultTemplate" utiliza 
+		la definición de arriba para heredar las páginas o textos del template original. 
+		Se puede sobreescribir cualquiera. Por ejemplo, para una pantalla de "login" 
+		podríamos utilizar <put-attribute name="menu_usuario" value=" " /> para que 
+		no salga ningún menu -->
+	<definition name="inicio" extends="defaultTemplate">
+		<put-attribute name="titulo" value="Inicio" />
+		<put-attribute name="content" value="/WEB-INF/views/home.jsp" />
+	</definition>
+	
+    
+
+	
+	
+	<definition name="Security/Rol/rol" extends="defaultTemplate">
+    	<put-attribute name="titulo" value="Gestión de Roles del Sistema" />
+		<put-attribute name="content" value="/WEB-INF/views/Security/Rol/rol.jsp"/>
+		<put-attribute name="content_javascript" value="/WEB-INF/views/Security/Rol/rol-script.jsp" />
+	</definition>
+	
+	<definition name="Variety/Error" extends="defaultTemplate">
+    	<put-attribute name="titulo" value="ERROR!" />
+		<put-attribute name="content" value="/WEB-INF/views/Variety/Error.jsp"/>
+	</definition>
+	
+		<!--Definicion de scripts-->
+	
+	<definition name="empleado" extends="defaultTemplate">
+    	<put-attribute name="titulo" value="Gestión de Empleados" />
+		<put-attribute name="content" value="/WEB-INF/views/empleado.jsp"/>
+		<put-attribute name="content_javascript" value="/WEB-INF/views/empleado-script.jsp" />
+	</definition>
+	
+		<definition name="usuario" extends="defaultTemplate">
+    	<put-attribute name="titulo" value="Registro de Usuarios" />
+		<put-attribute name="content" value="/WEB-INF/views/usuario.jsp"/>
+		<put-attribute name="content_javascript" value="/WEB-INF/views/usuario-script.jsp" />
+	</definition>
+	
+	<definition name="vista" extends="defaultTemplate">
+    	<put-attribute name="titulo" value="Registro de Vistas" />
+		<put-attribute name="content" value="/WEB-INF/views/vista.jsp"/>
+			<put-attribute name="content_javascript" value="/WEB-INF/views/vista-script.jsp" />
+	</definition>
+	
+	<definition name="Security/Menu/menu" extends="defaultTemplate">
+    	<put-attribute name="titulo" value="Registro de Menus" />
+		<put-attribute name="content" value="/WEB-INF/views/Security/Menu/menu.jsp"/>
+		<put-attribute name="content_javascript" value="/WEB-INF/views/Security/Menu/menu-script.jsp" />
+	</definition>
+	
+	
+	
+
+	
+	<definition name="empresa" extends="defaultTemplate">
+    	<put-attribute name="titulo" value="Registro de Empresas" />
+		<put-attribute name="content" value="/WEB-INF/views/empresa.jsp"/>
+						<put-attribute name="content_javascript" value="/WEB-INF/views/empresa-script.jsp" />
+	</definition>
+	
+	
+	
+
+	
+
+		
+	
+</tiles-definitions>
