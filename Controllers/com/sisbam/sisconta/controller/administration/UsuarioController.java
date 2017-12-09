@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sisbam.sisconta.configuration.AuthorizedService;
+import com.sisbam.sisconta.controller.variety.ObtenerPermisosPorUrl;
 import com.sisbam.sisconta.dao.DaoImp;
 import com.sisbam.sisconta.entity.administration.Empleado;
 import com.sisbam.sisconta.entity.administration.Empresa;
 import com.sisbam.sisconta.entity.administration.Usuario;
+import com.sisbam.sisconta.entity.security.Permisos;
 import com.sisbam.sisconta.entity.security.Rol;
 import com.sisbam.sisconta.entity.security.Vista;;
 
@@ -31,11 +34,13 @@ public class UsuarioController {
 	@Autowired
 	private DaoImp manage_entity;
 	
+	private String path ="Administration/Usuario/";
+	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
 	
-	
+	private Permisos permisos;
 	 
 	
 	/*
@@ -45,26 +50,20 @@ public class UsuarioController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/usuarios", method = RequestMethod.GET)
 	public String index(Model model, HttpServletRequest request) {
-		
+		String retorno = "403";
+		ObtenerPermisosPorUrl obtener = new ObtenerPermisosPorUrl();
+		this.permisos = obtener.Obtener("/sisconta/usuarios", request, manage_entity);
 		
 //*************CARGAR BOTONES PERMITIDOS******************
- 		
-		model.addAttribute("create",true);
-		model.addAttribute("read",true);
-		model.addAttribute("update",true);
-		model.addAttribute("delete",true);
+		model.addAttribute("create",permisos.isC());
+		model.addAttribute("read",	permisos.isR());
+		model.addAttribute("update",permisos.isU());
+		model.addAttribute("delete",permisos.isD());
 //**********************************************************
 		
 		
 //****ASIGNAR LOS PERMISOS PARA LAS URL********
-
-		
-		String retorno = "403";
-		String username = request.getUserPrincipal().getName();
-		String rol = AuthorizedService.getRol(manage_entity, username);
-		model.addAttribute("rol", rol);
-		boolean authorized = AuthorizedService.getRolAuthorization(manage_entity, username, "usuario");
-		if(authorized){
+			if(permisos.isR()) {
 			Usuario usuario = new Usuario();
 			model.addAttribute("usuarioForm", usuario);
 			model.addAttribute("usuario", null);
@@ -78,9 +77,10 @@ public class UsuarioController {
 			model.addAttribute("roles", roles);
 			model.addAttribute("empresas", empresas);
 			model.addAttribute("empleados", empleados);
-			retorno = "usuario";
-		}
-		return retorno;
+			retorno = path+"usuario";
+			}
+			
+			return retorno;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -89,11 +89,7 @@ public class UsuarioController {
 		
 		
 		String retorno = "403";
-		String username = request.getUserPrincipal().getName();
-		String rol = AuthorizedService.getRol(manage_entity, username);
-		model.addAttribute("rol", rol);
-		boolean authorized = AuthorizedService.getRolAuthorization(manage_entity, username, "usuario-form");
-		if(authorized){
+		if(permisos.isC()){
 			Usuario usuario = new Usuario();
 			List<Rol> roles = (List<Rol>) this.manage_entity.getAll("Rol");
 			List<Empresa> empresas = (List<Empresa>) this.manage_entity.getAll("Empresa");
@@ -103,7 +99,7 @@ public class UsuarioController {
 			model.addAttribute("roles", roles);
 			model.addAttribute("empresas", empresas);
 			model.addAttribute("empleados", empleados);
-			retorno = "usuario-form";
+			retorno = path+"usuario-form";
 		}
 		return retorno;
 		
@@ -111,6 +107,7 @@ public class UsuarioController {
 	
 	@RequestMapping(value = "/usuarios/add", method = RequestMethod.POST)
 	public String saveOrUpadateUsuario(@ModelAttribute("usuarioForm") Usuario usuarioRecibido) throws ClassNotFoundException {
+		if(permisos.isC()||permisos.isU()){
 		Usuario usuario = usuarioRecibido;
 		Rol rolSeleccionado = (Rol) this.manage_entity.getById(Rol.class.getName(), usuario.getIdRol());	
 		Empresa EmpresaSeleccionada = (Empresa) this.manage_entity.getById(Empresa.class.getName(), usuario.getIdEmpresa());
@@ -126,6 +123,7 @@ public class UsuarioController {
 		}else{
 			manage_entity.update(Usuario.class.getName(), usuario);
 		}
+		}
 		return "redirect:/usuarios";
 	}
 	
@@ -133,9 +131,7 @@ public class UsuarioController {
 	@RequestMapping(value = "/usuarios/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") String usuarioId, Model model, HttpServletRequest request) throws ClassNotFoundException {
 		
-		
-		
-		
+		if(permisos.isU()) {
 		String username = request.getUserPrincipal().getName();
 		String rol = AuthorizedService.getRol(manage_entity, username);
 		model.addAttribute("rol", rol);
@@ -153,7 +149,8 @@ public class UsuarioController {
 		model.addAttribute("roles", roles);
 		model.addAttribute("empresas", empresas);
 		model.addAttribute("empleados", empleados);
-		return "usuario-form";
+		}
+		return path+"usuario-form";
 	}
 	
 	/*
@@ -162,7 +159,7 @@ public class UsuarioController {
 	 */
 	@RequestMapping(value = "/usuarios/delete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable("id") String usuarioId, Model model) throws ClassNotFoundException {
-		
+		if(permisos.isD()) {
 		Usuario usuario = (Usuario) manage_entity.getById(Usuario.class.getName(), Integer.parseInt(usuarioId));
 		manage_entity.delete(Usuario.class.getName(), usuario);
 		model.addAttribute("usuario", usuario);
@@ -173,6 +170,7 @@ public class UsuarioController {
 		@SuppressWarnings("unchecked")
 		List<Usuario> usuarios = (List<Usuario>) this.manage_entity.getAll("Usuario");
 		model.addAttribute("usuarios", usuarios);
+		}
 		return "redirect:/usuarios";
 	}
 

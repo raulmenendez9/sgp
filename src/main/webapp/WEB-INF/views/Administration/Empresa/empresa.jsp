@@ -89,7 +89,7 @@
 												</label>
 												<div class="col-sm-8">
 													<form:input path="politicas" class="form-control"
-														placeholder="Politicas" type="text" id="us"
+														placeholder="Razon Social" type="text" id="us"
 														value="${empresa.politicas }" />
 												</div>
 											</div>
@@ -175,7 +175,7 @@
 												</label>
 												<div class="col-sm-8">
 													<form:input path="politicas" class="form-control"
-														placeholder="Politicas" type="text" id="us"
+														placeholder="Razon Social" type="text" id="us"
 														value="${empresa.politicas }" />
 												</div>
 											</div>

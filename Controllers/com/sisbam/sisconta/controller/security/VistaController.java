@@ -26,6 +26,7 @@ public class VistaController {
 	@Autowired
 	private DaoImp manage_entity;
 	
+	private String path="Security/Vista/";
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/vistas", method = RequestMethod.GET)
@@ -49,7 +50,7 @@ public class VistaController {
 			
 
 			
-			retorno = "vista";
+			retorno = path+"vista";
 		}
 		return retorno;
 	}
@@ -72,7 +73,7 @@ public class VistaController {
 			model.addAttribute("vistaForm", vista);
 			model.addAttribute("vista", null);
 			model.addAttribute("menus", menus);
-			retorno = "vista-form";
+			retorno = path+"vista-form";
 		}
 		return retorno;
 		
@@ -90,16 +91,12 @@ public class VistaController {
 		}else{
 			manage_entity.update(Vista.class.getName(), vista);
 		}
-		return "redirect:/vistas";
+		return "redirect:/menus";
 	}
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/vistas/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") String vistaId, Model model, HttpServletRequest request) throws ClassNotFoundException {
-		
-		
-		
-		
 		
 		String username = request.getUserPrincipal().getName();
 		String rol = AuthorizedService.getRol(manage_entity, username);
@@ -113,7 +110,7 @@ public class VistaController {
 		
 		List<Menu> menus = (List<Menu>) this.manage_entity.getAll("Menu");
 		model.addAttribute("menus", menus);
-		return "vista-form";
+		return path+"vista-form";
 	}
 	
 	

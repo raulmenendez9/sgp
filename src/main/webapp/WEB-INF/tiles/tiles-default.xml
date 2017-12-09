@@ -26,62 +26,47 @@
 		<put-attribute name="content" value="/WEB-INF/views/home.jsp" />
 	</definition>
 	
-    
-
-	
-	
+<!-- 	SECURITY -->
 	<definition name="Security/Rol/rol" extends="defaultTemplate">
-    	<put-attribute name="titulo" value="Gestión de Roles del Sistema" />
-		<put-attribute name="content" value="/WEB-INF/views/Security/Rol/rol.jsp"/>
-		<put-attribute name="content_javascript" value="/WEB-INF/views/Security/Rol/rol-script.jsp" />
+		<put-attribute name="titulo" value="Gestión de Roles del Sistema" />
+		<put-attribute name="content" value="/WEB-INF/views/Security/Rol/rol.jsp" />
+		<put-attribute name="content_javascript"
+			value="/WEB-INF/views/Security/Rol/rol-script.jsp" />
 	</definition>
+	<definition name="Security/Menu/menu" extends="defaultTemplate">
+		<put-attribute name="titulo" value="Registro de Menus" />
+		<put-attribute name="content" value="/WEB-INF/views/Security/Menu/menu.jsp" />
+		<put-attribute name="content_javascript"
+			value="/WEB-INF/views/Security/Menu/menu-script.jsp" />
+	</definition>
+	<definition name="Security/Vista/vista" extends="defaultTemplate">
+    	<put-attribute name="titulo" value="Registro de Vistas" />
+		<put-attribute name="content" value="/WEB-INF/views/Security/Vista/vista.jsp"/>
+			<put-attribute name="content_javascript" value="/WEB-INF/views/Security/Vista/vista-script.jsp" />
+	</definition>
+<!--    /SECURITY -->
 	
+<!-- 	ADMINISTRATION -->
+	<definition name="Administration/Usuario/usuario" extends="defaultTemplate">
+    	<put-attribute name="titulo" value="Registro de Usuarios" />
+		<put-attribute name="content" value="/WEB-INF/views/Administration/Usuario/usuario.jsp"/>
+		<put-attribute name="content_javascript" value="/WEB-INF/views/Administration/Usuario/usuario-script.jsp" />
+	</definition>
+	<definition name="Administration/Empresa/empresa" extends="defaultTemplate">
+    	<put-attribute name="titulo" value="Registro de Empresas" />
+		<put-attribute name="content" value="/WEB-INF/views/Administration/Empresa/empresa.jsp"/>
+		<put-attribute name="content_javascript" value="/WEB-INF/views/Administration/Empresa/empresa-script.jsp" />
+	</definition>
+<!-- 	/ADMINISTRATION -->	
+	
+<!-- 	VARIETY -->
 	<definition name="Variety/Error" extends="defaultTemplate">
     	<put-attribute name="titulo" value="ERROR!" />
 		<put-attribute name="content" value="/WEB-INF/views/Variety/Error.jsp"/>
 	</definition>
-	
-		<!--Definicion de scripts-->
-	
-	<definition name="empleado" extends="defaultTemplate">
-    	<put-attribute name="titulo" value="Gestión de Empleados" />
-		<put-attribute name="content" value="/WEB-INF/views/empleado.jsp"/>
-		<put-attribute name="content_javascript" value="/WEB-INF/views/empleado-script.jsp" />
+	<definition name="403" extends="defaultTemplate">
+    	<put-attribute name="titulo" value="ERROR!" />
+		<put-attribute name="content" value="/WEB-INF/views/403.jsp"/>
 	</definition>
-	
-		<definition name="usuario" extends="defaultTemplate">
-    	<put-attribute name="titulo" value="Registro de Usuarios" />
-		<put-attribute name="content" value="/WEB-INF/views/usuario.jsp"/>
-		<put-attribute name="content_javascript" value="/WEB-INF/views/usuario-script.jsp" />
-	</definition>
-	
-	<definition name="vista" extends="defaultTemplate">
-    	<put-attribute name="titulo" value="Registro de Vistas" />
-		<put-attribute name="content" value="/WEB-INF/views/vista.jsp"/>
-			<put-attribute name="content_javascript" value="/WEB-INF/views/vista-script.jsp" />
-	</definition>
-	
-	<definition name="Security/Menu/menu" extends="defaultTemplate">
-    	<put-attribute name="titulo" value="Registro de Menus" />
-		<put-attribute name="content" value="/WEB-INF/views/Security/Menu/menu.jsp"/>
-		<put-attribute name="content_javascript" value="/WEB-INF/views/Security/Menu/menu-script.jsp" />
-	</definition>
-	
-	
-	
-
-	
-	<definition name="empresa" extends="defaultTemplate">
-    	<put-attribute name="titulo" value="Registro de Empresas" />
-		<put-attribute name="content" value="/WEB-INF/views/empresa.jsp"/>
-						<put-attribute name="content_javascript" value="/WEB-INF/views/empresa-script.jsp" />
-	</definition>
-	
-	
-	
-
-	
-
-		
-	
+<!-- 	/VARIETY -->	
 </tiles-definitions>

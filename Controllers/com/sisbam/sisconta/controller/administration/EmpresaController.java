@@ -25,6 +25,8 @@ public class EmpresaController {
 	@Autowired
 	private DaoImp manage_entity;
 	
+	private String path = "Administration/Empresa/";
+	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/empresas", method = RequestMethod.GET)
 	public String index(Model model, HttpServletRequest request) {
@@ -41,12 +43,11 @@ public class EmpresaController {
 			model.addAttribute("empresa", null);
 			List<Empresa> empresas = (List<Empresa>) this.manage_entity.getAll("Empresa");
 			model.addAttribute("empresas", empresas);
-			retorno = "empresa";
+			retorno = path+"empresa";
 		}
 		return retorno;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/empresas/add", method = RequestMethod.GET)
 	public String addEmpresa(Model model, HttpServletRequest request)  {
 		
@@ -61,7 +62,7 @@ public class EmpresaController {
 			Empresa empresa = new Empresa();
 			model.addAttribute("empresaForm", empresa);
 			model.addAttribute("empresa", null);
-			retorno = "empresa-form";
+			retorno = path+"empresa-form";
 		}
 		return retorno;
 		
@@ -90,7 +91,7 @@ public class EmpresaController {
 		
 		List<Rol> roles = (List<Rol>) this.manage_entity.getAll("Rol");
 		model.addAttribute("roles", roles);
-		return "empresa-form";
+		return path+"empresa-form";
 	}
 	
 	/*

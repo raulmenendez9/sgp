@@ -36,15 +36,24 @@ public class HomeController {
 		
 		HttpSession session = request.getSession();
 		
-		//**************cargar el menu lateral*******************
+//		*************Cargar el usuario y el Rol actual***************
 		Principal user = request.getUserPrincipal();
+		Usuario usuario = (Usuario) manage_entity.getByName(Usuario.class.getName(),"username", user.getName());
+		Rol rol = (Rol) manage_entity.getByName(Rol.class.getName(), "idRol", usuario.getRol().getIdRol().toString());
+		session.setAttribute("rol_usuarioactual", rol);
+		session.setAttribute("usuarioactual", usuario);
+		
+		//**************cargar el menu lateral*******************
+		
 		List<Vista> vistas = (List<Vista>) manage_entity.getAll(Vista.class.getName());
 		List<Menu> menus = (List<Menu>) manage_entity.getMenusByUser(user); 
+		
 		session.setAttribute("vistasx", vistas);
 		session.setAttribute("menusdelrolx", menus);
 		
 		session.setAttribute("vistas_all", vistas);
 		session.setAttribute("menus_all", menus);
+		session.setAttribute("user", user);
 		//********************************************************
 		Rol rolin = null;
 		Vista vista = null;
@@ -56,14 +65,6 @@ public class HomeController {
 			System.out.println("ERROR EN LINEA 56 HOME CONTROLLER"+e);
 		}
 		
-	
-		
-		
-		
-		
-		String username = request.getUserPrincipal().getName();
-		String rol = AuthorizedService.getRol(manage_entity, username);
-		model.addAttribute("rol", rol);
 		
 		return "inicio";
 	}
