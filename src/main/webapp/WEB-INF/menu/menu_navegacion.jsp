@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-<!-- <li class="metismenu"><div class container><IMG SRC="http://www.liocreativo.com/wp-content/uploads/2014/03/fondo-11.jpg" width="100%"> </div></li> -->
+<li class="metismenu"><div class container><IMG SRC="${pageContext.request.contextPath}/resources/img/coin.png" class="img-responsive" width="110%"> </div></li>
 
 <c:forEach items="${menusdelrolx}" var="menx">
 	<li class="metismenu"><a href="#"><i class="fa ${menx.icono} fa-fw"></i> ${menx.nombre} <span class="fa arrow"></span></a> 
