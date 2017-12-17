@@ -42,6 +42,7 @@ public class EmpresaController {
 			model.addAttribute("empresaForm", empresa);
 			model.addAttribute("empresa", null);
 			List<Empresa> empresas = (List<Empresa>) this.manage_entity.getAll("Empresa");
+			
 			model.addAttribute("empresas", empresas);
 			retorno = path+"empresa";
 		}
@@ -71,6 +72,7 @@ public class EmpresaController {
 	@RequestMapping(value = "/empresas/add", method = RequestMethod.POST)
 	public String saveOrUpadateEmpresa(@ModelAttribute("empresaForm") Empresa empresaRecibido) throws ClassNotFoundException {
 		Empresa empresa = empresaRecibido;
+		System.out.println("EMRPESA RECIBIDA:>>> "+empresaRecibido.getNombre());
 		if(empresa.getIdEmpresa()==0){
 			manage_entity.save(Empresa.class.getName(), empresa);
 		}else{
@@ -79,18 +81,12 @@ public class EmpresaController {
 		return "redirect:/empresas";
 	}
 	
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/empresas/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") String empresaId, Model model, HttpServletRequest request) throws ClassNotFoundException {
-		
 		Empresa empresa = (Empresa) manage_entity.getById(Empresa.class.getName(), Integer.parseInt(empresaId));
 		model.addAttribute("empresa", empresa);
-		
 		Empresa empresaForm = new Empresa();
 		model.addAttribute("empresaForm", empresaForm);
-		
-		List<Rol> roles = (List<Rol>) this.manage_entity.getAll("Rol");
-		model.addAttribute("roles", roles);
 		return path+"empresa-form";
 	}
 	

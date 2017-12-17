@@ -75,7 +75,7 @@ public interface Dao {
     public List<Menu> getMenusByDistict(List<Menu> menus);    
     public Permisos getPermisosByVistaAndRol(Vista vista, Rol rol);
     
-    
+    public Object getNoJumps(String entityName, String column, int id);
     
     public void procedimiento(String proc, int id);
     

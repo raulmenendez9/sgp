@@ -100,27 +100,21 @@
 								<label class="control-label col-sm-4">Username: </label>
 								<div class="col-sm-8">
 									<form:input path="username" class="form-control"
-										placeholder="Username" type="text" id="us"
+										placeholder="Username" type="text" id="us-${usuario.idUsuario }"
 										value="${usuario.username }" />
 								</div>
 							</div>
-							<div id="alerta" class="alert alert-danger collapse">
-								<a id="linkClose" href="#" class="close">&times;</a> <strong>ERROR</strong>campo
-								obligatorio
-							</div>
+							
 
 							<div class="form-group">
 								<label class="control-label col-sm-4">Contraseña: </label>
 								<div class="col-sm-8">
 									<form:password path="password" class="form-control"
-										placeholder="Contraseña" id="pass"
+										placeholder="Contraseña" id="pass-${usuario.password }"
 										value="${usuario.password }" />
 								</div>
 							</div>
-							<div id="alerta2" class="alert alert-danger collapse">
-								<a id="linkClose2" href="#" class="close">&times;</a> <strong>ERROR
-									</strong>campo obligatorio
-							</div>
+							
 
 							<div class="form-group">
 								<label class="control-label col-sm-4">Rol: </label>
@@ -246,10 +240,7 @@
 										value="${usuario.username }" />
 								</div>
 							</div>
-							<div id="alerta" class="alert alert-danger collapse">
-								<a id="linkClose" href="#" class="close">&times;</a> <strong>ERROR</strong>campo
-								obligatorio
-							</div>
+							
 
 							<div class="form-group">
 								<label class="control-label col-sm-4">Contraseña: </label>
@@ -259,10 +250,7 @@
 										value="${usuario.password }" />
 								</div>
 							</div>
-							<div id="alerta2" class="alert alert-danger collapse">
-								<a id="linkClose2" href="#" class="close">&times;</a> <strong>ERROR
-									</strong>campo obligatorio
-							</div>
+							
 
 							<div class="form-group">
 								<label class="control-label col-sm-4">Rol: </label>

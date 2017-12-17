@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+
 <div class="col-lg-12">
 
 	<div class="container col-sm-12">
@@ -67,7 +68,7 @@
 									</div>
 									<div class="modal-body">
 										<form:form method="post" modelAttribute="empresaForm"
-											action="/sisconta/empresas/add" class="form-horizontal"
+											action="/sisconta/empresas/update/${empresa.idEmpresa }" class="form-horizontal"
 											onsubmit="return validar();">
 
 										
@@ -79,10 +80,7 @@
 														 required="required" value="${empresa.nombre}"/>
 												</div>
 											</div>
-											<div id="alerta" class="alert alert-danger collapse">	
-												<a id="linkClose" href="#" class="close">&times;</a> <strong>ERROR</strong>campo
-												obligatorio
-											</div>
+											
 
 											<div class="form-group">
 												<label class="control-label col-sm-4">Razon Social:
@@ -93,10 +91,7 @@
 														value="${empresa.politicas }" />
 												</div>
 											</div>
-											<div id="alerta" class="alert alert-danger collapse">
-												<a id="linkClose" href="#" class="close">&times;</a> <strong>ERROR</strong>campo
-												obligatorio
-											</div>
+											
 
 											<div class="form-group">
 												<label class="control-label col-sm-4">Objetivos: </label>
@@ -106,16 +101,13 @@
 														value="${empresa.objetivos }" />
 												</div>
 											</div>
-											<div id="alerta" class="alert alert-danger collapse">
-												<a id="linkClose" href="#" class="close">&times;</a> <strong>ERROR</strong>campo
-												obligatorio
-											</div>
+											
 
 											<div class="form-group">
 												<label class="control-label col-sm-4">Alcance: </label>
 												<div class="col-sm-8">
-													<form:input path="alcance" class="form-control"
-														placeholder="Alcance" type="text" id="us"
+													<form:textarea path="alcance" class="form-control"
+														placeholder="Alcance" type="text" id="${empresa.idEmpresa }"
 														value="${empresa.alcance }" />
 												</div>
 											</div>
@@ -139,7 +131,9 @@
 
 							</div>
 						</div>
-			
+				
+				
+
 			</c:forEach>
 			
 			<div id="-agregar" class="modal fade" role="dialog">
@@ -165,10 +159,7 @@
 														value="${empresa.nombre }" required="required"/>
 												</div>
 											</div>
-											<div id="alerta" class="alert alert-danger collapse">
-												<a id="linkClose" href="#" class="close">&times;</a> <strong>ERROR</strong>campo
-												obligatorio
-											</div>
+									
 
 											<div class="form-group">
 												<label class="control-label col-sm-4">Razon Social:
@@ -179,10 +170,7 @@
 														value="${empresa.politicas }" />
 												</div>
 											</div>
-											<div id="alerta" class="alert alert-danger collapse">
-												<a id="linkClose" href="#" class="close">&times;</a> <strong>ERROR</strong>campo
-												obligatorio
-											</div>
+											
 
 											<div class="form-group">
 												<label class="control-label col-sm-4">Objetivos: </label>
@@ -192,16 +180,13 @@
 														value="${empresa.objetivos }" />
 												</div>
 											</div>
-											<div id="alerta" class="alert alert-danger collapse">
-												<a id="linkClose" href="#" class="close">&times;</a> <strong>ERROR</strong>campo
-												obligatorio
-											</div>
+											
 
 											<div class="form-group">
 												<label class="control-label col-sm-4">Alcance: </label>
 												<div class="col-sm-8">
-													<form:input path="alcance" class="form-control"
-														placeholder="Alcance" type="text" id="us"
+													<form:textarea path="alcance" class="form-control"
+														placeholder="Alcance" type="text" id="txt-agregar"
 														value="${empresa.alcance }" />
 												</div>
 											</div>
@@ -236,4 +221,32 @@
 	</div>
 </div>
 <!-- /.col-lg-12 -->
+<c:import url="/WEB-INF/menu/librerias_js.jsp"></c:import>
+<script type="text/javascript">
+	CKEDITOR.replace( 'txt-agregar',
+		    {
+		        toolbar : 'Basic',
+		        uiColor : '#ffffff'
+		    });
+	</script>
 
+
+
+<c:forEach items="${empresas}" var="empresa">
+	<script type="text/javascript">
+		CKEDITOR.replace('${empresa.idEmpresa}', {
+			toolbar : 'Basic',
+			uiColor : '#ffffff'
+		});
+	</script>
+	<script type="text/javascript">
+	CKEDITOR.instances['${empresa.idEmpresa}'].setData("${empresa.alcance}");
+	</script>
+
+</c:forEach>
+<script type="text/javascript">
+	
+
+// 	CKEDITOR.instances['cuerpo'].insertHtml(document.getElementById("cuerpo_as"));
+	CKEDITOR.instances['cuerpo'].setData("${cuerpo}");
+	</script>

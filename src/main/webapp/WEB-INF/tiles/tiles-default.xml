@@ -57,6 +57,12 @@
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Empresa/empresa.jsp"/>
 		<put-attribute name="content_javascript" value="/WEB-INF/views/Administration/Empresa/empresa-script.jsp" />
 	</definition>
+	
+	<definition name="Administration/Empleado/empleado" extends="defaultTemplate">
+    	<put-attribute name="titulo" value="Registro de Empresas" />
+		<put-attribute name="content" value="/WEB-INF/views/Administration/Empleado/empleado.jsp"/>
+		<put-attribute name="content_javascript" value="/WEB-INF/views/Administration/Empleado/empleado-script.jsp" />
+	</definition>
 <!-- 	/ADMINISTRATION -->	
 	
 <!-- 	VARIETY -->

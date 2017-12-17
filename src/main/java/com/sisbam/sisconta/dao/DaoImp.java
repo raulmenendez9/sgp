@@ -447,6 +447,26 @@ public class DaoImp implements Dao {
 		} 
 		return obj;
 	}
+	
+	@Override
+	public Object getNoJumps(String entityName, String column, int id) {
+		Session session = getCurrentSession();
+		Object obj = null;
+		String sql = "select replace(replace(replace((select n." + column + " from " + entityName + " n where n.id_"
+				+ entityName + " = " + id + "),chr(10),''),chr(13),''),chr(34),chr(39))";
+		try {
+			session.getTransaction().begin();
+			obj = session.createNativeQuery(sql).list().get(0);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			System.out.print(e);
+			if (session.getTransaction().getStatus() == TransactionStatus.ACTIVE
+					|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
+				session.getTransaction().rollback();
+			}
+		}
+		return obj;
+	}
 
 	
 	
