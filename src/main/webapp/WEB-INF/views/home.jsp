@@ -4,8 +4,54 @@
 	<h1>Bienvenido ${user.getName()}</h1>
 	
 </div>
-<div class="col-lg-7">
-<IMG align="right" SRC="${pageContext.request.contextPath}/resources/img/cuche.png" class="img-responsive" width="45%" height="40%">
+
+
+<div class="col-lg-12">
+<hr>
+	<div class="container col-sm-12">
+		<div class="table-responsive">
+		<table>
+				<tr>
+					<td><IMG align="right"
+						SRC="${pageContext.request.contextPath}/resources/img/icons/database.png"
+						class="img-responsive" width="45%" height="40%"></td>
+					<td><IMG align="right"
+						SRC="${pageContext.request.contextPath}/resources/img/icons/folder.png"
+						class="img-responsive" width="45%" height="40%"></td>
+					<td><IMG align="right"
+						SRC="${pageContext.request.contextPath}/resources/img/icons/gear.png"
+						class="img-responsive" width="45%" height="40%"></td>
+					<td><IMG align="right"
+						SRC="${pageContext.request.contextPath}/resources/img/icons/lock.png"
+						class="img-responsive" width="45%" height="40%"></td>
+					<td><IMG align="right"
+						SRC="${pageContext.request.contextPath}/resources/img/icons/printer.png"
+						class="img-responsive" width="45%" height="40%"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+
+
+			</table>
+		
+		</div>
+	</div>
 </div>
 
-HACER QUE EN EL LOGO DE INICIO SALGA RAMDOM ENTRE EL CUCHE Y LOS MENS QUE HABLAN O ALGUN OTRO ICONO RAMDOM
+			

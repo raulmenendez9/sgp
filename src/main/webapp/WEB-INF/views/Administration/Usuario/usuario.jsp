@@ -177,18 +177,15 @@
 							</div>
 
 							<div class="form-group">
-								<label class="control-label col-sm-8">Activo: </label>
-								<div class="col-sm-4">
+								<label class="control-label col-sm-4">Activo: </label>
+								<div class="col-sm-8">
 									<c:choose>
 										<c:when test="${usuario.activo }">
-										<div class="checkbox">
-											<form:checkbox path="activo" checked="true" id="toggle-one" />
-											</div>
+										
+											<form:checkbox path="activo" checked="true" data-toggle="toggle" />
 										</c:when>
 										<c:otherwise>
-										<div class="checkbox">
-											<form:checkbox path="activo" id="toggle-one" />
-											</div>
+											<form:checkbox path="activo" data-toggle="toggle" />
 										</c:otherwise>
 									</c:choose>
 
@@ -229,7 +226,7 @@
 									<div class="modal-body">
 										<form:form method="post" modelAttribute="usuarioForm"
 							action="/sisconta/usuarios/add" class="form-horizontal"
-							onsubmit="return validar();">
+							onsubmit="myFunction();">
 
 
 							<div class="form-group">
@@ -313,18 +310,15 @@
 							</div>
 
 							<div class="form-group">
-								<label class="control-label col-sm-8">Activo: </label>
-								<div class="col-sm-4">
+								<label class="control-label col-sm-4">Activo: </label>
+								<div class="col-sm-8">
 									<c:choose>
 										<c:when test="${usuario.activo }">
-										<div class="checkbox">
-											<form:checkbox path="activo" checked="true" id="toggle-one" />
-											 <span class="slider"></span></div>
+										
+											<form:checkbox path="activo" checked="true" data-toggle="toggle" />
 										</c:when>
 										<c:otherwise>
-										<div class="checkbox">
-											<form:checkbox path="activo" id="toggle-one" />
-											</div>
+											<form:checkbox path="activo" data-toggle="toggle" />
 										</c:otherwise>
 									</c:choose>
 
@@ -336,7 +330,7 @@
 								<div class="text-center">
 									<hr>
 									<br>
-									<form:button type="submit" class="btn btn-primary">
+									<form:button type="submit" class="btn btn-primary" >
 										<span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Guardar</form:button>
 									<form:button type="submit" class="btn btn-default"
 										data-dismiss="modal">
@@ -358,3 +352,12 @@
 
 <!-- /.col-lg-12 -->
 
+<div id="snackbar">Some text some message..</div>
+
+<script>
+function myFunction() {
+    var x = document.getElementById("snackbar")
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+</script>

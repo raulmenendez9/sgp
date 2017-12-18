@@ -35,6 +35,9 @@
 <link
 	href="<c:url value="/resources/vendor/datatables-responsive/dataTables.responsive.css"/>"
 	rel="stylesheet" type="text/css" />
+	<link
+	href="<c:url value="/resources/vendor/bootstrap/dist/bootstrap-toggle.min.css"/>"
+	rel="stylesheet" type="text/css" />
 	
 <link
 	href="<c:url value="/resources/vendor/sigpaai/estilos.css"/>"
@@ -119,6 +122,10 @@
 		src="<c:url value="resources/vendor/datatables-plugins/dataTables.bootstrap.min.js"/> "></script>
 	<script
 		src="<c:url value="resources/vendor/datatables-responsive/dataTables.responsive.js"/> "></script>
+	
+	<script src="<c:url value="	resources/vendor/bootstrap/dist/bootstrap-toggle.min.js"/> "></script>
+	
+	
 	<script>
 		$(document).ready(function() {
 			$('#dataTables-example').DataTable({

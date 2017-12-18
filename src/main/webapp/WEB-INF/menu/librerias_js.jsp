@@ -7,4 +7,5 @@
 <script src="<c:url value="${context}/resources/dist/js/sb-admin-2.js"/> "></script>
 
 <script src="<c:url value="${context}/resources/vendor/ckeditor/ckeditor.js"/> "></script>
+<script src="<c:url value="${context}/resources/vendor/bootstrap/dist/bootstrap-toggle.min.js"/> "></script>
 

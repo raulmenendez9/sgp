@@ -325,16 +325,6 @@ public class RolController {
 		
 		List<Menu> menusdeagregacion = new ArrayList<Menu>();
 		menusdeagregacion = manage_entity.getMenusByDistict(menusdelrol);
-//		List<Menu> menuses = (List<Menu>) request.getSession().getAttribute("menus_all");
-//		
-//		for (Menu menx : menuses) {
-//			for(Menu meny:menusdelrol) {
-//				if(menx.getId()==meny.getId()) {
-//					menusdeagregacion.add(meny);
-//				}
-//			}
-//
-//		}
 		
 		
 		model.addAttribute("msg_menurolvacio", msg_menurolvacio);

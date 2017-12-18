@@ -120,7 +120,7 @@
 
 
 						
-							<h3>${msj_listaDeDisponibles}</h3>
+						<h3>${msj_listaDeDisponibles}</h3>
 						<h4>${msg_menudispvacio}</h4>
 						<hr>
 						<div class="list-group">
@@ -440,7 +440,7 @@
 						</div>
 
 						<hr>
-						<h3>${msj_listaDeDisponibles}</h3>
+						<h3>${msj_listaActuales}</h3>
 						<h4>${msg_menudispvacio}</h4>
 						<hr>
 						<div class="list-group">
