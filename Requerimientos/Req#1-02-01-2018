@@ -1,0 +1,21 @@
+
+***************************************************************************************************************************
+Bitacora de operaciones:
+En las auditorias es necesario ver que usuario hizo que cambios.
+
+-Hacer que cada vez que un usuario guarde, elimite o edite se guarde un registro de esas acciones.
+
+	Tabla:		Bitacora
+	Atributos:	fecha 		[Date]		#fecha en que se realizo la accion .
+				usuario 	[Usuario]	#Usuario que realizo la accion.
+				accion		[String]	#Accion que realizo, guardar,editar,o eliminar, (leer no).
+				tabla		[String]	#Tabla o entidad que se modifico (Nombre).
+				id			[Integer]	#id de la linea de bitacora.
+
+Ayuda:				
+~ Hay un archivo llamado DAOimp ahi van a parar todas las operaciones antes mencionadas
+  cada vez que pase por un metodo de editar eliminar o actualizar de esa clase que ejecute la accion de guardar en bitacora.
+
+~ Si no se puede obtener el usuario apartir de la sesion actual, mandar un usuario como parametro.
+
+***************************************************************************************************************************
