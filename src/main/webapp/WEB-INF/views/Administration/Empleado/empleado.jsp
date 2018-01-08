@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-
+<div class="row">
 <div class="col-lg-12">
 	<div class="container col-sm-12">
 		<div class="table-responsive">
@@ -42,5 +42,6 @@
 			</table>
 		</div>
 	</div>
+</div>
 </div>
 <!-- /.col-lg-12 -->

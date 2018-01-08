@@ -2,6 +2,11 @@
 <link
 	href="<c:url value="${context}/resources/vendor/bootstrap/css/bootstrap.min.css"/>"
 	rel="stylesheet" type="text/css" />
+	
+<link
+	href="<c:url value="${context}/resources/vendor/materialize/css/materialize.min.css"/>"
+	rel="stylesheet" type="text/css" />
+		
 <link
 	href="<c:url value="${context}/resources/vendor/metisMenu/metisMenu.min.css"/>"
 	rel="stylesheet" type="text/css" />
@@ -14,3 +19,7 @@
 
 <link href="<c:url value="${context }/resources/vendor/bootstrap/dist/bootstrap-toggle.min.css"/>" rel="stylesheet" type="text/css" />
 <link href="<c:url value="/resources/vendor/metisMenu/metisMenu.min.css"/>" rel="stylesheet" type="text/css" />
+
+
+
+

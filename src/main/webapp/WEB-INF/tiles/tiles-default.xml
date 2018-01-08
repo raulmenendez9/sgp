@@ -12,8 +12,17 @@
 		<put-attribute name="menu_usuario" value="/WEB-INF/menu/menu_usuario.jsp" />
 		<put-attribute name="content" value="/WEB-INF/template/defaultContent.jsp" />
 		<put-attribute name="content_javascript" value="" />
-
 	</definition>
+	
+	
+	<definition name="materializeTemplate" template="WEB-INF/template/_template_materialize.jsp">
+		<put-attribute name="titulo" value="SCONTA" />
+		<put-attribute name="content" value="/WEB-INF/template/defaultContent.jsp" />
+	</definition>
+	
+	
+	
+	
 	<!--Definición de controlador "inicio": Esta definición es la que busca 
 		el controlador por el atributo "name" Si un controlador tiene 'return "inicio";' 
 		abrirá los elementos que le corresponden Extends "defaultTemplate" utiliza 
@@ -52,10 +61,9 @@
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Usuario/usuario.jsp"/>
 		<put-attribute name="content_javascript" value="/WEB-INF/views/Administration/Usuario/usuario-script.jsp" />
 	</definition>
-	<definition name="Administration/Empresa/empresa" extends="defaultTemplate">
+	<definition name="Administration/Empresa/empresa" extends="materializeTemplate">
     	<put-attribute name="titulo" value="Registro de Empresas" />
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Empresa/empresa.jsp"/>
-		<put-attribute name="content_javascript" value="/WEB-INF/views/Administration/Empresa/empresa-script.jsp" />
 	</definition>
 	
 	<definition name="Administration/Empleado/empleado" extends="defaultTemplate">
