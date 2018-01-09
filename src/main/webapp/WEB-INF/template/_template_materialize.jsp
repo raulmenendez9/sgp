@@ -16,19 +16,25 @@
 
 <style>
 
-th{
-color:#ecf0f1
+input{
+width:200px;height:15px
 }
+
+
+ th{ 
+ background-color:#2c3e50; 
+ color:#ecf0f1 
+ } 
 .nav-wrapper{
 background-color:#2980b9;
 }
 
-table{
-background-color:#2c3e50;
-}
+ table{ 
+ background-color:#2c3e50; 
+ } 
 
 body{
-background-color:#95a5a6
+background-image: url(<c:url value="/resources/img/background.jpg" />); 
 }
 
 // FIX SIDENAV SPACING
@@ -80,7 +86,8 @@ padding: 0;
 <!-- Definición de Apache Tiles para el titulo de la página -->
 <title><tiles:getAsString name="titulo" /></title>
 <link rel="icon" href="<c:url value="/resources/img/one.ico" />" />
-<script src="<c:url value="resources/vendor/jquery/jquery.js"/>" /></script>
+<%-- <script src="<c:url value="resources/vendor/jquery/jquery.js"/>" /></script> --%>
+<script src="//code.jquery.com/jquery-1.12.4.js" ></script>
 
 
 <!-- MATERIALIZE -->
@@ -93,7 +100,17 @@ padding: 0;
 <!-- DATATABLES -->
 <link href="<c:url value="/resources/vendor/datatables/css/jquery.dataTables.min.css"/>"rel="stylesheet" type="text/css" />	
 <script src="<c:url value="resources/vendor/datatables/js/jquery.dataTables.min.js"/>" /></script>
+<link href="<c:url value="/resources/vendor/datatables-plugins/dataTables.bootstrap.css"/>" rel="stylesheet" type="text/css" />
+<link href="<c:url value="/resources/vendor/datatables-responsive/dataTables.responsive.css"/>" rel="stylesheet" type="text/css" />
 <script src="<c:url value="resources/vendor/datatables-responsive/dataTables.responsive.js"/> "></script>
+
+
+<!-- <script src="//code.jquery.com/jquery-1.12.4.js" ></script> -->
+<!-- <link href="//cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css" rel="stylesheet">	 -->
+<!-- <link href="https://cdn.datatables.net/1.10.16/css/dataTables.material.min.css" rel="stylesheet">	 -->
+<!-- <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" ></script> -->
+<!-- <script src="https://cdn.datatables.net/1.10.16/js/dataTables.material.min.js" ></script> -->
+
 <script type="text/javascript">
  $(document).ready(function(){
 	  $('.button-collapse').sideNav({
@@ -104,7 +121,7 @@ padding: 0;
 	    }
 	  );
 	  // START OPEN
-	  $('.button-collapse').sideNav('show');
+// 	  $('.button-collapse').sideNav('show');
 	});
  </script>
  </head>

@@ -11,7 +11,7 @@
 <div class="row">
 	<div class="col s12">
 	<div class="card-panel hoverable">
-		<table id="example" class="responsive-table display bordered highlight" >
+		<table id="example" class="display hover"  cellspacing="0" width="100%">
 			<thead>
 				<tr>
 					<th>Nombre</th>
@@ -50,11 +50,13 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $('#example').DataTable( {
-    	responsive : true,
-		language: {"url": "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"}
+//     	pagingType: "full_numbers",
+    	stateSave: false,
+    	responsive : false,
+		language: {"url": "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"},
+		
      
     } );
-    
 } );
 </script>
 

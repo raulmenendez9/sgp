@@ -26,7 +26,7 @@ public class EmpresaController {
 	private DaoImp manage_entity;
 	
 	private String path = "Administration/Empresa/";
-	
+
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/empresas", method = RequestMethod.GET)
 	public String index(Model model, HttpServletRequest request) {
