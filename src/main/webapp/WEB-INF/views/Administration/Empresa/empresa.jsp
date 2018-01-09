@@ -49,32 +49,38 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#example').DataTable( {
-//     	pagingType: "full_numbers",
-    	stateSave: false,
-    	responsive : false,
-		language: {"url": "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"},
-		
-     
-    } );
-} );
+    	$('#example').DataTable( {
+    			pagingType: "full_numbers",
+				dom: 'Bfrtip',
+    			buttons: [
+      						{
+        					 extend: 'collection',
+        					 text: 'Exportar a..',
+        					 buttons: [ 'excelHtml5','print']
+      						}
+      					  ],
+    			stateSave: true,
+    			responsive : true,
+				language: {"url": "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"}
+    			} );//fin DataTable
+} );//fin function
 </script>
 
 <script type="text/javascript"> 
-	CKEDITOR.replace( 'txt-agregar', 
-		    { 
-	        toolbar : 'Basic', 
-		    }); 
+// 	CKEDITOR.replace( 'txt-agregar', 
+// 		    { 
+// 	        toolbar : 'Basic', 
+// 		    }); 
 	</script>
 <c:forEach items="${empresas}" var="empresa">
 	<script type="text/javascript">
-		CKEDITOR.replace('${empresa.idEmpresa}', {
-			toolbar : 'Basic',
-			uiColor : '#ffffff'
-		});
+// 		CKEDITOR.replace('${empresa.idEmpresa}', {
+// 			toolbar : 'Basic',
+// 			uiColor : '#ffffff'
+// 		});
 	</script>
 	<script type="text/javascript">
-	CKEDITOR.instances['${empresa.idEmpresa}'].setData("${empresa.alcance}");
+// 	CKEDITOR.instances['${empresa.idEmpresa}'].setData("${empresa.alcance}");
 	</script>
 
 </c:forEach>
@@ -82,5 +88,5 @@ $(document).ready(function() {
 
 
 // 	CKEDITOR.instances['cuerpo'].insertHtml(document.getElementById("cuerpo_as"));
-	CKEDITOR.instances['cuerpo'].setData("${cuerpo}");
+// 	CKEDITOR.instances['cuerpo'].setData("${cuerpo}");
 	</script>
