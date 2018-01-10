@@ -52,7 +52,7 @@
 
  
 <!-- Modal Structure -->
-<div id="agregar" class="modal modal-fixed-footer white darken-4">
+<div id="agregar" class="modal white darken-4">
 	<div class="modal-header">
 <!-- 		<h4>Agregar Empresa</h4> --> 
 	</div> 
@@ -90,11 +90,11 @@
 
 			<div class="center">
 				<form:button type="submit"
-					class="hoverable btn green modal-action waves-effect waves-green btn-flat white-text">
+					class=" btn green modal-actionwaves-effect waves-light white-text">
 					<i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </form:button>
 
 				<form:button href="#!"
-					class="hoverable btn red modal-action modal-close waves-effect waves-green btn-flat white-text">
+					class=" btn red modal-action modal-close waves-effect waves-light white-text">
 					<i class="fa fa-reply" aria-hidden="true"></i> Cerrar </form:button>
 			</div>
 		</form:form>
@@ -108,7 +108,7 @@
 <c:forEach items="${empresas}" var="empresa">
  
 <!-- Modal Structure -->
-<div id="-${empresa.idEmpresa }" class="modal modal-fixed-footer white darken-4">
+<div id="-${empresa.idEmpresa }" class="modal  white darken-4">
 	<div class="modal-header">
 <!-- 		<h4>Agregar Empresa</h4> --> 
 	</div> 
@@ -149,11 +149,11 @@
 
 			<div class="center">
 				<form:button type="submit"
-					class="hoverable btn green modal-action waves-effect waves-green btn-flat white-text">
+					class=" btn green modal-actionwaves-effect waves-light white-text">
 					<i class="fa fa-floppy-o" aria-hidden="true"></i> Actualizar </form:button>
 
 				<form:button href="#!"
-					class="hoverable btn red modal-action modal-close waves-effect waves-green btn-flat white-text">
+					class=" btn red modal-action modal-close waves-effect waves-light white-text">
 					<i class="fa fa-reply" aria-hidden="true"></i> Cerrar </form:button>
 			</div>
 		</form:form>
