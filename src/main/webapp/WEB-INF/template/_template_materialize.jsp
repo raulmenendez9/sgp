@@ -55,6 +55,8 @@ background-image: url(<c:url value="/resources/img/background.jpg" />);
 <link href="<c:url value="/resources/vendor/datatables/datatables.min.css"/>" rel="stylesheet" type="text/css" />
 
 
+<script src="<c:url value="resources/vendor/ckeditor/ckeditor.js"/>" /></script>
+
 <%-- <script src="<c:url value="resources/vendor/newdatatables/JSZip/jszip.js"/> "></script> --%>
 <%-- <script src="<c:url value="resources/vendor/newdatatables/pdfmake/pdfmake.js"/> "></script> --%>
 <!-- <script src="//code.jquery.com/jquery-1.12.4.js" ></script> -->
