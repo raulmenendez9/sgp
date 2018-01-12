@@ -74,11 +74,11 @@
 <!-- 	/ADMINISTRATION -->	
 	
 <!-- 	VARIETY -->
-	<definition name="Variety/Error" extends="defaultTemplate">
+	<definition name="Variety/Error" extends="materializeTemplate">
     	<put-attribute name="titulo" value="ERROR!" />
 		<put-attribute name="content" value="/WEB-INF/views/Variety/Error.jsp"/>
 	</definition>
-	<definition name="403" extends="defaultTemplate">
+	<definition name="403" extends="materializeTemplate">
     	<put-attribute name="titulo" value="ERROR!" />
 		<put-attribute name="content" value="/WEB-INF/views/403.jsp"/>
 	</definition>
