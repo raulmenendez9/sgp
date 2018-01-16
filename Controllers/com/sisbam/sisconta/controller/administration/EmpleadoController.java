@@ -49,6 +49,7 @@ public class EmpleadoController {
 		ObtenerPermisosPorUrl obtener = new ObtenerPermisosPorUrl();
 		this.permisos = obtener.Obtener("/sisconta/vistas", request, manage_entity);
 		
+				
 //se cargan los permisos CRUD que tenga el usuario sobre la vista		
 //*************CARGAR BOTONES PERMITIDOS******************
 		model.addAttribute("create",permisos.isC());

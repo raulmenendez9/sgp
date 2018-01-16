@@ -384,7 +384,6 @@ public class DaoImp implements Dao{
 			e.printStackTrace();
 			System.out.println("LINEA 50 ERROR");
 		}
-		System.out.println("EL USUARIO ACTUAL ES:" + user.getName() + "SU ROL ES:" + roldeluseractual.getNombre());
 
 		// busquemos los menus que tiene asociado ese rol
 		List<Integer> idsMenu = (List<Integer>) executeNativeQuery(

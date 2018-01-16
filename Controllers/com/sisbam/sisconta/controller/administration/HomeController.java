@@ -48,6 +48,9 @@ public class HomeController {
 		List<Vista> vistas = (List<Vista>) manage_entity.getAll(Vista.class.getName());
 		List<Menu> menus = (List<Menu>) manage_entity.getMenusByUser(user); 
 		
+		List<Permisos> permisos = (List<Permisos>) manage_entity.getListByName(Permisos.class.getName(), "rol", usuario.getRol().getIdRol().toString());
+		
+		session.setAttribute("permisosx", permisos);
 		session.setAttribute("vistasx", vistas);
 		session.setAttribute("menusdelrolx", menus);
 		

@@ -96,21 +96,13 @@ body{
                 <a class="collapsible-header  waves-effect waves-blue "><i class="fa ${menx.icono} fa-fw"></i>${menx.nombre} <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
                 <div class="collapsible-body z-depth-3">
                   <ul>
-                		<c:forEach items="${vistasx}" var="vitax">
+                		<c:forEach items="${permisosx}" var="perx">
 	                		<c:choose>
-	                		<c:when test="${menx.id == vitax.menu.id }">
-	                		 	<li><a class="waves-effect waves-blue" href="${vitax.url}"><i class="fa ${vitax.icon } fa-fw"></i>${vitax.nombre }</a></li>
+	                		<c:when test="${menx.id == perx.vista.menu.id && perx.rol.idRol == rol_usuarioactual.idRol}">
+	                		 	<li><a class="waves-effect waves-blue" href="${perx.vista.url}"><i class="fa ${perx.vista.icon } fa-fw"></i>${perx.vista.nombre}</a></li>
 	                		 </c:when>
-	                		 </c:choose>
+	                		 </c:choose>	
                 		</c:forEach>
-                		
-                		
-                		
-	
-                		
-                		
-                		
-                		
                   </ul>
                 </div>
               </li>
