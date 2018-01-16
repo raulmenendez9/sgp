@@ -5,12 +5,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <div id="contenido" class="card-panel hoverable">
-	 	<div class="container">
-
-			<c:if test="${create}">
+<c:if test="${create}">
 				<a class="waves-effect waves-light btn-floating modal-trigger green" href="#agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
 			</c:if>
 			<hr>
+	 	<div class="container">
+
+			
 				<c:if test="${read}">
 					<table id="tabla" class="display hover cell-border"  cellspacing="0" width="100%">
 						<thead>
@@ -44,7 +45,7 @@
 															<a class="modal-trigger" href="#-${usuario.idUsuario}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 													</c:if>
 													<c:if test="${delete}">		
-															<a class="" href="/sisconta/empresas/delete/${usuario.idUsuario}" data-toggle="modal" data-target="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
+															<a class="" href="/sisconta/usuarios/delete/${usuario.idUsuario}" data-toggle="modal" data-target="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
 													</c:if>						
 											</td>
 								</tr>
@@ -105,8 +106,7 @@
 						<div class="input-field col s12">
 							<form:select path="idEmpleado" class="form-control"
 								required="true">
-								<option value="" disabled selected>Selecione el
-									Empleado</option>
+								<option value="" disabled selected>Selecione el empleado</option>
 								<c:forEach items="${empleados}" var="r">
 									<c:choose>
 										<c:when test="${usuario.empleado.idEmpleado == r.idEmpleado}">
@@ -145,7 +145,7 @@
 					</div>
 					
 					
-					<div class="form-group">
+							<div class="form-group">
 								<label class="control-label col-sm-4">Activo: </label>
 								<div class="col-sm-8">
 									<c:choose>
@@ -181,7 +181,7 @@
 
 
 <c:forEach items="${usuarios}" var="usuario">
-<div id="-${usuario.password }" class="modal white darken-4">
+<div id="-${usuario.idUsuario }" class="modal white darken-4">
 	<div class="modal-header">
 		<!-- 		<h4>Agregar Empresa</h4> -->
 	</div>
@@ -227,8 +227,7 @@
 						<div class="input-field col s12">
 							<form:select path="idEmpleado" class="form-control"
 								required="true">
-								<option value="" disabled selected>Selecione el
-									Empleado</option>
+								<option value="" disabled selected>Selecione el empleado</option>
 								<c:forEach items="${empleados}" var="r">
 									<c:choose>
 										<c:when test="${usuario.empleado.idEmpleado == r.idEmpleado}">
@@ -248,7 +247,8 @@
 
 					<div class="row">
 						<div class="input-field col s12">
-							<select>
+							<form:select path="idEmpresa" class="form-control"
+								required="true">
 								<option value="" disabled selected>Selecione la empresa</option>
 								<c:forEach items="${empresas}" var="e">
 									<c:choose>
@@ -261,26 +261,26 @@
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
-							</select>
+							</form:select>
 						</div>
 					</div>
 					
 					
-<!-- 					<div class="form-group"> -->
-<!-- 								<label class="control-label col-sm-4">Activo: </label> -->
-<!-- 								<div class="col-sm-8"> -->
-<%-- 									<c:choose> --%>
-<%-- 										<c:when test="${usuario.activo }"> --%>
+							<div class="form-group">
+								<label class="control-label col-sm-4">Activo: </label>
+								<div class="col-sm-8">
+									<c:choose>
+										<c:when test="${usuario.activo }">
 										
-<%-- 											<form:checkbox path="activo" checked="true" data-toggle="toggle" /> --%>
-<%-- 										</c:when> --%>
-<%-- 										<c:otherwise> --%>
-<%-- 											<form:checkbox path="activo" data-toggle="toggle" /> --%>
-<%-- 										</c:otherwise> --%>
-<%-- 									</c:choose> --%>
+											<form:checkbox path="activo" checked="true" data-toggle="toggle" />
+										</c:when>
+										<c:otherwise>
+											<form:checkbox path="activo" data-toggle="toggle" />
+										</c:otherwise>
+									</c:choose>
 
-<!-- 								</div> -->
-<!-- 							</div> -->
+								</div>
+							</div>
 
 					<form:hidden id="idUsuario" path="idUsuario" value="${usuario.idUsuario}" />
 
@@ -311,24 +311,3 @@
 
 <!-- /.col-lg-12 -->
 
-<script type="text/javascript">
-	//asignar los estilos y paginacion a la tabla
-	$(document).ready(function() {
-		$('#tabla').DataTable({
-			scrollY: true,
-		    scroller: {
-		       			loadingIndicator: true
-		   			  },
-			pagingType : "full_numbers",
-			stateSave : true,
-			responsive : true,
-			language : {
-				"url" : "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-		}
-	});//fin DataTable
-
-	//asignar el editor de texto al textarea de alcances
-
-						
-});//fin function
-</script>

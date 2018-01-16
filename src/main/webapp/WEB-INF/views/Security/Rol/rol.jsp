@@ -5,9 +5,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <div id="contenido" class="card-panel hoverable">
-<div class="container">
 <a class="waves-effect waves-light btn-floating modal-trigger green" href="/sisconta/rolesadd"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
 <hr>
+<div class="container">
+
 		<table id="tabla" class="display hover cell-border"  cellspacing="0" width="100%">
 			<thead>
 				<tr>
@@ -32,24 +33,3 @@
 	</div>
 </div>
 
-
-<script type="text/javascript">
-	//asignar los estilos y paginacion a la tabla
-	$(document).ready(function() {
-		$('#tabla').DataTable({
-			scrollY: true,
-		    scroller: {
-		       			loadingIndicator: true
-		   			  },
-			pagingType : "full_numbers",
-			stateSave : true,
-			responsive : true,
-			language : {
-				"url" : "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-		}
-	});//fin DataTable
-
-
-						
-});//fin function
-</script>

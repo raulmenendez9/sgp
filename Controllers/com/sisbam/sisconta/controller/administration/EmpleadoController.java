@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sisbam.sisconta.configuration.AuthorizedService;
+import com.sisbam.sisconta.controller.variety.ObtenerPermisosPorUrl;
 import com.sisbam.sisconta.dao.DaoImp;
 import com.sisbam.sisconta.entity.administration.Empleado;
 import com.sisbam.sisconta.entity.administration.Empresa;
+import com.sisbam.sisconta.entity.security.Permisos;
 
 import java.util.List;
 
@@ -32,26 +34,31 @@ public class EmpleadoController {
 	private DaoImp manage_entity;
 
 	String path = "Administration/Empleado/";
+	private Permisos permisos;
 
 	@SuppressWarnings("unchecked")
 
 	@RequestMapping(value = "/empleados", method = RequestMethod.GET)
 
 	public String index(Model model, HttpServletRequest request) {
-		
+	
+	
 		
 		
 		String retorno = "403";
+		ObtenerPermisosPorUrl obtener = new ObtenerPermisosPorUrl();
+		this.permisos = obtener.Obtener("/sisconta/vistas", request, manage_entity);
+		
+//se cargan los permisos CRUD que tenga el usuario sobre la vista		
+//*************CARGAR BOTONES PERMITIDOS******************
+		model.addAttribute("create",permisos.isC());
+		model.addAttribute("read",	permisos.isR());
+		model.addAttribute("update",permisos.isU());
+		model.addAttribute("delete",permisos.isD());
+//**********************************************************
 
-		String username = request.getUserPrincipal().getName();
-
-		String rol = AuthorizedService.getRol(manage_entity, username);
-
-		model.addAttribute("rol", rol);
-
-		boolean authorized = AuthorizedService.getRolAuthorization(manage_entity, username, "Empresa");
-
-		if(authorized){
+		
+		if(permisos.isR()) {
 
 			Empleado empleado = new Empleado();
 
@@ -85,15 +92,7 @@ public class EmpleadoController {
 
 		String retorno = "403";
 
-		String username = request.getUserPrincipal().getName();
-
-		String rol = AuthorizedService.getRol(manage_entity, username);
-
-		model.addAttribute("rol", rol);
-
-		boolean authorized = AuthorizedService.getRolAuthorization(manage_entity, username, "empleado-form");
-
-		if(authorized){
+		if(permisos.isC()) {
 
 			Empleado empleado = new Empleado();
 
@@ -121,31 +120,28 @@ public class EmpleadoController {
 
 		Empleado empleado = empleadoRecibido;
 
-		try{
+		if (permisos.isR()) {
 
-			Empresa pai = (Empresa)this.manage_entity.getById(Empresa.class.getName(), empleado.getIdEmpresa());
+			try {
+				Empresa pai = (Empresa) this.manage_entity.getById(Empresa.class.getName(), empleado.getIdEmpresa());
+				empleado.setEmpresa(pai);
+			} 
+			catch (ClassNotFoundException ex) 
+			{
+				System.err.println("ERROR Empleado contrller"+ex.getMessage());
+			}
+			if (empleado.getIdEmpleado() == 0) {
 
-			empleado.setEmpresa(pai);	
-
-		}catch(ClassNotFoundException ex)
-
-		{
-
-			System.out.println(ex.getMessage());
-
+				manage_entity.save("com.oneforall.sgr.entity.Empleado", empleado);
+			} 
+			else
+			{
+				manage_entity.update("com.oneforall.sgr.entity.Empleado", empleado);
+			}
+			
+			return "redirect:/empleados";
 		}
-
-		if(empleado.getIdEmpleado()==0){
-
-			manage_entity.save("com.oneforall.sgr.entity.Empleado", empleado);
-
-		}else{
-
-			manage_entity.update("com.oneforall.sgr.entity.Empleado", empleado);
-
-		}
-
-		return "redirect:/empleados";
+		return "403";
 
 	}
 
@@ -154,36 +150,22 @@ public class EmpleadoController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/empleados/update/{id}", method = RequestMethod.GET)
 
-	public String update(@PathVariable("id") String idEmpleado, Model model, HttpServletRequest request) throws ClassNotFoundException {
+	public String update(@PathVariable("id") String idEmpleado, Model model, HttpServletRequest request)
+			throws ClassNotFoundException {
 		
-		String username = request.getUserPrincipal().getName();
-
-		String rol = AuthorizedService.getRol(manage_entity, username);
-
-		model.addAttribute("rol", rol);
-
-		
-
-		Empleado empleado = (Empleado) manage_entity.getById("com.oneforall.sgr.entity.Empleado", Integer.parseInt(idEmpleado));
-
+		if(permisos.isU()) {
+		Empleado empleado = (Empleado) manage_entity.getById("com.oneforall.sgr.entity.Empleado",
+				Integer.parseInt(idEmpleado));
 		model.addAttribute("empleado", empleado);
-
 		Empleado empleadoForm = new Empleado();
-
 		model.addAttribute("empleadoForm", empleadoForm);
-
-		
-
-
-		List<Empresa> empresas = (List<Empresa>) this.manage_entity.getAll("Empresa"); 
-
+		List<Empresa> empresas = (List<Empresa>) this.manage_entity.getAll("Empresa");
 		model.addAttribute("empresas", empresas);
-
-		List<Empleado> empleados = (List<Empleado>) this.manage_entity.getAll("Empleado"); //esto podria darme error
-
+		List<Empleado> empleados = (List<Empleado>) this.manage_entity.getAll("Empleado"); // esto podria darme error
 		model.addAttribute("empleados", empleados);
-
-		return path+"empleado-form";
+		return path + "empleado-form";
+		}
+		return "403";
 
 	}
 
@@ -191,29 +173,28 @@ public class EmpleadoController {
 
 	@RequestMapping(value = "/empleados/delete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable("id") String idEmpleado, Model model) throws ClassNotFoundException {
-		Empleado empleado = (Empleado) manage_entity.getById("com.oneforall.sgr.entity.Empleado", Integer.parseInt(idEmpleado));
-
-	manage_entity.delete("com.oneforall.sgr.entity.Empleado", empleado);
-
-	model.addAttribute("empleado", empleado);
-
-	System.out.println(idEmpleado);
-
-	
-
-	Empleado empleadoForm = new Empleado();
-
-	model.addAttribute("empleadoForm", empleadoForm);
-
+		Empleado empleado = (Empleado) manage_entity.getById(Empleado.class.getName(), Integer.parseInt(idEmpleado));
 		
+		if (permisos.isR()) {
 
-		@SuppressWarnings("unchecked")
+			manage_entity.delete(Empleado.class.getName(), empleado);
 
-		List<Empleado> empleados = (List<Empleado>) this.manage_entity.getAll("Empleado");
+			model.addAttribute("empleado", empleado);
 
-		model.addAttribute("empleados", empleados);
 
-		return "redirect:/empleados";
+			Empleado empleadoForm = new Empleado();
+
+			model.addAttribute("empleadoForm", empleadoForm);
+
+			@SuppressWarnings("unchecked")
+
+			List<Empleado> empleados = (List<Empleado>) this.manage_entity.getAll("Empleado");
+
+			model.addAttribute("empleados", empleados);
+
+			return "redirect:/empleados";
+		}
+		return "403";
 
 	}
 

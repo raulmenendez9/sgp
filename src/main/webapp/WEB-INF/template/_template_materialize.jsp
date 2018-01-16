@@ -85,7 +85,7 @@ body{
                 <img src="https://78.media.tumblr.com/39d03bb413c70e6f50641561f64030cf/tumblr_otu2u7Vxd61u8xhwoo2_250.png" width="48px" height="48px" alt="" class="circle responsive-img valign profile-image">
             </div>
             <div class="col s8">
-                <a class="btn-flat dropdown-button waves-effect waves-light white-text" href="#" data-activates="profile-dropdown">${usuarioactual.username}<i class="mdi-navigation-arrow-drop-down right"></i></a>
+                <a class="btn-flat dropdown-button waves-effect waves-light white-text" href="#" data-activates="menu-usuario">${usuarioactual.username}<i class="mdi-navigation-arrow-drop-down right"></i></a>
             </div>
           </div>
         </li>        
@@ -103,13 +103,23 @@ body{
 	                		 </c:when>
 	                		 </c:choose>
                 		</c:forEach>
-                    <li><div class="divider"></div></li>
+                		
+                		
+                		
+	
+                		
+                		
+                		
+                		
                   </ul>
                 </div>
               </li>
           </ul>
         </li>
         </c:forEach>
+        <li class="divider white"></li>
+
+        
       </ul>
     </div>
   </nav>
@@ -127,12 +137,60 @@ body{
 </body>
 
 
+<ul id='menu-usuario' class='dropdown-content'>
+	<li><c:url value="/logout" var="logoutUrl" />
+		<form id="logout" action="${logoutUrl}" method="post">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</form> <a href="javascript:document.getElementById('logout').submit()">
+			Cerrar sesión
+	</a></li>
+</ul>
+
+
 <script type="text/javascript">
 	$(window).load(function()
 		{
-		    $(".loader").fadeOut("fast");
-		    $('.modal').modal();
+		$(".loader").fadeOut("fast");
+		$('select').material_select();
+	    $('.modal').modal();
+	    $('.dropdown-button').dropdown({
+	        inDuration: 300,
+	        outDuration: 225,
+	        constrainWidth: false, // Does not change width of dropdown to that of the activator
+	        hover: false, // Activate on hover
+	        gutter: 10, // Spacing from edge
+	        belowOrigin: false, // Displays dropdown below the button
+	        alignment: 'left', // Displays dropdown with edge aligned to the left of button
+	        stopPropagation: false // Stops event propagation
+	      }
+	    );
+		   
 		});
+</script>
+<script type="text/javascript">
+	//asignar los estilos y paginacion a la tabla
+	$(document).ready(function() {
+		
+		
+		
+		$('#tabla').DataTable({
+			scrollY: true,
+		    scroller: {
+		       			loadingIndicator: true
+		   			  },
+			pagingType : "full_numbers",
+			stateSave : true,
+			responsive : true,
+			language : {
+				"url" : "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+		}
+	});//fin DataTable
+
+					
+
+						
+});//fin function
 </script>
 
 </html>

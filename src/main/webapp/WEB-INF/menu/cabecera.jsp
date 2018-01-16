@@ -19,7 +19,7 @@
 
 <link href="<c:url value="${context}/resources/vendor/datatables/css/jquery.dataTables.min.css"/>"rel="stylesheet" type="text/css" />	
 <script src="<c:url value="${context}/resources/vendor/datatables/js/jquery.dataTables.min.js"/>" /></script>
-<link href="<c:url value="${context}/resources/vendor/datatables-plugins/dataTables.bootstrap.css"/>" rel="stylesheet" type="text/css" />
+<%-- <link href="<c:url value="${context}/resources/vendor/datatables-plugins/dataTables.bootstrap.css"/>" rel="stylesheet" type="text/css" /> --%>
 <link href="<c:url value="${context}/resources/vendor/datatables-responsive/dataTables.responsive.css"/>" rel="stylesheet" type="text/css" />
 <script src="<c:url value="${context}/resources/vendor/datatables-responsive/dataTables.responsive.js"/> "></script>
 

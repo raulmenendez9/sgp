@@ -15,17 +15,16 @@
   
 
 <div id="contenido" class="card-panel hoverable">
-	 	<div class="container">
-<!-- boton añadir que abre una modal -->
 <c:if test="${create}">
-<a class="waves-effect waves-light btn-floating modal-trigger green" href="#agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
+		<a class="waves-effect waves-light btn-floating modal-trigger green" href="#agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
 </c:if>
 <c:if test="${read}">
-<a class="waves-effect waves-light btn-floating modal-trigger red darken-3" href="#"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>PDF</a>
-<a class="waves-effect waves-light btn-floating modal-trigger green darken-3" href="#"><i class="fa fa-file-excel-o" aria-hidden="true"></i> EXCEL</a>
+		<a class="waves-effect waves-light btn-floating modal-trigger red darken-3" href="#"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>PDF</a>
+		<a class="waves-effect waves-light btn-floating modal-trigger green darken-3" href="#"><i class="fa fa-file-excel-o" aria-hidden="true"></i> EXCEL</a>
 </c:if>
 <hr>
-<c:if test="${read}">
+	 	<div class="container">
+		<c:if test="${read}">
 		<table id="tabla" class="display hover cell-border"  cellspacing="0" width="100%">
 			<thead>
 				<tr>
@@ -48,16 +47,16 @@
 									<a class=" modal-trigger" href="#-${empresa.idEmpresa }"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${delete}">		
-									<a class="" href="/sisconta/empresas/delete/${empresa.idEmpresa }" data-toggle="modal"data-target="#" onclick="borrar('${empresa.nombre }')"><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a class="" href="/sisconta/empresas/delete/${empresa.idEmpresa }" data-toggle="modal"data-target="#" ><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>						
 						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-</c:if>
-	</div>
+		</c:if>
 		</div>
+</div>
 
 
 <!-- Modal Structure -->
@@ -181,20 +180,8 @@
 </c:forEach>
 
 <script type="text/javascript">
-	//asignar los estilos y paginacion a la tabla
-	$(document).ready(function() {
-		$('#tabla').DataTable({
-			scrollY: true,
-		    scroller: {
-		       			loadingIndicator: true
-		   			  },
-			pagingType : "full_numbers",
-			stateSave : true,
-			responsive : true,
-			language : {
-				"url" : "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-		}
-	});//fin DataTable
+$(document).ready(function() {	
+
 
 	//asignar el editor de texto al textarea de alcances
 	CKEDITOR.replace( 'alcance', 
@@ -203,5 +190,5 @@
 			    }); 					
 
 						
-});//fin function
+});
 </script>

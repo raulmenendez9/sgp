@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sisbam.sisconta.configuration.AuthorizedService;
+import com.sisbam.sisconta.controller.variety.ObtenerPermisosPorUrl;
 import com.sisbam.sisconta.dao.DaoImp;
 import com.sisbam.sisconta.entity.security.Menu;
+import com.sisbam.sisconta.entity.security.Permisos;
 import com.sisbam.sisconta.entity.security.Vista;
 
 @Controller
@@ -28,18 +30,25 @@ public class VistaController {
 	
 	private String path="Security/Vista/";
 	
+	private Permisos permisos;
+	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/vistas", method = RequestMethod.GET)
 	public String index(Model model, HttpServletRequest request) {
 		
-		
-		
 		String retorno = "403";
-		String username = request.getUserPrincipal().getName();
-		String rol = AuthorizedService.getRol(manage_entity, username);
-		model.addAttribute("rol", rol);
-		boolean authorized = AuthorizedService.getRolAuthorization(manage_entity, username, "vista");
-		if(authorized){
+		
+		ObtenerPermisosPorUrl obtener = new ObtenerPermisosPorUrl();
+		this.permisos = obtener.Obtener("/sisconta/vistas", request, manage_entity);
+		
+//se cargan los permisos CRUD que tenga el usuario sobre la vista		
+//*************CARGAR BOTONES PERMITIDOS******************
+		model.addAttribute("create",permisos.isC());
+		model.addAttribute("read",	permisos.isR());
+		model.addAttribute("update",permisos.isU());
+		model.addAttribute("delete",permisos.isD());
+//**********************************************************
+		if(permisos.isR()) {
 			Vista vista = new Vista();
 			model.addAttribute("vistaForm", vista);
 			model.addAttribute("vista", null);
@@ -47,9 +56,6 @@ public class VistaController {
 			List<Menu> menus = (List<Menu>) this.manage_entity.getAll("Menu");
 			model.addAttribute("vistas", vistas);
 			model.addAttribute("menus", menus);
-			
-
-			
 			retorno = path+"vista";
 		}
 		return retorno;
@@ -63,11 +69,8 @@ public class VistaController {
 		
 		
 		String retorno = "403";
-		String username = request.getUserPrincipal().getName();
-		String rol = AuthorizedService.getRol(manage_entity, username);
-		model.addAttribute("rol", rol);
-		boolean authorized = AuthorizedService.getRolAuthorization(manage_entity, username, "vista-form");
-		if(authorized){
+		if(permisos.isC())
+		{
 			Vista vista = new Vista();
 			List<Menu> menus = (List<Menu>) this.manage_entity.getAll("Menu");
 			model.addAttribute("vistaForm", vista);
@@ -82,22 +85,26 @@ public class VistaController {
 	@RequestMapping(value = "/vistas/add", method = RequestMethod.POST)
 	public String saveOrUpadateVista(@ModelAttribute("vistaForm") Vista vistaRecibido) throws ClassNotFoundException {
 		Vista vista = vistaRecibido;
-		Menu menuSeleccionado = (Menu) this.manage_entity.getById(Menu.class.getName(), vista.getIdMenu());	
+		Menu menuSeleccionado = (Menu) this.manage_entity.getById(Menu.class.getName(), vista.getIdMenu());
 		vista.setMenu(menuSeleccionado);
-		
-		
-		if(vista.getIdVista()==0){
-			manage_entity.save(Vista.class.getName(), vista);
-		}else{
-			manage_entity.update(Vista.class.getName(), vista);
+		if (permisos.isC()) {
+
+			if (vista.getIdVista() == 0) {
+				manage_entity.save(Vista.class.getName(), vista);
+			} else {
+				manage_entity.update(Vista.class.getName(), vista);
+			}
+			return "redirect:/vistas";
 		}
-		return "redirect:/menus";
+		return "403";
 	}
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/vistas/update/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") String vistaId, Model model, HttpServletRequest request) throws ClassNotFoundException {
 		
+		if(permisos.isU()) 
+		{
 		String username = request.getUserPrincipal().getName();
 		String rol = AuthorizedService.getRol(manage_entity, username);
 		model.addAttribute("rol", rol);
@@ -111,11 +118,14 @@ public class VistaController {
 		List<Menu> menus = (List<Menu>) this.manage_entity.getAll("Menu");
 		model.addAttribute("menus", menus);
 		return path+"vista-form";
+		}
+		return "403";
 	}
 	
 	
 	@RequestMapping(value = "/vistas/delete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable("id") String vistaId, Model model) throws ClassNotFoundException {
+		if(permisos.isD()) {
 		Vista vista = (Vista) manage_entity.getById(Vista.class.getName(), Integer.parseInt(vistaId));
 		manage_entity.delete(Vista.class.getName(), vista);
 		model.addAttribute("vista", vista);
@@ -127,6 +137,8 @@ public class VistaController {
 		List<Vista> vistas = (List<Vista>) this.manage_entity.getAll("Vista");
 		model.addAttribute("vistas", vistas);
 		return "redirect:/vistas";
+		}
+		return "403";
 	}
 	
 	@RequestMapping("/quepex")
