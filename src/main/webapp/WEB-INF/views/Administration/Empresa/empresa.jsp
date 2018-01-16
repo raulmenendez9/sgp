@@ -15,7 +15,7 @@
   
 
 <div id="contenido" class="card-panel hoverable">
-	  
+	 	<div class="container">
 <!-- boton añadir que abre una modal -->
 <c:if test="${create}">
 <a class="waves-effect waves-light btn-floating modal-trigger green" href="#agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
@@ -56,6 +56,7 @@
 			</tbody>
 		</table>
 </c:if>
+	</div>
 		</div>
 
 

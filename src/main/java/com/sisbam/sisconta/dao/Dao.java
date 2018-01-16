@@ -9,12 +9,6 @@ import com.sisbam.sisconta.entity.security.Permisos;
 import com.sisbam.sisconta.entity.security.Rol;
 import com.sisbam.sisconta.entity.security.Vista;
 
-/**
- * @author Omar
- * Interface para la implementacion de el patron DAO
- * este contiene los metodos necesarios para la gestion de objetos
- * con la base de datos.
- */
 public interface Dao {
 
 	/*

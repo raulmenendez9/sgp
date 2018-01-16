@@ -54,7 +54,7 @@ public class RolController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/roles/add", method = RequestMethod.GET)//FUNCIONANDO  4/11/2017 NO TOCAR
+	@RequestMapping(value = "/rolesadd", method = RequestMethod.GET)//FUNCIONANDO  4/11/2017 NO TOCAR
 	public String addRol(Model model, HttpServletRequest request) {
 		
 		
@@ -63,11 +63,6 @@ public class RolController {
 //		ASI QUE LLEVAR TODOS LOS MENUS Y VISTAS DISPONIBLES YA NO ES NECESARIO
 		
 		String retorno = "403";
-		String username = request.getUserPrincipal().getName();
-		String rol = AuthorizedService.getRol(manage_entity, username);
-		model.addAttribute("rol", rol);
-		boolean authorized = AuthorizedService.getRolAuthorization(manage_entity, username, "rol-form");
-		if (authorized) {
 			Rol rol1 = new Rol();
 			model.addAttribute("rolForm", rol1);
 			model.addAttribute("rol", null);
@@ -78,13 +73,11 @@ public class RolController {
 			model.addAttribute("vistas", vistas);
 			model.addAttribute("permisos", permisos);
 			model.addAttribute("estoyguardando",true);
-			retorno = path+"rol-form";
-		}
+			retorno = path+"rolform";
 		return retorno;
 	}
 	
-	@SuppressWarnings({ "null", "unchecked" })
-	@RequestMapping(value = "/roles/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/rolesadd", method = RequestMethod.POST)
 	public String saveOrUpadateRol(HttpServletRequest request) {
 
 		Rol rol = new Rol();
@@ -296,7 +289,7 @@ public class RolController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/roles/update/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/rolesupdate/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") String rolId, Model model, HttpServletRequest request) throws ClassNotFoundException {
 		
 		String username = request.getUserPrincipal().getName();
@@ -345,11 +338,11 @@ public class RolController {
 		model.addAttribute("estoyactualizando",true);
 		model.addAttribute("estoyguardando",true);
 		
-		return path+"rol-form";
+		return path+"rolform";
 	}
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/roles/delete/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/rolesdelete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable("id") String rolId, Model model) throws ClassNotFoundException {
 		Rol rol = (Rol) manage_entity.getById(Rol.class.getName(), Integer.parseInt(rolId));
 		

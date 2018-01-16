@@ -18,58 +18,66 @@
 	<definition name="materializeTemplate" template="WEB-INF/template/_template_materialize.jsp">
 		<put-attribute name="titulo" value="SCONTA" />
 		<put-attribute name="content" value="/WEB-INF/template/defaultContent.jsp" />
+		<put-attribute name="cabecera" value="/WEB-INF/menu/cabecera.jsp" />
+	</definition>
+	
+		<definition name="materializeTemplateForm" template="/WEB-INF/template/_template_materialize.jsp">
+		<put-attribute name="titulo" value="SCONTA" />
+		<put-attribute name="content" value="/WEB-INF/template/defaultContent.jsp" />
+		<put-attribute name="cabecera" value="/WEB-INF/menu/cabecera.jsp" />
 	</definition>
 	
 	
+<!-- 	SI HAY UN ERROR QUE DIGA: 404 /sisconta/roles/update/WEB-INF/template/_template_materialize.js -->
+<!-- 	ES PORQUE TILES NO ENTIENDE RUTAS DEMASIADO LARGAS -->
+<!-- /WEB-INF/template/_template_materialize.jsp 													-->
+<!-- 		^ 																						-->
+<!-- 		|____UNA PLECA INDICA SOBRE ESCRITURA EN URL, SIN PLECA INDICA UNA SUMA A LA URL ACTUAL -->
+
 	
-	
-	<!--Definición de controlador "inicio": Esta definición es la que busca 
-		el controlador por el atributo "name" Si un controlador tiene 'return "inicio";' 
-		abrirá los elementos que le corresponden Extends "defaultTemplate" utiliza 
-		la definición de arriba para heredar las páginas o textos del template original. 
-		Se puede sobreescribir cualquiera. Por ejemplo, para una pantalla de "login" 
-		podríamos utilizar <put-attribute name="menu_usuario" value=" " /> para que 
-		no salga ningún menu -->
-	<definition name="inicio" extends="defaultTemplate">
+<!-- ESTE ARCHIVO INDICA QUE VISTAS VAN A HEREDAR LA VISTA GENERAL(MENU LATERAL Y BARRA DE ARRIBA) -->
+<!-- SE LE INDICA EN TITULO EL TITULO DE LA VISTA Y EN CONTENT EL JSP QUE HEREDARA LA VISTA GENERAL -->
+
+	<definition name="inicio" extends="materializeTemplate">
 		<put-attribute name="titulo" value="Inicio" />
 		<put-attribute name="content" value="/WEB-INF/views/home.jsp" />
 	</definition>
 	
 <!-- 	SECURITY -->
-	<definition name="Security/Rol/rol" extends="defaultTemplate">
+	<definition name="Security/Rol/rol" extends="materializeTemplate">
 		<put-attribute name="titulo" value="Gestión de Roles del Sistema" />
 		<put-attribute name="content" value="/WEB-INF/views/Security/Rol/rol.jsp" />
-		<put-attribute name="content_javascript"
-			value="/WEB-INF/views/Security/Rol/rol-script.jsp" />
 	</definition>
-	<definition name="Security/Menu/menu" extends="defaultTemplate">
+	
+	<definition name="Security/Rol/rolform" extends="materializeTemplateForm">
+		<put-attribute name="titulo" value="Roles" />
+		<put-attribute name="content" value="/WEB-INF/views/Security/Rol/rolform.jsp" />
+	</definition>
+	
+	
+	<definition name="Security/Menu/menu" extends="materializeTemplateForm">
 		<put-attribute name="titulo" value="Registro de Menus" />
 		<put-attribute name="content" value="/WEB-INF/views/Security/Menu/menu.jsp" />
-		<put-attribute name="content_javascript"
-			value="/WEB-INF/views/Security/Menu/menu-script.jsp" />
 	</definition>
-	<definition name="Security/Vista/vista" extends="defaultTemplate">
+	<definition name="Security/Vista/vista" extends="materializeTemplateForm">
     	<put-attribute name="titulo" value="Registro de Vistas" />
 		<put-attribute name="content" value="/WEB-INF/views/Security/Vista/vista.jsp"/>
-			<put-attribute name="content_javascript" value="/WEB-INF/views/Security/Vista/vista-script.jsp" />
 	</definition>
 <!--    /SECURITY -->
 	
 <!-- 	ADMINISTRATION -->
-	<definition name="Administration/Usuario/usuario" extends="defaultTemplate">
+	<definition name="Administration/Usuario/usuario" extends="materializeTemplateForm">
     	<put-attribute name="titulo" value="Registro de Usuarios" />
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Usuario/usuario.jsp"/>
-		<put-attribute name="content_javascript" value="/WEB-INF/views/Administration/Usuario/usuario-script.jsp" />
 	</definition>
 	<definition name="Administration/Empresa/empresa" extends="materializeTemplate">
     	<put-attribute name="titulo" value="Registro de Empresas" />
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Empresa/empresa.jsp"/>
 	</definition>
 	
-	<definition name="Administration/Empleado/empleado" extends="defaultTemplate">
+	<definition name="Administration/Empleado/empleado" extends="materializeTemplateForm">
     	<put-attribute name="titulo" value="Registro de Empresas" />
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Empleado/empleado.jsp"/>
-		<put-attribute name="content_javascript" value="/WEB-INF/views/Administration/Empleado/empleado-script.jsp" />
 	</definition>
 <!-- 	/ADMINISTRATION -->	
 	

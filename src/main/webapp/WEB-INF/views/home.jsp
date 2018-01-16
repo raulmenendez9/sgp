@@ -1,9 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<div class="col-lg-5">
-	<h1>Bienvenido ${user.getName()}</h1>
-	
+<div id="contenido" class="card-panel hoverable">
+	<div class="container">
+			<h3 class="center">Bienvenido ${user.getName()}</h3>
+	</div>
 </div>
+
 
 
 <div class="col-lg-12">
