@@ -55,7 +55,12 @@ public class ServiceAuthProvider implements AuthenticationProvider {
 		}
 		if (usuario != null) {
 			if(passwordEncoder.matches(password, usuario.getPassword())){
-				return usuario;
+				if(usuario.isActivo()) {
+					return usuario;
+				}
+				else
+					return null;
+				
 			}
 		}
 		return null;

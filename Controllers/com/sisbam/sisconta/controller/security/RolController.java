@@ -290,9 +290,9 @@ public class RolController {
 				
 			
 		}
-		return retorno;
-		}
 		return "redirect:/roles";
+		}
+		return retorno;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -359,20 +359,26 @@ public class RolController {
 		Rol rol = (Rol) manage_entity.getById(Rol.class.getName(), Integer.parseInt(rolId));
 		if(permisos.isD()) {	
 		model.addAttribute("rol", rol);
-				try {						
+									
 				Permisos permi = new Permisos();
 				List<Vista> vistas = (List<Vista>) manage_entity.getAll(Vista.class.getName());
 		
 					for(Vista vistita : vistas) {
+						try {	
 						permi = (Permisos) manage_entity.getPermisosByVistaAndRol(vistita, rol);
-						if(permi.getVista().getIdVista()==vistita.getIdVista()&&permi.getRol().getIdRol()==rol.getIdRol()) {
-							manage_entity.delete("Permisos", permi);
+						if(permi.getRol().getIdRol()==rol.getIdRol()) {
+//							System.err.println("TRATANDO DE BORRAR PERMISOS-> "+rol.getIdRol()+"-> "+vistita.getNombre());
+							manage_entity.delete(Permisos.class.getName(), permi);
 						}
+						}
+						catch(Exception e) {
+//							System.err.println("Error: rolform, nada grave"+e.getMessage());
+						}
+//						permi.getVista().getIdVista()==vistita.getIdVista()&&
+						
 					}
-				}
-				catch(Exception e) {
-					System.err.println("Error: rolform, nada grave"+e.getMessage());
-				}
+				
+
 					
 				manage_entity.delete(Rol.class.getName(), rol);
 		Rol rolForm = new Rol();

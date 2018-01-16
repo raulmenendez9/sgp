@@ -47,7 +47,7 @@ public class EmpleadoController {
 		
 		String retorno = "403";
 		ObtenerPermisosPorUrl obtener = new ObtenerPermisosPorUrl();
-		this.permisos = obtener.Obtener("/sisconta/vistas", request, manage_entity);
+		this.permisos = obtener.Obtener("/sisconta/empleados", request, manage_entity);
 		
 				
 //se cargan los permisos CRUD que tenga el usuario sobre la vista		
