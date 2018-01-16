@@ -40,7 +40,7 @@ public class ServiceAuthProvider implements AuthenticationProvider {
 			return null;
 		}
 	}
-
+ 
 	@Override
 	public boolean supports(Class<?> authentication) {
 		return authentication.equals(UsernamePasswordAuthenticationToken.class);
@@ -55,10 +55,7 @@ public class ServiceAuthProvider implements AuthenticationProvider {
 		}
 		if (usuario != null) {
 			if(passwordEncoder.matches(password, usuario.getPassword())){
-				System.out.println("Contraseña coincide");
 				return usuario;
-			}else{
-				System.out.println("Contraseña no coincide");
 			}
 		}
 		return null;

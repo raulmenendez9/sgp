@@ -1,8 +1,6 @@
 package com.sisbam.sisconta.dao;
 
-import java.math.BigDecimal;
 import java.security.Principal;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,15 +8,20 @@ import java.util.List;
 
 import javax.persistence.ParameterMode;
 import javax.persistence.Query;
+import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.procedure.ProcedureCall;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.sisbam.sisconta.entity.administration.Usuario;
+import com.sisbam.sisconta.entity.security.Bitacora;
 import com.sisbam.sisconta.entity.security.Menu;
 import com.sisbam.sisconta.entity.security.Permisos;
 import com.sisbam.sisconta.entity.security.Rol;
@@ -28,15 +31,37 @@ import com.sisbam.sisconta.entity.security.Vista;
  *  Clase que implementa la inteface DAO y todos sus metodos
  */
 @Service("manage_entity")
-public class DaoImp implements Dao {
+
+public class DaoImp implements Dao{
 
 	@Autowired
 	SessionFactory sessionFactory;
-
+	
 	@Override
-	public void save(String entityName, Object obj) {
+	public void crearBitacora(String accion,String tabla){
+		String entidad = tabla.replaceAll("com.sisbam.sisconta.entity","");;
+		Bitacora bitacora = new Bitacora();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Date hoy = new Date();
+		SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		String fechahora = formater.format(hoy);
+		
+		bitacora.setAccion(accion);
+		bitacora.setFecha(hoy);
+		bitacora.setTabla(entidad);
+		bitacora.setUsername((String)auth.getPrincipal());
+		bitacora.setLinea("El usuario:"+auth.getPrincipal()+" "+accion+" en la tabla"+" "+entidad+" El dia "+fechahora);
+		
+		saveBitacora(Bitacora.class.getName(), bitacora);
+	}
+	
+	
+	@Override
+	public void saveBitacora(String entityName, Object obj) {
+		
 		// recupera la session actual.
 		Session session = getCurrentSession();
+			
 		try {
 			// Inicia una nueva transaccion.
 			session.getTransaction().begin();
@@ -44,6 +69,32 @@ public class DaoImp implements Dao {
 			session.save(entityName, obj);
 			// Ejecuta la transaccion que se realizao anteriormente.
 			session.getTransaction().commit();
+		} catch (Exception e) {
+			// Si el estatus de la transaccion se encuentra activa o el marca
+			// rollback
+			// se realiza un rollback() para regresar la operacion que se
+			// intentaba realizar.
+			if (session.getTransaction().getStatus() == TransactionStatus.ACTIVE
+					|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
+				session.getTransaction().rollback();
+			}
+		} 
+	}
+	
+	
+	@Override
+	public void save(String entityName, Object obj) {
+		// recupera la session actual.
+		Session session = getCurrentSession();
+			
+		try {
+			// Inicia una nueva transaccion.
+			session.getTransaction().begin();
+			// save: para guardar una entidad, similar: persist
+			session.save(entityName, obj);
+			// Ejecuta la transaccion que se realizao anteriormente.
+			session.getTransaction().commit();
+			crearBitacora("Guardo", entityName);
 		} catch (Exception e) {
 			// Si el estatus de la transaccion se encuentra activa o el marca
 			// rollback
@@ -63,6 +114,7 @@ public class DaoImp implements Dao {
 			session.getTransaction().begin();
 			session.update(entityName, obj);
 			session.getTransaction().commit();
+			crearBitacora("Actualizo", entityName);
 		} catch (Exception e) {
 			if (session.getTransaction().getStatus() == TransactionStatus.ACTIVE
 					|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
@@ -96,6 +148,7 @@ public class DaoImp implements Dao {
 			session.getTransaction().begin();
 			session.delete(entityName, obj);
 			session.getTransaction().commit();
+			crearBitacora("Elimino", entityName);
 		} catch (Exception e) {
 			if (session.getTransaction().getStatus() == TransactionStatus.ACTIVE
 					|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
@@ -467,6 +520,8 @@ public class DaoImp implements Dao {
 		}
 		return obj;
 	}
+
+
 
 	
 	

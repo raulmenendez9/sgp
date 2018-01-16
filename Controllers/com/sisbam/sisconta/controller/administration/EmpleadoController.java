@@ -132,11 +132,11 @@ public class EmpleadoController {
 			}
 			if (empleado.getIdEmpleado() == 0) {
 
-				manage_entity.save("com.oneforall.sgr.entity.Empleado", empleado);
+				manage_entity.save(Empleado.class.getName(), empleado);
 			} 
 			else
 			{
-				manage_entity.update("com.oneforall.sgr.entity.Empleado", empleado);
+				manage_entity.update(Empleado.class.getName(), empleado);
 			}
 			
 			return "redirect:/empleados";
@@ -154,7 +154,7 @@ public class EmpleadoController {
 			throws ClassNotFoundException {
 		
 		if(permisos.isU()) {
-		Empleado empleado = (Empleado) manage_entity.getById("com.oneforall.sgr.entity.Empleado",
+		Empleado empleado = (Empleado) manage_entity.getById(Empleado.class.getName(),
 				Integer.parseInt(idEmpleado));
 		model.addAttribute("empleado", empleado);
 		Empleado empleadoForm = new Empleado();

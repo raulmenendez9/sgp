@@ -4,6 +4,11 @@ import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.http.HttpRequest;
+
+import com.sisbam.sisconta.entity.security.Bitacora;
 import com.sisbam.sisconta.entity.security.Menu;
 import com.sisbam.sisconta.entity.security.Permisos;
 import com.sisbam.sisconta.entity.security.Rol;
@@ -23,6 +28,8 @@ public interface Dao {
 	 * Utilizado para guardar un objeto.
 	 */
     public void save(String entityName, Object obj);
+    public void saveBitacora(String entityName, Object obj);
+    public void crearBitacora(String accion,String tabla);
     
     /*
      * Update:
@@ -53,7 +60,7 @@ public interface Dao {
     //Para obtener un listado con registros filtrados por un campo
     public List<?> getListByName(String entityName, String column, String name);
     
-  //Para obtener un listado con registros filtrados por m�ltiples campos
+  //Para obtener un listado con registros filtrados por multiples campos
     public List<?> getListFilter(String entityName, List<String> columns, List<String> values);
     
     public List<?> getListFilterByDate(String entityName,String column_date,String date1,String date2);
