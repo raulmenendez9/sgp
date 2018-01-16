@@ -40,6 +40,7 @@ public class Usuario implements java.io.Serializable {
 	private int idEmpleado;
 	
 	
+	
 	@Transient
 	public int getIdEmpleado() {
 		return idEmpleado;
@@ -69,6 +70,12 @@ public class Usuario implements java.io.Serializable {
 	public int getIdEmpresa() {
 		return idEmpresa;
 	}
+	
+	@Transient
+	public void setIdEmpresa(int idEmpresa) {
+		this.idEmpresa = idEmpresa;
+	}
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_id_usuario_seq")
@@ -128,6 +135,8 @@ public class Usuario implements java.io.Serializable {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+	
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_empresa")
 	public Empresa getEmpresa() {

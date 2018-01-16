@@ -66,19 +66,18 @@
 	</div>
 	<div class="modal-content">
 		<form:form method="post" modelAttribute="usuarioForm"
-			action="/sisconta/usuarios/add" id="registro" autocomplete="off">
+			action="/sisconta/usuariosadd" id="registro" autocomplete="off">
 
 			<div class="row">
 				<div class="input-field col s6">
 					<form:input path="username" class="form-control"
 								placeholder="Username" type="text" id="us-${usuario.idUsuario }"
-								value="${usuario.username }" />
+								value="${usuario.username }" required="required"/>
 
 				</div>
 				<div class="input-field col s6">
 					<form:password path="password" class="form-control"
-								placeholder="Contraseña" id="pass-${usuario.password }"
-								value="${usuario.password }" />
+								placeholder="Contraseña" id="pass-${usuario.password }" required="required" />
 					
 				</div>
 			</div>
@@ -125,9 +124,8 @@
 
 
 					<div class="row">
-						<div class="input-field col s12">
-							<form:select path="idEmpresa" class="form-control"
-								required="true">
+						<div class="input-field col s6">
+							<form:select path="idEmpresa" class="form-control" required="true">
 								<option value="" disabled selected>Selecione la empresa</option>
 								<c:forEach items="${empresas}" var="e">
 									<c:choose>
@@ -142,24 +140,17 @@
 								</c:forEach>
 							</form:select>
 						</div>
+						
+						<!-- Switch -->
+						  <div class="col s6 switch center">
+						    <label>
+						      Activo
+						      <input type="checkbox" name="activo">
+						      <span class="lever"></span>
+						    </label>
+						  </div>
 					</div>
-					
-					
-							<div class="form-group">
-								<label class="control-label col-sm-4">Activo: </label>
-								<div class="col-sm-8">
-									<c:choose>
-										<c:when test="${usuario.activo }">
-										
-											<form:checkbox path="activo" checked="true" data-toggle="toggle" />
-										</c:when>
-										<c:otherwise>
-											<form:checkbox path="activo" data-toggle="toggle" />
-										</c:otherwise>
-									</c:choose>
 
-								</div>
-							</div>
 
 					<form:hidden id="idUsuario" path="idUsuario" value="${usuario.idUsuario}" />
 
@@ -187,26 +178,25 @@
 	</div>
 	<div class="modal-content">
 		<form:form method="post" modelAttribute="usuarioForm"
-			action="/sisconta/usuarios/add" id="registro" autocomplete="off">
+			action="/sisconta/usuariosadd" id="registro" autocomplete="off">
 
 			<div class="row">
 				<div class="input-field col s6">
 					<form:input path="username" class="form-control"
 								placeholder="Username" type="text" id="us-${usuario.idUsuario }"
-								value="${usuario.username }" />
+								value="${usuario.username }" required="required"/>
 
 				</div>
 				<div class="input-field col s6">
 					<form:password path="password" class="form-control"
-								placeholder="Contraseña" id="pass-${usuario.password }"
-								value="${usuario.password }" />
+								placeholder="Contraseña" id="pass-${usuario.password }" required="required" />
 					
 				</div>
 			</div>
 
 					<div class="row">
 						<div class="input-field col s12">
-							<form:select path="idRol" class="form-control" required="true">
+							<form:select path="idRol" class="form-control" required="true" id="idRol-${usuario.idUsuario }">
 								<option value="" disabled selected>Selecione el rol</option>
 								<c:forEach items="${roles}" var="r">
 									<c:choose>
@@ -225,8 +215,7 @@
 
 					<div class="row">
 						<div class="input-field col s12">
-							<form:select path="idEmpleado" class="form-control"
-								required="true">
+							<form:select path="idEmpleado" class="form-control" required="true" id="idEmpleado-${usuario.idUsuario }">
 								<option value="" disabled selected>Selecione el empleado</option>
 								<c:forEach items="${empleados}" var="r">
 									<c:choose>
@@ -246,9 +235,8 @@
 
 
 					<div class="row">
-						<div class="input-field col s12">
-							<form:select path="idEmpresa" class="form-control"
-								required="true">
+						<div class="input-field col s6">
+							<form:select path="idEmpresa" class="form-control" required="true" id="idEmpresa-${usuario.idUsuario }">
 								<option value="" disabled selected>Selecione la empresa</option>
 								<c:forEach items="${empresas}" var="e">
 									<c:choose>
@@ -263,24 +251,29 @@
 								</c:forEach>
 							</form:select>
 						</div>
+						
+						<c:choose>
+							<c:when test="${usuario.activo}">
+									<div class="col s6 switch center">
+										<label> Activo <input checked type="checkbox"
+											name="activo-${usuario.idUsuario}"> <span
+											class="lever"></span>
+										</label>
+									</div>
+								</c:when>
+							<c:otherwise>
+									<div class="col s6 switch center">
+										<label> Activo <input type="checkbox"
+											name="activo-${usuario.idUsuario}"> <span
+											class="lever"></span>
+										</label>
+									</div>
+							</c:otherwise>
+						</c:choose>
+						<!-- Switch -->
+							
+						  
 					</div>
-					
-					
-							<div class="form-group">
-								<label class="control-label col-sm-4">Activo: </label>
-								<div class="col-sm-8">
-									<c:choose>
-										<c:when test="${usuario.activo }">
-										
-											<form:checkbox path="activo" checked="true" data-toggle="toggle" />
-										</c:when>
-										<c:otherwise>
-											<form:checkbox path="activo" data-toggle="toggle" />
-										</c:otherwise>
-									</c:choose>
-
-								</div>
-							</div>
 
 					<form:hidden id="idUsuario" path="idUsuario" value="${usuario.idUsuario}" />
 

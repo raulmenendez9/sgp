@@ -3,6 +3,8 @@ package com.sisbam.sisconta.controller.variety;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import java.lang.ClassCastException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.ws.http.HTTPException;
 
@@ -22,6 +24,12 @@ public class ExceptionsController {
 	 @ExceptionHandler(Exception.class)
 	    public String exceptionHandler(){
 	        return "Variety/Error";
+	    }
+	 
+	 @ExceptionHandler(ClassCastException.class)
+	    public String exceptionClassCastHandler(){
+	        System.err.println("Error: cierre sesion cada vez que haga cambios");
+	        return "redirect:/sisconta";
 	    }
 	 
 	 @ExceptionHandler(SQLException.class)

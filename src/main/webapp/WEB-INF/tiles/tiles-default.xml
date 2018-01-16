@@ -14,6 +14,9 @@
 		<put-attribute name="content_javascript" value="" />
 	</definition>
 	
+	<definition name="login" template="WEB-INF/views/login.jsp">
+		<put-attribute name="cabecera" value="/WEB-INF/menu/cabecera.jsp" />
+	</definition>
 	
 	<definition name="materializeTemplate" template="WEB-INF/template/_template_materialize.jsp">
 		<put-attribute name="titulo" value="SCONTA" />
@@ -45,7 +48,7 @@
 	
 <!-- 	SECURITY -->
 	<definition name="Security/Rol/rol" extends="materializeTemplate">
-		<put-attribute name="titulo" value="Gestión de Roles del Sistema" />
+		<put-attribute name="titulo" value="Roles del Sistema" />
 		<put-attribute name="content" value="/WEB-INF/views/Security/Rol/rol.jsp" />
 	</definition>
 	
@@ -56,7 +59,7 @@
 	
 	
 	<definition name="Security/Menu/menu" extends="materializeTemplateForm">
-		<put-attribute name="titulo" value="Registro de Menus" />
+		<put-attribute name="titulo" value="Menus" />
 		<put-attribute name="content" value="/WEB-INF/views/Security/Menu/menu.jsp" />
 	</definition>
 	<definition name="Security/Vista/vista" extends="materializeTemplateForm">
@@ -67,16 +70,16 @@
 	
 <!-- 	ADMINISTRATION -->
 	<definition name="Administration/Usuario/usuario" extends="materializeTemplateForm">
-    	<put-attribute name="titulo" value="Registro de Usuarios" />
+    	<put-attribute name="titulo" value="Usuarios" />
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Usuario/usuario.jsp"/>
 	</definition>
 	<definition name="Administration/Empresa/empresa" extends="materializeTemplate">
-    	<put-attribute name="titulo" value="Registro de Empresas" />
+    	<put-attribute name="titulo" value="Empresas" />
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Empresa/empresa.jsp"/>
 	</definition>
 	
 	<definition name="Administration/Empleado/empleado" extends="materializeTemplateForm">
-    	<put-attribute name="titulo" value="Registro de Empresas" />
+    	<put-attribute name="titulo" value="Empleados" />
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Empleado/empleado.jsp"/>
 	</definition>
 <!-- 	/ADMINISTRATION -->	

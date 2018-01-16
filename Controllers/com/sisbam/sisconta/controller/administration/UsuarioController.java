@@ -105,13 +105,15 @@ public class UsuarioController {
 		
 	}
 	
-	@RequestMapping(value = "/usuarios/add", method = RequestMethod.POST)
-	public String saveOrUpadateUsuario(@ModelAttribute("usuarioForm") Usuario usuarioRecibido) throws ClassNotFoundException {
+	@RequestMapping(value = "/usuariosadd", method = RequestMethod.POST)
+	public String saveOrUpadateUsuario(@ModelAttribute("usuarioForm") Usuario usuarioRecibido, HttpServletRequest request) throws ClassNotFoundException {
 		if(permisos.isC()||permisos.isU()){
+			
 		Usuario usuario = usuarioRecibido;
-		Rol rolSeleccionado = (Rol) this.manage_entity.getById(Rol.class.getName(), usuario.getIdRol());	
-		Empresa EmpresaSeleccionada = (Empresa) this.manage_entity.getById(Empresa.class.getName(), usuario.getIdEmpresa());
-		Empleado empleado = (Empleado) this.manage_entity.getById(Empleado.class.getName(), usuario.getIdEmpleado());
+		
+		Rol rolSeleccionado 		= 	(Rol) 		this.manage_entity.getById(Rol.class.getName(), usuario.getIdRol());	
+		Empresa EmpresaSeleccionada = 	(Empresa) 	this.manage_entity.getById(Empresa.class.getName(), usuario.getIdEmpresa());
+		Empleado empleado 			= 	(Empleado) 	this.manage_entity.getById(Empleado.class.getName(), usuario.getIdEmpleado());
 		usuario.setRol(rolSeleccionado);
 		usuario.setEmpresa(EmpresaSeleccionada);
 		usuario.setEmpleado(empleado);
@@ -119,12 +121,30 @@ public class UsuarioController {
 		usuario.setPassword(passwordEncoder.encode(pass));
 		
 		if(usuario.getIdUsuario()==0){
+			
+			if(request.getParameter("activo").equals("on")){
+				usuario.setActivo(true);
+			}
+			else {
+				usuario.setActivo(false);
+			}
 			manage_entity.save(Usuario.class.getName(), usuario);
+			
 		}else{
+			
+			if(request.getParameter("activo-"+usuario.getIdUsuario()).equals("on")){
+				usuario.setActivo(true);
+			}
+			else {
+				usuario.setActivo(false);
+			}
 			manage_entity.update(Usuario.class.getName(), usuario);
+			
 		}
-		}
+		
 		return "redirect:/usuarios";
+		}
+		return "403";
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -149,8 +169,10 @@ public class UsuarioController {
 		model.addAttribute("roles", roles);
 		model.addAttribute("empresas", empresas);
 		model.addAttribute("empleados", empleados);
-		}
+		
 		return path+"usuario-form";
+		}
+		return "403";
 	}
 	
 	/*

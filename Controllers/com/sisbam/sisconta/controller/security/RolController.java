@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sisbam.sisconta.configuration.AuthorizedService;
+import com.sisbam.sisconta.controller.variety.ObtenerPermisosPorUrl;
 import com.sisbam.sisconta.dao.DaoImp;
 import com.sisbam.sisconta.entity.security.Menu;
 import com.sisbam.sisconta.entity.security.Permisos;
@@ -29,18 +30,25 @@ public class RolController {
 	
 	private String path="Security/Rol/";
 	
+	private Permisos permisos;
+	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/roles", method = RequestMethod.GET)
 	public String index(Model model, HttpServletRequest request) {
 		
+	ObtenerPermisosPorUrl obtener = new ObtenerPermisosPorUrl();
+	this.permisos = obtener.Obtener("/sisconta/vistas", request, manage_entity);
 		
-		
+//se cargan los permisos CRUD que tenga el usuario sobre la vista		
+//*************CARGAR BOTONES PERMITIDOS******************
+		model.addAttribute("create",permisos.isC());
+		model.addAttribute("read",	permisos.isR());
+		model.addAttribute("update",permisos.isU());
+		model.addAttribute("delete",permisos.isD());
+//**********************************************************
 		String retorno = "403";
-		String username = request.getUserPrincipal().getName();
-		String rol = AuthorizedService.getRol(manage_entity, username);
-		model.addAttribute("rol", rol);
-		boolean authorized = AuthorizedService.getRolAuthorization(manage_entity, username, "rol");
-		if(authorized){
+		if(permisos.isR()) {	
+		
 			Rol rol1 = new Rol();
 			model.addAttribute("rolForm", rol1);
 			model.addAttribute("rol1", null);
@@ -49,6 +57,7 @@ public class RolController {
 			
 			model.addAttribute("roles", roles);
 			retorno = path+"rol";
+			return retorno;
 		}
 		return retorno;
 	}
@@ -57,12 +66,12 @@ public class RolController {
 	@RequestMapping(value = "/rolesadd", method = RequestMethod.GET)//FUNCIONANDO  4/11/2017 NO TOCAR
 	public String addRol(Model model, HttpServletRequest request) {
 		
-		
+		String retorno = "403";
 //		HOY YA NO VAS A CARGAR MENUS Y VISTAS DISPONIBLES, PORQUE CUANDO SE HAGA UN NUEVO ROL, SE MOSTRARAN TODOS LOS MENUS Y TODAS LAS VISTAS
 //		LO QUE VA A IR CAMBIANDO SON LOS PERMISOS, LO DEMAS SE MANTIENE IGUAL
 //		ASI QUE LLEVAR TODOS LOS MENUS Y VISTAS DISPONIBLES YA NO ES NECESARIO
+		if(permisos.isC()) {		
 		
-		String retorno = "403";
 			Rol rol1 = new Rol();
 			model.addAttribute("rolForm", rol1);
 			model.addAttribute("rol", null);
@@ -74,11 +83,14 @@ public class RolController {
 			model.addAttribute("permisos", permisos);
 			model.addAttribute("estoyguardando",true);
 			retorno = path+"rolform";
+		}
 		return retorno;
 	}
 	
 	@RequestMapping(value = "/rolesadd", method = RequestMethod.POST)
 	public String saveOrUpadateRol(HttpServletRequest request) {
+		String retorno = "403";
+		if(permisos.isC()) {	
 
 		Rol rol = new Rol();
 		try {
@@ -272,18 +284,13 @@ public class RolController {
 							manage_entity.save("Permisos", permix);
 						}
 					}
-					
-					
-							
 							
 					
 				}
 				
-				
-				
-				
 			
-			
+		}
+		return retorno;
 		}
 		return "redirect:/roles";
 	}
@@ -291,6 +298,9 @@ public class RolController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/rolesupdate/{id}", method = RequestMethod.GET)
 	public String update(@PathVariable("id") String rolId, Model model, HttpServletRequest request) throws ClassNotFoundException {
+		
+		String retorno = "403";
+		if(permisos.isU()) {	
 		
 		String username = request.getUserPrincipal().getName();
 		String rol = AuthorizedService.getRol(manage_entity, username);
@@ -339,13 +349,15 @@ public class RolController {
 		model.addAttribute("estoyguardando",true);
 		
 		return path+"rolform";
+		}
+		return retorno;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/rolesdelete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable("id") String rolId, Model model) throws ClassNotFoundException {
 		Rol rol = (Rol) manage_entity.getById(Rol.class.getName(), Integer.parseInt(rolId));
-		
+		if(permisos.isD()) {	
 		model.addAttribute("rol", rol);
 				try {						
 				Permisos permi = new Permisos();
@@ -359,7 +371,7 @@ public class RolController {
 					}
 				}
 				catch(Exception e) {
-					System.out.println("tranqui");
+					System.err.println("Error: rolform, nada grave"+e.getMessage());
 				}
 					
 				manage_entity.delete(Rol.class.getName(), rol);
@@ -369,5 +381,7 @@ public class RolController {
 		List<Rol> roles = (List<Rol>) this.manage_entity.getAll("Rol");
 		model.addAttribute("roles", roles);
 		return "redirect:/roles";
+	}
+		 return "403";
 	}
 }
