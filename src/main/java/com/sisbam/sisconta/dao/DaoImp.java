@@ -81,6 +81,61 @@ public class DaoImp implements Dao{
 		} 
 	}
 	
+	@Override
+	public void saveSinBitacora(String entityName, Object obj) {
+		// recupera la session actual.
+				Session session = getCurrentSession();
+					
+				try {
+					// Inicia una nueva transaccion.
+					session.getTransaction().begin();
+					// save: para guardar una entidad, similar: persist
+					session.save(entityName, obj);
+					// Ejecuta la transaccion que se realizao anteriormente.
+					session.getTransaction().commit();
+				} catch (Exception e) {
+					// Si el estatus de la transaccion se encuentra activa o el marca
+					// rollback
+					// se realiza un rollback() para regresar la operacion que se
+					// intentaba realizar.
+					if (session.getTransaction().getStatus() == TransactionStatus.ACTIVE
+							|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
+						session.getTransaction().rollback();
+					}
+				} 
+		
+	}
+	
+	@Override
+	public void updateSinBitacora(String entityName, Object obj) {
+		Session session = getCurrentSession();
+		try {
+			session.getTransaction().begin();
+			session.update(entityName, obj);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			if (session.getTransaction().getStatus() == TransactionStatus.ACTIVE
+					|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
+				session.getTransaction().rollback();
+			}
+		} 
+	}
+	
+	@Override
+	public void deleteSinBitacora(String entityName, Object obj) {
+		Session session = getCurrentSession();
+		try {
+			session.getTransaction().begin();
+			session.delete(entityName, obj);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			if (session.getTransaction().getStatus() == TransactionStatus.ACTIVE
+					|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
+				session.getTransaction().rollback();
+			}
+		} 
+	}
+	
 	
 	@Override
 	public void save(String entityName, Object obj) {
@@ -519,6 +574,9 @@ public class DaoImp implements Dao{
 		}
 		return obj;
 	}
+
+
+
 
 
 

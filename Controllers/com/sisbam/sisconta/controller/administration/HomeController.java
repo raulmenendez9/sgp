@@ -15,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sisbam.sisconta.configuration.AuthorizedService;
 import com.sisbam.sisconta.dao.Dao;
 import com.sisbam.sisconta.dao.DaoImp;
 import com.sisbam.sisconta.entity.administration.Usuario;

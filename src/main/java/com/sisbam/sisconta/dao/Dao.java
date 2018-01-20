@@ -29,6 +29,10 @@ public interface Dao {
 	 */
     public void save(String entityName, Object obj);
     public void saveBitacora(String entityName, Object obj);
+    
+    public void saveSinBitacora(String entityName, Object obj);
+    public void updateSinBitacora(String entityName, Object obj);
+    public void deleteSinBitacora(String entityName, Object obj);
     public void crearBitacora(String accion,String tabla);
     
     /*

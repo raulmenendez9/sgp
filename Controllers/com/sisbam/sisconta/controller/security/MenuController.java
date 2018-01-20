@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sisbam.sisconta.configuration.AuthorizedService;
 import com.sisbam.sisconta.controller.variety.ObtenerPermisosPorUrl;
 import com.sisbam.sisconta.dao.DaoImp;
 import com.sisbam.sisconta.entity.security.Menu;
@@ -102,10 +101,6 @@ public class MenuController {
 	public String update(@PathVariable("id") String menuId, Model model, HttpServletRequest request) throws ClassNotFoundException {
 		
 		if(permisos.isR()) {
-		String username = request.getUserPrincipal().getName();
-		String rol = AuthorizedService.getRol(manage_entity, username);
-		model.addAttribute("rol", rol);
-		
 				
 		Menu menu = (Menu) manage_entity.getById(Menu.class.getName(), Integer.parseInt(menuId));
 		model.addAttribute("menu", menu);

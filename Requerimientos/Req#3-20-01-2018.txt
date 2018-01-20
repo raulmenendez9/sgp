@@ -1,0 +1,21 @@
+Mensajeria entre usuarios
+Vas a hacer una clase llamada “Mensajes” en la carpeta com.sisbam.sisconta.entity.administration con estos atributos:
+-	Id 			(int)		not null
+-	usuarioRedactor		(Usuario)	not null
+-	usuarioDestino		(Usuario)	not null
+-	mensaje			(String):4096	not null
+-	fechaEnvio		(Date)		not null
+-	asunto			(String):64	not null
+
+por el momento solo vas a hacer un crud basico de eso, la fecha se debe sacar del Sistema con un new Date()
+
+podes basarte en las cosas que ya están hechas, por ejemplo el crud de “Empresas” es sencillo 
+
+en la carpeta Entitys haces las clases Modelo, en la carpeta Controllers están las controlador y las vistas están en \src\main\webapp\WEB-INF\views 
+si queres buscar un archivo apreta Ctrl+shit+R y te abre un buscado el spring
+
+En el archivo tiles-default.xml heredas los estilos de las paginas como el menú lateral
+
+Los controladores son casi iguales todos el de “EmpresasController.java” esta comentado que hace cada cosa.
+
+Las clases Model tienen unos @algo que se llaman anotaciones jpa con eso le decis a Hibernate atravez de jpa que te haga una tabla en la BD de esa clase

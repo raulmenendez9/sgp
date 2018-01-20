@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.sisbam.sisconta.configuration.AuthorizedService;
 import com.sisbam.sisconta.controller.variety.ObtenerPermisosPorUrl;
 import com.sisbam.sisconta.dao.DaoImp;
 import com.sisbam.sisconta.entity.security.Menu;
@@ -182,7 +181,7 @@ public class RolController {
 				if((create != null || read != null || update != null || delete != null)&& (menuesderol!=null)) {
 					permisos.setVista(vista);
 					permisos.setRol(rol);
-					manage_entity.save("Permisos", permisos);
+					manage_entity.saveSinBitacora(Permisos.class.getName(), permisos);
 				}
 
 				
@@ -256,7 +255,7 @@ public class RolController {
 						}
 						
 						if((create != null || read != null || update != null || delete != null)&& (menuesderol!=null)) {
-							manage_entity.update("Permisos", permisos);
+							manage_entity.updateSinBitacora(Permisos.class.getName(), permisos);
 						}	
 						
 					}
@@ -281,7 +280,7 @@ public class RolController {
 						if((create != null || read != null || update != null || delete != null)&& (menuesderol!=null)) {
 							permix.setVista(vista);
 							permix.setRol(rol);
-							manage_entity.save("Permisos", permix);
+							manage_entity.saveSinBitacora(Permisos.class.getName(), permix);
 						}
 					}
 							
@@ -303,8 +302,6 @@ public class RolController {
 		if(permisos.isU()) {	
 		
 		String username = request.getUserPrincipal().getName();
-		String rol = AuthorizedService.getRol(manage_entity, username);
-		model.addAttribute("rol", rol);
 		
 		Rol rol1 = (Rol) manage_entity.getById(Rol.class.getName(), Integer.parseInt(rolId));
 		
@@ -368,7 +365,7 @@ public class RolController {
 						permi = (Permisos) manage_entity.getPermisosByVistaAndRol(vistita, rol);
 						if(permi.getRol().getIdRol()==rol.getIdRol()) {
 //							System.err.println("TRATANDO DE BORRAR PERMISOS-> "+rol.getIdRol()+"-> "+vistita.getNombre());
-							manage_entity.delete(Permisos.class.getName(), permi);
+							manage_entity.deleteSinBitacora(Permisos.class.getName(), permi);
 						}
 						}
 						catch(Exception e) {
