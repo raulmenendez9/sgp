@@ -88,6 +88,12 @@
     	<put-attribute name="titulo" value="Empleados" />
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Empleado/empleado.jsp"/>
 	</definition>
+	
+	<definition name="Administration/Cuentas/cuenta" extends="materializeTemplateForm">
+    	<put-attribute name="titulo" value="Cuentas" />
+		<put-attribute name="content" value="/WEB-INF/views/Administration/Cuentas/cuentas.jsp"/>
+	</definition>
+	
 <!-- 	/ADMINISTRATION -->	
 	
 <!-- 	VARIETY -->
