@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.sisbam.sisconta.controller.variety.ReportesController;
 import com.sisbam.sisconta.dao.Dao;
 import com.sisbam.sisconta.dao.DaoImp;
 import com.sisbam.sisconta.entity.administration.Usuario;
@@ -22,6 +23,8 @@ import com.sisbam.sisconta.entity.security.Menu;
 import com.sisbam.sisconta.entity.security.Permisos;
 import com.sisbam.sisconta.entity.security.Rol;
 import com.sisbam.sisconta.entity.security.Vista;
+
+import freemarker.core.ParseException;
 
 @Controller
 public class HomeController {
@@ -31,10 +34,10 @@ public class HomeController {
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = {"/", "home"}, method = RequestMethod.GET)
-	public String home(Model model, HttpServletRequest request) {
+	public String home(Model model, HttpServletRequest request,HttpServletResponse response) throws ParseException {
 		
 		HttpSession session = request.getSession();
-		
+
 //		*************Cargar el usuario y el Rol actual***************
 		Principal user = request.getUserPrincipal();
 		Usuario usuario = (Usuario) manage_entity.getByName(Usuario.class.getName(),"username", user.getName());

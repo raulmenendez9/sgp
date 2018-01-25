@@ -174,7 +174,7 @@
 			<div class="center">
 				<form:button type="submit"
 					class=" btn green modal-actionwaves-effect waves-light white-text">
-					<i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </form:button>
+					<i class="fa fa-floppy-o" aria-hidden="true"></i> Actualizar</form:button>
 
 				<form:button href="#!"
 					class=" btn red modal-action modal-close waves-effect waves-light white-text">

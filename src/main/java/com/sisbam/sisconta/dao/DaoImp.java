@@ -50,7 +50,7 @@ public class DaoImp implements Dao{
 		bitacora.setFecha(hoy);
 		bitacora.setTabla(entidad);
 		bitacora.setUsername((String)auth.getPrincipal());
-		bitacora.setLinea("El usuario:"+auth.getPrincipal()+" "+accion+" en la tabla"+" "+entidad+" El dia "+fechahora);
+		bitacora.setLinea(auth.getPrincipal().toString().toUpperCase()+" "+accion+"     en "+" "+entidad+"->"+fechahora);
 		
 		saveBitacora(Bitacora.class.getName(), bitacora);
 	}
