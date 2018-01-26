@@ -77,42 +77,41 @@
 						required="required" />
 
 				</div>
-					<div class="input-field col s12">
-					<form:input path="cuentaPadre" value="${cuenta.cuentaPadre}"
-						placeholder="Cuenta Mayor" id="cuentaPadre" type="text"
-						class="validate" required="required" />
-					</div>
-			
+				
+				<div class="row">
 				<div class="input-field col s6">
-					<form:textarea path="description" value="${cuenta.description }"
-						placeholder="description" id="description" cols="10" rows="10" type="text"
-						class="validate" required="required" />
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="input-field col s12">
 					<form:input path="nombre" value="${cuenta.nombre}"
 						placeholder="nombre" id="nombre" type="text"
 						class="validate" required="required" />
 				</div>
 			</div>
-			
-			<div class="row">
+					
+			</div><br>
 				<div class="input-field col s12">
-					<form:input path="saldoAcreedor" value="${cuenta.saldoAcreedor}"
-						placeholder="Haber" id="haber" type="number" min="0"
+					<form:textarea path="description" value="${cuenta.description }"
+						placeholder="description" id="description" cols="10" rows="10" type="text"
 						class="validate" required="required" />
 				</div>
-			</div>
 			
-			<div class="row">
-				<div class="input-field col s12">
-					<form:input path="saldoDeudor" value="${cuenta.saldoDeudor}"
-						placeholder="Debe" id="debe" type="number" min="0"
-						class="validate" required="required" />
-				</div>
-			</div>
+
+			
+			
+			
+<!-- 			<div class="row"> -->
+<!-- 				<div class="input-field col s12"> -->
+<%-- 					<form:input path="saldoAcreedor" value="${cuenta.saldoAcreedor}" --%>
+<%-- 						placeholder="Haber" id="haber" type="number" min="0" --%>
+<%-- 						class="validate" required="required" /> --%>
+<!-- 				</div> -->
+<!-- 			</div> -->
+			
+<!-- 			<div class="row"> -->
+<!-- 				<div class="input-field col s12"> -->
+<%-- 					<form:input path="saldoDeudor" value="${cuenta.saldoDeudor}" --%>
+<%-- 						placeholder="Debe" id="debe" type="number" min="0" --%>
+<%-- 						class="validate" required="required" /> --%>
+<!-- 				</div> -->
+<!-- 			</div> -->
 
 
 			
@@ -148,45 +147,40 @@
 							placeholder="Codigo" id="codigo" type="text" class="validate"
 							required="required" />
 					</div>
-						<div class="input-field col s12">
-							<form:input path="cuentaPadre" value="${cuenta.cuentaPadre}"
-									placeholder="Cuenta Mayor" id="cuentaPadre" type="text"
-									class="validate" required="required" />
-						</div>
-					
-			
-				</div>
+						
 
 				<div class="row">
-					<div class="input-field col s12">
+					<div class="input-field col s6">
 						<form:input path="nombre" value="${cuenta.nombre }"
 							placeholder="nombre" id="nombre" type="text"
 							class="validate" required="required" />
 					</div>
 				</div>
+				
+				</div><br>
 
 			
-				<div class="input-field col s6">
+				<div class="input-field col s12">
 					<form:textarea path="description" value="${cuenta.description }"
-						placeholder="description" id="description" cols="10" rows="10" type="text"
+						placeholder="description" id="description-${cuenta.idCuentaContable }" cols="10" rows="10" type="text"
 						class="validate" required="required" />
 				</div>
 				
-				<div class="row">
-				<div class="input-field col s12">
-					<form:input path="saldoAcreedor" value="${cuenta.saldoAcreedor}"
-						placeholder="Haber" id="haber" type="number" min="0"
-						class="validate" required="required" />
-				</div>
-			</div>
+<!-- 				<div class="row"> -->
+<!-- 				<div class="input-field col s12"> -->
+<%-- 					<form:input path="saldoAcreedor" value="${cuenta.saldoAcreedor}" --%>
+<%-- 						placeholder="Haber" id="haber" type="number" min="0" --%>
+<%-- 						class="validate" required="required" /> --%>
+<!-- 				</div> -->
+<!-- 			</div> -->
 			
-			<div class="row">
-				<div class="input-field col s12">
-					<form:input path="saldoDeudor" value="${cuenta.saldoDeudor}"
-						placeholder="Debe" id="debe" type="number" min="0"
-						class="validate" required="required" />
-				</div>
-			</div>
+<!-- 			<div class="row"> -->
+<!-- 				<div class="input-field col s12"> -->
+<%-- 					<form:input path="saldoDeudor" value="${cuenta.saldoDeudor}" --%>
+<%-- 						placeholder="Debe" id="debe" type="number" min="0" --%>
+<%-- 						class="validate" required="required" /> --%>
+<!-- 				</div> -->
+<!-- 			</div> -->
 			
 				<form:hidden path="idCuentaContable" value="${cuenta.idCuentaContable}" />
 
@@ -203,12 +197,12 @@
 		</div>
 	</div>
 	<script>
-		CKEDITOR.replace('description',
+		CKEDITOR.replace('description-${cuenta.idCuentaContable }',
 							{
 								TOOLBAR : 'BASIC',
 							}
 						);
-		CKEDITOR.instances['description'].setData("${cuenta.description}");
+		CKEDITOR.instances['description-${cuenta.idCuentaContable }'].setData("${cuenta.description}");
 	</script>
 </c:forEach>
 

@@ -1,5 +1,6 @@
-package com.sisbam.sisconta.controller.administration;
+package com.sisbam.sisconta.controller.accounting;
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sisbam.sisconta.controller.variety.ObtenerPermisosPorUrl;
 import com.sisbam.sisconta.dao.DaoImp;
-import com.sisbam.sisconta.entity.administration.CuentaContable;
+import com.sisbam.sisconta.entity.accounting.CuentaContable;
 import com.sisbam.sisconta.entity.administration.Empresa;
 import com.sisbam.sisconta.entity.security.Permisos;
 import com.sisbam.sisconta.entity.security.Rol;
@@ -29,7 +30,7 @@ public class CuentaContableController {
 	@Autowired
 	private DaoImp manage_entity;//generalizacion de todo lo que tenga que ver con SQL
 	
-	private String path = "Administration/Cuentas/";//ruta donde esta la carpeta de las vista
+	private String path = "Accounting/";//ruta donde esta la carpeta de las vista
 	
 	private Permisos permisos;//permisos del usuario en determinada vista
 
@@ -41,7 +42,7 @@ public class CuentaContableController {
 		
 		String retorno = "403";
 		ObtenerPermisosPorUrl obtener = new ObtenerPermisosPorUrl();
-		this.permisos = obtener.Obtener("/sisconta/cuentas", request, manage_entity);
+		this.permisos = obtener.ObtenerAmbienteDePruebas("/sisconta/vistas", request, manage_entity);
 		
 //se cargan los permisos CRUD que tenga el usuario sobre la vista		
 //*************CARGAR BOTONES PERMITIDOS******************
@@ -55,7 +56,7 @@ public class CuentaContableController {
 			CuentaContable cuenta = new CuentaContable();
 			model.addAttribute("cuentaForm", cuenta);
 			model.addAttribute("cuenta", null);
-				List<CuentaContable> cuentas = (List<CuentaContable>) this.manage_entity.getAll("CuentaContable");
+				List<CuentaContable> cuentas = (List<CuentaContable>) this.manage_entity.getAll(CuentaContable.class.getName());
 				model.addAttribute("cuentas", cuentas);
 			retorno = path+"cuenta";
 		}
@@ -65,6 +66,11 @@ public class CuentaContableController {
 	@RequestMapping(value = "/cuentas/add", method = RequestMethod.POST)
 	public String saveOrUpadateCuenta(@ModelAttribute("cuentaForm") CuentaContable cuentaRecibido,Model model) throws ClassNotFoundException {
 		String retorno = "403";
+		
+		cuentaRecibido.setCuentaPadre(null);
+		Date hoy = new Date();
+		cuentaRecibido.setFechaModificacion(hoy);
+		
 		if(permisos.isC())
 		{
 				CuentaContable cuenta = cuentaRecibido;

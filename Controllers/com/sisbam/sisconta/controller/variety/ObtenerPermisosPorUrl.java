@@ -27,5 +27,18 @@ public class ObtenerPermisosPorUrl {
 		
 		
 	}
+	
+	public Permisos ObtenerAmbienteDePruebas(String url,HttpServletRequest request,DaoImp manage_entity) {
+		Rol rol = (Rol) request.getSession().getAttribute("rol_usuarioactual");
+		Vista vista = (Vista) manage_entity.getByName(Vista.class.getName(), "url", url);
+		Permisos permisos = new Permisos();
+		permisos.setC(true);
+		permisos.setR(true);
+		permisos.setU(true);
+		permisos.setD(true);
+		permisos.setVista(vista);
+		permisos.setRol(rol);
+		return permisos;
+	}
 
 }

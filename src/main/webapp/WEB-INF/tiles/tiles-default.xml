@@ -89,9 +89,9 @@
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Empleado/empleado.jsp"/>
 	</definition>
 	
-	<definition name="Administration/Cuentas/cuenta" extends="materializeTemplateForm">
+	<definition name="Accounting/cuenta" extends="materializeTemplate">
     	<put-attribute name="titulo" value="Cuentas" />
-		<put-attribute name="content" value="/WEB-INF/views/Administration/Cuentas/cuentas.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/views/Accounting/cuentas.jsp"/>
 	</definition>
 	
 <!-- 	/ADMINISTRATION -->	
