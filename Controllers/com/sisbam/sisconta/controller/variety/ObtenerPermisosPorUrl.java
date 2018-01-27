@@ -28,6 +28,7 @@ public class ObtenerPermisosPorUrl {
 		
 	}
 	
+//	USAR ESTE METODO CUANDO SE ESTEN HACIENDO PRUEBAS Y NO SE QUIERA AGREGAR LA VISTA AL MENU
 	public Permisos ObtenerAmbienteDePruebas(String url,HttpServletRequest request,DaoImp manage_entity) {
 		Rol rol = (Rol) request.getSession().getAttribute("rol_usuarioactual");
 		Vista vista = (Vista) manage_entity.getByName(Vista.class.getName(), "url", url);

@@ -35,7 +35,7 @@ public class HibernateConf {
 		prop.setProperty("hibernate.hbm2ddl.auto", "update");
 		prop.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
 		prop.setProperty("hibernate.current_session_context_class", "thread");
-		prop.setProperty("hibernate.show_sql", "true");
+		prop.setProperty("hibernate.show_sql", "false");
 		
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(restDataSource());

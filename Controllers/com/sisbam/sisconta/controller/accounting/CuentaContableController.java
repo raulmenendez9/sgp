@@ -1,5 +1,4 @@
 package com.sisbam.sisconta.controller.accounting;
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -8,29 +7,20 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.hibernate.HibernateError;
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate3.HibernateJdbcException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.sisbam.sisconta.controller.variety.ObtenerPermisosPorUrl;
 import com.sisbam.sisconta.controller.variety.ReportesController;
 import com.sisbam.sisconta.dao.DaoImp;
 import com.sisbam.sisconta.entity.accounting.CuentaContable;
-import com.sisbam.sisconta.entity.administration.Empresa;
 import com.sisbam.sisconta.entity.security.Permisos;
-import com.sisbam.sisconta.entity.security.Rol;
-import com.sisbam.sisconta.entity.security.Vista;
 
 
 @Controller
@@ -76,47 +66,37 @@ public class CuentaContableController {
 		return retorno;
 	}
 	
-	@RequestMapping(value = "/cuentas/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/cuentasadd", method = RequestMethod.POST)
 	public String saveOrUpadateCuenta(@ModelAttribute("cuentaForm") CuentaContable cuentaRecibido,Model model) throws ClassNotFoundException{
 		String retorno = "403";
-		
-		
-		Date hoy = new Date();
-		cuentaRecibido.setFechaModificacion(hoy);
+
 		
 		if(permisos.isC())
 		{
 			
-			try {
-			String codigo =cuentaRecibido.getCodigo();
-			Integer codigoInt = (Integer.parseInt(codigo));
-			if(codigo.length()<1) {
-				cuentaRecibido.setCuentaPadre(null);
-			}
-			else {
-				//quitarle el ultimo numero a el codigo, para que se pueda consultar quien es el padre
-				String codigoConsulta = codigo.substring(1);
-				CuentaContable cuentaPadre = (CuentaContable) manage_entity.getByName(CuentaContable.class.getName(), "codigo", codigoConsulta);
-				cuentaRecibido.setCuentaPadre(cuentaPadre);
-			}}
-			catch(Exception e) {
-				System.out.println("ERROR CuentaContableController"+e.getMessage());
-				return "error";
-			}
-			
-			
+				if(validarCuenta(cuentaRecibido.getCodigo())) {
+					
+					CuentaContable cuentaConPadreCapturado = encontrarPadre(cuentaRecibido);
+					
+					CuentaContable cuenta = cuentaConPadreCapturado;
+					if(cuenta.getIdCuentaContable()==0){
+						manage_entity.save(CuentaContable.class.getName(), cuenta);
+					}else{
+						manage_entity.update(CuentaContable.class.getName(), cuenta);
+					}
+					retorno="redirect:/cuentas";
+				}
+				else {
+					retorno ="Variety/ErrorCuentaContable";
+				}
 			
 				
-				CuentaContable cuenta = cuentaRecibido;
-				if(cuenta.getIdCuentaContable()==0){
-					manage_entity.save(CuentaContable.class.getName(), cuenta);
-				}else{
-					manage_entity.update(CuentaContable.class.getName(), cuenta);
-				}
-				retorno="redirect:/cuentas";
+				
 		}
 		return retorno;
 	}
+	
+
 	
 	
 	@RequestMapping(value = "/cuentas/update/{id}", method = RequestMethod.GET)
@@ -169,16 +149,110 @@ public class CuentaContableController {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	*******************************************
+//	METODS PARA FUNCIONAMIENTO
+//	*******************************************
+	
+	public Boolean validarCuenta(String codigo) {
+		try {
+			Long.parseLong(codigo);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+		return true;
+	}
+	
+	
+	public CuentaContable encontrarPadre(CuentaContable cuentaRecibido) {
+		
+		Date hoy = new Date();
+		cuentaRecibido.setFechaModificacion(hoy);
+		String codigo =cuentaRecibido.getCodigo();
+		if(codigo.length()<=1) {
+			cuentaRecibido.setCuentaPadre(null);
+			return cuentaRecibido;
+		}
+		else {
+			
+			CuentaContable cuentaPadre =null;
+									while(codigo.length()>0)//mientras el codigo de la cuenta sea mayor a 1
+									{
+										try {
+												//quitarle el ultimo numero a el codigo, para que se pueda consultar y averiguar quien es el padre
+												String codigoConsulta = codigo.substring(0, codigo.length()-1);
+												cuentaPadre = (CuentaContable) manage_entity.getByName(CuentaContable.class.getName(), "codigo", codigoConsulta);
+												//si la consulta no retorna nada quiere decir que no encontre al papa
+												if(cuentaPadre!=null) {
+													//si la consulta devuelve algo es porque lo encontre, lo capture y le digo al hijo quien es su papa
+													cuentaRecibido.setCuentaPadre(cuentaPadre);
+													codigo ="";
+												}
+												else {
+													//si el padre que obtuve con el codigo anterior devuelve null es que no encontre al padre y pruebo con otro codigo
+													codigo = codigo.substring(0, codigo.length()-1);
+												}
+											} 
+											catch (Exception e) 
+											{
+												//por cualquier razon mando un null por si encutro un padre falso osea vacio
+												cuentaPadre=null;
+											}
+									}
+									
+									
+									//si no encontro niguna cuenta y su codigo es mayor a uno es porque es un padre pero hay que quitarle numeros a su codigo
+									if(cuentaPadre==null) {
+										String codigoactual =cuentaRecibido.getCodigo();
+										codigoactual=codigoactual.substring(0, 1);
+										cuentaRecibido.setCodigo(codigoactual);
+										return cuentaRecibido;
+									}
+									
+			}
+		
+		
+		
+		
+		return cuentaRecibido;
+		
+	}
+	
+	
 	public List<CuentaContable> asignarTab(List<CuentaContable> cuentas){
 		String nombre=null;
 		String tab = null;
 		int i=0;
 		List<CuentaContable> cuentasConTabulacion =new ArrayList<CuentaContable>();
 		for(CuentaContable cuentita:cuentas) {
-			
-//			System.out.println("CUENTA NOMBRE:"+cuentita.getNombre());
-//			System.out.println("CUENTA TAMANO:"+cuentita.getCodigo().length()+"\n");
-			
 			
 			if(cuentita.getCodigo().length()==1) {
 				
@@ -216,6 +290,11 @@ public class CuentaContableController {
 		HashMap<String,Object> hmParams=new HashMap<String,Object>();
 		rep.genearReporte(model, request, response, "cuentacontableRep",hmParams);
 	}
+	
+
+	
+	
+	
 	
 	
 	

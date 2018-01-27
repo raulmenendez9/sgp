@@ -255,11 +255,13 @@ public class DaoImp implements Dao{
 			obj = session.createQuery(hql).list().get(0);
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			System.out.print(e);
+			System.out.print("ERROR EN EL METODO DE GET BY NAME DAO LINEA 258"+e);
 			if (session.getTransaction().getStatus() == TransactionStatus.ACTIVE
 					|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
 				session.getTransaction().rollback();
 			}
+			obj =null;
+			
 		} 
 		return obj;
 	}

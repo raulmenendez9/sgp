@@ -35,12 +35,12 @@ body{
     opacity: .9; 
 }
 </style>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport">
 <meta name="description" content="">
-<meta name="author" content="">
+<meta name="author" content="BMIRANDA">
 
 <meta name="_csrf" content="${_csrf.token}"/>
 <!-- default header name is X-CSRF-TOKEN -->
@@ -79,12 +79,12 @@ body{
       
       
       <ul class="side-nav grey darken-2" id="mobile-demo">
-        <li class="sidenav-header blue">
+        <li class="sidenav-header grey darken-2">
           <div class="row">
-            <div class="col s4">
+            <div class="col s3">
                 <img src="https://78.media.tumblr.com/39d03bb413c70e6f50641561f64030cf/tumblr_otu2u7Vxd61u8xhwoo2_250.png" width="48px" height="48px" alt="" class="circle responsive-img valign profile-image">
             </div>
-            <div class="col s8">
+            <div class="col s9">
                 <a class="btn-flat dropdown-button waves-effect waves-light white-text" href="#" data-activates="menu-usuario">${usuarioactual.username}<i class="mdi-navigation-arrow-drop-down right"></i></a>
             </div>
           </div>
@@ -109,7 +109,6 @@ body{
           </ul>
         </li>
         </c:forEach>
-        <li class="divider white"></li>
 
         
       </ul>

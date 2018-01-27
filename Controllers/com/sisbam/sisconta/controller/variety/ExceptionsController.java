@@ -9,8 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.xml.ws.http.HTTPException;
 
 import org.apache.velocity.exception.ResourceNotFoundException;
+import org.hibernate.HibernateException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -57,12 +60,21 @@ public class ExceptionsController {
 //	        return "Variety/Error";
 //	 }
 //	 
+//	 @ExceptionHandler(HibernateException.class)
+//	    public String errorBDException() {
+//		 
+//	        return "Variety/Error";
+//	 }
+//	 
+//	 
 //	 @ResponseStatus(HttpStatus.NOT_FOUND)
 //	 @ExceptionHandler(RuntimeException.class)
 //	    public String http404() {
 //	        // Nothing to do
 //		 return "Variety/Error";
 //	    }
+	 
+	 
 	
 }
 
