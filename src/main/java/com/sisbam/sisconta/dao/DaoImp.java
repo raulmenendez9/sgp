@@ -10,6 +10,7 @@ import javax.persistence.ParameterMode;
 import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.procedure.ProcedureCall;
@@ -209,6 +210,7 @@ public class DaoImp implements Dao{
 					|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
 				session.getTransaction().rollback();
 			}
+			throw new HibernateException("ERROR: HAY OTROS VALORES QUE DEPENDEN DE ESTE");
 		} 
 	}
 

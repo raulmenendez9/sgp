@@ -93,13 +93,13 @@ body{
          <li class="white">
           <ul class="collapsible collapsible-accordion">
               <li>
-                <a class="collapsible-header  waves-effect waves-blue "><i class="fa ${menx.icono} fa-fw"></i>${menx.nombre} <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+                <a class="collapsible-header  waves-effect waves-blue "><i class="fa ${menx[1]} fa-fw"></i>${menx[0]} <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
                 <div class="collapsible-body z-depth-3">
                   <ul>
-                		<c:forEach items="${permisosx}" var="perx">
+                		<c:forEach items="${vistasx}" var="v">
 	                		<c:choose>
-	                		<c:when test="${menx.id == perx.vista.menu.id && perx.rol.idRol == rol_usuarioactual.idRol}">
-	                		 	<li><a class="waves-effect waves-blue" href="${perx.vista.url}"><i class="fa ${perx.vista.icon } fa-fw"></i>${perx.vista.nombre}</a></li>
+	                		<c:when test="${menx[2] == v[1]}">
+	                		 	<li><a class="waves-effect waves-blue" href="${v[3]}"><i class="fa ${v[4] } fa-fw"></i>${v[0]}</a></li>
 	                		 </c:when>
 	                		 </c:choose>	
                 		</c:forEach>

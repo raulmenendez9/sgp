@@ -25,29 +25,26 @@
 <hr>
 	 	<div class="container">
 		<c:if test="${read}">
-		<table id="tabla" class="display hover cell-border"  cellspacing="0" width="100%">
+		<table id="tablacuentas" class="display hover cell-border"  cellspacing="0" width="100%">
 			<thead>
 				<tr>
-					<th>Codigo</th>
-					<th>Description</th>
-					<th>Nombre</th>
-					<th>Saldo Acreedor</th>
-					<th>Saldo Deudor</th>
-					<th width="5%">&nbsp;</th>
+					<th width="10%">Codigo</th>
+					<th width="70%">Nombre</th>
+					
+					<th width="8%">Saldo Acreedor</th>
+					<th width="8%">Saldo Deudor</th>
+					<th width="4%">&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${cuentas}" var="cuenta">
 					<tr>
 						<td>${cuenta.codigo }</td>
-						<td>${cuenta.description }</td>
 						<td>${cuenta.nombre}</td>
-						<td>${cuenta.saldoAcreedor }</td>
-						<td>${cuenta.saldoDeudor }</td>
-						<td width="5%">
-							<c:if test="${update}">	
-									<a class=" modal-trigger" href="#-${cuenta.idCuentaContable }"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
-							</c:if>
+						
+						<td>$ ${cuenta.saldoAcreedor }</td>
+						<td>$ ${cuenta.saldoDeudor }</td>
+						<td>
 							<c:if test="${delete}">		
 									<a class="" href="/sisconta/cuentas/delete/${cuenta.idCuentaContable }" data-toggle="modal"data-target="#" ><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>						
@@ -200,11 +197,23 @@
 		CKEDITOR.replace('description-${cuenta.idCuentaContable }',
 							{
 								TOOLBAR : 'BASIC',
+								
 							}
 						);
 		CKEDITOR.instances['description-${cuenta.idCuentaContable }'].setData("${cuenta.description}");
 	</script>
 </c:forEach>
+
+<c:if test="${error}">
+<script type="text/javascript">
+	//asignar los estilos y paginacion a la tabla
+	$(document).ready(function() {
+		 Materialize.toast("ESTE VALOR DEPENDE DE OTROS, BORRA LAS DEPENDENCIAS PRIMERO PARA BORRAR A ESTE", 4000)
+						
+});//fin function
+</script>
+</c:if>
+
 
 <script type="text/javascript">
 $(document).ready(function() {	
@@ -218,4 +227,30 @@ $(document).ready(function() {
 
 						
 });
+</script>
+<script type="text/javascript">
+	//asignar los estilos y paginacion a la tabla
+	$(document).ready(function() {
+		
+		$('#tablacuentas').DataTable({
+			scrollY: true,
+			"columnDefs": [
+			    { "type": "string", "targets": 0 }
+			  ],
+			  "order": [[ 0, 'desc' ]],
+		    scroller: {
+		       			loadingIndicator: true
+		   			  },
+			pagingType : "full_numbers",
+			stateSave : true,
+			responsive : true,
+			language : {
+				"url" : "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+		}
+	});//fin DataTable
+
+					
+
+						
+});//fin function
 </script>

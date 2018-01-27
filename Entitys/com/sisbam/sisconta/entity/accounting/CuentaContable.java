@@ -2,6 +2,7 @@ package com.sisbam.sisconta.entity.accounting;
 import java.beans.Transient;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,12 +20,16 @@ import javax.persistence.Table;
 public class CuentaContable implements java.io.Serializable{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int idCuentaContable;
 	private String codigo;
 	private String nombre;
 	private Date fechaModificacion;
-	private Double saldoDeudor;
-	private Double saldoAcreedor;
+	private Double saldoDeudor =0.0;
+	private Double saldoAcreedor=0.0;
 	private CuentaContable cuentaPadre;
 	private String description;
 	

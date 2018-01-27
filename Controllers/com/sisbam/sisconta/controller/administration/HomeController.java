@@ -49,26 +49,17 @@ public class HomeController {
 		
 		List<Vista> vistas = (List<Vista>) manage_entity.getAll(Vista.class.getName());
 		List<Menu> menus = (List<Menu>) manage_entity.getMenusByUser(user); 
+		List<Menu> menustodos = (List<Menu>) manage_entity.getAll(Menu.class.getName()); 
 		
 		List<Permisos> permisos = (List<Permisos>) manage_entity.getListByName(Permisos.class.getName(), "rol", usuario.getRol().getIdRol().toString());
 		
-		session.setAttribute("permisosx", permisos);
-		session.setAttribute("vistasx", vistas);
-		session.setAttribute("menusdelrolx", menus);
+		session.setAttribute("vistasx", listaVistas(rol));
+		session.setAttribute("menusdelrolx", listaMenus(rol));
 		
 		session.setAttribute("vistas_all", vistas);
 		session.setAttribute("menus_all", menus);
 		session.setAttribute("user", user);
 		//********************************************************
-		Rol rolin = null;
-		Vista vista = null;
-		try {
-			rolin = (Rol) manage_entity.getById(Rol.class.getName(), 1);
-			vista = (Vista) manage_entity.getById(Vista.class.getName(), 1);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.out.println("ERROR EN LINEA 56 HOME CONTROLLER"+e);
-		}
 		
 		
 		return "inicio";
@@ -79,8 +70,30 @@ public class HomeController {
 		return "login";
 	}
 	
-//	OBTENER EL ROL DEL USUARIO QUE VE LA PAGINA, APARTIR DE ESE ROL OBTENER TODOS LOS MENUS QUE PERTENECEN A ESE ROL
-//	LUEGO GUANDO HE MOSTRADO EL MENU DEL ROL LISTO LAS VISTAS PARA ESE MENU DENTRO DE EL 
-//	AL FINAL SOLO DEBO ENVIAR LA LISTA DE MENUS Y LA LISTA DE VISTAS PARA QUE CUANDO LA VISTA.MENU.ID == MENU.ID MUESTRE LA VISTA
+	
+	public List<String> listaMenus(Rol rol){
+		String sql = "select m.nombre,m.icono,m.id_menu from permisos p "
+				+ " inner join vista v on v.id_vista = p.id_vista "
+				+ " inner join menu m on m.id_menu = v.id_menu"
+				+ " where p.id_rol ="+rol.getIdRol()
+				+ " group by m.nombre,m.icono,m.id_menu";
+		
+		List<String> listamenus = (List<String>) manage_entity.executeNativeQuery(sql);
+		return listamenus;
+	}
+	
+	public List<String> listaVistas(Rol rol){
+		String sql = "select v.nombre,v.id_menu,v.id_vista,v.url,v.icono  from permisos p "
+				+ " inner join vista v on v.id_vista = p.id_vista "
+				+ " inner join menu m on m.id_menu = v.id_menu "
+				+ " where p.id_rol ="+rol.getIdRol()+""
+				+ " group by v.nombre,v.id_menu,v.id_vista,v.url,v.icono "
+				+ " order by v.id_menu";
+		
+		List<String> listamenus = (List<String>) manage_entity.executeNativeQuery(sql);
+		return listamenus;
+		
+	}
+	
 	
 }
