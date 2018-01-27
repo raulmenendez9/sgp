@@ -2,9 +2,11 @@ package com.sisbam.sisconta.controller.accounting;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.HibernateError;
 import org.hibernate.HibernateException;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sisbam.sisconta.controller.variety.ObtenerPermisosPorUrl;
+import com.sisbam.sisconta.controller.variety.ReportesController;
 import com.sisbam.sisconta.dao.DaoImp;
 import com.sisbam.sisconta.entity.accounting.CuentaContable;
 import com.sisbam.sisconta.entity.administration.Empresa;
@@ -50,7 +53,7 @@ public class CuentaContableController {
 		
 		String retorno = "403";
 		ObtenerPermisosPorUrl obtener = new ObtenerPermisosPorUrl();
-		this.permisos = obtener.ObtenerAmbienteDePruebas("/sisconta/vistas", request, manage_entity);
+		this.permisos = obtener.Obtener("/sisconta/cuentas", request, manage_entity);
 		
 //se cargan los permisos CRUD que tenga el usuario sobre la vista		
 //*************CARGAR BOTONES PERMITIDOS******************
@@ -205,6 +208,15 @@ public class CuentaContableController {
 		
 		return cuentasConTabulacion;
 	}
+	
+	
+	@RequestMapping(value = "/reporteCuentasContables", method = RequestMethod.GET)
+	public void reporte(Model model, HttpServletRequest request,HttpServletResponse response) throws Exception {
+		ReportesController rep = new ReportesController();
+		HashMap<String,Object> hmParams=new HashMap<String,Object>();
+		rep.genearReporte(model, request, response, "cuentacontableRep",hmParams);
+	}
+	
 	
 	
 }

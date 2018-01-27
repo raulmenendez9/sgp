@@ -19,7 +19,7 @@
 		<a class="waves-effect waves-light btn-floating modal-trigger green" href="#agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
 </c:if>
 <c:if test="${read}">
-		<a class="waves-effect waves-light btn-floating modal-trigger red darken-3" href="#"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>PDF</a>
+		<a class="waves-effect waves-light btn-floating modal-trigger red darken-3" href="/sisconta/reporteCuentasContables" target="blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>PDF</a>
 		<a class="waves-effect waves-light btn-floating modal-trigger green darken-3" href="#"><i class="fa fa-file-excel-o" aria-hidden="true"></i> EXCEL</a>
 </c:if>
 <hr>
