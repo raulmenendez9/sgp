@@ -94,8 +94,7 @@
 			<form:hidden id="idCuentaContable" path="idCuentaContable" value="${cuenta.idCuentaContable}" />
 
 			<div class="center">
-				<form:button type="submit"
-					class=" btn green modal-actionwaves-effect waves-light white-text">
+	<form:button type="submit"	class=" btn green modal-actionwaves-effect waves-light white-text " onclick="toast();">
 					<i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </form:button>
 
 				<form:button href="#!"

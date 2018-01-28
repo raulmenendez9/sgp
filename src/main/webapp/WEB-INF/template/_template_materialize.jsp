@@ -183,5 +183,11 @@ body{
 						
 });//fin function
 </script>
+<script>
+function toast() {
+	Materialize.toast('Guardado', 4000,'#558b2f light-green darken-3','rounded');
+	}
+	
+</script>
 
 </html>

@@ -101,7 +101,7 @@
 
 			<div class="center">
 				<form:button type="submit"
-					class=" btn green modal-actionwaves-effect waves-light white-text">
+					class=" btn green modal-actionwaves-effect waves-light white-text" onclick="toast();">
 					<i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </form:button>
 
 				<form:button href="#!"
@@ -165,7 +165,7 @@
 
 			<div class="center">
 				<form:button type="submit"
-					class=" btn green modal-actionwaves-effect waves-light white-text">
+					class=" btn green modal-actionwaves-effect waves-light white-text" onclick="toast();">
 					<i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </form:button>
 
 				<form:button href="#!"
