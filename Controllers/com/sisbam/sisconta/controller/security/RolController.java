@@ -130,14 +130,15 @@ public class RolController {
 			List<Menu> menusroles = new ArrayList<Menu>();
 			for (Menu menu : menustodos) {
 				String menuesderol = request.getParameter("menuactivo-" + menu.getId());
-				if (menuesderol != null) {
 
 					if (menuesderol != null) {
 						menu.setActivo(true);
 						menusroles.add(menu);
 					}
-				}
 			}
+			
+			
+			
 
 			try {
 				System.out.println("Tratar de hacer INSERT");

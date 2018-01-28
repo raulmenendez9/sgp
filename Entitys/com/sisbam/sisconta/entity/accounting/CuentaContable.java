@@ -1,7 +1,8 @@
-package com.sisbam.sisconta.entity.administration;
+package com.sisbam.sisconta.entity.accounting;
 import java.beans.Transient;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,12 +20,16 @@ import javax.persistence.Table;
 public class CuentaContable implements java.io.Serializable{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int idCuentaContable;
 	private String codigo;
 	private String nombre;
 	private Date fechaModificacion;
-	private Double saldoDeudor;
-	private Double saldoAcreedor;
+	private Double saldoDeudor =0.0;
+	private Double saldoAcreedor=0.0;
 	private CuentaContable cuentaPadre;
 	private String description;
 	
@@ -83,7 +88,7 @@ public class CuentaContable implements java.io.Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	@Column(name = "fecha", nullable = false)
+	@Column(name = "fecha", nullable = true)
 	public Date getFechaModificacion() {
 		return fechaModificacion;
 	}
@@ -91,7 +96,7 @@ public class CuentaContable implements java.io.Serializable{
 	public void setFechaModificacion(Date fechaModificacion) {
 		this.fechaModificacion = fechaModificacion;
 	}
-	@Column(name = "SaldoDeudor", nullable = false)
+	@Column(name = "SaldoDeudor", nullable = true)
 	public Double getSaldoDeudor() {
 		return saldoDeudor;
 	}
@@ -99,7 +104,7 @@ public class CuentaContable implements java.io.Serializable{
 		this.saldoDeudor = saldoDeudor;
 	}
 	
-	@Column(name = "SaldoAcreedor", nullable = false)
+	@Column(name = "SaldoAcreedor", nullable = true)
 	public Double getSaldoAcreedor() {
 		return saldoAcreedor;
 	}
@@ -109,7 +114,7 @@ public class CuentaContable implements java.io.Serializable{
 	}
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_cuentaPadre", nullable=false)
+	@JoinColumn(name = "id_cuentaPadre", nullable=true)
 	public CuentaContable getCuentaPadre() {
 		return cuentaPadre;
 	}
@@ -118,7 +123,7 @@ public class CuentaContable implements java.io.Serializable{
 		this.cuentaPadre = cuentaPadre;
 	}
 	
-	@Column(name = "descripcion", nullable = false, length = 512)
+	@Column(name = "descripcion", nullable = true, length = 512)
 	public String getDescription() {
 		return description;
 	}

@@ -10,6 +10,7 @@ import javax.persistence.ParameterMode;
 import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.procedure.ProcedureCall;
@@ -50,7 +51,7 @@ public class DaoImp implements Dao{
 		bitacora.setFecha(hoy);
 		bitacora.setTabla(entidad);
 		bitacora.setUsername((String)auth.getPrincipal());
-		bitacora.setLinea("El usuario:"+auth.getPrincipal()+" "+accion+" en la tabla"+" "+entidad+" El dia "+fechahora);
+		bitacora.setLinea(auth.getPrincipal().toString().toUpperCase()+" "+accion+"     en "+" "+entidad+"->"+fechahora);
 		
 		saveBitacora(Bitacora.class.getName(), bitacora);
 	}
@@ -209,6 +210,7 @@ public class DaoImp implements Dao{
 					|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
 				session.getTransaction().rollback();
 			}
+			throw new HibernateException("ERROR: HAY OTROS VALORES QUE DEPENDEN DE ESTE");
 		} 
 	}
 
@@ -253,11 +255,13 @@ public class DaoImp implements Dao{
 			obj = session.createQuery(hql).list().get(0);
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			System.out.print(e);
+			System.out.print("ERROR EN EL METODO DE GET BY NAME DAO LINEA 258"+e);
 			if (session.getTransaction().getStatus() == TransactionStatus.ACTIVE
 					|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
 				session.getTransaction().rollback();
 			}
+			obj =null;
+			
 		} 
 		return obj;
 	}
