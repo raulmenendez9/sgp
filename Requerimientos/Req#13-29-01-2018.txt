@@ -1,0 +1,13 @@
+Calculadora:
+
+En el boton rojo que sale en la esquina inferior izquierda
+hacer que aparesca una ventana modal con una caluladora pequeña
+se puede usar la que esta en esta pagina:
+
+https://codepen.io/dougjuliao/pen/vtazA
+
+no hay que saturar el jsp de _template_materialize con mas codigo
+si no que importarla con un tiles, asi como se importan las cabeceras.jsp 
+
+ver la documentacion de materialize para las modales, ahi hay varias modales
+bien chivas, hay una que sale por debajo de la pantalla, esa seria buena.

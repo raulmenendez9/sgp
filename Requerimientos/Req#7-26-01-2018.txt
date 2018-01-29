@@ -1,0 +1,9 @@
+Buscador de vistas en SideMenu:
+
+En _template_materialize.jsp esta el menu de al lado
+hacer una barra de busqueda debajo de la foto del usuario que sirva para
+buscar una vista en particular, si la barra de busqueda se ve fea se cancela
+
+la idea es hacerla igual que en la documentacion de materialize donde
+se empieza a escribir y sale que se esta buscando, si hay que hacer mucho 
+trabajo igual se cancela.

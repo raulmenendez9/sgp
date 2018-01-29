@@ -1,0 +1,13 @@
+Ajustes de Usuario (Terminar REQ 11 antes de hacer este):
+
+que cualquier usuario pueda cambiar su contraseña y sus datos (pero que no pueda editar su ROL),
+que en el menu pequeño que sale para cerrar sesion salga otra pestañita que diga
+"ajustar perfil" (o algo parecido) para que cada quien pueda editar sus datos,
+
+porque esta este error,supongamos esto el administrador puede editar las contraseñas de quien sea
+y el usuario propio no puede editar su propia contraseña, si el admin es malilla
+puede cambiarle la contra a alguien mas por fregarlo, entonces en editar ya no va a salir
+el campo de "password" solo en +agregar va a poder poder una contraseña.
+
+
+

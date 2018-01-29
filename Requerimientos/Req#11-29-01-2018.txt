@@ -1,0 +1,15 @@
+Arreglo:
+
+cuando un agrega un usuario, le pide la empresa pero tambien pide un empleado
+y en empleado igual se pide una empresa y eso es una discrepancia, hay un solo
+relajo entre estos 3:
+
+-Empresa
+-Empleado
+-Usuario
+
+~Ver que se hace para que tenga logica y sentido como por ejemplo que usuario
+ y empleado sean uno mismo y que pertenescan a una empresa, ahi ve que haces xD
+
+~a los usuarios no hay que tocarle
+ las contraseñas ni el username.
