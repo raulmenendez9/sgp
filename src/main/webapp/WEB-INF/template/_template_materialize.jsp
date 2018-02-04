@@ -1,3 +1,4 @@
+
 <!DOCTYPE>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -33,6 +34,12 @@ body{
     z-index: 9999;
     background: url(<c:url value="/resources/img/cargando2.gif" />) 50% 50% no-repeat rgb(249,249,249);
     opacity: .9; 
+}
+
+.posicion
+{
+	float:right;
+	margin-right: 10px;
 }
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -76,6 +83,8 @@ body{
     <div class="nav-wrapper">
       <a href="#" data-activates="mobile-demo" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
       <a href="/sisconta" class="brand-logo" ><tiles:getAsString name="titulo" /></a>
+      <a class="modal-trigger posicion" href="#modal1"><i class="material-icons">exposure</i></a>
+      
       
       
       <ul class="side-nav grey darken-2" id="mobile-demo">
@@ -124,7 +133,7 @@ body{
 			</div>
 		</div>				
 	<!--  ***************** /CONTENIDO DE LA PAGINA ********************** -->
-
+	<%@ include file = "/WEB-INF/template/articulo.jsp" %>
 </body>
 
 
