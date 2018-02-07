@@ -68,13 +68,13 @@ public class UsuarioController {
 			model.addAttribute("usuario", null);
 			List<Usuario> usuarios = (List<Usuario>) this.manage_entity.getAll("Usuario");
 			List<Rol> roles = (List<Rol>) this.manage_entity.getAll("Rol");
-			List<Empresa> empresas = (List<Empresa>) this.manage_entity.getAll("Empresa");
+		//	List<Empresa> empresas = (List<Empresa>) this.manage_entity.getAll("Empresa");
 			List<Empleado> empleados = (List<Empleado>) this.manage_entity.getAll("Empleado");
 			// Agrega al modelo el atributo "usuarios", asi se conocera en la vista
 			// la lista usuarios creada y llenada en el controlador.
 			model.addAttribute("usuarios", usuarios);
 			model.addAttribute("roles", roles);
-			model.addAttribute("empresas", empresas);
+			//model.addAttribute("empresas", empresas);
 			model.addAttribute("empleados", empleados);
 			retorno = path+"usuario";
 			}
@@ -91,12 +91,12 @@ public class UsuarioController {
 		if(permisos.isC()){
 			Usuario usuario = new Usuario();
 			List<Rol> roles = (List<Rol>) this.manage_entity.getAll("Rol");
-			List<Empresa> empresas = (List<Empresa>) this.manage_entity.getAll("Empresa");
+			//List<Empresa> empresas = (List<Empresa>) this.manage_entity.getAll("Empresa");
 			List<Empleado> empleados = (List<Empleado>) this.manage_entity.getAll("Empleado");
 			model.addAttribute("usuarioForm", usuario);
 			model.addAttribute("usuario", null);
 			model.addAttribute("roles", roles);
-			model.addAttribute("empresas", empresas);
+			//model.addAttribute("empresas", empresas);
 			model.addAttribute("empleados", empleados);
 			retorno = path+"usuario-form";
 		}
@@ -112,12 +112,11 @@ public class UsuarioController {
 			Usuario usuario = usuarioRecibido;
 
 			Rol rolSeleccionado = (Rol) this.manage_entity.getById(Rol.class.getName(), usuario.getIdRol());
-			Empresa EmpresaSeleccionada = (Empresa) this.manage_entity.getById(Empresa.class.getName(),
-					usuario.getIdEmpresa());
+			//Empresa EmpresaSeleccionada = (Empresa) this.manage_entity.getById(Empresa.class.getName(),	usuario.getIdEmpresa());
 			Empleado empleado = (Empleado) this.manage_entity.getById(Empleado.class.getName(),
 					usuario.getIdEmpleado());
 			usuario.setRol(rolSeleccionado);
-			usuario.setEmpresa(EmpresaSeleccionada);
+			//usuario.setEmpresa(EmpresaSeleccionada);
 			usuario.setEmpleado(empleado);
 			String pass = usuario.getPassword();
 			usuario.setPassword(passwordEncoder.encode(pass));
@@ -172,10 +171,10 @@ public class UsuarioController {
 		model.addAttribute("usuarioForm", usuarioForm);
 		
 		List<Rol> roles = (List<Rol>) this.manage_entity.getAll("Rol");
-		List<Empresa> empresas = (List<Empresa>) this.manage_entity.getAll("Empresa");
+		//List<Empresa> empresas = (List<Empresa>) this.manage_entity.getAll("Empresa");
 		List<Empleado> empleados = (List<Empleado>) this.manage_entity.getAll("Empleado");
 		model.addAttribute("roles", roles);
-		model.addAttribute("empresas", empresas);
+		//model.addAttribute("empresas", empresas);
 		model.addAttribute("empleados", empleados);
 		
 		return path+"usuario-form";

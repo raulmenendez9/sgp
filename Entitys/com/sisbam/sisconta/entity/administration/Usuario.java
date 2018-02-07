@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -23,15 +24,15 @@ public class Usuario implements java.io.Serializable {
 	private String username;
 	private String password;
 	private boolean activo;
-	private Empresa empresa;
+	//private Empresa empresa;
 	private Empleado empleado;
 
-	public Usuario(int idUsuario, String username, String password, boolean activo, Empresa empresa, Empleado empleado) {
+	public Usuario(int idUsuario, String username, String password, boolean activo,/* Empresa empresa,*/ Empleado empleado) {
 		this.idUsuario = idUsuario;
 		this.username = username;
 		this.password = password;
 		this.activo = activo;
-		this.empresa = empresa;
+		//this.empresa = empresa;
 		this.empleado = empleado;
 		// this.idRol = idRol;
 	}
@@ -62,20 +63,7 @@ public class Usuario implements java.io.Serializable {
 	public void setIdRol(int idRol) {
 		this.idRol = idRol;
 	}
-	
-	@Transient
-	private int idEmpresa;
-
-	@Transient
-	public int getIdEmpresa() {
-		return idEmpresa;
-	}
-	
-	@Transient
-	public void setIdEmpresa(int idEmpresa) {
-		this.idEmpresa = idEmpresa;
-	}
-	
+		
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuario_id_usuario_seq")
@@ -100,7 +88,7 @@ public class Usuario implements java.io.Serializable {
 	}
 	
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_empleado")
 	public Empleado getEmpleado() {
 		return empleado;
@@ -136,17 +124,6 @@ public class Usuario implements java.io.Serializable {
 		this.activo = activo;
 	}
 	
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_empresa")
-	public Empresa getEmpresa() {
-		return empresa;
-	}
-
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
-	}
-
 	public Usuario() {
 	}
 

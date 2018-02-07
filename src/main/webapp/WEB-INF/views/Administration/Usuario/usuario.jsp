@@ -29,7 +29,7 @@
 								<tr>
 									<td>${usuario.username  }</td>
 									<td>${usuario.rol.nombre }</td>
-									<td>${usuario.empresa.nombre }</td>
+									<td>${usuario.empleado.empresa.nombre }</td>
 									<td>${usuario.empleado.nombre } ${usuario.empleado.apellidos }</td>
 
 									<td>
@@ -122,36 +122,6 @@
 						</div>
 					</div>
 
-
-					<div class="row">
-						<div class="input-field col s6">
-							<form:select path="idEmpresa" class="form-control" required="true">
-								<option value="" disabled selected>Selecione la empresa</option>
-								<c:forEach items="${empresas}" var="e">
-									<c:choose>
-										<c:when test="${usuario.empresa.idEmpresa == e.idEmpresa}">
-											<form:option value="${e.idEmpresa }" label="${e.nombre}"
-												selected="true" />
-										</c:when>
-										<c:otherwise>
-											<form:option value="${e.idEmpresa }" label="${e.nombre}" />
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-							</form:select>
-						</div>
-						
-						<!-- Switch -->
-						  <div class="col s6 switch center">
-						    <label>
-						      Activo
-						      <input type="checkbox" name="activo">
-						      <span class="lever"></span>
-						    </label>
-						  </div>
-					</div>
-
-
 					<form:hidden id="idUsuario" path="idUsuario" value="${usuario.idUsuario}" />
 
 			<div class="center">
@@ -235,23 +205,7 @@
 
 
 					<div class="row">
-						<div class="input-field col s6">
-							<form:select path="idEmpresa" class="form-control" required="true" id="idEmpresa-${usuario.idUsuario }">
-								<option value="" disabled selected>Selecione la empresa</option>
-								<c:forEach items="${empresas}" var="e">
-									<c:choose>
-										<c:when test="${usuario.empresa.idEmpresa == e.idEmpresa}">
-											<form:option value="${e.idEmpresa }" label="${e.nombre}"
-												selected="true" />
-										</c:when>
-										<c:otherwise>
-											<form:option value="${e.idEmpresa }" label="${e.nombre}" />
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-							</form:select>
-						</div>
-						
+											
 						<c:choose>
 							<c:when test="${usuario.activo}">
 									<div class="col s6 switch center">
