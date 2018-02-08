@@ -131,7 +131,7 @@ body{
 			<div class="col s12">
 						<tiles:insertAttribute name="content" />
 			</div>
-		</div>				
+		</div>	
 	<!--  ***************** /CONTENIDO DE LA PAGINA ********************** -->
 	<%@ include file = "/WEB-INF/template/articulo.jsp" %>
 </body>

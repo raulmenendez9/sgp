@@ -16,9 +16,13 @@ import javax.persistence.Transient;
 import com.sisbam.sisconta.entity.security.Rol;
 
 @Entity
-@Table(name = "usuario", catalog = "sgr")
+@Table(name = "usuario")
 public class Usuario implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int idUsuario;
 	private Rol rol;
 	private String username;
