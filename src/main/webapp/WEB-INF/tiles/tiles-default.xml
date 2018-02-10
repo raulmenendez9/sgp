@@ -72,6 +72,7 @@
     	<put-attribute name="titulo" value="Bitacora" />
 		<put-attribute name="content" value="/WEB-INF/views/Security/bitacora.jsp"/>
 	</definition>
+		
 <!--    /SECURITY -->
 	
 <!-- 	ADMINISTRATION -->
@@ -92,6 +93,11 @@
 	<definition name="Accounting/cuenta" extends="materializeTemplate">
     	<put-attribute name="titulo" value="Cuentas" />
 		<put-attribute name="content" value="/WEB-INF/views/Accounting/cuentas.jsp"/>
+	</definition>
+	
+	<definition name="Administration/Mensajes/mensaje" extends="materializeTemplate">
+		<put-attribute name="titulo" value="Mensajes" />
+		<put-attribute name="content" value="/WEB-INF/views/Administration/Mensajes/mensaje.jsp"/>
 	</definition>
 	
 <!-- 	/ADMINISTRATION -->	
