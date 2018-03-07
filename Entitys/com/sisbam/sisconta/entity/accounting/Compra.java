@@ -31,7 +31,6 @@ public class Compra implements Serializable{
 	private boolean importacion=false;
 	private Double totalCompra;
 	private TipoDocumento tipodocumento;
-	private List<Producto> productos;
 
 	
 	@Id
@@ -104,16 +103,6 @@ public class Compra implements Serializable{
 	public void setTipodocumento(TipoDocumento tipodocumento) {
 		this.tipodocumento = tipodocumento;
 	}
-	
-	@OneToMany( targetEntity=Producto.class )
-	public List<Producto> getProductos() {
-		return productos;
-	}
-	public void setProductos(List<Producto> productos) {
-		this.productos = productos;
-	}
-	
-	
 	
 	
 	

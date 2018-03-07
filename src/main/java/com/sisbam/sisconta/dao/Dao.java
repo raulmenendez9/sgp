@@ -74,6 +74,8 @@ public interface Dao {
     public List<?> getInstancesById(String entityName,String Instance,String InstanceColumnId, int InstanceId);
     
     public List<?> executeNativeQuery(String query);
+    public List<?> executeHibernateQuery(String query);
+    public List<String[]> executeNativeQueryString(String query);
     
     public List<Menu> getMenusByUser(Principal user);
     public List<Menu> getMenusByRol(Rol rol);

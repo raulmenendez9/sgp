@@ -10,49 +10,47 @@
 			</c:if>
 			<hr>
 	 	<div class="container">
-
-			
-				<c:if test="${read}">
-					<table id="tabla" class="display hover cell-border"  cellspacing="0" width="100%">
-						<thead>
+			<c:if test="${read}">
+				<table id="tabla" class="display hover cell-border"  cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th>Username</th>
+							<th>Rol</th>
+							<th>Empresa</th>
+							<th>Empleado</th>
+							<th>Activo</th>
+							<th>&nbsp;</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${usuarios}" var="usuario">
 							<tr>
-								<th>Username</th>
-								<th>Rol</th>
-								<th>Empresa</th>
-								<th>Empleado</th>
-								<th>Activo</th>
-								<th>&nbsp;</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${usuarios}" var="usuario">
-								<tr>
-									<td>${usuario.username  }</td>
-									<td>${usuario.rol.nombre }</td>
-									<td>${usuario.empleado.empresa.nombre }</td>
-									<td>${usuario.empleado.nombre } ${usuario.empleado.apellidos }</td>
-
-									<td>
-										<c:if test="${usuario.activo == true }">
-												Si
+								<td>${usuario.username  }</td>
+								<td>${usuario.rol.nombre }</td>
+								<td>${usuario.empleado.empresa.nombre }</td>
+								<td>${usuario.empleado.nombre } ${usuario.empleado.apellidos }</td>
+	
+								<td>
+									<c:if test="${usuario.activo == true }">
+											Si
+									</c:if>
+									<c:if test="${usuario.activo == false }">
+											No
+									</c:if>
+								</td>
+									<td width="5%">
+										<c:if test="${update}">	
+												<a class="modal-trigger" href="#-${usuario.idUsuario}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 										</c:if>
-										<c:if test="${usuario.activo == false }">
-												No
-										</c:if>
+										<c:if test="${delete}">		
+												<a class="" href="/sisconta/usuarios/delete/${usuario.idUsuario}" data-toggle="modal" data-target="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
+										</c:if>						
 									</td>
-											<td width="5%">
-													<c:if test="${update}">	
-															<a class="modal-trigger" href="#-${usuario.idUsuario}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
-													</c:if>
-													<c:if test="${delete}">		
-															<a class="" href="/sisconta/usuarios/delete/${usuario.idUsuario}" data-toggle="modal" data-target="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
-													</c:if>						
-											</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</c:if>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</c:if>
 
 
 
@@ -120,6 +118,32 @@
 								</c:forEach>
 							</form:select>
 						</div>
+					</div>
+					
+					
+					
+					<div class="row">
+											
+						<c:choose>
+							<c:when test="${usuario.activo}">
+									<div class="col s6 switch center">
+										<label> Activo <input checked type="checkbox"
+											name="activo-${usuario.idUsuario}"> <span
+											class="lever"></span>
+										</label>
+									</div>
+								</c:when>
+							<c:otherwise>
+									<div class="col s6 switch center">
+										<label> Activo <input type="checkbox"
+											name="activo-${usuario.idUsuario}"> <span
+											class="lever"></span>
+										</label>
+									</div>
+							</c:otherwise>
+						</c:choose>
+						<!-- Switch -->
+						  
 					</div>
 
 					<form:hidden id="idUsuario" path="idUsuario" value="${usuario.idUsuario}" />

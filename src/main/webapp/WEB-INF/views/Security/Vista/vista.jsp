@@ -35,13 +35,15 @@
 							<td><li><i class="fa ${vista.icon } fa-fw"></i>&nbsp; ${vista.icon }</li></td>
 							<td>${vista.menu.nombre }</td>
 
-						<td width="5%">
+						<td width="10%">
+						<center>
 							<c:if test="${update}">	
 									<a class="modal-trigger" href="#-${vista.idVista }"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${delete}">		
 									<a class="" href="/sisconta/vistas/delete/${vista.idVista }" data-toggle="modal"data-target="#""><i class="fa fa-trash" aria-hidden="true"></i></a>
-							</c:if>						
+							</c:if>	
+						</center>						
 						</td>
 						</tr>
 					</c:forEach>

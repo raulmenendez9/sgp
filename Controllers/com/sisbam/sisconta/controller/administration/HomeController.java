@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.sisbam.sisconta.controller.variety.ReportesController;
 import com.sisbam.sisconta.dao.Dao;
 import com.sisbam.sisconta.dao.DaoImp;
+import com.sisbam.sisconta.entity.accounting.CuentaContable;
 import com.sisbam.sisconta.entity.administration.Usuario;
 import com.sisbam.sisconta.entity.security.Menu;
 import com.sisbam.sisconta.entity.security.Permisos;
@@ -47,18 +48,17 @@ public class HomeController {
 		
 		//**************cargar el menu lateral*******************
 		
-		List<Vista> vistas = (List<Vista>) manage_entity.getAll(Vista.class.getName());
-		List<Menu> menus = (List<Menu>) manage_entity.getMenusByUser(user); 
-		List<Menu> menustodos = (List<Menu>) manage_entity.getAll(Menu.class.getName()); 
+//		List<Vista> vistas = (List<Vista>) manage_entity.getAll(Vista.class.getName());
+//		List<Menu> menus = (List<Menu>) manage_entity.getMenusByUser(user); 
 		
-		List<Permisos> permisos = (List<Permisos>) manage_entity.getListByName(Permisos.class.getName(), "rol", usuario.getRol().getIdRol().toString());
 		
 		session.setAttribute("vistasx", listaVistas(rol));
 		session.setAttribute("menusdelrolx", listaMenus(rol));
 		
-		session.setAttribute("vistas_all", vistas);
-		session.setAttribute("menus_all", menus);
+//		session.setAttribute("vistas_all", vistas);
+//		session.setAttribute("menus_all", menus);
 		session.setAttribute("user", user);
+		
 		//********************************************************
 		
 		

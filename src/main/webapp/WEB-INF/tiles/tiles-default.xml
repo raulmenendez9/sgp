@@ -90,17 +90,30 @@
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Empleado/empleado.jsp"/>
 	</definition>
 	
-	<definition name="Accounting/cuenta" extends="materializeTemplate">
-    	<put-attribute name="titulo" value="Cuentas" />
-		<put-attribute name="content" value="/WEB-INF/views/Accounting/cuentas.jsp"/>
-	</definition>
-	
 	<definition name="Administration/Mensajes/mensaje" extends="materializeTemplate">
 		<put-attribute name="titulo" value="Mensajes" />
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Mensajes/mensaje.jsp"/>
 	</definition>
-	
 <!-- 	/ADMINISTRATION -->	
+
+
+
+<!-- 	ACCOUNTING -->
+	<definition name="Accounting/cuenta" extends="materializeTemplate">
+    	<put-attribute name="titulo" value="Cuentas" />
+		<put-attribute name="content" value="/WEB-INF/views/Accounting/cuentas.jsp"/>
+	</definition>
+	<definition name="Accounting/Partida/partidas" extends="materializeTemplate">
+    	<put-attribute name="titulo" value="Partidas" />
+		<put-attribute name="content" value="/WEB-INF/views/Accounting/Partida/partidas.jsp"/>
+	</definition>
+	
+	<definition name="Accounting/Partida/partida-form" extends="materializeTemplateForm">
+    	<put-attribute name="titulo" value="Partidas" />
+		<put-attribute name="content" value="/WEB-INF/views/Accounting/Partida/partida-form.jsp"/>
+	</definition>
+	
+<!-- /ACCOUNTING -->
 	
 <!-- 	VARIETY -->
 	<definition name="Variety/Error" extends="materializeTemplate">

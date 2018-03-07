@@ -428,6 +428,30 @@ public class DaoImp implements Dao{
 		} 
 		return obj;
 	}
+	
+	
+	@Override
+	public List<String[]> executeNativeQueryString(String query) {
+		Session session = getCurrentSession();
+		List<String[]> obj = null;
+		String hql = query;
+		try {
+			session.getTransaction().begin();
+			obj = session.createNativeQuery(hql).list();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			System.out.print(e);
+			if (session.getTransaction().getStatus() == TransactionStatus.ACTIVE
+					|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
+				session.getTransaction().rollback();
+				System.out.println("ERROR AL EJECUTAR LA CONSULTA:"+query);
+			}
+		} 
+		
+		return obj;
+	}
+	
+	
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -577,6 +601,30 @@ public class DaoImp implements Dao{
 			}
 		}
 		return obj;
+	}
+
+
+	@Override
+	public List<?> executeHibernateQuery(String query) {
+		
+
+		Session session = getCurrentSession();
+		List<?> obj = null;
+		String hql = query;
+		
+		try {
+			session.getTransaction().begin();
+			obj = session.createQuery(hql).list();
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			System.out.print(e);
+			if (session.getTransaction().getStatus() == TransactionStatus.ACTIVE
+					|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
+				session.getTransaction().rollback();
+			}
+		} 
+		return obj;
+		
 	}
 
 
