@@ -18,6 +18,14 @@
 		<put-attribute name="cabecera" value="/WEB-INF/menu/cabecera.jsp" />
 	</definition>
 	
+	
+	<definition name="estilos" template="/WEB-INF/menu/cabecera.jsp">
+		<put-attribute name="content" value="/WEB-INF/template/defaultContent.jsp" />
+	</definition>
+	
+	
+	
+	
 	<definition name="materializeTemplate" template="WEB-INF/template/_template_materialize.jsp">
 		<put-attribute name="titulo" value="SCONTA" />
 		<put-attribute name="content" value="/WEB-INF/template/defaultContent.jsp" />
@@ -29,6 +37,7 @@
 		<put-attribute name="content" value="/WEB-INF/template/defaultContent.jsp" />
 		<put-attribute name="cabecera" value="/WEB-INF/menu/cabecera.jsp" />
 	</definition>
+	
 	
 	
 <!-- 	SI HAY UN ERROR QUE DIGA: 404 /sisconta/roles/update/WEB-INF/template/_template_materialize.js -->
@@ -112,6 +121,9 @@
     	<put-attribute name="titulo" value="Partidas" />
 		<put-attribute name="content" value="/WEB-INF/views/Accounting/Partida/partida-form.jsp"/>
 	</definition>
+	
+	
+	
 	
 <!-- /ACCOUNTING -->
 	

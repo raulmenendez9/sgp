@@ -5,6 +5,21 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 
+<style>
+.embed-container {
+    position: relative;
+    padding-bottom: 40.25%;
+    height: 0;
+    overflow: hidden;
+}
+.embed-container iframe {
+    position: relative;
+    top:0;
+    left: 0;
+    width: 100%;
+}
+</style>
+
 <div id="contenido" class="card-panel hoverable">
 	<form:form method="post" modelAttribute="partidaForm"
 			action="/sisconta/partida/add" id="registro" autocomplete="off">
@@ -41,27 +56,16 @@
 						
 				</div>
 			
-					<div class="row">
-					    <div class="col s12">
-					      <div class="row">
-						        <div class="input-field col s6">
-						          <input type="text" id="autocomplete-input" class="autocomplete">
-						          <label for="autocomplete-input">Cuenta Contable</label>
-						        </div>
-						        
-							    <div class="input-field col s3">
-						          <input placeholder="" id="first_name" type="text" class="validate">
-						          <label for="first_name">Saldo Acreedor</label>
-						       </div>
-						       
-						       <div class="input-field col s3">
-						          <input placeholder="" id="first_name2" type="text" class="validate">
-						          <label for="first_name2">Saldo Deudor</label>
-						       </div>
-					        
-					      </div>
-					    </div>
-					  </div>
+		<BR>					  
+<!-- 					  IFRAMRE -->
+<center>
+		<div class="embed-container">
+		<iframe src="/sisconta/partidas/mostrarCuentas" width="auto" height="500px">
+		</iframe>
+		</div>
+</center>		
+		<hr><br>			  
+					  
 					  
 					  <div class="row">
 					    <div class="col s12">
@@ -104,23 +108,7 @@
 
 
 
-<script>
 
-$(document).ready(function() {
-	 
-	 $( "input.autocomplete ").autocomplete({
-		    data: ${objString},
-		    limit: 5, // The max amount of results that can be shown at once. Default: Infinity.
-		    onAutocomplete: function(val) {
-		      // Callback function when value is autcompleted.\
-		      
-		    },
-		    minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
-		  });	
-});//fin function
-
-	
-</script>
 <script type="text/javascript">
 $(document).ready(function() {	
 
