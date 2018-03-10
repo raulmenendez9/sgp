@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ public class CuentaContableController {
 	private DaoImp manage_entity;//generalizacion de todo lo que tenga que ver con SQL
 	
 	private String path = "Accounting/";//ruta donde esta la carpeta de las vista
+	private static final String IDENTIFICADOR = "cuentaContablex12";
 	
 	private Permisos permisos;//permisos del usuario en determinada vista
 	
@@ -42,17 +44,12 @@ public class CuentaContableController {
 	public String index(Model model, HttpServletRequest request) {
 		
 		String retorno = "403";
-		ObtenerPermisosPorUrl obtener = new ObtenerPermisosPorUrl();
-		this.permisos = obtener.Obtener("/sisconta/cuentas", request, manage_entity);
-		
-//se cargan los permisos CRUD que tenga el usuario sobre la vista		
-//*************CARGAR BOTONES PERMITIDOS******************
-		model.addAttribute("create",permisos.isC());
-		model.addAttribute("read",	permisos.isR());
-		model.addAttribute("update",permisos.isU());
-		model.addAttribute("delete",permisos.isD());
-		model.addAttribute("error",ERROR);
-//**********************************************************
+		HttpSession session = request.getSession();
+		ObtenerPermisosPorUrl facilitador = new ObtenerPermisosPorUrl();
+		session = facilitador.Obtener("/sisconta/cuentas", request, manage_entity,IDENTIFICADOR);
+		permisos = (Permisos) session.getAttribute("permisos-de-"+IDENTIFICADOR);
+					
+
 		if(permisos.isR())//si no tiene permiso de leer mandara a la pantalla de error 403 Forbiden
 		{
 			CuentaContable cuenta = new CuentaContable();

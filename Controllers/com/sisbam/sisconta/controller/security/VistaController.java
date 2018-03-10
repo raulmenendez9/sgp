@@ -4,6 +4,7 @@ package com.sisbam.sisconta.controller.security;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.xml.ws.http.HTTPException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class VistaController {
 	private DaoImp manage_entity;
 	
 	private String path="Security/Vista/";
+	private static final String IDENTIFICADOR = "vistasx23";
 	
 	private Permisos permisos;
 	
@@ -36,16 +38,13 @@ public class VistaController {
 		
 		String retorno = "403";
 		
-		ObtenerPermisosPorUrl obtener = new ObtenerPermisosPorUrl();
-		this.permisos = obtener.Obtener("/sisconta/vistas", request, manage_entity);
+		HttpSession session = request.getSession();
+		ObtenerPermisosPorUrl facilitador = new ObtenerPermisosPorUrl();
+		session = facilitador.Obtener("/sisconta/vistas", request, manage_entity,IDENTIFICADOR);
+		permisos = (Permisos) session.getAttribute("permisos-de-"+IDENTIFICADOR);
+			
+	
 		
-//se cargan los permisos CRUD que tenga el usuario sobre la vista		
-//*************CARGAR BOTONES PERMITIDOS******************
-		model.addAttribute("create",permisos.isC());
-		model.addAttribute("read",	permisos.isR());
-		model.addAttribute("update",permisos.isU());
-		model.addAttribute("delete",permisos.isD());
-//**********************************************************
 		if(permisos.isR()) {
 			Vista vista = new Vista();
 			model.addAttribute("vistaForm", vista);

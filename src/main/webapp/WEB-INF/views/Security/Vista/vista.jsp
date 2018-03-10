@@ -7,16 +7,16 @@
 
 
 <div id="contenido" class="card-panel hoverable">
-<c:if test="${create}">	
+<c:if test="${createvistasx23}">	
 		<a class="waves-effect waves-light btn-floating modal-trigger green" href="#agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
 </c:if>	
-<c:if test="${read}">		
+<c:if test="${readvistasx23}">		
 		<a class="waves-effect waves-light btn-floating modal-trigger red darken-3" href="#"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>PDF</a>
 		<a class="waves-effect waves-light btn-floating modal-trigger green darken-3" href="#"><i class="fa fa-file-excel-o" aria-hidden="true"></i> EXCEL</a>
 </c:if>			
 		<hr>	
 	 	<div class="container">	
-<c:if test="${read}">	
+<c:if test="${readvistasx23}">	
 			<table id="tabla" class="display hover cell-border"  cellspacing="0" width="100%">
 				<thead>
 					<tr>
@@ -37,10 +37,10 @@
 
 						<td width="10%">
 						<center>
-							<c:if test="${update}">	
+							<c:if test="${updatevistasx23}">	
 									<a class="modal-trigger" href="#-${vista.idVista }"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
-							<c:if test="${delete}">		
+							<c:if test="${deletevistasx23}">		
 									<a class="" href="/sisconta/vistas/delete/${vista.idVista }" data-toggle="modal"data-target="#""><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>	
 						</center>						

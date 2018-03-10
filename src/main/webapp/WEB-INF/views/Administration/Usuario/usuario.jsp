@@ -5,12 +5,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <div id="contenido" class="card-panel hoverable">
-<c:if test="${create}">
+<c:if test="${createusuariosx67}">
 				<a class="waves-effect waves-light btn-floating modal-trigger green" href="#agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
 			</c:if>
 			<hr>
 	 	<div class="container">
-			<c:if test="${read}">
+			<c:if test="${readusuariosx67}">
 				<table id="tabla" class="display hover cell-border"  cellspacing="0" width="100%">
 					<thead>
 						<tr>
@@ -39,10 +39,10 @@
 									</c:if>
 								</td>
 									<td width="5%">
-										<c:if test="${update}">	
+										<c:if test="${updateusuariosx67}">	
 												<a class="modal-trigger" href="#-${usuario.idUsuario}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 										</c:if>
-										<c:if test="${delete}">		
+										<c:if test="${deleteusuariosx67}">		
 												<a class="" href="/sisconta/usuarios/delete/${usuario.idUsuario}" data-toggle="modal" data-target="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
 										</c:if>						
 									</td>

@@ -5,12 +5,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 
- 
+
 <div id="contenido" class="card-panel hoverable">
-<c:if test="${create}">	
+<c:if test="${createmenux23}">	
 		<a class="waves-effect waves-light btn-floating modal-trigger green" href="#agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
 </c:if>	
-<c:if test="${read}">			
+<c:if test="${readmenux23}" >			
 		<hr>	
 <div class="container">	 
 <ul class="collection">
@@ -18,10 +18,10 @@
 		<li class="collection-item avatar">
 		<i class="fa ${menu.icono } fa-fw circle" style="color: white"></i>&nbsp;  
 		<span class="title">${menu.nombre} :</span>
-		<c:if test="${update}">	
+		<c:if test="${updatemenux23}" >	
 			<a class=" right btn-floating btn-large waves-effect waves-light" href="/sisconta/menus/delete/${menu.id }" data-toggle="modal" data-target="#"><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp; &nbsp;
 			</c:if>	
-		<c:if test="${delete}">	
+		<c:if test="${deletemenux23}">	
 			<a class="modal-trigger right btn-floating btn-large waves-effect waves-light" href="#-${menu.id }"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 		</c:if>	
 		

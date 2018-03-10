@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,27 +26,21 @@ public class MenuController {
 	private DaoImp manage_entity;
 	
 	private String path="Security/Menu/";
+	private static final String IDENTIFICADOR = "menux23";
 	
-	private Permisos permisos;
+	private Permisos permisos=new Permisos();
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/menus", method = RequestMethod.GET)
 	public String index(Model model, HttpServletRequest request) {
 		
-		
-		
-		
 		String retorno = "403";
-		ObtenerPermisosPorUrl obtener = new ObtenerPermisosPorUrl();
-		this.permisos = obtener.Obtener("/sisconta/vistas", request, manage_entity);
+		HttpSession session = request.getSession();
+		ObtenerPermisosPorUrl facilitador = new ObtenerPermisosPorUrl();
+		session = facilitador.Obtener("/sisconta/menus", request, manage_entity,IDENTIFICADOR);
+		permisos = (Permisos) session.getAttribute("permisos-de-"+IDENTIFICADOR);
+			
 		
-//se cargan los permisos CRUD que tenga el usuario sobre la vista		
-//*************CARGAR BOTONES PERMITIDOS******************
-		model.addAttribute("create",permisos.isC());
-		model.addAttribute("read",	permisos.isR());
-		model.addAttribute("update",permisos.isU());
-		model.addAttribute("delete",permisos.isD());
-//**********************************************************
 		if(permisos.isR()) {
 			Menu menu = new Menu();
 			Vista vista = new Vista();

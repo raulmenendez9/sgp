@@ -1,6 +1,7 @@
 package com.sisbam.sisconta.controller.security;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class RolController {
 	private DaoImp manage_entity;
 	
 	private String path="Security/Rol/";
+	private static final String IDENTIFICADOR = "rolesx23";
 	
 	private Permisos permisos;
 	
@@ -35,16 +37,11 @@ public class RolController {
 	@RequestMapping(value = "/roles", method = RequestMethod.GET)
 	public String index(Model model, HttpServletRequest request) {
 		
-	ObtenerPermisosPorUrl obtener = new ObtenerPermisosPorUrl();
-	this.permisos = obtener.Obtener("/sisconta/vistas", request, manage_entity);
-		
-//se cargan los permisos CRUD que tenga el usuario sobre la vista		
-//*************CARGAR BOTONES PERMITIDOS******************
-		model.addAttribute("create",permisos.isC());
-		model.addAttribute("read",	permisos.isR());
-		model.addAttribute("update",permisos.isU());
-		model.addAttribute("delete",permisos.isD());
-//**********************************************************
+		HttpSession session = request.getSession();
+		ObtenerPermisosPorUrl facilitador = new ObtenerPermisosPorUrl();
+		session = facilitador.Obtener("/sisconta/roles", request, manage_entity,IDENTIFICADOR);
+		permisos = (Permisos) session.getAttribute("permisos-de-"+IDENTIFICADOR);
+			
 		String retorno = "403";
 		if(permisos.isR()) {	
 		

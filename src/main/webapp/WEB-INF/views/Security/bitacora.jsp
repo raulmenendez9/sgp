@@ -6,7 +6,7 @@
 
 <div id="contenido" class="card-panel hoverable">
 	<div class="container">
-		<c:if test="${read}">
+		<c:if test="${readbitacorax23}">
 		
 		<table id="tabla" class="display hover cell-border"  cellspacing="0" width="100%">
 				<thead>

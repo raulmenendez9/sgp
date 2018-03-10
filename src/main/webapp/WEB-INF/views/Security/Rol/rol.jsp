@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<c:if test="${readrolesx23}">
 <div id="contenido" class="card-panel hoverable">
 <a class="waves-effect waves-light btn-floating modal-trigger green" href="/sisconta/rolesadd"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
 <hr>
@@ -32,4 +32,5 @@
 		</table>
 	</div>
 </div>
+</c:if>
 

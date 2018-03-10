@@ -3,6 +3,7 @@ import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,7 @@ public class MensajeController {
 	@Autowired
 	private DaoImp manage_entity;
 	private String path = "Administration/Mensajes/";
+	private static final String IDENTIFICADOR = "mensajes-x23";
 	private Permisos permisos;
 	
 	@SuppressWarnings("unchecked")
@@ -35,13 +37,12 @@ public class MensajeController {
 	public String index(Model model, HttpServletRequest request) {
 		
 		String retorno = "403";
-		ObtenerPermisosPorUrl obtener = new ObtenerPermisosPorUrl();
-		this.permisos = obtener.Obtener("/sisconta/mensajes", request, manage_entity);
 		
-		model.addAttribute("create",permisos.isC());
-		model.addAttribute("read",	permisos.isR());
-		model.addAttribute("update",permisos.isU());
-		model.addAttribute("delete",permisos.isD());
+		HttpSession session = request.getSession();
+		ObtenerPermisosPorUrl facilitador = new ObtenerPermisosPorUrl();
+		session = facilitador.Obtener("/sisconta/mensajes", request, manage_entity,IDENTIFICADOR);
+		permisos = (Permisos) session.getAttribute("permisos-de-"+IDENTIFICADOR);
+			
 		
 		if(permisos.isR())
 		{

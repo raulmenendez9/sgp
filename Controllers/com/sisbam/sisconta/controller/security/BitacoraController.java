@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,7 @@ public class BitacoraController {
 	private DaoImp manage_entity;
 	
 	private String path="Security/";
+	private static final String IDENTIFICADOR = "bitacorax23";
 	
 	private Permisos permisos;
 	
@@ -34,9 +36,12 @@ public class BitacoraController {
 	public String index(Model model, HttpServletRequest request) {
 		
 		String retorno = "403";
+
+		HttpSession session = request.getSession();
+		ObtenerPermisosPorUrl facilitador = new ObtenerPermisosPorUrl();
+		session = facilitador.Obtener("/sisconta/bitacora", request, manage_entity,IDENTIFICADOR);
+		permisos = (Permisos) session.getAttribute("permisos-de-"+IDENTIFICADOR);
 		
-		ObtenerPermisosPorUrl obtener = new ObtenerPermisosPorUrl();
-		this.permisos = obtener.Obtener("/sisconta/bitacora", request, manage_entity);
 		
 		model.addAttribute("read",	permisos.isR());
 

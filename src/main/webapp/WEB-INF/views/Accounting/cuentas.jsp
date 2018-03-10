@@ -15,16 +15,16 @@
   
 
 <div id="contenido" class="card-panel hoverable">
-<c:if test="${create}">
+<c:if test="${createcuentaContablex12}">
 		<a class="waves-effect waves-light btn-floating modal-trigger green" href="#agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
 </c:if>
-<c:if test="${read}">
+<c:if test="${readcuentaContablex12}">
 		<a class="waves-effect waves-light btn-floating modal-trigger red darken-3" href="/sisconta/reporteCuentasContables" target="blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>PDF</a>
 		<a class="waves-effect waves-light btn-floating modal-trigger green darken-3" href="#"><i class="fa fa-file-excel-o" aria-hidden="true"></i> EXCEL</a>
 </c:if>
 <hr>
 	 	<div class="container">
-		<c:if test="${read}">
+		<c:if test="${readcuentaContablex12}">
 		<table id="tablacuentas" class="display hover cell-border"  cellspacing="0" width="100%">
 			<thead>
 				<tr>
@@ -45,7 +45,7 @@
 						<td>$ ${cuenta.saldoAcreedor }</td>
 						<td>$ ${cuenta.saldoDeudor }</td>
 						<td>
-							<c:if test="${delete}">		
+							<c:if test="${deletecuentaContablex12}">		
 									<a class="" href="/sisconta/cuentas/delete/${cuenta.idCuentaContable }" data-toggle="modal"data-target="#" ><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>						
 						</td>

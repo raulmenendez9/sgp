@@ -40,11 +40,23 @@ public class HomeController {
 		HttpSession session = request.getSession();
 
 //		*************Cargar el usuario y el Rol actual***************
-		Principal user = request.getUserPrincipal();
-		Usuario usuario = (Usuario) manage_entity.getByName(Usuario.class.getName(),"username", user.getName());
-		Rol rol = (Rol) manage_entity.getByName(Rol.class.getName(), "idRol", usuario.getRol().getIdRol().toString());
-		session.setAttribute("rol_usuarioactual", rol);
-		session.setAttribute("usuarioactual", usuario);
+		
+		if(session.getAttribute("rol_usuarioactual")==null||session.getAttribute("usuarioactual")==null) {
+			System.out.println("=======CARGANDO MENU LATERAL Y VARIABLES DE SESION=======");
+			Principal user = request.getUserPrincipal();
+			Usuario usuario = (Usuario) manage_entity.getByName(Usuario.class.getName(),"username", user.getName());
+			Rol rol = (Rol) manage_entity.getByName(Rol.class.getName(), "idRol", usuario.getRol().getIdRol().toString());
+			session.setAttribute("rol_usuarioactual", rol);
+			session.setAttribute("usuarioactual", usuario);
+			
+			if(session.getAttribute("vistasx")==null||session.getAttribute("menusdelrolx")==null) {
+				session.setAttribute("vistasx", listaVistas(rol));
+				session.setAttribute("menusdelrolx", listaMenus(rol));
+				session.setAttribute("user", user);
+			}
+			System.out.println("========================================================");
+		}
+		
 		
 		//**************cargar el menu lateral*******************
 		
@@ -52,12 +64,11 @@ public class HomeController {
 //		List<Menu> menus = (List<Menu>) manage_entity.getMenusByUser(user); 
 		
 		
-		session.setAttribute("vistasx", listaVistas(rol));
-		session.setAttribute("menusdelrolx", listaMenus(rol));
+		
 		
 //		session.setAttribute("vistas_all", vistas);
 //		session.setAttribute("menus_all", menus);
-		session.setAttribute("user", user);
+		
 		
 		//********************************************************
 		

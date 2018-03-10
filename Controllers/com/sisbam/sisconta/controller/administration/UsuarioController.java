@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ public class UsuarioController {
 	private DaoImp manage_entity;
 	
 	private String path ="Administration/Usuario/";
+	private static final String IDENTIFICADOR = "usuariosx67";
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -50,15 +52,12 @@ public class UsuarioController {
 	@RequestMapping(value = "/usuarios", method = RequestMethod.GET)
 	public String index(Model model, HttpServletRequest request) {
 		String retorno = "403";
-		ObtenerPermisosPorUrl obtener = new ObtenerPermisosPorUrl();
-		this.permisos = obtener.Obtener("/sisconta/usuarios", request, manage_entity);
 		
-//*************CARGAR BOTONES PERMITIDOS******************
-		model.addAttribute("create",permisos.isC());
-		model.addAttribute("read",	permisos.isR());
-		model.addAttribute("update",permisos.isU());
-		model.addAttribute("delete",permisos.isD());
-//**********************************************************
+		HttpSession session = request.getSession();
+		ObtenerPermisosPorUrl facilitador = new ObtenerPermisosPorUrl();
+		session = facilitador.Obtener("/sisconta/usuarios", request, manage_entity,IDENTIFICADOR);
+		permisos = (Permisos) session.getAttribute("permisos-de-"+IDENTIFICADOR);
+			
 		
 		
 //****ASIGNAR LOS PERMISOS PARA LAS URL********

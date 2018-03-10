@@ -98,11 +98,17 @@
 				
 				<table class="striped"  cellspacing="0" width="100%">
 				<tbody>
-			          	<tr> <td width="100%" style="color: red"><center>${mensajeCuentasDiario}</center></td></tr>
+			          	<tr> <td width="100%" style="color: red"><center>${mensaje}</center></td></tr>
 				</tbody>
 				</table>
 </div>
 </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

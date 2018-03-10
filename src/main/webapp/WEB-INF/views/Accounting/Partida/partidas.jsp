@@ -5,12 +5,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <div id="contenido" class="card-panel hoverable">
-<c:if test="${create}">
+<c:if test="${createpartidasx23}" >
 				<a class="waves-effect waves-light btn-floating modal-trigger green" href="/sisconta/partidas/add"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
 			</c:if>
 			<hr>
 	 	<div class="container">
-			<c:if test="${read}">
+			<c:if test="${readpartidasx23}">
 				<table id="tabla" class="display hover cell-border"  cellspacing="0" width="100%">
 					<thead>
 						<tr>

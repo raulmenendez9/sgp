@@ -1,12 +1,16 @@
 package com.sisbam.sisconta.controller.accounting;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.sound.midi.SysexMessage;
 
 import org.hibernate.Session;
+import org.hibernate.dialect.CUBRIDDialect;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.GsonBuilderUtils;
@@ -36,8 +40,9 @@ public class PartidaController{
 	private DaoImp manage_entity;
 	
 	private String path ="Accounting/Partida/";
+	private static final String IDENTIFICADOR = "partidasx23";
 	
-	private Permisos permisos;
+	private Permisos permisos = new Permisos();
 	 
 	
 	/*
@@ -46,18 +51,15 @@ public class PartidaController{
 	 * */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/partidas", method = RequestMethod.GET)
-	public String index(Model model, HttpServletRequest request) {
+	public String index(Model model, HttpServletRequest request) 
+	{
 		String retorno = "403";
-		ObtenerPermisosPorUrl obtener = new ObtenerPermisosPorUrl();
-		this.permisos = obtener.Obtener("/sisconta/partidas", request, manage_entity);
 		
-//*************CARGAR BOTONES PERMITIDOS******************
-		model.addAttribute("create",permisos.isC());
-		model.addAttribute("read",	permisos.isR());
-		model.addAttribute("update",permisos.isU());
-		model.addAttribute("delete",permisos.isD());
-//**********************************************************
-		
+			HttpSession session = request.getSession();
+			ObtenerPermisosPorUrl facilitador = new ObtenerPermisosPorUrl();
+			session = facilitador.Obtener("/sisconta/partidas", request, manage_entity,IDENTIFICADOR);
+			permisos = (Permisos) session.getAttribute("permisos-de-"+IDENTIFICADOR);
+				
 		
 			if(permisos.isR()) {
 			Partida partida = new Partida();
@@ -92,17 +94,28 @@ public class PartidaController{
 	@RequestMapping(value = "/partidasadd", method = RequestMethod.POST)
 	public String saveOrUpadateUsuario(@ModelAttribute("partidaForm") Partida partidaRecibido,
 			HttpServletRequest request) throws ClassNotFoundException {
+		HttpSession session = request.getSession();
+		
+		Date hoy = new Date();
+		Partida partida = partidaRecibido;
+		partida.setFecha(hoy);
+		partida.setCuentas(ListarCuentas(session));
+		
+		System.err.println("\n\n DATOS DE PARTIDA QUE SE GUARDARA: "+partida.getDescripcion()+","+partida.getIdPartida()+","+partida.getTipoDePartida()+",");
+		
+		
 		if (permisos.isC() || permisos.isU()) {
 
-			Partida partida = partidaRecibido;
+			
 
 			if (partida.getIdPartida() == 0) {
+				System.err.println("SE GUARDO LA PARTIDA");
 				manage_entity.save(Partida.class.getName(), partida);
 			}
 			else {
 				manage_entity.update(Partida.class.getName(), partida);
 			}
-			return "redirect:/usuarios";
+			return "redirect:/partidas/add";
 		}
 		return "403";
 	}
@@ -141,52 +154,65 @@ public class PartidaController{
 		return "redirect:/partidas";
 	}
 	
+	
+	
+	//TRATAMIENTO DE LISTA DE CUENTAS
+	
+	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/partidas/procesarCuentas", method = RequestMethod.POST)
 	public String procesarListaCuentas(Model model,HttpServletRequest request) throws ClassNotFoundException {
 		HttpSession session = request.getSession();
 		try {
 		
-		List<CuentaContable> listaCuentas;
-		
-		if(session.getAttribute("listaDeCuentasDiario")==null) {
-			listaCuentas=new ArrayList<CuentaContable>();
-		}
-		else
-		{
-			listaCuentas=(List<CuentaContable>)session.getAttribute("listaDeCuentasDiario");
-		}
-		
+		//Obtener lista de cuentas	
+		List<CuentaContable> listaCuentas = ListarCuentas(session);
+		//Obntener la cuenta que se ingreso
 		String cuenta=request.getParameter("cuenta-contable");
-		
-		
+		//obtener saldo acreedor y deudor
 		String sd=request.getParameter("sd")!=null?request.getParameter("sd"):"0.00";
 		String sa=request.getParameter("sa")!=null?request.getParameter("sa"):"0.00";
 		
-		
+		//quitar a la cuenta el nombre, para solo quedarse con el codigo
 		String[] token = cuenta.split("-");
 		String codigoCuenta = token[0];
 		CuentaContable cc = new CuentaContable();
+		//buscar la cuenta con ese codigo en la base
 		cc = (CuentaContable) manage_entity.getByName(CuentaContable.class.getName(), "codigo", codigoCuenta);
 		
-
+		//si el codigo no se encuentra en la base es porque se ingresaron caracteres extranos o una cuenta invalida
+		if(cc==null) {
+			model.addAttribute("mensaje","Error, cuenta ingresada no es valida");
+			return path+"listacuentas-form";
+		}
+		
+		//obtener la lista de cuentas hijas
+		List<CuentaContable> listaHijas = ObtenerHIjas();
+		//al objeto cuenta se le meten los saldos
 		try {cc.setSaldoDeudor(Double.parseDouble(sd));} catch (Exception e) { cc.setSaldoDeudor(0.00);}
 		try {cc.setSaldoAcreedor(Double.parseDouble(sa));} catch (Exception e) { cc.setSaldoAcreedor(0.00);}
 		
-		
-		
-		
-		listaCuentas.add(cc);
+		//si la cuenta existe en la lista de cuentas hijas se procede con normalidad si no muestra un mensaje
+		if(ExisteElemento(listaHijas, cc)) {
+			listaCuentas = AgregarElemento(listaCuentas, cc);
+			HashMap< String, Object> mapa = SubTotal(ListarCuentas(session));
+			model.addAttribute("mensaje",mapa.get("mensaje"));
+			model.addAttribute("totalAcreedor",mapa.get("totalAcreedor"));
+			model.addAttribute("totalDeudor",mapa.get("totalDeudor"));
+		}
+		else {
+			model.addAttribute("mensaje","Error, cuenta ingresada no es valida para transacciones");
+		}
 		
 		session.setAttribute("listaDeCuentasDiario", listaCuentas);
 		
-		
 		}
 		catch(Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("ERROR LLENANDO LISTA "+e);
 			return path+"listacuentas-form";
 		}
 		session= LlenarJSON(session);
+		
 		return path+"listacuentas-form";
 	}
 	
@@ -195,119 +221,284 @@ public class PartidaController{
 	public String mostrarListaCuentas(Model model,HttpServletRequest request) throws ClassNotFoundException {
 		HttpSession session = request.getSession();
 		session= LlenarJSON(session);
-		session = subtotal(session);
+		HashMap< String, Object> mapa = SubTotal(ListarCuentas(session));
+		model.addAttribute("mensaje",mapa.get("mensaje"));
+		model.addAttribute("totalAcreedor",mapa.get("totalAcreedor"));
+		model.addAttribute("totalDeudor",mapa.get("totalDeudor"));
 		return path+"listacuentas-form";
 	}
 	
+	/**
+	 * 
+	 * Elimina una cuenta obtenida en la vista
+	 * 
+	 * @param model
+	 * @param request
+	 * @return
+	 * @throws ClassNotFoundException
+	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/partidas/eliminar", method = RequestMethod.POST)
 	public String eliminarCuentaEnListaCuentas(Model model,HttpServletRequest request) throws ClassNotFoundException {
 		HttpSession session = request.getSession();
-		List<CuentaContable> listaCuentas;
+		List<CuentaContable> listaCuentas = ListarCuentas(session);
 		String cuenta=request.getParameter("cuenta-contable");
 		CuentaContable cc = new CuentaContable();
-		
-		
 		cc = (CuentaContable) manage_entity.getByName(CuentaContable.class.getName(), "codigo", cuenta);
-		
-		if(session.getAttribute("listaDeCuentasDiario")==null) {
-			listaCuentas=new ArrayList<CuentaContable>();
+		listaCuentas = EliminarElemento(listaCuentas, cc);
+		HashMap< String, Object> mapa = SubTotal(ListarCuentas(session));
+		model.addAttribute("mensaje",mapa.get("mensaje"));
+		model.addAttribute("totalAcreedor",mapa.get("totalAcreedor"));
+		model.addAttribute("totalDeudor",mapa.get("totalDeudor"));
+		session.setAttribute("listaDeCuentasDiario", listaCuentas);
+		return path+"listacuentas-form";
+	}
+	
+	
+	
+	/**
+	 * 
+	 * Apartir de la sesion, llena la lista de cuentas hijas
+	 * disponibles para que el usuario escoja una tecleando el codigo
+	 * 
+	 * @param session
+	 * @return
+	 * @throws ClassNotFoundException
+	 */
+	@SuppressWarnings("unchecked")
+	public HttpSession LlenarJSON(HttpSession session) throws ClassNotFoundException {
+		if(session.getAttribute("objString")==null) {
+			 String sql = " select id_cuentacontable from cuentacontable " + 
+						 " EXCEPT" + 
+						 " select id_cuentapadre from cuentacontable where id_cuentapadre>0";
+			 List<Integer> ctas = (List<Integer>) manage_entity.executeNativeQuery(sql);
+			 List<CuentaContable> cuentasHijas = new ArrayList<CuentaContable>();
+			 JSONObject obj = new JSONObject();
+			 
+			 for(Integer cc : ctas) 
+			 {
+				 CuentaContable c = (CuentaContable) manage_entity.getById(CuentaContable.class.getName(), cc);
+				 if(c!=null){
+					 obj.put(""+c.getCodigo()+"-"+c.getNombre(), null);
+					 cuentasHijas.add(c);
+				 }
+				 
+			 }
+			session.setAttribute("objString",obj.toJSONString()); 
 		}
-		else
-		{
-			listaCuentas=(List<CuentaContable>)session.getAttribute("listaDeCuentasDiario");
+	return session;
+		
+	}
+	
+	
+	
+	
+	/**
+	 * 
+	 * Apartir de la sesion obtiene la lista de cuentas que se han guardado en la sesion
+	 * y las devuelve, validando que no vengan vacias
+	 * 
+	 * 
+	 * @param session
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<CuentaContable> ListarCuentas(HttpSession session){
+		List<CuentaContable> listaCuentas = null;
+		try {
+			
+	
+			if(session.getAttribute("listaDeCuentasDiario")==null) {
+				listaCuentas=new ArrayList<CuentaContable>();
+			}
+			else
+			{
+				listaCuentas=(List<CuentaContable>)session.getAttribute("listaDeCuentasDiario");
+			}
+			
+			return listaCuentas;
+		}
+		catch(Exception e) {
+			System.err.println("ERROR ListarCuentas: "+e);
+			return listaCuentas;
 		}
 		
+	}
+	
+	
+	/**
+	 * 
+	 * Toma una lista agarra los saldos y los suma
+	 * despues devuelve un mapa con un mensaje y la suma de los saldos
+	 * 
+	 * @param listaCuentas
+	 * @return HashMap<String,Object>
+	 */
+	public HashMap<String,Object> SubTotal(List<CuentaContable> listaCuentas){
+		HashMap<String, Object> mapa = new HashMap<>();
+		try {
+		Double acumA =0.00;
+		Double acumD =0.00;
+		
+		if(listaCuentas.isEmpty()) {
+			mapa.put("mensaje", 		"");
+			mapa.put("totalAcreedor",	acumA);
+			mapa.put("totalDeudor",		acumD);
+			System.out.println();
+			
+			
+			return mapa;
+		}
+		
+		for(CuentaContable cx:listaCuentas) {
+			acumA=cx.getSaldoAcreedor()+acumA;
+			acumD=cx.getSaldoDeudor()+acumD;
+		}
+		
+		
+		if(acumA>acumD) {
+			mapa.put("mensaje", 		"Saldo acreedor es mayor que saldo deudor");
+			mapa.put("totalAcreedor",	acumA);
+			mapa.put("totalDeudor",		acumD);
+			return mapa;
+		}
+		
+		else if(acumA<acumD) {
+			mapa.put("mensaje", 		"Saldo deudor es mayor que saldo acreedor");
+			mapa.put("totalAcreedor",	acumA);
+			mapa.put("totalDeudor",		acumD);
+			return mapa;
+		}
+		
+		else if(acumA.toString().equals(acumD.toString())) {
+			mapa.put("mensaje", 		"");
+			mapa.put("totalAcreedor",	acumA);
+			mapa.put("totalDeudor",		acumD);
+			return mapa;
+		}
+		
+		
+		}
+		catch(Exception e) {
+			System.err.println("ERROR SubTotal: "+e);
+			mapa.put("mensaje", 		"");
+			mapa.put("totalAcreedor",	"err");
+			mapa.put("totalDeudor",		"err");
+			return mapa;
+		}
+		return mapa;
+	}
+	
+	
+	/**
+	 * Toma una cuenta contable y una lista de cuentas
+	 * anade la cuenta a esta lista y la devuelve
+	 * 
+	 * @param listaCuentas
+	 * @param cuenta
+	 * @return listaCuentas
+	 */
+	public List<CuentaContable> AgregarElemento(List<CuentaContable> listaCuentas,CuentaContable cuenta){
+		listaCuentas.add(cuenta);
+		return listaCuentas;
+	}
+	
+	
+	
+	/**
+	 * 
+	 * Toma una cuenta contable y una lista de cuentas
+	 * elimina esta cuenta de la lista y 
+	 * devuelve la nueva lista sin la cuenta que se selecciono
+	 * 
+	 * @param listaCuentas
+	 * @param cuenta
+	 * @return listaCuentas
+	 */
+	public List<CuentaContable> EliminarElemento(List<CuentaContable> listaCuentas,CuentaContable cuenta){
 		int i=0;
 		int x=0;
 		
 			for(CuentaContable cx : listaCuentas) {
-				if(cx.getCodigo().trim().equals(cc.getCodigo().trim())) {
+				
+				if(cx.getCodigo().trim().equals(cuenta.getCodigo().trim())) {
 					x=i;
 				}
 				else {
 					i++;
 				}
 			}
-			
 			listaCuentas.remove(x);
-		
-		
-		session.setAttribute("listaDeCuentasDiario", listaCuentas);
-		session = subtotal(session);
-		return path+"listacuentas-form";
+			return listaCuentas;
 	}
 	
 	
-	@SuppressWarnings("unchecked")
-	public HttpSession LlenarJSON(HttpSession session) throws ClassNotFoundException {
-	
-	 if(session.getAttribute("objString")==null) {	
-			 String sql = " select id_cuentacontable from cuentacontable " + 
-						 " EXCEPT" + 
-						 " select id_cuentapadre from cuentacontable where id_cuentapadre>0";
-			 List<Integer> ctas = (List<Integer>) manage_entity.executeNativeQuery(sql);
-			 JSONObject obj = new JSONObject();
-			 
-			 for(Integer cc : ctas) 
-			 {
-				 CuentaContable c = (CuentaContable) manage_entity.getById(CuentaContable.class.getName(), cc);
-				 obj.put(""+c.getCodigo()+"-"+c.getNombre(), null);
-			 }
+	/**
+	 * Verifica si un elemento existe en la lista de cuentas
+	 * 
+	 * @param listaCuentas
+	 * @param cuenta
+	 * @return true si existe, false si no existe
+	 */
+	public boolean ExisteElemento(List<CuentaContable> listaCuentas,CuentaContable cuenta) {
+		int i=0;
+			for(CuentaContable cx : listaCuentas) {
+				if(cx.getCodigo().trim().equals(cuenta.getCodigo().trim())) {
+					return true;
+				}
+				else {
+					i++;
+				}
+			}
 			
-			session.setAttribute("objString",obj.toJSONString()); 
-	 }
+			return false;
+	}
 	
+	
+	
+	/**
+	 * 
+	 * Devuelve una lista de cuentas aptas para hacer transacciones
+	 * 
+	 * @return
+	 * @throws ClassNotFoundException
+	 */
+	@SuppressWarnings("unchecked")
+	public List<CuentaContable> ObtenerHIjas() throws ClassNotFoundException{
+		String sql = " select id_cuentacontable from cuentacontable " + 
+				 " EXCEPT" + 
+				 " select id_cuentapadre from cuentacontable where id_cuentapadre>0";
+	 List<Integer> ctas = (List<Integer>) manage_entity.executeNativeQuery(sql);
+	 List<CuentaContable> cuentasHijas = new ArrayList<CuentaContable>();
 	 
-	session=subtotal(session);
-	return session;
-		
+	 for(Integer cc : ctas) 
+	 {
+		 CuentaContable c = (CuentaContable) manage_entity.getById(CuentaContable.class.getName(), cc);
+		 if(c!=null) {
+			 cuentasHijas.add(c);
+		 }
+	 }
+	 
+	 return cuentasHijas;
+	 
 	}
 	
-	
-	@SuppressWarnings("unchecked")
-	public HttpSession subtotal(HttpSession session){
+	/**
+	 * Imprime en consola una lista de cuentas
+	 * 
+	 * @param listaCuentas
+	 */
+	public void ImprimirLista(List<CuentaContable> listaCuentas) {
 		
-		List<CuentaContable> cc;
-		Double acumA =0.00;
-		Double acumD =0.00;
-		if(session.getAttribute("listaDeCuentasDiario")==null) {
-			session.removeAttribute("mensajeCuentasDiario");
-			return session;
+		if(listaCuentas.isEmpty()) {
+			System.err.println("LISTA DE CUENTAS ESTA VACIA");
 		}
-		else {
-			session.removeAttribute("mensajeCuentasDiario");
-			cc=(List<CuentaContable> )session.getAttribute("listaDeCuentasDiario");
-			for(CuentaContable cx:cc) {
-				acumA=cx.getSaldoAcreedor()+acumA;
-				acumD=cx.getSaldoDeudor()+acumD;
-			}
-			
-			if(acumA==acumD) {
-				session.setAttribute("mensajeCuentasDiario", "");
-				session.setAttribute("totalAcreedor", acumA);
-				session.setAttribute("totalDeudor", acumD);
-				return session;
-			}
-			
-			if(acumA>acumD) {
-				session.setAttribute("mensajeCuentasDiario", "Acreedor mayor que deudor...");
-				session.setAttribute("totalAcreedor", acumA);
-				session.setAttribute("totalDeudor", acumD);
-				return session;
-			}
-			
-			if(acumA<acumD) {
-				session.setAttribute("mensajeCuentasDiario", "Deudor mayor que acreedor...");
-				session.setAttribute("totalAcreedor", acumA);
-				session.setAttribute("totalDeudor", acumD);
-				return session;
-			}
+		int i=0;
+		for(CuentaContable cx : listaCuentas) {
+			System.err.println("#"+i+" "+cx.getCodigo()+cx.getNombre());
 		}
-		
-		return session;
 	}
-		
+	
 	
 	
 	

@@ -1,5 +1,6 @@
 package com.sisbam.sisconta.controller.administration;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -33,8 +34,10 @@ public class EmpleadoController {
 	private DaoImp manage_entity;
 
 	String path = "Administration/Empleado/";
+	private static final String IDENTIFICADOR = "empleadox02";
 	private Permisos permisos;
 
+	
 	@SuppressWarnings("unchecked")
 
 	@RequestMapping(value = "/empleados", method = RequestMethod.GET)
@@ -45,17 +48,13 @@ public class EmpleadoController {
 		
 		
 		String retorno = "403";
-		ObtenerPermisosPorUrl obtener = new ObtenerPermisosPorUrl();
-		this.permisos = obtener.Obtener("/sisconta/empleados", request, manage_entity);
+		
+		HttpSession session = request.getSession();
+		ObtenerPermisosPorUrl facilitador = new ObtenerPermisosPorUrl();
+		session = facilitador.Obtener("/sisconta/empleados", request, manage_entity,IDENTIFICADOR);
+		permisos = (Permisos) session.getAttribute("permisos-de-"+IDENTIFICADOR);
 		
 				
-//se cargan los permisos CRUD que tenga el usuario sobre la vista		
-//*************CARGAR BOTONES PERMITIDOS******************
-		model.addAttribute("create",permisos.isC());
-		model.addAttribute("read",	permisos.isR());
-		model.addAttribute("update",permisos.isU());
-		model.addAttribute("delete",permisos.isD());
-//**********************************************************
 
 		
 		if(permisos.isR()) {

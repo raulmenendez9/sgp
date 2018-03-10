@@ -8,7 +8,7 @@
 <style>
 .embed-container {
     position: relative;
-    padding-bottom: 40.25%;
+    padding-bottom: 100%;
     height: 0;
     overflow: hidden;
 }
@@ -20,15 +20,22 @@
 }
 </style>
 
-<div id="contenido" class="card-panel hoverable">
+<div id="contenido" class="card-panel white">
 	<form:form method="post" modelAttribute="partidaForm"
-			action="/sisconta/partida/add" id="registro" autocomplete="off">
-
+			action="/sisconta/partidasadd" id="registro" autocomplete="off">
+				
+				<div class="row">
+				 	<div class="col s6">
+						<label><h5>Mes a trabajar</h5></label>
+					</div>
+					<div class="col s6">
+						<label><h5>Tipo de partida</h5></label>
+					</div>
+				</div>
 				<div class="row">
 						<div class="input-field col s6">
-							<form:select path="mesAtrabajar" class="form-control"
-								required="true">
-								<option value="xx" disabled selected>Mes a trabajar</option>
+							<form:select path="mesAtrabajar" class="form-control" required="true">
+								<option value="xx" disabled selected>Seleccionar mes</option>
 								<option value="enero">Enero</option>
 								<option value="febrero">Febrero</option>
 								<option value="marzo">Marzo</option>
@@ -45,8 +52,8 @@
 						</div>
 						
 						<div class="input-field col s6">
-							<form:select path="mesAtrabajar" class="form-control" required="true">
-								<option value="xx" disabled selected>Tipo de partida</option>
+							<form:select path="tipoDePartida" class="form-control" required="true">
+								<option value="xx" disabled selected>Seleccionar tipo de partida</option>
 								<option value="ingreso">Ingreso</option>
 								<option value="egreso">Egreso</option>
 								<option value="comp">comp</option>
@@ -57,42 +64,57 @@
 				</div>
 			
 		<BR>					  
-<!-- 					  IFRAMRE -->
-<center>
-		<div class="embed-container">
-		<iframe src="/sisconta/partidas/mostrarCuentas" width="auto" height="500px">
-		</iframe>
-		</div>
-</center>		
-		<hr><br>			  
 					  
-					  
+					<div class="row">
+					 	<div class="col s6">
+							<label><h5>Movimientos</h5></label>
+						</div>
+						<div class="col s6">
+							<label><h5>Descripcion</h5></label>
+						</div>
+					</div>
 					  <div class="row">
-					    <div class="col s12">
+					  
+					  
+					  <div class="col s6">
+								<div class="embed-container">
+								<iframe src="/sisconta/partidas/mostrarCuentas" width="auto" height="900px" frameborder="0">
+								</iframe>
+								</div>
+						</div>
+					  
+					  
+					  
+					    <div class="col s6">
 					      <div class="row">
-						   <label>Descripcion</label>
 								<div class="input-field col s12">
 									<form:textarea path="descripcion" value=""
-										placeholder="" cols="10" rows='10' id="descripcion" type="text"
+										placeholder="" cols="50" rows='50' id="descripcion" type="text"
 										class="validate" />
+									<BR><Hr><br>	
+									<form:hidden id="idPartida" path="idPartida" value="${partida.idPartida}" />	
+									<div class="center">
+										<form:button type="submit"
+											class=" btn green waves-light white-text">
+											<i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </form:button>
+					
+										<form:button href="#!"
+											class=" btn red waves-effect waves-light white-text">
+											<i class="fa fa-reply" aria-hidden="true"></i> Cerrar </form:button>
+									</div>	
 								</div>
 							</div>
 						</div>
+						
 					</div>
+					
+					
 			
 			
 			
-					<form:hidden id="idPartida" path="idPartida" value="${partida.idPartida}" />
-
-			<div class="center">
-				<form:button type="submit"
-					class=" btn green modal-actionwaves-effect waves-light white-text">
-					<i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </form:button>
-
-				<form:button href="#!"
-					class=" btn red modal-action modal-close waves-effect waves-light white-text">
-					<i class="fa fa-reply" aria-hidden="true"></i> Cerrar </form:button>
-			</div>
+					
+							
+			
 			
 			
 		</form:form>
