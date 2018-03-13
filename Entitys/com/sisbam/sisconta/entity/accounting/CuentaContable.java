@@ -68,7 +68,7 @@ public class CuentaContable implements java.io.Serializable{
 	}
 	
 
-	@Column(name = "codigo", nullable = false, length = 100)
+	@Column(name = "codigo",unique=true, nullable = false, length = 100)
 	public String getCodigo() {
 		return codigo;
 	}

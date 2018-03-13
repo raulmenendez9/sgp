@@ -64,7 +64,7 @@ public class CuentaContableController {
 	}
 	
 	@RequestMapping(value = "/cuentasadd", method = RequestMethod.POST)
-	public String saveOrUpadateCuenta(@ModelAttribute("cuentaForm") CuentaContable cuentaRecibido,Model model) throws ClassNotFoundException{
+	public String saveOrUpadateCuenta(@ModelAttribute("cuentaForm") CuentaContable cuentaRecibido,Model model,HttpServletRequest request) throws ClassNotFoundException{
 		String retorno = "403";
 
 		
@@ -90,6 +90,8 @@ public class CuentaContableController {
 				
 				
 		}
+		HttpSession s = request.getSession();
+		s.removeAttribute("listacuentashijas");
 		return retorno;
 	}
 	

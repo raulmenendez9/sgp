@@ -8,12 +8,16 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.sound.midi.SysexMessage;
+import javax.transaction.Transaction;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.jaxb.hbm.internal.ImplicitResultSetMappingDefinition;
 import org.hibernate.dialect.CUBRIDDialect;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.GsonBuilderUtils;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -92,32 +96,14 @@ public class PartidaController{
 	}
 	
 	@RequestMapping(value = "/partidasadd", method = RequestMethod.POST)
-	public String saveOrUpadateUsuario(@ModelAttribute("partidaForm") Partida partidaRecibido,
-			HttpServletRequest request) throws ClassNotFoundException {
+	public String saveOrUpadatePartida(@ModelAttribute("partidaForm") Partida partidaRecibido,
+		HttpServletRequest request) throws ClassNotFoundException {
 		HttpSession session = request.getSession();
 		
-		Date hoy = new Date();
-		Partida partida = partidaRecibido;
-		partida.setFecha(hoy);
-		partida.setCuentas(ListarCuentas(session));
+		partidaRecibido.setCuentas(ListarCuentas(session));
+		manage_entity.saveOrUpdatePartida(partidaRecibido);
 		
-		System.err.println("\n\n DATOS DE PARTIDA QUE SE GUARDARA: "+partida.getDescripcion()+","+partida.getIdPartida()+","+partida.getTipoDePartida()+",");
-		
-		
-		if (permisos.isC() || permisos.isU()) {
-
-			
-
-			if (partida.getIdPartida() == 0) {
-				System.err.println("SE GUARDO LA PARTIDA");
-				manage_entity.save(Partida.class.getName(), partida);
-			}
-			else {
-				manage_entity.update(Partida.class.getName(), partida);
-			}
-			return "redirect:/partidas/add";
-		}
-		return "403";
+		return path+"partida-form";
 	}
 	
 	@RequestMapping(value = "/partidas/update/{id}", method = RequestMethod.GET)
@@ -178,8 +164,10 @@ public class PartidaController{
 		String codigoCuenta = token[0];
 		CuentaContable cc = new CuentaContable();
 		//buscar la cuenta con ese codigo en la base
-		cc = (CuentaContable) manage_entity.getByName(CuentaContable.class.getName(), "codigo", codigoCuenta);
 		
+		System.out.println("#########ESTA ESTA PERMITIDA#####################");
+		cc = (CuentaContable) manage_entity.getByName(CuentaContable.class.getName(), "codigo", codigoCuenta);
+		System.out.println("################################################");
 		//si el codigo no se encuentra en la base es porque se ingresaron caracteres extranos o una cuenta invalida
 		if(cc==null) {
 			model.addAttribute("mensaje","Error, cuenta ingresada no es valida");
@@ -187,7 +175,8 @@ public class PartidaController{
 		}
 		
 		//obtener la lista de cuentas hijas
-		List<CuentaContable> listaHijas = ObtenerHIjas();
+		
+		List<CuentaContable> listaHijas = ObtenerHIjas(session);
 		//al objeto cuenta se le meten los saldos
 		try {cc.setSaldoDeudor(Double.parseDouble(sd));} catch (Exception e) { cc.setSaldoDeudor(0.00);}
 		try {cc.setSaldoAcreedor(Double.parseDouble(sa));} catch (Exception e) { cc.setSaldoAcreedor(0.00);}
@@ -464,21 +453,31 @@ public class PartidaController{
 	 * @throws ClassNotFoundException
 	 */
 	@SuppressWarnings("unchecked")
-	public List<CuentaContable> ObtenerHIjas() throws ClassNotFoundException{
-		String sql = " select id_cuentacontable from cuentacontable " + 
-				 " EXCEPT" + 
-				 " select id_cuentapadre from cuentacontable where id_cuentapadre>0";
-	 List<Integer> ctas = (List<Integer>) manage_entity.executeNativeQuery(sql);
-	 List<CuentaContable> cuentasHijas = new ArrayList<CuentaContable>();
-	 
-	 for(Integer cc : ctas) 
+	public List<CuentaContable> ObtenerHIjas(HttpSession session) throws ClassNotFoundException{
+		
+	List<CuentaContable> cuentasHijas = new ArrayList<CuentaContable>();
+	 if(session.getAttribute("listacuentashijas")==null)
 	 {
-		 CuentaContable c = (CuentaContable) manage_entity.getById(CuentaContable.class.getName(), cc);
-		 if(c!=null) {
-			 cuentasHijas.add(c);
-		 }
+		 System.out.println("============LLENANDO CUENTAS HIJAS PARA LA SESION ACTUAL ===============");
+					 String sql = " select id_cuentacontable from cuentacontable " + 
+							 " EXCEPT" + 
+							 " select id_cuentapadre from cuentacontable where id_cuentapadre>0";
+					 List<Integer> ctas = (List<Integer>) manage_entity.executeNativeQuery(sql);
+					 
+					 for(Integer cc : ctas) 
+					 {
+						 CuentaContable c = (CuentaContable) manage_entity.getById(CuentaContable.class.getName(), cc);
+						 if(c!=null) {
+							 cuentasHijas.add(c);
+						 }
+					 }
+					 session.setAttribute("listacuentashijas", cuentasHijas);
+					 System.out.println("============FIN LLENADO DE HIJASL ==============="); 
 	 }
-	 
+	 else {
+		 cuentasHijas = (List<CuentaContable>) session.getAttribute("listacuentashijas");
+	 }
+		
 	 return cuentasHijas;
 	 
 	}

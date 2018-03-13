@@ -13,22 +13,6 @@ import com.sisbam.sisconta.entity.security.Vista;
 public class ObtenerPermisosPorUrl {
 	
 	
-	
-//	public Permisos Obtener(String url,HttpServletRequest request,DaoImp manage_entity) {
-//		Rol rol = (Rol) request.getSession().getAttribute("rol_usuarioactual");
-//		Vista vista = (Vista) manage_entity.getByName(Vista.class.getName(), "url", url);
-//		try {
-//		Permisos permisos = (Permisos) manage_entity.getPermisosByVistaAndRol(vista, rol);
-//		return permisos;
-//		}
-//		catch(Exception e) {
-//			System.out.println("NULL POINTER: VISTA-ROL NO ENCONTRADA ObtenerPermisosPorUrl.java");
-//			return null;
-//		}
-//	}
-	
-	
-	
 	public HttpSession Obtener(String url,HttpServletRequest request,DaoImp manage_entity,String identificador) {
 		//se obtiene la session 
 		HttpSession session = request.getSession();

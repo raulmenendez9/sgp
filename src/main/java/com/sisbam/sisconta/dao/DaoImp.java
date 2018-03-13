@@ -21,6 +21,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.sisbam.sisconta.entity.accounting.CuentaContable;
+import com.sisbam.sisconta.entity.accounting.Partida;
+import com.sisbam.sisconta.entity.accounting.PartidaListCuentas;
 import com.sisbam.sisconta.entity.administration.Usuario;
 import com.sisbam.sisconta.entity.security.Bitacora;
 import com.sisbam.sisconta.entity.security.Menu;
@@ -148,6 +151,8 @@ public class DaoImp implements Dao{
 			session.getTransaction().begin();
 			// save: para guardar una entidad, similar: persist
 			session.save(entityName, obj);
+			
+				
 			// Ejecuta la transaccion que se realizao anteriormente.
 			session.getTransaction().commit();
 			crearBitacora("Guardo", entityName);
@@ -289,7 +294,7 @@ public class DaoImp implements Dao{
 		return obj;
 	}
 
-	protected Session getCurrentSession() {
+	public Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
 
@@ -624,6 +629,24 @@ public class DaoImp implements Dao{
 			}
 		} 
 		return obj;
+		
+	}
+
+
+	@Override
+	public void saveOrUpdatePartida(Partida partida) {
+		
+		Date hoy = new Date();
+		partida.setFecha(hoy);
+		
+		try {
+			  save(Partida.class.getName(),partida);
+					
+			
+		} catch (Exception e) {
+			System.err.println("ERROR GUARDANDO PARTIDA Y SUS CUENTAS: "+e);
+		}
+		
 		
 	}
 

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "partida")
@@ -19,7 +20,7 @@ public class Partida implements java.io.Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	private int idPartida;
-	private List<CuentaContable> cuentas;
+	
 	private String descripcion;
 	private Date fecha;
 	private String tipoDePartida;
@@ -29,6 +30,8 @@ public class Partida implements java.io.Serializable{
 	private Double saldoAcreedor;
 	private Double saldoDeudor;
 	
+	@Transient
+	private List<CuentaContable> cuentas;
 	
 	
 	@Column(name = "sa", nullable = false)
@@ -61,8 +64,7 @@ public class Partida implements java.io.Serializable{
 		this.idPartida = idPartida;
 	}
 
-	
-	@OneToMany( targetEntity=CuentaContable.class )
+	@Transient
 	public List<CuentaContable> getCuentas() {
 		return cuentas;
 	}

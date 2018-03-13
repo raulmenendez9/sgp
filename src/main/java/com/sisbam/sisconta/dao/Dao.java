@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpRequest;
 
+import com.sisbam.sisconta.entity.accounting.Partida;
 import com.sisbam.sisconta.entity.security.Bitacora;
 import com.sisbam.sisconta.entity.security.Menu;
 import com.sisbam.sisconta.entity.security.Permisos;
@@ -87,5 +88,7 @@ public interface Dao {
     public void procedimiento(String proc, int id);
     
     
+    //PARTIDAS DE DIARIO
+	void saveOrUpdatePartida(Partida partida);
     
 }
