@@ -23,7 +23,6 @@ import org.springframework.stereotype.Service;
 
 import com.sisbam.sisconta.entity.accounting.CuentaContable;
 import com.sisbam.sisconta.entity.accounting.Partida;
-import com.sisbam.sisconta.entity.accounting.PartidaListCuentas;
 import com.sisbam.sisconta.entity.administration.Usuario;
 import com.sisbam.sisconta.entity.security.Bitacora;
 import com.sisbam.sisconta.entity.security.Menu;

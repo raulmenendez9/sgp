@@ -9,6 +9,7 @@
 				<a class="waves-effect waves-light btn-floating modal-trigger green" href="/sisconta/partidas/add"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
 			</c:if>
 			<hr>
+			<br>
 	 	<div class="container">
 			<c:if test="${readpartidasx23}">
 				<table id="tabla" class="display hover cell-border"  cellspacing="0" width="100%">
@@ -26,7 +27,7 @@
 						<c:forEach items="${partidas}" var="p">
 							<tr>
 								<td>${p.fecha  }</td>
-								<td>${p.id }</td>
+								<td>${p.idPartida }</td>
 								<td>${p.descripcion }</td>
 								<td>${p.saldoAcreedor }</td>
 								<td>${p.saldoDeudor }</td>

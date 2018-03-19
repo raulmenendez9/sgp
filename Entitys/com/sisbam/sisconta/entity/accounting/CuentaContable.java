@@ -1,5 +1,6 @@
 package com.sisbam.sisconta.entity.accounting;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,13 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "cuentacontable", catalog = "sgr")
+@Table(name = "cuentacontable")
 public class CuentaContable implements java.io.Serializable{
 	
 	
@@ -30,8 +32,19 @@ public class CuentaContable implements java.io.Serializable{
 	private Double saldoAcreedor=0.0;
 	private CuentaContable cuentaPadre;
 	private String description;
+
 	
 	
+	public Set<Partida> partidaset;
+	
+	@ManyToMany(mappedBy="cuentaset")
+	public Set<Partida> getPartidaset() {
+		return partidaset;
+	}
+
+	public void setPartidaset(Set<Partida> partidaset) {
+		this.partidaset = partidaset;
+	}
 
 	public CuentaContable()
 	{

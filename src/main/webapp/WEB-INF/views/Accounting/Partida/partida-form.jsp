@@ -87,6 +87,7 @@
 					  
 					    <div class="col s6">
 					      <div class="row">
+					      
 								<div class="input-field col s12">
 									<form:textarea path="descripcion" value=""
 										placeholder="" cols="50" rows='50' id="descripcion" type="text"
@@ -103,6 +104,7 @@
 											<i class="fa fa-reply" aria-hidden="true"></i> Cerrar </form:button>
 									</div>	
 								</div>
+								
 							</div>
 						</div>
 						

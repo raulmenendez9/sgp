@@ -112,7 +112,7 @@
     	<put-attribute name="titulo" value="Cuentas" />
 		<put-attribute name="content" value="/WEB-INF/views/Accounting/cuentas.jsp"/>
 	</definition>
-	<definition name="Accounting/Partida/partidas" extends="materializeTemplate">
+	<definition name="Accounting/Partida/partidas" extends="materializeTemplateForm">
     	<put-attribute name="titulo" value="Partidas" />
 		<put-attribute name="content" value="/WEB-INF/views/Accounting/Partida/partidas.jsp"/>
 	</definition>

@@ -3,7 +3,9 @@ package com.sisbam.sisconta.controller.accounting;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -100,10 +102,16 @@ public class PartidaController{
 		HttpServletRequest request) throws ClassNotFoundException {
 		HttpSession session = request.getSession();
 		
-		partidaRecibido.setCuentas(ListarCuentas(session));
-		manage_entity.saveOrUpdatePartida(partidaRecibido);
 		
-		return path+"partida-form";
+		Set<CuentaContable> cuentas = new HashSet<CuentaContable>(ListarCuentas(session));
+		partidaRecibido.setFecha(new Date());
+		partidaRecibido.setCuentaset(cuentas);
+		
+		manage_entity.save(Partida.class.getName(), partidaRecibido);
+		
+		session.removeAttribute("listaDeCuentasDiario");
+		
+		return "redirect:/partidas/add";
 	}
 	
 	@RequestMapping(value = "/partidas/update/{id}", method = RequestMethod.GET)
@@ -183,11 +191,26 @@ public class PartidaController{
 		
 		//si la cuenta existe en la lista de cuentas hijas se procede con normalidad si no muestra un mensaje
 		if(ExisteElemento(listaHijas, cc)) {
-			listaCuentas = AgregarElemento(listaCuentas, cc);
-			HashMap< String, Object> mapa = SubTotal(ListarCuentas(session));
-			model.addAttribute("mensaje",mapa.get("mensaje"));
-			model.addAttribute("totalAcreedor",mapa.get("totalAcreedor"));
-			model.addAttribute("totalDeudor",mapa.get("totalDeudor"));
+			
+			
+			
+				//validar si la cuenta ya existe en la lista
+				if(ExisteElemento(listaCuentas, cc)) {
+					HashMap< String, Object> mapa = SubTotal(ListarCuentas(session));
+					model.addAttribute("mensaje","La cuenta: "+cc.getNombre()+" ya existe en la lista, no puede ser abonada o cargada 2 veces en un mismo asiento");
+					model.addAttribute("totalAcreedor",mapa.get("totalAcreedor"));
+					model.addAttribute("totalDeudor",mapa.get("totalDeudor"));
+				}
+				else {
+					HashMap< String, Object> mapa = SubTotal(ListarCuentas(session));
+					model.addAttribute("mensaje",mapa.get("mensaje"));
+					model.addAttribute("totalAcreedor",mapa.get("totalAcreedor"));
+					model.addAttribute("totalDeudor",mapa.get("totalDeudor"));
+					listaCuentas = AgregarElemento(listaCuentas, cc);
+				}
+			
+			
+			
 		}
 		else {
 			model.addAttribute("mensaje","Error, cuenta ingresada no es valida para transacciones");
@@ -499,7 +522,62 @@ public class PartidaController{
 	}
 	
 	
+	public String validarCuentas(List<CuentaContable> listaCuentas) {
+		
+		String result ="";
+		
+		for(CuentaContable cc: listaCuentas) {
+			
+		}
+		
+		
+		
+		
+		return result;
+		
+		
+	}
 	
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		List<String> lista = new ArrayList<String>();
+		lista.add("1");
+		lista.add("2");
+		lista.add("3");
+		lista.add("4");
+		lista.add("5");
+		lista.add("6");
+		lista.add("7");
+		lista.add("8");
+		lista.add("9");
+		lista.add("0");
+		
+		lista.add("7");
+		lista.add("8");
+		lista.add("9");
+		lista.add("0");
+		
+		System.out.println("LISTA ANTES DE MDIFICAR");
+		for(String ss : lista) {
+			System.out.println(ss);
+		}
+		
+		
+		
+	    Set<String> hs = new HashSet<>();
+	    hs.addAll(lista);
+	    lista.clear();
+	    lista.addAll(hs);
+	    
+	    System.out.println("LISTA DESPUES DE MDIFICAR");
+		for(String ss : lista) {
+			System.out.println(ss);
+		}
+
+	}
+	
+
 	
 	
 }
