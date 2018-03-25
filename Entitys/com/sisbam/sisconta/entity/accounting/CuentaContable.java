@@ -37,7 +37,7 @@ public class CuentaContable implements java.io.Serializable{
 	
 	public Set<Partida> partidaset;
 	
-	@ManyToMany(mappedBy="cuentaset")
+	@ManyToMany(mappedBy="SET_DIARIO_PARTIDA_x_CUENTACONTABLE")
 	public Set<Partida> getPartidaset() {
 		return partidaset;
 	}

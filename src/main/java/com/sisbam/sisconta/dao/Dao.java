@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.hibernate.Session;
 import org.springframework.http.HttpRequest;
 
 import com.sisbam.sisconta.entity.accounting.Partida;
@@ -29,12 +30,7 @@ public interface Dao {
 	 * Utilizado para guardar un objeto.
 	 */
     public void save(String entityName, Object obj);
-    public void saveBitacora(String entityName, Object obj);
     
-    public void saveSinBitacora(String entityName, Object obj);
-    public void updateSinBitacora(String entityName, Object obj);
-    public void deleteSinBitacora(String entityName, Object obj);
-    public void crearBitacora(String accion,String tabla);
     
     /*
      * Update:
@@ -90,5 +86,12 @@ public interface Dao {
     
     //PARTIDAS DE DIARIO
 	void saveOrUpdatePartida(Partida partida);
+
+
+	void EscribirBitacora(String accion, String tabla, String usuario);
+
+
+	void saveBitacora(String entityName, Object obj);
+
     
 }

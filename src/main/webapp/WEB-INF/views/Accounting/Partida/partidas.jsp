@@ -31,7 +31,11 @@
 								<td>${p.descripcion }</td>
 								<td>${p.saldoAcreedor }</td>
 								<td>${p.saldoDeudor }</td>
-	
+								<td>
+							<c:if test="${deletepartidasx23}">		
+									<a class="" href="/sisconta/partidas/delete/${p.idPartida}" data-toggle="modal"data-target="#""><i class="fa fa-trash" aria-hidden="true"></i></a>
+							</c:if>
+							</td>	
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -39,3 +43,19 @@
 			</c:if>
 </div>
 </div>
+
+
+<script type="text/javascript">
+	//asignar los estilos y paginacion a la tabla
+	$(document).ready(function() {
+		$('#tablapartidas').DataTable({
+			scrollY: true,
+			stateSave : true,
+			responsive : true,
+			language : {
+				"url" : "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+		}
+	});//fin DataTable
+						
+});//fin function
+</script>

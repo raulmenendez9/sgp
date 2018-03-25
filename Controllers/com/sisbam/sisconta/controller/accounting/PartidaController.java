@@ -1,5 +1,6 @@
 package com.sisbam.sisconta.controller.accounting;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,7 +17,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.jaxb.hbm.internal.ImplicitResultSetMappingDefinition;
 import org.hibernate.dialect.CUBRIDDialect;
+import org.hibernate.query.criteria.internal.predicate.IsEmptyPredicate;
 import org.json.simple.JSONObject;
+import org.mvel2.optimizers.impl.refl.nodes.ListAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -49,7 +52,7 @@ public class PartidaController{
 	private static final String IDENTIFICADOR = "partidasx23";
 	
 	private Permisos permisos = new Permisos();
-	 
+	private DecimalFormat df = new DecimalFormat("#.00"); 
 	
 	/*
 	 * value = "/Usuarioes" => URL.
@@ -72,7 +75,9 @@ public class PartidaController{
 			model.addAttribute("partidaForm", partida);
 			model.addAttribute("paratida", null);
 			
+			System.out.println("//////////////////////CARGANDO LISTA DE PARTIDAS/////////////////////////");
 			List<Partida> partidas = (List<Partida>) this.manage_entity.getAll(Partida.class.getName());
+			System.out.println("/////////////////////////////////////////////////////////////////////////");
 			model.addAttribute("partidas", partidas);
 			retorno = path+"partidas";
 			}
@@ -105,7 +110,12 @@ public class PartidaController{
 		
 		Set<CuentaContable> cuentas = new HashSet<CuentaContable>(ListarCuentas(session));
 		partidaRecibido.setFecha(new Date());
-		partidaRecibido.setCuentaset(cuentas);
+		partidaRecibido.setSET_DIARIO_PARTIDA_x_CUENTACONTABLE(cuentas);
+		
+		HashMap< String, Object> mapa = SubTotal(ListarCuentas(session));
+		
+		partidaRecibido.setSaldoAcreedor((Double.parseDouble(df.format(Double.parseDouble(""+mapa.get("totalAcreedor"))))));
+		partidaRecibido.setSaldoDeudor((Double.parseDouble(df.format(Double.parseDouble(""+mapa.get("totalAcreedor"))))));
 		
 		manage_entity.save(Partida.class.getName(), partidaRecibido);
 		
@@ -164,8 +174,13 @@ public class PartidaController{
 		//Obntener la cuenta que se ingreso
 		String cuenta=request.getParameter("cuenta-contable");
 		//obtener saldo acreedor y deudor
-		String sd=request.getParameter("sd")!=null?request.getParameter("sd"):"0.00";
-		String sa=request.getParameter("sa")!=null?request.getParameter("sa"):"0.00";
+		 
+		String sd="0.00";
+		String sa="0.00";
+		try {sd=df.format(Double.parseDouble((request.getParameter("sd")!=null||!request.getParameter("sa").equals(""))?request.getParameter("sd").toString():"0.00"));}catch(Exception e) {sd="0.00";}
+		try {sa=df.format(Double.parseDouble((request.getParameter("sa")!=null||!request.getParameter("sa").equals(""))?request.getParameter("sa").toString():"0.00"));}catch(Exception e) {sa="0.00";}
+		
+		
 		
 		//quitar a la cuenta el nombre, para solo quedarse con el codigo
 		String[] token = cuenta.split("-");
@@ -178,7 +193,10 @@ public class PartidaController{
 		System.out.println("################################################");
 		//si el codigo no se encuentra en la base es porque se ingresaron caracteres extranos o una cuenta invalida
 		if(cc==null) {
-			model.addAttribute("mensaje","Error, cuenta ingresada no es valida");
+			HashMap< String, Object> mapa = SubTotal(ListarCuentas(session));
+			model.addAttribute("mensaje","Error, cuenta ingresada no existe");
+			model.addAttribute("totalAcreedor",mapa.get("totalAcreedor"));
+			model.addAttribute("totalDeudor",mapa.get("totalDeudor"));
 			return path+"listacuentas-form";
 		}
 		
@@ -192,25 +210,21 @@ public class PartidaController{
 		//si la cuenta existe en la lista de cuentas hijas se procede con normalidad si no muestra un mensaje
 		if(ExisteElemento(listaHijas, cc)) {
 			
-			
-			
 				//validar si la cuenta ya existe en la lista
+				
 				if(ExisteElemento(listaCuentas, cc)) {
 					HashMap< String, Object> mapa = SubTotal(ListarCuentas(session));
 					model.addAttribute("mensaje","La cuenta: "+cc.getNombre()+" ya existe en la lista, no puede ser abonada o cargada 2 veces en un mismo asiento");
 					model.addAttribute("totalAcreedor",mapa.get("totalAcreedor"));
 					model.addAttribute("totalDeudor",mapa.get("totalDeudor"));
 				}
-				else {
-					HashMap< String, Object> mapa = SubTotal(ListarCuentas(session));
+				else{
+					listaCuentas = AgregarElemento(listaCuentas, cc);
+					HashMap< String, Object> mapa = SubTotal(listaCuentas);
 					model.addAttribute("mensaje",mapa.get("mensaje"));
 					model.addAttribute("totalAcreedor",mapa.get("totalAcreedor"));
 					model.addAttribute("totalDeudor",mapa.get("totalDeudor"));
-					listaCuentas = AgregarElemento(listaCuentas, cc);
 				}
-			
-			
-			
 		}
 		else {
 			model.addAttribute("mensaje","Error, cuenta ingresada no es valida para transacciones");
@@ -256,7 +270,9 @@ public class PartidaController{
 		List<CuentaContable> listaCuentas = ListarCuentas(session);
 		String cuenta=request.getParameter("cuenta-contable");
 		CuentaContable cc = new CuentaContable();
+		System.out.println("-----------OBTENER CUENTA APARTIR DE CODIGO----------");
 		cc = (CuentaContable) manage_entity.getByName(CuentaContable.class.getName(), "codigo", cuenta);
+		System.out.println("------------------------------------------------------");
 		listaCuentas = EliminarElemento(listaCuentas, cc);
 		HashMap< String, Object> mapa = SubTotal(ListarCuentas(session));
 		model.addAttribute("mensaje",mapa.get("mensaje"));
@@ -270,7 +286,7 @@ public class PartidaController{
 	
 	/**
 	 * 
-	 * Apartir de la sesion, llena la lista de cuentas hijas
+	 * Apartir de la sesion, llena la lista de cuentas hija
 	 * disponibles para que el usuario escoja una tecleando el codigo
 	 * 
 	 * @param session
@@ -354,10 +370,9 @@ public class PartidaController{
 		
 		if(listaCuentas.isEmpty()) {
 			mapa.put("mensaje", 		"");
-			mapa.put("totalAcreedor",	acumA);
-			mapa.put("totalDeudor",		acumD);
+			mapa.put("totalAcreedor",	df.format(acumA));
+			mapa.put("totalDeudor",		df.format(acumD));
 			System.out.println();
-			
 			
 			return mapa;
 		}
@@ -367,28 +382,26 @@ public class PartidaController{
 			acumD=cx.getSaldoDeudor()+acumD;
 		}
 		
-		
 		if(acumA>acumD) {
 			mapa.put("mensaje", 		"Saldo acreedor es mayor que saldo deudor");
-			mapa.put("totalAcreedor",	acumA);
-			mapa.put("totalDeudor",		acumD);
+			mapa.put("totalAcreedor",	df.format(acumA));
+			mapa.put("totalDeudor",		df.format(acumD));
 			return mapa;
 		}
 		
 		else if(acumA<acumD) {
 			mapa.put("mensaje", 		"Saldo deudor es mayor que saldo acreedor");
-			mapa.put("totalAcreedor",	acumA);
-			mapa.put("totalDeudor",		acumD);
+			mapa.put("totalAcreedor",	df.format(acumA));
+			mapa.put("totalDeudor",		df.format(acumD));
 			return mapa;
 		}
 		
 		else if(acumA.toString().equals(acumD.toString())) {
 			mapa.put("mensaje", 		"");
-			mapa.put("totalAcreedor",	acumA);
-			mapa.put("totalDeudor",		acumD);
+			mapa.put("totalAcreedor",	df.format(acumA));
+			mapa.put("totalDeudor",		df.format(acumD));
 			return mapa;
 		}
-		
 		
 		}
 		catch(Exception e) {
@@ -453,13 +466,15 @@ public class PartidaController{
 	 * @return true si existe, false si no existe
 	 */
 	public boolean ExisteElemento(List<CuentaContable> listaCuentas,CuentaContable cuenta) {
-		int i=0;
+		
+		if(listaCuentas.isEmpty()) {
+			return false;
+		}
+		
 			for(CuentaContable cx : listaCuentas) {
 				if(cx.getCodigo().trim().equals(cuenta.getCodigo().trim())) {
+					System.err.println("LA CUENTA :"+cx.getCodigo()+"ES IGUAL A "+cuenta.getCodigo());
 					return true;
-				}
-				else {
-					i++;
 				}
 			}
 			

@@ -179,7 +179,7 @@ public class RolController {
 				if((create != null || read != null || update != null || delete != null)&& (menuesderol!=null)) {
 					permisos.setVista(vista);
 					permisos.setRol(rol);
-					manage_entity.saveSinBitacora(Permisos.class.getName(), permisos);
+					manage_entity.save(Permisos.class.getName(), permisos);
 				}
 
 				
@@ -253,7 +253,7 @@ public class RolController {
 						}
 						
 						if((create != null || read != null || update != null || delete != null)&& (menuesderol!=null)) {
-							manage_entity.updateSinBitacora(Permisos.class.getName(), permisos);
+							manage_entity.update(Permisos.class.getName(), permisos);
 						}	
 						
 					}
@@ -278,7 +278,7 @@ public class RolController {
 						if((create != null || read != null || update != null || delete != null)&& (menuesderol!=null)) {
 							permix.setVista(vista);
 							permix.setRol(rol);
-							manage_entity.saveSinBitacora(Permisos.class.getName(), permix);
+							manage_entity.save(Permisos.class.getName(), permix);
 						}
 					}
 							
@@ -363,7 +363,7 @@ public class RolController {
 						permi = (Permisos) manage_entity.getPermisosByVistaAndRol(vistita, rol);
 						if(permi.getRol().getIdRol()==rol.getIdRol()) {
 //							System.err.println("TRATANDO DE BORRAR PERMISOS-> "+rol.getIdRol()+"-> "+vistita.getNombre());
-							manage_entity.deleteSinBitacora(Permisos.class.getName(), permi);
+							manage_entity.delete(Permisos.class.getName(), permi);
 						}
 						}
 						catch(Exception e) {

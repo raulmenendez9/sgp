@@ -28,10 +28,11 @@ public class ObtenerPermisosPorUrl {
 					
 					//se obtiene el rol y la vista 
 					Rol rol = (Rol) request.getSession().getAttribute("rol_usuarioactual");
+					System.out.println("+++++++++++++++++CARGANDO PERMISOS CRUD PARA ESTA VISTA+++++++++++++++++++++");
 					Vista vista = (Vista) manage_entity.getByName(Vista.class.getName(), "url", url);
 					
 					permisos = (Permisos) manage_entity.getPermisosByVistaAndRol(vista, rol);
-					
+					System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 					
 					//*************CARGAR BOTONES PERMITIDOS******************
 //					String c = permisos.isC()?"si":"no";

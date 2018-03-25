@@ -11,13 +11,19 @@
 		<table id="tabla" class="display hover cell-border"  cellspacing="0" width="100%">
 				<thead>
 					<tr>
-					    <th>Historial</th>
+						<th>Fecha</th>
+					    <th>Usuario</th>
+					    <th>Accion</th>
+					    <th>Tabla</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${bitacoras}" var="bitacora">
 						<tr style="color:#0B0B61;">
-							<td>${bitacora.linea }</td>
+							<td>${bitacora.fecha }</td>
+							<td>${bitacora.username }</td>
+							<td>${bitacora.accion }</td>
+							<td>${bitacora.tabla }</td>
 						</tr>
 					</c:forEach>
 				</tbody>

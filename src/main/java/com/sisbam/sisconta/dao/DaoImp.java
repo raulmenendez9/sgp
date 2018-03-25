@@ -5,23 +5,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.ParameterMode;
 import javax.persistence.Query;
-import javax.servlet.http.HttpServletRequest;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.procedure.ProcedureCall;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
-import com.sisbam.sisconta.entity.accounting.CuentaContable;
 import com.sisbam.sisconta.entity.accounting.Partida;
 import com.sisbam.sisconta.entity.administration.Usuario;
 import com.sisbam.sisconta.entity.security.Bitacora;
@@ -34,132 +27,78 @@ import com.sisbam.sisconta.entity.security.Vista;
  *  Clase que implementa la inteface DAO y todos sus metodos
  */
 @Service("manage_entity")
-
 public class DaoImp implements Dao{
 
 	@Autowired
 	SessionFactory sessionFactory;
 	
 	@Override
-	public void crearBitacora(String accion,String tabla){
-		String entidad = tabla.replaceAll("com.sisbam.sisconta.entity","");;
-		Bitacora bitacora = new Bitacora();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Date hoy = new Date();
-		SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		String fechahora = formater.format(hoy);
+	public void EscribirBitacora(String accion,String tabla,String usuario) {
 		
-		bitacora.setAccion(accion);
-		bitacora.setFecha(hoy);
-		bitacora.setTabla(entidad);
-		bitacora.setUsername((String)auth.getPrincipal());
-		bitacora.setLinea(auth.getPrincipal().toString().toUpperCase()+" "+accion+"     en "+" "+entidad+"->"+fechahora);
-		
-		saveBitacora(Bitacora.class.getName(), bitacora);
+		try {
+			tabla=tabla.replace(".", "-");
+			String[] tbls = tabla.split("-");
+			String entidad = tbls[tbls.length-1];
+			
+			Bitacora bitacora = new Bitacora();
+			Date hoy = new Date();
+			SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			String fechahora = formater.format(hoy);
+			bitacora.setAccion(accion);
+			
+			bitacora.setFecha(formater.parse(fechahora));
+			bitacora.setTabla(entidad);
+			bitacora.setUsername(usuario.toUpperCase());
+			bitacora.setLinea(usuario.toUpperCase()+" "+accion+"     en "+" "+entidad+"->"+fechahora);
+			saveBitacora(Bitacora.class.getName(), bitacora);
+		}
+		catch(Exception e) {
+			System.out.println("ERROR ESCRIIR BITACORA: "+e);
+		}
 	}
-	
-	
 	@Override
 	public void saveBitacora(String entityName, Object obj) {
+		Session session = getCurrentSession();
 		
 		// recupera la session actual.
-		Session session = getCurrentSession();
+		try {
+				session.getTransaction().begin();
+				session.save(entityName, obj);
+				session.getTransaction().commit();
 			
-		try {
-			// Inicia una nueva transaccion.
-			session.getTransaction().begin();
-			// save: para guardar una entidad, similar: persist
-			session.save(entityName, obj);
-			// Ejecuta la transaccion que se realizao anteriormente.
-			session.getTransaction().commit();
 		} catch (Exception e) {
-			// Si el estatus de la transaccion se encuentra activa o el marca
-			// rollback
-			// se realiza un rollback() para regresar la operacion que se
-			// intentaba realizar.
 			if (session.getTransaction().getStatus() == TransactionStatus.ACTIVE
-					|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
+					||session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
 				session.getTransaction().rollback();
 			}
 		} 
 	}
 	
-	@Override
-	public void saveSinBitacora(String entityName, Object obj) {
-		// recupera la session actual.
-				Session session = getCurrentSession();
-					
-				try {
-					// Inicia una nueva transaccion.
-					session.getTransaction().begin();
-					// save: para guardar una entidad, similar: persist
-					session.save(entityName, obj);
-					// Ejecuta la transaccion que se realizao anteriormente.
-					session.getTransaction().commit();
-				} catch (Exception e) {
-					// Si el estatus de la transaccion se encuentra activa o el marca
-					// rollback
-					// se realiza un rollback() para regresar la operacion que se
-					// intentaba realizar.
-					if (session.getTransaction().getStatus() == TransactionStatus.ACTIVE
-							|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
-						session.getTransaction().rollback();
-					}
-				} 
-		
-	}
-	
-	@Override
-	public void updateSinBitacora(String entityName, Object obj) {
-		Session session = getCurrentSession();
-		try {
-			session.getTransaction().begin();
-			session.update(entityName, obj);
-			session.getTransaction().commit();
-		} catch (Exception e) {
-			if (session.getTransaction().getStatus() == TransactionStatus.ACTIVE
-					|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
-				session.getTransaction().rollback();
-			}
-		} 
-	}
-	
-	@Override
-	public void deleteSinBitacora(String entityName, Object obj) {
-		Session session = getCurrentSession();
-		try {
-			session.getTransaction().begin();
-			session.delete(entityName, obj);
-			session.getTransaction().commit();
-		} catch (Exception e) {
-			if (session.getTransaction().getStatus() == TransactionStatus.ACTIVE
-					|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
-				session.getTransaction().rollback();
-			}
-		} 
-	}
 	
 	
 	@Override
 	public void save(String entityName, Object obj) {
 		// recupera la session actual.
 		Session session = getCurrentSession();
-			
+		
+		
 		try {
+			
 			// Inicia una nueva transaccion.
 			session.getTransaction().begin();
 			// save: para guardar una entidad, similar: persist
 			session.save(entityName, obj);
-			
-				
 			// Ejecuta la transaccion que se realizao anteriormente.
 			session.getTransaction().commit();
-			crearBitacora("Guardo", entityName);
+			EscribirBitacora("Guardo", entityName,""+SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+			
+			
 		} catch (Exception e) {
 			// Si el estatus de la transaccion se encuentra activa o el marca
 			// rollback
 			// se realiza un rollback() para regresar la operacion que se
 			// intentaba realizar.
+			System.err.println("hubo un error guardando");
 			if (session.getTransaction().getStatus() == TransactionStatus.ACTIVE
 					|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
 				session.getTransaction().rollback();
@@ -171,10 +110,11 @@ public class DaoImp implements Dao{
 	public void update(String entityName, Object obj) {
 		Session session = getCurrentSession();
 		try {
+			
 			session.getTransaction().begin();
 			session.update(entityName, obj);
 			session.getTransaction().commit();
-			crearBitacora("Actualizo", entityName);
+			EscribirBitacora("Modifico", entityName,""+SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 		} catch (Exception e) {
 			if (session.getTransaction().getStatus() == TransactionStatus.ACTIVE
 					|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
@@ -192,7 +132,7 @@ public class DaoImp implements Dao{
 			obj = session.get(entityName, id);
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			System.out.print(e);
+			System.out.print("ERROR OBTENIENDO POR ID"+e);
 			if (session.getTransaction().getStatus() == TransactionStatus.ACTIVE
 					|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
 				session.getTransaction().rollback();
@@ -205,16 +145,16 @@ public class DaoImp implements Dao{
 	public void delete(String entityName, Object obj) {
 		Session session = getCurrentSession();
 		try {
+			
 			session.getTransaction().begin();
 			session.delete(entityName, obj);
 			session.getTransaction().commit();
-			crearBitacora("Elimino", entityName);
+			EscribirBitacora("Elimino", entityName,""+SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 		} catch (Exception e) {
 			if (session.getTransaction().getStatus() == TransactionStatus.ACTIVE
 					|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
 				session.getTransaction().rollback();
 			}
-			throw new HibernateException("ERROR: HAY OTROS VALORES QUE DEPENDEN DE ESTE");
 		} 
 	}
 
@@ -240,7 +180,7 @@ public class DaoImp implements Dao{
 			objects = session.createQuery(hql).list();
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			System.out.print(e);
+			System.out.print("ERROR OBTENIENDO TODOS, DAOIMP"+e);
 			if (session.getTransaction().getStatus() == TransactionStatus.ACTIVE
 					|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
 				session.getTransaction().rollback();
@@ -259,7 +199,7 @@ public class DaoImp implements Dao{
 			obj = session.createQuery(hql).list().get(0);
 			session.getTransaction().commit();
 		} catch (Exception e) {
-			System.out.print("ERROR EN EL METODO DE GET BY NAME DAO LINEA 258"+e);
+			System.out.print("ERROR EN EL METODO DE GET BY NAME DAO"+e);
 			if (session.getTransaction().getStatus() == TransactionStatus.ACTIVE
 					|| session.getTransaction().getStatus() == TransactionStatus.MARKED_ROLLBACK) {
 				session.getTransaction().rollback();
@@ -346,7 +286,6 @@ public class DaoImp implements Dao{
 			                +"c."+ column_date+" <= '"+fecha2+"' and "+"c."+column_date+" >= '"+fecha1+"'";
 					
 					try {
-						System.out.println(hql);
 						session.getTransaction().begin();
 						objects = session.createQuery(hql).list();
 						session.getTransaction().commit();

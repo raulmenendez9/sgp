@@ -24,33 +24,32 @@
 
 <div class="card-panel hoverable"  style="position: fixed; width: 100%; padding-top: 0px;">
 <form:form action="/sisconta/partidas/procesarCuentas" method="post"  autocomplete="off">
-
-					<div class="row">
-					    <div class="col s12">
-					      <div class="row">
-						        <div class="input-field col s4">
-						          <input name="cuenta-contable" type="text" id="autocomplete-input" class="autocomplete">
-						          <label for="autocomplete-input">Cuenta Contable</label>
-						        </div>
-						        
-							    <div class="input-field col s3">
-						          <input name="sa" placeholder="" id="first_name" type="text" class="validate">
-						          <label for="first_name">Saldo Acreedor</label>
-						       </div>
-						       
-						       <div class="input-field col s3">
-						          <input name="sd" placeholder="" id="first_name2" type="text" class="validate">
-						          <label for="first_name2">Saldo Deudor</label>
-						       </div>
-						       
-						       <div class="input-field col s2">
-						       <center>
-						        <button type="submit" class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">add</i></a>
-						        </center>
-					           </div>
-					      </div>
-					    </div>
-					  </div>
+		<div class="row">
+		    <div class="col s12">
+		      <div class="row">
+			        <div class="input-field col s4">
+			          <input name="cuenta-contable" type="text" id="autocomplete-input" class="autocomplete" required="required" >
+			          <label for="autocomplete-input">Cuenta Contable</label>
+			        </div>
+			        
+				    <div class="input-field col s3">
+			          <input name="sa" placeholder="" id="sa" type="text" class="validate" maxlength="13">
+			          <label for="first_name">Saldo Acreedor</label>
+			       </div>
+			       
+			       <div class="input-field col s3">
+			          <input name="sd" placeholder="" id="sd" type="text" class="validate" maxlength="13">
+			          <label for="first_name2">Saldo Deudor</label>
+			       </div>
+			       
+			       <div class="input-field col s2">
+			       <center>
+			        	<button type="submit" class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">add</i></a>
+			        </center>
+		           </div>
+		      </div>
+		    </div>
+		  </div>
 </form:form>
 </div>
 <br><br><br><br><br><br><br><br><br><br>

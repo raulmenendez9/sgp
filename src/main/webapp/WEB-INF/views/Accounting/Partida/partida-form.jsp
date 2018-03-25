@@ -22,7 +22,7 @@
 
 <div id="contenido" class="card-panel white">
 	<form:form method="post" modelAttribute="partidaForm"
-			action="/sisconta/partidasadd" id="registro" autocomplete="off">
+			action="/sisconta/partidasadd" id="registro" autocomplete="off" accept-charset="UTF-8">
 				
 				<div class="row">
 				 	<div class="col s6">
@@ -83,11 +83,8 @@
 								</div>
 						</div>
 					  
-					  
-					  
 					    <div class="col s6">
 					      <div class="row">
-					      
 								<div class="input-field col s12">
 									<form:textarea path="descripcion" value=""
 										placeholder="" cols="50" rows='50' id="descripcion" type="text"
@@ -99,37 +96,14 @@
 											class=" btn green waves-light white-text">
 											<i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </form:button>
 					
-										<form:button href="#!"
-											class=" btn red waves-effect waves-light white-text">
-											<i class="fa fa-reply" aria-hidden="true"></i> Cerrar </form:button>
+										<a href="/sisconta/partidas" class=" btn red waves-effect waves-light white-text"><i class="fa fa-arrow-left" aria-hidden="true"></i> Regresar</a>
 									</div>	
 								</div>
-								
 							</div>
 						</div>
-						
 					</div>
-					
-					
-			
-			
-			
-					
-							
-			
-			
-			
 		</form:form>
-
 </div>
-
-
-
-
-
-
-
-
 
 
 
@@ -142,8 +116,6 @@ $(document).ready(function() {
 			    { 
 		        TOOLBAR : 'BASIC', 
 			    }); 					
-
-						
 });
 </script>
 

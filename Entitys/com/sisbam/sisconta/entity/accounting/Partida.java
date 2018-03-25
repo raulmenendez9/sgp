@@ -33,7 +33,7 @@ public class Partida implements java.io.Serializable{
 	private Double saldoAcreedor=0.0;
 	private Double saldoDeudor=0.0;
 	
-	public Set<CuentaContable> cuentaset;
+	public Set<CuentaContable> SET_DIARIO_PARTIDA_x_CUENTACONTABLE;
 
 	
 	@Id
@@ -105,15 +105,18 @@ public class Partida implements java.io.Serializable{
 	}
 
 	
+
 	@ManyToMany
-	@JoinTable(name="cuentaset")
-	public Set<CuentaContable> getCuentaset() {
-		return cuentaset;
+	@JoinTable(name="SET_DIARIO_PARTIDA_x_CUENTACONTABLE")
+	public Set<CuentaContable> getSET_DIARIO_PARTIDA_x_CUENTACONTABLE() {
+		return SET_DIARIO_PARTIDA_x_CUENTACONTABLE;
 	}
 
-	public void setCuentaset(Set<CuentaContable> cuentaset) {
-		this.cuentaset = cuentaset;
+	public void setSET_DIARIO_PARTIDA_x_CUENTACONTABLE(Set<CuentaContable> sET_DIARIO_PARTIDA_x_CUENTACONTABLE) {
+		SET_DIARIO_PARTIDA_x_CUENTACONTABLE = sET_DIARIO_PARTIDA_x_CUENTACONTABLE;
 	}
+
+	
 	
 	
 }
