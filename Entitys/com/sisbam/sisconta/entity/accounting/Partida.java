@@ -1,5 +1,6 @@
 package com.sisbam.sisconta.entity.accounting;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.Set;
 
@@ -12,10 +13,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "partida")
 public class Partida implements java.io.Serializable{
+	@Transient
+	private DecimalFormat df = new DecimalFormat("#.00"); 
 
 /**
 	 * 
@@ -92,6 +96,7 @@ public class Partida implements java.io.Serializable{
 	}
 
 	public void setSaldoAcreedor(Double saldoAcreedor) {
+		saldoAcreedor = Double.parseDouble(df.format(saldoAcreedor));
 		this.saldoAcreedor = saldoAcreedor;
 	}
 
@@ -101,6 +106,7 @@ public class Partida implements java.io.Serializable{
 	}
 
 	public void setSaldoDeudor(Double saldoDeudor) {
+		saldoDeudor = Double.parseDouble(df.format(saldoDeudor));
 		this.saldoDeudor = saldoDeudor;
 	}
 

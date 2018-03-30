@@ -23,7 +23,7 @@
 <body>
 
 <div class="card-panel hoverable"  style="position: fixed; width: 100%; padding-top: 0px;">
-<form:form action="/sisconta/partidas/procesarCuentas" method="post"  autocomplete="off">
+<form:form action="/sisconta/partidas/procesarCuentas" method="post"  autocomplete="off" accept-charset="UTF-8">
 		<div class="row">
 		    <div class="col s12">
 		      <div class="row">

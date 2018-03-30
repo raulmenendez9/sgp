@@ -38,7 +38,7 @@
 											No
 									</c:if>
 								</td>
-									<td width="5%">
+									<td width="10%">
 										<c:if test="${updateusuariosx67}">	
 												<a class="modal-trigger" href="#-${usuario.idUsuario}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 										</c:if>
@@ -64,18 +64,18 @@
 	</div>
 	<div class="modal-content">
 		<form:form method="post" modelAttribute="usuarioForm"
-			action="/sisconta/usuariosadd" id="registro" autocomplete="off">
+			action="/sisconta/usuariosadd" id="registro" autocomplete="off" accept-charset="UTF-8">
 
 			<div class="row">
 				<div class="input-field col s6">
 					<form:input path="username" class="form-control"
-								placeholder="Username" type="text" id="us-${usuario.idUsuario }"
-								value="${usuario.username }" required="required"/>
+								placeholder="Username" type="text" id="us"
+								value="" required="required"/>
 
 				</div>
 				<div class="input-field col s6">
-					<form:password path="password" class="form-control"
-								placeholder="Contraseña" id="pass-${usuario.password }" required="required" />
+					<form:password path="password" class="form-control" value=""
+								placeholder="Contraseña" id="pass" required="required" />
 					
 				</div>
 			</div>
@@ -101,26 +101,10 @@
 
 					<div class="row">
 						<div class="input-field col s12">
-							<form:select path="idEmpleado" class="form-control"
-								required="true">
-								<option value="" disabled selected>Selecione el empleado</option>
-								<c:forEach items="${empleados}" var="r">
-									<c:choose>
-										<c:when test="${usuario.empleado.idEmpleado == r.idEmpleado}">
-											<form:option value="${r.idEmpleado }"
-												label="${r.nombre} ${r.apellidos}" selected="true" />
-										</c:when>
-										<c:otherwise>
-											<form:option value="${r.idEmpleado }"
-												label="${r.nombre} ${r.apellidos}" />
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-							</form:select>
+						          <input name="empleado-selec" type="text" id="autocomplete-input" class="autocomplete" required="required" >
+						          <label for="autocomplete-input">Empleado que responsable de este usuario</label>
 						</div>
 					</div>
-					
-					
 					
 					<div class="row">
 											
@@ -209,21 +193,8 @@
 
 					<div class="row">
 						<div class="input-field col s12">
-							<form:select path="idEmpleado" class="form-control" required="true" id="idEmpleado-${usuario.idUsuario }">
-								<option value="" disabled selected>Selecione el empleado</option>
-								<c:forEach items="${empleados}" var="r">
-									<c:choose>
-										<c:when test="${usuario.empleado.idEmpleado == r.idEmpleado}">
-											<form:option value="${r.idEmpleado }"
-												label="${r.nombre} ${r.apellidos}" selected="true" />
-										</c:when>
-										<c:otherwise>
-											<form:option value="${r.idEmpleado }"
-												label="${r.nombre} ${r.apellidos}" />
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-							</form:select>
+						          <input name="empleado-${usuario.idUsuario}" type="text" id="autocomplete-input" class="autocomplete" required="required" value="${usuario.empleado.idEmpleado}-${usuario.empleado.nombre} ${usuario.empleado.apellidos}">
+						          <label for="autocomplete-input">Empleado que responsable de este usuario</label>
 						</div>
 					</div>
 
@@ -267,18 +238,28 @@
 		</form:form>
 	</div>
 </div>
+
 </c:forEach>
-
-
-
-
-
-
-
-			
 			
 	</div>
 </div>
 
+<script>
+
+$(document).ready(function() {
+	 
+	 $( "input.autocomplete ").autocomplete({
+		    data: ${objStringEmpleados},
+		    limit: 10, // The max amount of results that can be shown at once. Default: Infinity.
+		    onAutocomplete: function(val) {
+		      // Callback function when value is autcompleted.\
+		      
+		    },
+		    minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+		  });	
+});//fin function
+
+	
+</script>
 <!-- /.col-lg-12 -->
 

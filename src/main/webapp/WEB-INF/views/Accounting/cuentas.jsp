@@ -29,11 +29,11 @@
 			<thead>
 				<tr>
 					<th width="10%">Codigo</th>
-					<th width="70%">Nombre</th>
+					<th width="50%">Nombre</th>
 					
-					<th width="8%">Saldo Acreedor</th>
-					<th width="8%">Saldo Deudor</th>
-					<th width="4%">&nbsp;</th>
+					<th width="15%" align="right">Saldo Acreedor</th>
+					<th width="15%" align="right">Saldo Deudor</th>
+					<th width="10%">&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -65,7 +65,7 @@
 	</div>
 	<div class="modal-content">
 		<form:form method="post" modelAttribute="cuentaForm"
-			action="/sisconta/cuentasadd" id="registro" autocomplete="off">
+			action="/sisconta/cuentasadd" id="registro" autocomplete="off" accept-charset="UTF-8">
 
 			<div class="row">
 				<div class="input-field col s6">

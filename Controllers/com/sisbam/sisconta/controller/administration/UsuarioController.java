@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -50,10 +51,10 @@ public class UsuarioController {
 	 * */
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/usuarios", method = RequestMethod.GET)
-	public String index(Model model, HttpServletRequest request) {
+	public String index(Model model, HttpServletRequest request) throws ClassNotFoundException {
 		String retorno = "403";
-		
 		HttpSession session = request.getSession();
+		session = LlenarJSON(session);
 		ObtenerPermisosPorUrl facilitador = new ObtenerPermisosPorUrl();
 		session = facilitador.Obtener("/sisconta/usuarios", request, manage_entity,IDENTIFICADOR);
 		permisos = (Permisos) session.getAttribute("permisos-de-"+IDENTIFICADOR);
@@ -62,20 +63,20 @@ public class UsuarioController {
 		
 //****ASIGNAR LOS PERMISOS PARA LAS URL********
 			if(permisos.isR()) {
-			Usuario usuario = new Usuario();
-			model.addAttribute("usuarioForm", usuario);
-			model.addAttribute("usuario", null);
-			List<Usuario> usuarios = (List<Usuario>) this.manage_entity.getAll("Usuario");
-			List<Rol> roles = (List<Rol>) this.manage_entity.getAll("Rol");
-		//	List<Empresa> empresas = (List<Empresa>) this.manage_entity.getAll("Empresa");
-			List<Empleado> empleados = (List<Empleado>) this.manage_entity.getAll("Empleado");
-			// Agrega al modelo el atributo "usuarios", asi se conocera en la vista
-			// la lista usuarios creada y llenada en el controlador.
-			model.addAttribute("usuarios", usuarios);
-			model.addAttribute("roles", roles);
-			//model.addAttribute("empresas", empresas);
-			model.addAttribute("empleados", empleados);
-			retorno = path+"usuario";
+				Usuario usuario = new Usuario();
+				model.addAttribute("usuarioForm", usuario);
+				model.addAttribute("usuario", null);
+				List<Usuario> usuarios = (List<Usuario>) this.manage_entity.getAll("Usuario");
+				List<Rol> roles = (List<Rol>) this.manage_entity.getAll("Rol");
+			//	List<Empresa> empresas = (List<Empresa>) this.manage_entity.getAll("Empresa");
+				List<Empleado> empleados = (List<Empleado>) this.manage_entity.getAll("Empleado");
+				// Agrega al modelo el atributo "usuarios", asi se conocera en la vista
+				// la lista usuarios creada y llenada en el controlador.
+				model.addAttribute("usuarios", usuarios);
+				model.addAttribute("roles", roles);
+				//model.addAttribute("empresas", empresas);
+				model.addAttribute("empleados", empleados);
+				retorno = path+"usuario";
 			}
 			
 			return retorno;
@@ -109,19 +110,26 @@ public class UsuarioController {
 		if (permisos.isC() || permisos.isU()) {
 
 			Usuario usuario = usuarioRecibido;
+			
 
 			Rol rolSeleccionado = (Rol) this.manage_entity.getById(Rol.class.getName(), usuario.getIdRol());
 			//Empresa EmpresaSeleccionada = (Empresa) this.manage_entity.getById(Empresa.class.getName(),	usuario.getIdEmpresa());
-			Empleado empleado = (Empleado) this.manage_entity.getById(Empleado.class.getName(),
-					usuario.getIdEmpleado());
+			
 			usuario.setRol(rolSeleccionado);
 			//usuario.setEmpresa(EmpresaSeleccionada);
-			usuario.setEmpleado(empleado);
+			
 			String pass = usuario.getPassword();
 			usuario.setPassword(passwordEncoder.encode(pass));
+			
+			
+			
 			// guardar
 			if (usuario.getIdUsuario() == 0) {
-				try {
+				String empleadoId = request.getParameter("empleado-selec");
+				empleadoId=empleadoId.split("-")[0];
+				Empleado empleado = (Empleado) this.manage_entity.getById(Empleado.class.getName(), Integer.parseInt(empleadoId));
+				usuario.setEmpleado(empleado);
+						try {
 					if (request.getParameter("activo").equals("on")) {
 						usuario.setActivo(true);
 					} else {
@@ -136,6 +144,10 @@ public class UsuarioController {
 
 			// actualizar
 			else {
+				String empleadoId = request.getParameter("empleado-"+usuarioRecibido.getIdUsuario());
+				empleadoId=empleadoId.split("-")[0];
+				Empleado empleado = (Empleado) this.manage_entity.getById(Empleado.class.getName(), Integer.parseInt(empleadoId));
+				usuario.setEmpleado(empleado);
 				try {
 					if (request.getParameter("activo-" + usuario.getIdUsuario()).equals("on")) {
 						usuario.setActivo(true);
@@ -201,5 +213,32 @@ public class UsuarioController {
 		}
 		return "redirect:/usuarios";
 	}
+	
+	/**
+	 * 
+	 * Apartir de la sesion, llena la lista de cuentas hija
+	 * disponibles para que el usuario escoja una tecleando el codigo
+	 * 
+	 * @param session
+	 * @return
+	 * @throws ClassNotFoundException
+	 */
+	@SuppressWarnings("unchecked")
+	public HttpSession LlenarJSON(HttpSession session) throws ClassNotFoundException {
+		if(session.getAttribute("objStringEmpleados")==null) {
+			 System.out.println("//////////////////LLENANDO JSON DE EMPLEADOS////////////////////");
+			 List<Empleado> emps =(List<Empleado>) manage_entity.getAll(Empleado.class.getName());
+			 System.out.println("//////////////////LLENANDO JSON DE EMPLEADOS////////////////////");
+				
+			JSONObject obj = new JSONObject();
+			for(Empleado e :emps) {
+				obj.put(e.getIdEmpleado()+"-"+e.getNombre()+" "+e.getApellidos(),null );
+			}
+			session.setAttribute("objStringEmpleados",obj.toJSONString()); 
+		}
+		return session;
+	}
+	
+	
 
 }

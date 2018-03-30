@@ -1,4 +1,5 @@
 package com.sisbam.sisconta.controller.accounting;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +38,8 @@ public class CuentaContableController {
 	private Permisos permisos;//permisos del usuario en determinada vista
 	
 	private Boolean ERROR;
+	
+	private DecimalFormat df = new DecimalFormat("#.00"); 
 
 	
 //Metodo para leer de la base de datos responde con una lista de empresas a la URL:/empresas
@@ -66,7 +70,7 @@ public class CuentaContableController {
 	@RequestMapping(value = "/cuentasadd", method = RequestMethod.POST)
 	public String saveOrUpadateCuenta(@ModelAttribute("cuentaForm") CuentaContable cuentaRecibido,Model model,HttpServletRequest request) throws ClassNotFoundException{
 		String retorno = "403";
-
+		HttpSession session = request.getSession();
 		
 		if(permisos.isC())
 		{
@@ -78,8 +82,10 @@ public class CuentaContableController {
 					CuentaContable cuenta = cuentaConPadreCapturado;
 					if(cuenta.getIdCuentaContable()==0){
 						manage_entity.save(CuentaContable.class.getName(), cuenta);
+						session.removeAttribute("objString");
 					}else{
 						manage_entity.update(CuentaContable.class.getName(), cuenta);
+						session.removeAttribute("objString");
 					}
 					retorno="redirect:/cuentas";
 				}
@@ -148,38 +154,11 @@ public class CuentaContableController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 //	*******************************************
 //	METODS PARA FUNCIONAMIENTO
 //	*******************************************
 	
-	public Boolean validarCuenta(String codigo) {
+	public Boolean validarCuenta(String codigo) { 
 		try {
 			Long.parseLong(codigo);
 			

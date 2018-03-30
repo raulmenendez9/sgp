@@ -92,7 +92,7 @@ public class Usuario implements java.io.Serializable {
 	}
 	
 	
-	@OneToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_empleado")
 	public Empleado getEmpleado() {
 		return empleado;

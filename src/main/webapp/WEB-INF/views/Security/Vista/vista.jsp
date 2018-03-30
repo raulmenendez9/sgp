@@ -58,7 +58,7 @@
 	</div>
 	<div class="modal-content">
 		<form:form method="post" modelAttribute="vistaForm"
-			action="/sisconta/vistas/add" id="registro" autocomplete="off">
+			action="/sisconta/vistas/add" id="registro" autocomplete="off" accept-charset="UTF-8">
 
 			<div class="row">
 				<div class="input-field col s6">
@@ -125,7 +125,7 @@
 	</div>
 	<div class="modal-content">
 		<form:form method="post" modelAttribute="vistaForm"
-			action="/sisconta/vistas/add" id="registro" autocomplete="off">
+			action="/sisconta/vistas/add" id="registro" autocomplete="off" accept-charset="UTF-8">
 
 			<div class="row">
 				<div class="input-field col s6">

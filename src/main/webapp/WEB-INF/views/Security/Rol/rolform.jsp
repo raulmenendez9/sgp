@@ -9,7 +9,7 @@
 <div class="container">
 
 					<form method="post" action="/sisconta/rolesadd" class="form-horizontal"
-						id="rolForm" onsubmit="return validar();">
+						id="rolForm" onsubmit="return validar();" accept-charset="UTF-8">
 						<div class="container">
 
 						<input type="hidden" name="${_csrf.parameterName}"

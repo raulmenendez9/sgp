@@ -10,27 +10,14 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.sound.midi.SysexMessage;
-import javax.transaction.Transaction;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.jaxb.hbm.internal.ImplicitResultSetMappingDefinition;
-import org.hibernate.dialect.CUBRIDDialect;
-import org.hibernate.query.criteria.internal.predicate.IsEmptyPredicate;
 import org.json.simple.JSONObject;
-import org.mvel2.optimizers.impl.refl.nodes.ListAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.json.GsonBuilderUtils;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.ibm.icu.util.BytesTrie.Iterator;
 import com.sisbam.sisconta.controller.variety.ObtenerPermisosPorUrl;
 import com.sisbam.sisconta.dao.DaoImp;
 import com.sisbam.sisconta.entity.accounting.CuentaContable;
@@ -85,7 +72,6 @@ public class PartidaController{
 			return retorno;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/partidas/add", method = RequestMethod.GET)
 	public String addPartida(Model model, HttpServletRequest request) throws ClassNotFoundException  {
 		
@@ -118,7 +104,7 @@ public class PartidaController{
 		partidaRecibido.setSaldoDeudor((Double.parseDouble(df.format(Double.parseDouble(""+mapa.get("totalAcreedor"))))));
 		
 		manage_entity.save(Partida.class.getName(), partidaRecibido);
-		
+		RegistrarDiario(ListarCuentas(session));
 		session.removeAttribute("listaDeCuentasDiario");
 		
 		return "redirect:/partidas/add";
@@ -163,7 +149,6 @@ public class PartidaController{
 	//TRATAMIENTO DE LISTA DE CUENTAS
 	
 	
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/partidas/procesarCuentas", method = RequestMethod.POST)
 	public String procesarListaCuentas(Model model,HttpServletRequest request) throws ClassNotFoundException {
 		HttpSession session = request.getSession();
@@ -242,7 +227,6 @@ public class PartidaController{
 		return path+"listacuentas-form";
 	}
 	
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/partidas/mostrarCuentas", method = RequestMethod.GET)
 	public String mostrarListaCuentas(Model model,HttpServletRequest request) throws ClassNotFoundException {
 		HttpSession session = request.getSession();
@@ -263,7 +247,6 @@ public class PartidaController{
 	 * @return
 	 * @throws ClassNotFoundException
 	 */
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/partidas/eliminar", method = RequestMethod.POST)
 	public String eliminarCuentaEnListaCuentas(Model model,HttpServletRequest request) throws ClassNotFoundException {
 		HttpSession session = request.getSession();
@@ -302,7 +285,7 @@ public class PartidaController{
 			 List<Integer> ctas = (List<Integer>) manage_entity.executeNativeQuery(sql);
 			 List<CuentaContable> cuentasHijas = new ArrayList<CuentaContable>();
 			 JSONObject obj = new JSONObject();
-			 
+			 System.out.println("//////////////////LLENANDO JSON DE CUENTAS HIJAS////////////////////");
 			 for(Integer cc : ctas) 
 			 {
 				 CuentaContable c = (CuentaContable) manage_entity.getById(CuentaContable.class.getName(), cc);
@@ -312,6 +295,7 @@ public class PartidaController{
 				 }
 				 
 			 }
+			 System.out.println("/////////////////////////////////////////////////////////////////////");
 			session.setAttribute("objString",obj.toJSONString()); 
 		}
 	return session;
@@ -334,23 +318,20 @@ public class PartidaController{
 	public List<CuentaContable> ListarCuentas(HttpSession session){
 		List<CuentaContable> listaCuentas = null;
 		try {
-			
-	
-			if(session.getAttribute("listaDeCuentasDiario")==null) {
+			if(session.getAttribute("listaDeCuentasDiario")==null) 
+			{
 				listaCuentas=new ArrayList<CuentaContable>();
 			}
 			else
 			{
 				listaCuentas=(List<CuentaContable>)session.getAttribute("listaDeCuentasDiario");
 			}
-			
 			return listaCuentas;
 		}
 		catch(Exception e) {
 			System.err.println("ERROR ListarCuentas: "+e);
 			return listaCuentas;
 		}
-		
 	}
 	
 	
@@ -440,7 +421,8 @@ public class PartidaController{
 	 * @param cuenta
 	 * @return listaCuentas
 	 */
-	public List<CuentaContable> EliminarElemento(List<CuentaContable> listaCuentas,CuentaContable cuenta){
+	public List<CuentaContable> EliminarElemento(List<CuentaContable> listaCuentas,CuentaContable cuenta)
+	{
 		int i=0;
 		int x=0;
 		
@@ -473,7 +455,6 @@ public class PartidaController{
 		
 			for(CuentaContable cx : listaCuentas) {
 				if(cx.getCodigo().trim().equals(cuenta.getCodigo().trim())) {
-					System.err.println("LA CUENTA :"+cx.getCodigo()+"ES IGUAL A "+cuenta.getCodigo());
 					return true;
 				}
 			}
@@ -496,7 +477,7 @@ public class PartidaController{
 	List<CuentaContable> cuentasHijas = new ArrayList<CuentaContable>();
 	 if(session.getAttribute("listacuentashijas")==null)
 	 {
-		 System.out.println("============LLENANDO CUENTAS HIJAS PARA LA SESION ACTUAL ===============");
+		System.out.println("============LLENANDO CUENTAS HIJAS PARA LA SESION ACTUAL ===============");
 					 String sql = " select id_cuentacontable from cuentacontable " + 
 							 " EXCEPT" + 
 							 " select id_cuentapadre from cuentacontable where id_cuentapadre>0";
@@ -510,7 +491,7 @@ public class PartidaController{
 						 }
 					 }
 					 session.setAttribute("listacuentashijas", cuentasHijas);
-					 System.out.println("============FIN LLENADO DE HIJASL ==============="); 
+		System.out.println("============FIN LLENADO DE HIJASL ==============="); 
 	 }
 	 else {
 		 cuentasHijas = (List<CuentaContable>) session.getAttribute("listacuentashijas");
@@ -537,21 +518,61 @@ public class PartidaController{
 	}
 	
 	
-	public String validarCuentas(List<CuentaContable> listaCuentas) {
-		
-		String result ="";
-		
-		for(CuentaContable cc: listaCuentas) {
-			
+	
+	
+	public void RegistrarDiario(List<CuentaContable> listaCuentas) {
+		for(CuentaContable cc:listaCuentas) {
+			CuentaContable cx = new CuentaContable();
+			try {
+					//actualiza el saldo de la cuenta que se toco
+					cx=(CuentaContable) manage_entity.getById(CuentaContable.class.getName(), cc.getIdCuentaContable());
+						
+						
+						Double SALDO_ACREEDOR_SUMARIZADOR = cc.getSaldoAcreedor();
+						Double SALDO_DEUDOR_SUMARIZADOR = cc.getSaldoDeudor();
+						
+						
+						cc.setSaldoAcreedor(cc.getSaldoAcreedor()+cx.getSaldoAcreedor());
+						cc.setSaldoDeudor(cc.getSaldoDeudor()+cx.getSaldoDeudor());
+						manage_entity.update(CuentaContable.class.getName(), cc);
+					
+					CuentaContable padre = cc.getCuentaPadre();	
+					padre.setSaldoAcreedor(padre.getSaldoAcreedor()+SALDO_ACREEDOR_SUMARIZADOR);
+					padre.setSaldoDeudor(padre.getSaldoDeudor()+SALDO_DEUDOR_SUMARIZADOR);
+					manage_entity.update(CuentaContable.class.getName(), padre);
+					
+					boolean bandera = true;
+					while(bandera) {
+							CuentaContable hija = padre;
+							CuentaContable papa = padre.getCuentaPadre();
+							if(papa.getCuentaPadre()==null) {
+								System.err.println("SE ACABO DE RECORRER LOS PADRES, EL ULTIMO PADRE FUE: "+papa.getCodigo()+"-"+papa.getNombre());
+								papa.setSaldoAcreedor(papa.getSaldoAcreedor()+SALDO_ACREEDOR_SUMARIZADOR);
+								papa.setSaldoDeudor(papa.getSaldoDeudor()+SALDO_DEUDOR_SUMARIZADOR);
+								manage_entity.update(CuentaContable.class.getName(), papa);
+								bandera=false;
+							}
+							else {
+								System.err.println("la hija: "+hija.getCodigo()+"-"+hija.getNombre()+" LE PASA SALDO A SU PADRE: "+papa.getCodigo()+"-"+papa.getNombre());
+								papa.setSaldoAcreedor(papa.getSaldoAcreedor()+SALDO_ACREEDOR_SUMARIZADOR);
+								papa.setSaldoDeudor(papa.getSaldoDeudor()+SALDO_DEUDOR_SUMARIZADOR);
+								manage_entity.update(CuentaContable.class.getName(), papa);
+								
+								//el ultimo papa que hubo
+								padre=papa;
+							}
+					}
+
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
-		
-		
-		
-		
-		return result;
-		
-		
 	}
+	
+	
+	
+	
+	
 	
 	
 	public static void main(String[] args) {
