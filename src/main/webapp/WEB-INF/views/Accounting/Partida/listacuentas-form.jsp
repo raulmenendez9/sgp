@@ -23,7 +23,7 @@
 <body>
 
 <div class="card-panel hoverable"  style="position: fixed; width: 100%; padding-top: 0px;">
-<form:form action="/sisconta/partidas/procesarCuentas" method="post"  autocomplete="off" accept-charset="UTF-8">
+<form:form action="/sgp/partidas/procesarCuentas" method="post"  autocomplete="off" accept-charset="UTF-8">
 		<div class="row">
 		    <div class="col s12">
 		      <div class="row">
@@ -74,7 +74,7 @@
             <td width="10%" align="right">${lc.saldoAcreedor}</td>
             <td width="10%" align="right">${lc.saldoDeudor}</td>
             <td width="10%">
-            <form:form action="/sisconta/partidas/eliminar" method="post">
+            <form:form action="/sgp/partidas/eliminar" method="post">
             	<input type="text" style="display:none" value="${lc.codigo}" name="cuenta-contable"/>
             	<button type="submit"><i class="fa fa-trash" aria-hidden="true"></i></button>
             </form:form>

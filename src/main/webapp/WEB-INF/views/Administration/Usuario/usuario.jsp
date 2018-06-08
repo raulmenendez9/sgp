@@ -43,7 +43,7 @@
 												<a class="modal-trigger" href="#-${usuario.idUsuario}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 										</c:if>
 										<c:if test="${deleteusuariosx67}">		
-												<a class="" href="/sisconta/usuarios/delete/${usuario.idUsuario}" data-toggle="modal" data-target="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
+												<a class="" href="/sgp/usuarios/delete/${usuario.idUsuario}" data-toggle="modal" data-target="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
 										</c:if>						
 									</td>
 							</tr>
@@ -64,7 +64,7 @@
 	</div>
 	<div class="modal-content">
 		<form:form method="post" modelAttribute="usuarioForm"
-			action="/sisconta/usuariosadd" id="registro" autocomplete="off" accept-charset="UTF-8">
+			action="/sgp/usuariosadd" id="registro" autocomplete="off" accept-charset="UTF-8">
 
 			<div class="row">
 				<div class="input-field col s6">
@@ -156,7 +156,7 @@
 	</div>
 	<div class="modal-content">
 		<form:form method="post" modelAttribute="usuarioForm"
-			action="/sisconta/usuariosadd" id="registro" autocomplete="off">
+			action="/sgp/usuariosadd" id="registro" autocomplete="off">
 
 			<div class="row">
 				<div class="input-field col s6">

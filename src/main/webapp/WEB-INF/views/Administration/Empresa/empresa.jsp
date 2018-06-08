@@ -47,7 +47,7 @@
 									<a class=" modal-trigger" href="#-${empresa.idEmpresa }"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${deleteempresasx23}">		
-									<a class="" href="/sisconta/empresas/delete/${empresa.idEmpresa }" data-toggle="modal"data-target="#" ><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a class="" href="/sgp/empresas/delete/${empresa.idEmpresa }" data-toggle="modal"data-target="#" ><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>						
 						</td>
 					</tr>
@@ -66,7 +66,7 @@
 	</div>
 	<div class="modal-content">
 		<form:form method="post" modelAttribute="empresaForm"
-			action="/sisconta/empresas/add" id="registro" autocomplete="off" accept-charset="UTF-8">
+			action="/sgp/empresas/add" id="registro" autocomplete="off" accept-charset="UTF-8">
 
 			<div class="row">
 				<div class="input-field col s6">
@@ -123,7 +123,7 @@
 		</div>
 		<div class="modal-content">
 			<form:form method="post" modelAttribute="empresaForm"
-				action="/sisconta/empresas/add" autocomplete="off" accept-charset="UTF-8">
+				action="/sgp/empresas/add" autocomplete="off" accept-charset="UTF-8">
 
 				<div class="row">
 					<div class="input-field col s6">

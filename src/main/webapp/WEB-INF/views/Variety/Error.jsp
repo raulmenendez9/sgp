@@ -5,5 +5,5 @@
 	<h1>OOPS.... ALGO SALIO MAL....</h1>
 	<p>${error}</p>
 	<br>
-	<h1><a href="/sisconta" class="waves-effect waves-light btn red">Volver a la pantalla de inicio...</a></h1>
+	<h1><a href="/sgp" class="waves-effect waves-light btn red">Volver a la pantalla de inicio...</a></h1>
 </div>

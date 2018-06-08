@@ -48,7 +48,7 @@
 	$("#formulario_eliminar").submit(function(event){
 		event.preventDefault();
 		var id_eliminar = $('#hdn_id_eliminar').val();
-		window.location.href = "/sisconta/roles/delete/" + id_eliminar;
+		window.location.href = "/sgp/roles/delete/" + id_eliminar;
 	});
 
 	

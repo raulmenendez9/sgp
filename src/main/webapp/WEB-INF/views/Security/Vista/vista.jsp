@@ -41,7 +41,7 @@
 									<a class="modal-trigger" href="#-${vista.idVista }"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${deletevistasx23}">		
-									<a class="" href="/sisconta/vistas/delete/${vista.idVista }" data-toggle="modal"data-target="#""><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a class="" href="/sgp/vistas/delete/${vista.idVista }" data-toggle="modal"data-target="#""><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>	
 						</center>						
 						</td>
@@ -58,7 +58,7 @@
 	</div>
 	<div class="modal-content">
 		<form:form method="post" modelAttribute="vistaForm"
-			action="/sisconta/vistas/add" id="registro" autocomplete="off" accept-charset="UTF-8">
+			action="/sgp/vistas/add" id="registro" autocomplete="off" accept-charset="UTF-8">
 
 			<div class="row">
 				<div class="input-field col s6">
@@ -125,7 +125,7 @@
 	</div>
 	<div class="modal-content">
 		<form:form method="post" modelAttribute="vistaForm"
-			action="/sisconta/vistas/add" id="registro" autocomplete="off" accept-charset="UTF-8">
+			action="/sgp/vistas/add" id="registro" autocomplete="off" accept-charset="UTF-8">
 
 			<div class="row">
 				<div class="input-field col s6">

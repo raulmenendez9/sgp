@@ -82,7 +82,7 @@ body{
  <nav>
     <div class="nav-wrapper">
       <a href="#" data-activates="mobile-demo" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
-      <a href="/sisconta" class="brand-logo" ><tiles:getAsString name="titulo" /></a>
+      <a href="/sgp" class="brand-logo" ><tiles:getAsString name="titulo" /></a>
       <a class="modal-trigger posicion" href="#modal1"><i class="material-icons">exposure</i></a>
       
       

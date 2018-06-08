@@ -34,7 +34,7 @@
 						class="icon-bar"></span>
 				</button>
 			<div class="col-sm-12">
-			<a class="navbar-brand" href="/sisconta">Sistema Contable</a>
+			<a class="navbar-brand" href="/sgp">Sistema Gestor de Proyectos</a>
 			</div>
 			</div>
 			<!-- /.navbar-header -->
@@ -76,7 +76,7 @@
 						<h1 class="text-center">Agregar Menu</h1>
 						<hr>
 						<form:form method="post" modelAttribute="menuForm"
-							action="/sisconta/menus/add" class="form-horizontal"
+							action="/sgp/menus/add" class="form-horizontal"
 							onsubmit="return validar();">
 
 
@@ -101,7 +101,7 @@
 							</div>
 							<div class="text-center">
 							<div class="form-group">
-							<a href="/sisconta/vistas/add" class="btn btn-primary">+Añadir Vista</a>
+							<a href="/sgp/vistas/add" class="btn btn-primary">+Añadir Vista</a>
 							</div>
 							</div>
 							

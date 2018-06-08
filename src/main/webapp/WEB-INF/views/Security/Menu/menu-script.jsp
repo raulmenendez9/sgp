@@ -42,7 +42,7 @@
 	  $("#formulario_eliminar").submit(function(event){
 	event.preventDefault();
 	var id_eliminar = $('#hdn_id_eliminar').val();
-	window.location.href = "/sisconta/menus/delete/" + id_eliminar;
+	window.location.href = "/sgp/menus/delete/" + id_eliminar;
 });
 	
 </script>

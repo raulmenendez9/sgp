@@ -19,7 +19,7 @@
 		<a class="waves-effect waves-light btn-floating modal-trigger green" href="#agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
 </c:if>
 <c:if test="${readcuentaContablex12}">
-		<a class="waves-effect waves-light btn-floating modal-trigger red darken-3" href="/sisconta/reporteCuentasContables" target="blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>PDF</a>
+		<a class="waves-effect waves-light btn-floating modal-trigger red darken-3" href="/sgp/reporteCuentasContables" target="blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>PDF</a>
 		<a class="waves-effect waves-light btn-floating modal-trigger green darken-3" href="#"><i class="fa fa-file-excel-o" aria-hidden="true"></i> EXCEL</a>
 </c:if>
 <hr>
@@ -46,7 +46,7 @@
 						<td>$ ${cuenta.saldoDeudor }</td>
 						<td>
 							<c:if test="${deletecuentaContablex12}">		
-									<a class="" href="/sisconta/cuentas/delete/${cuenta.idCuentaContable }" data-toggle="modal"data-target="#" ><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a class="" href="/sgp/cuentas/delete/${cuenta.idCuentaContable }" data-toggle="modal"data-target="#" ><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>						
 						</td>
 					</tr>
@@ -65,7 +65,7 @@
 	</div>
 	<div class="modal-content">
 		<form:form method="post" modelAttribute="cuentaForm"
-			action="/sisconta/cuentasadd" id="registro" autocomplete="off" accept-charset="UTF-8">
+			action="/sgp/cuentasadd" id="registro" autocomplete="off" accept-charset="UTF-8">
 
 			<div class="row">
 				<div class="input-field col s6">

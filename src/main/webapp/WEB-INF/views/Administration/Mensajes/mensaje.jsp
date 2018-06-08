@@ -48,7 +48,7 @@
 									<a class=" modal-trigger" href="#-${mensaje.idMensaje }"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${delete}">		
-									<a class="" href="/sisconta/mensajes/delete/${mensaje.idMensaje }" data-toggle="modal"data-target="#" ><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a class="" href="/sgp/mensajes/delete/${mensaje.idMensaje }" data-toggle="modal"data-target="#" ><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>						
 						</td>
 					</tr>
@@ -65,7 +65,7 @@
 	</div>
 	<div class="modal-content">
 		<form:form method="post" modelAttribute="mensajeForm"
-			action="/sisconta/mensajes/add" id="registro" autocomplete="off">
+			action="/sgp/mensajes/add" id="registro" autocomplete="off">
 <!--  
 			<div class="row">
 				<div class="input-field col s6">
@@ -141,7 +141,7 @@
 		</div>
 		<div class="modal-content">
 			<form:form method="post" modelAttribute="mensajeForm"
-				action="/sisconta/mensajes/add" autocomplete="off">
+				action="/sgp/mensajes/add" autocomplete="off">
 
 	<!--  			<div class="row">
 					<div class="input-field col s6">

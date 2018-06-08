@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:if test="${readrolesx23}">
 <div id="contenido" class="card-panel hoverable">
-<a class="waves-effect waves-light btn-floating modal-trigger green" href="/sisconta/rolesadd"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
+<a class="waves-effect waves-light btn-floating modal-trigger green" href="/sgp/rolesadd"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
 <hr>
 <div class="container">
 
@@ -23,8 +23,8 @@
 						<td>${rol.nombre }</td>
 						<td>${rol.descripcion }</td>
 						<td width="5%">
-						<a class="" href="/sisconta/rolesupdate/${rol.idRol }"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
-						<a class="" href="/sisconta/rolesdelete/${rol.idRol }" ><i class="fa fa-trash" aria-hidden="true"></i></a>							
+						<a class="" href="/sgp/rolesupdate/${rol.idRol }"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
+						<a class="" href="/sgp/rolesdelete/${rol.idRol }" ><i class="fa fa-trash" aria-hidden="true"></i></a>							
 						</td>
 					</tr>
 				</c:forEach>

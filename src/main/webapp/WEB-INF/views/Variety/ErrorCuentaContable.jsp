@@ -5,5 +5,5 @@
 	<h1>OOPS.... ALGO SALIO MAL....</h1>
 	<p>El campo codigo de cuenta deben ser solo numeros</p>
 	<br>
-	<h1><a href="/sisconta/cuentas" class="waves-effect waves-light btn red">Volver a catalogo de cuentas...</a></h1>
+	<h1><a href="/sgp/cuentas" class="waves-effect waves-light btn red">Volver a catalogo de cuentas...</a></h1>
 </div>

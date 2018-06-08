@@ -6,7 +6,7 @@
 
 <div id="contenido" class="card-panel hoverable">
 <c:if test="${createpartidasx23}" >
-				<a class="waves-effect waves-light btn-floating modal-trigger green" href="/sisconta/partidas/add"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
+				<a class="waves-effect waves-light btn-floating modal-trigger green" href="/sgp/partidas/add"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
 			</c:if>
 			<hr>
 			<br>
@@ -33,7 +33,7 @@
 								<td>${p.saldoDeudor }</td>
 								<td>
 							<c:if test="${deletepartidasx23}">		
-									<a class="" href="/sisconta/partidas/delete/${p.idPartida}" data-toggle="modal"data-target="#""><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a class="" href="/sgp/partidas/delete/${p.idPartida}" data-toggle="modal"data-target="#""><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>
 							</td>	
 							</tr>

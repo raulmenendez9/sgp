@@ -19,7 +19,7 @@
 		<i class="fa ${menu.icono } fa-fw circle" style="color: white"></i>&nbsp;  
 		<span class="title">${menu.nombre} :</span>
 		<c:if test="${updatemenux23}" >	
-			<a class=" right btn-floating btn-large waves-effect waves-light" href="/sisconta/menus/delete/${menu.id }" data-toggle="modal" data-target="#"><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp; &nbsp;
+			<a class=" right btn-floating btn-large waves-effect waves-light" href="/sgp/menus/delete/${menu.id }" data-toggle="modal" data-target="#"><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp; &nbsp;
 			</c:if>	
 		<c:if test="${deletemenux23}">	
 			<a class="modal-trigger right btn-floating btn-large waves-effect waves-light" href="#-${menu.id }"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
@@ -50,7 +50,7 @@
 		<div class="modal-header"></div>
 		<div class="modal-content">
 			<form:form method="post" modelAttribute="menuForm"
-				action="/sisconta/menus/add" id="registro" autocomplete="off" accept-charset="UTF-8">
+				action="/sgp/menus/add" id="registro" autocomplete="off" accept-charset="UTF-8">
 
 				<div class="row">
 					<div class="input-field col s6">
@@ -92,7 +92,7 @@
 		<div class="modal-header"></div>
 		<div class="modal-content">
 			<form:form method="post" modelAttribute="menuForm"
-				action="/sisconta/menus/add" id="registro" autocomplete="off" accept-charset="UTF-8">
+				action="/sgp/menus/add" id="registro" autocomplete="off" accept-charset="UTF-8">
 
 				<div class="row">
 					<div class="input-field col s6">

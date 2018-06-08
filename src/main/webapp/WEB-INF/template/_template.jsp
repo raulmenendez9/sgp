@@ -58,7 +58,7 @@
 					class="icon-bar"></span>
 			</button>
 			<div class="col-sm-12">
-			<a class="navbar-brand" href="/sisconta"><i class="fa fa-usd" aria-hidden="true"></i> SISTEMA CONTABLE <i class="fa fa-usd" aria-hidden="true"></i></a>
+			<a class="navbar-brand" href="/sgp"><i class="fa fa-usd" aria-hidden="true"></i> SISTEMA GESTOR DE PROYECTOS <i class="fa fa-usd" aria-hidden="true"></i></a>
 			</div>
 			
 		</div>

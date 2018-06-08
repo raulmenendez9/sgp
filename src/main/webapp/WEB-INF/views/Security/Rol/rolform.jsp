@@ -8,7 +8,7 @@
 <div id="contenido" class="card-panel hoverable">
 <div class="container">
 
-					<form method="post" action="/sisconta/rolesadd" class="form-horizontal"
+					<form method="post" action="/sgp/rolesadd" class="form-horizontal"
 						id="rolForm" onsubmit="return validar();" accept-charset="UTF-8">
 						<div class="container">
 
@@ -513,7 +513,7 @@
 						<button type="submit" class="btn btn-primary">
 							<i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
 						</button>
-						<a href="/sisconta/roles" class="btn btn-default" data-dismiss="modal">
+						<a href="/sgp/roles" class="btn btn-default" data-dismiss="modal">
 						<i class="fa fa-reply" aria-hidden="true"></i>	 Cancelar
 						</a>
 					</div>

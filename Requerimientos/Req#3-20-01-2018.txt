@@ -1,5 +1,5 @@
 Mensajeria entre usuarios
-Vas a hacer una clase llamada “Mensajes” en la carpeta com.sisbam.sisconta.entity.administration con estos atributos:
+Vas a hacer una clase llamada “Mensajes” en la carpeta com.sisbam.sgp.entity.administration con estos atributos:
 -	Id 			(int)		not null
 -	usuarioRedactor		(Usuario)	not null
 -	usuarioDestino		(Usuario)	not null

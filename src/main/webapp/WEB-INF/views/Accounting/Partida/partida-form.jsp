@@ -22,7 +22,7 @@
 
 <div id="contenido" class="card-panel white">
 	<form:form method="post" modelAttribute="partidaForm"
-			action="/sisconta/partidasadd" id="registro" autocomplete="off" accept-charset="UTF-8">
+			action="/sgp/partidasadd" id="registro" autocomplete="off" accept-charset="UTF-8">
 				
 				<div class="row">
 				 	<div class="col s6">
@@ -78,7 +78,7 @@
 					  
 					  <div class="col s6">
 								<div class="embed-container">
-								<iframe src="/sisconta/partidas/mostrarCuentas" width="auto" height="900px" frameborder="0">
+								<iframe src="/sgp/partidas/mostrarCuentas" width="auto" height="900px" frameborder="0">
 								</iframe>
 								</div>
 						</div>
@@ -96,7 +96,7 @@
 											class=" btn green waves-light white-text">
 											<i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </form:button>
 					
-										<a href="/sisconta/partidas" class=" btn red waves-effect waves-light white-text"><i class="fa fa-arrow-left" aria-hidden="true"></i> Regresar</a>
+										<a href="/sgp/partidas" class=" btn red waves-effect waves-light white-text"><i class="fa fa-arrow-left" aria-hidden="true"></i> Regresar</a>
 									</div>	
 								</div>
 							</div>

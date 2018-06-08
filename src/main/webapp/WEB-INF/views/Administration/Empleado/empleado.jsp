@@ -36,7 +36,7 @@
 									<a class="modal-trigger" href="#-${empleado.idEmpleado}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${deleteempleadox02}">		
-									<a class="" href="/sisconta/empleados/delete/${empleado.idEmpleado}" data-toggle="modal"data-target="#""><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a class="" href="/sgp/empleados/delete/${empleado.idEmpleado}" data-toggle="modal"data-target="#""><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>						
 						</td>
 						</tr>
@@ -56,7 +56,7 @@
 	<div class="modal-header"></div>
 	<div class="modal-content">
 		<form:form method="post" modelAttribute="empleadoForm"
-			action="/sisconta/empleados/add" id="registro" autocomplete="off" accept-charset="UTF-8">
+			action="/sgp/empleados/add" id="registro" autocomplete="off" accept-charset="UTF-8">
 
 			<div class="row">
 				<div class="input-field col s6">
@@ -120,7 +120,7 @@
 	<div class="modal-header"></div>
 	<div class="modal-content">
 		<form:form method="post" modelAttribute="empleadoForm"
-			action="/sisconta/empleados/add" id="registro" autocomplete="off" accept-charset="UTF-8">
+			action="/sgp/empleados/add" id="registro" autocomplete="off" accept-charset="UTF-8">
 
 			<div class="row">
 				<div class="input-field col s6">
