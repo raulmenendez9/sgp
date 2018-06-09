@@ -1,6 +1,10 @@
 package com.sisbam.sgp.controller.administration;
 
 import java.security.Principal;
+
+import java.math.BigDecimal;
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,10 +17,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.sisbam.sgp.controller.variety.ReportesController;
+import com.sisbam.sgp.dao.Dao;
 import com.sisbam.sgp.dao.DaoImp;
+import com.sisbam.sgp.entity.accounting.CuentaContable;
 import com.sisbam.sgp.entity.administration.Usuario;
+import com.sisbam.sgp.entity.security.Menu;
+import com.sisbam.sgp.entity.security.Permisos;
 import com.sisbam.sgp.entity.security.Rol;
+import com.sisbam.sgp.entity.security.Vista;
+
 import freemarker.core.ParseException;
+
 
 @Controller
 public class HomeController {
@@ -31,10 +43,10 @@ public class HomeController {
 		HttpSession session = request.getSession();
 
 //		*************Cargar el usuario y el Rol actual***************
-		
+		Principal user = request.getUserPrincipal();
 		if(session.getAttribute("rol_usuarioactual")==null||session.getAttribute("usuarioactual")==null) {
 			System.out.println("=======CARGANDO MENU LATERAL Y VARIABLES DE SESION=======");
-			Principal user = request.getUserPrincipal();
+			
 			Usuario usuario = (Usuario) manage_entity.getByName(Usuario.class.getName(),"username", user.getName());
 			Rol rol = (Rol) manage_entity.getByName(Rol.class.getName(), "idRol", usuario.getRol().getIdRol().toString());
 			session.setAttribute("rol_usuarioactual", rol);
@@ -51,14 +63,14 @@ public class HomeController {
 		
 		//**************cargar el menu lateral*******************
 		
-//		List<Vista> vistas = (List<Vista>) manage_entity.getAll(Vista.class.getName());
-//		List<Menu> menus = (List<Menu>) manage_entity.getMenusByUser(user); 
+		List<Vista> vistas = (List<Vista>) manage_entity.getAll(Vista.class.getName());
+		List<Menu> menus = (List<Menu>) manage_entity.getMenusByUser(user); 
 		
 		
 		
 		
-//		session.setAttribute("vistas_all", vistas);
-//		session.setAttribute("menus_all", menus);
+		session.setAttribute("vistas_all", vistas);
+	session.setAttribute("menus_all", menus);
 		
 		
 		//********************************************************
