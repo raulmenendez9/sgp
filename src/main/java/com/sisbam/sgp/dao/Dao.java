@@ -3,7 +3,6 @@ package com.sisbam.sgp.dao;
 import java.security.Principal;
 import java.util.List;
 
-import com.sisbam.sgp.entity.accounting.Partida;
 import com.sisbam.sgp.entity.security.Menu;
 import com.sisbam.sgp.entity.security.Permisos;
 import com.sisbam.sgp.entity.security.Rol;
@@ -78,7 +77,7 @@ public interface Dao {
     
     
     //PARTIDAS DE DIARIO
-	void saveOrUpdatePartida(Partida partida);
+	
 
 
 	void EscribirBitacora(String accion, String tabla, String usuario);

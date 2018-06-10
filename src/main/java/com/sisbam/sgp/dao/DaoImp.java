@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.sisbam.sgp.entity.accounting.Partida;
+
 import com.sisbam.sgp.entity.administration.Usuario;
 import com.sisbam.sgp.entity.security.Bitacora;
 import com.sisbam.sgp.entity.security.Menu;
@@ -571,22 +571,6 @@ public class DaoImp implements Dao{
 	}
 
 
-	@Override
-	public void saveOrUpdatePartida(Partida partida) {
-		
-		Date hoy = new Date();
-		partida.setFecha(hoy);
-		
-		try {
-			  save(Partida.class.getName(),partida);
-					
-			
-		} catch (Exception e) {
-			System.err.println("ERROR GUARDANDO PARTIDA Y SUS CUENTAS: "+e);
-		}
-		
-		
-	}
 
 
 

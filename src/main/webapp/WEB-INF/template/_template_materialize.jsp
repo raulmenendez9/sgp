@@ -23,7 +23,7 @@
 <head>
 <style type="text/css">
 body{
-	background-image: url(<c:url value="/resources/img/background.jpg" />); 
+	background-image: url(<c:url value="/resources/img/fondo.jpg" />); 
 }
 .loader {
     position: fixed;
@@ -41,6 +41,17 @@ body{
 	float:right;
 	margin-right: 10px;
 }
+
+.navegar
+{	
+	color: blue;
+}
+
+.posi
+{	
+	background-color: rgba(0,0,255,0.5);
+}
+
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="utf-8">
@@ -85,13 +96,13 @@ body{
       <a href="/sgp" class="brand-logo" ><tiles:getAsString name="titulo" /></a>
       <a class="modal-trigger posicion" href="#modal1"><i class="material-icons">exposure</i></a>
       
+      <!-- class="side-nav grey darken-2" -->
       
-      
-      <ul class="side-nav grey darken-2" id="mobile-demo">
-        <li class="sidenav-header grey darken-2">
+      <ul class="side-nav posi" id="mobile-demo">
+        <li class="sidenav-header grey">
           <div class="row">
             <div class="col s3">
-                <img src="https://78.media.tumblr.com/39d03bb413c70e6f50641561f64030cf/tumblr_otu2u7Vxd61u8xhwoo2_250.png" width="48px" height="48px" alt="" class="circle responsive-img valign profile-image">
+                <img src="http://www.quimicayfarmacia.ues.edu.sv/sites/default/files/g4339_9.png" width="48px" height="48px" alt="" class="circle responsive-img valign profile-image">
             </div>
             <div class="col s9">
                 <a class="btn-flat dropdown-button waves-effect waves-light white-text" href="#" data-activates="menu-usuario">${usuarioactual.username}<i class="mdi-navigation-arrow-drop-down right"></i></a>

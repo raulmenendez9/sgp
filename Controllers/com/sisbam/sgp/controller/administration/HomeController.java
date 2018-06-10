@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.sisbam.sgp.controller.variety.ReportesController;
 import com.sisbam.sgp.dao.Dao;
 import com.sisbam.sgp.dao.DaoImp;
-import com.sisbam.sgp.entity.accounting.CuentaContable;
 import com.sisbam.sgp.entity.administration.Usuario;
 import com.sisbam.sgp.entity.security.Menu;
 import com.sisbam.sgp.entity.security.Permisos;
