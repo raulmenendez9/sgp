@@ -31,7 +31,7 @@ public class RolController {
 	private static final String IDENTIFICADOR = "rolesx23";
 	
 	private Permisos permisos;
-	
+	//lgi
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/roles", method = RequestMethod.GET)
 	public String index(Model model, HttpServletRequest request) {
