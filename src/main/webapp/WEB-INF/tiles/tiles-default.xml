@@ -89,6 +89,11 @@
     	<put-attribute name="titulo" value="Usuarios" />
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Usuario/usuario.jsp"/>
 	</definition>
+	<definition name="Administration/Proyecto/tipoProyecto"
+		extends="materializeTemplate">
+		<put-attribute name="titulo" value="Tipo de Proyectos"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/views/Administration/Proyecto/tipoProyecto.jsp"></put-attribute>
+	</definition>
 	<definition name="Administration/Empresa/empresa" extends="materializeTemplate">
     	<put-attribute name="titulo" value="Empresas" />
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Empresa/empresa.jsp"/>
