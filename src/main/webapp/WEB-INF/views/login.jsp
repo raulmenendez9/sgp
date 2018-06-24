@@ -93,7 +93,7 @@
 <!--       <img class="responsive-img" style="width: 250px;" src="https://i.imgur.com/ax0NCsK.gif" /> -->
       <div class="section"></div>
 	  <h5 class="indigo-text white-text">-SISTEMA GESTOR DE PROYECTOS-</h5>
-      <h5 class="indigo-text white-text">Inicia secion con tu cuenta</h5>
+      <h5 class="indigo-text white-text">Inicia sesión con tu cuenta</h5>
       <h6 class="indigo-text white-text">si no tienes una, solicita una al administrador</h6>
       <div class="section"></div>
 
