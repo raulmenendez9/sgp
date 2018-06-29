@@ -65,6 +65,8 @@
 		<put-attribute name="titulo" value="Roles" />
 		<put-attribute name="content" value="/WEB-INF/views/Security/Rol/rolform.jsp" />
 	</definition>
+
+
 	
 	
 	<definition name="Security/Menu/menu" extends="materializeTemplateForm">
@@ -89,6 +91,11 @@
     	<put-attribute name="titulo" value="Usuarios" />
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Usuario/usuario.jsp"/>
 	</definition>
+	<definition name="Administration/Solicitud/solicitud" extends="materializeTemplateForm">
+    	<put-attribute name="titulo" value="Solicitudes" />
+		<put-attribute name="content" value="/WEB-INF/views/Administration/Solicitud/solicitud.jsp"/>
+	</definition>
+	
 	<definition name="Administration/Proyecto/tipoProyecto"
 		extends="materializeTemplate">
 		<put-attribute name="titulo" value="Tipo de Proyectos"></put-attribute>
