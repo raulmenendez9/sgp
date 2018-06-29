@@ -156,6 +156,7 @@ public class RolController {
 				String read = request.getParameter("read-" + vista.getIdVista());
 				String update = request.getParameter("update-" + vista.getIdVista());
 				String delete = request.getParameter("delete-" + vista.getIdVista());
+			
 				
 				System.out.println("Create:"+create+" Read:"+read+"Update:"+update+" Delete:"+delete+"\n");
 				
@@ -181,7 +182,7 @@ public class RolController {
 					manage_entity.save(Permisos.class.getName(), permisos);
 				}
 
-				
+			
 			}
 			
 			
@@ -204,7 +205,7 @@ public class RolController {
 
 			manage_entity.update(Rol.class.getName(), rol);
 
-			List<Vista> vistastodas = (List<Vista>) manage_entity.getAll("Vista");
+			List<Vista> vistastodas = (List<Vista>) manage_entity.getAll("vistas_all");
 			boolean permiEncontrado=true;
 				for(Vista vista: vistastodas) {
 					Permisos permisos = manage_entity.getPermisosByVistaAndRol(vista, rol);
@@ -301,7 +302,7 @@ public class RolController {
 		String username = request.getUserPrincipal().getName();
 		
 		Rol rol1 = (Rol) manage_entity.getById(Rol.class.getName(), Integer.parseInt(rolId));
-		
+		Rol rol = new Rol();
 		List<Integer> idsMenu = (List<Integer>) manage_entity.executeNativeQuery("select MENUSET_ID_MENU from menuset where ROLSET_ID_ROL = "+Integer.parseInt(rolId));
 		List<Menu> menusdelrol = new ArrayList<Menu>();
 		Menu menu = new Menu();
@@ -310,8 +311,8 @@ public class RolController {
 			menu.setActivo(true);
 			menusdelrol.add(menu);
 		}
-		
-		List<Vista> vistas = (List<Vista>) manage_entity.getAll(Vista.class.getName());
+
+		List<Vista> vistas = (List<Vista>) manage_entity.getAll("vistas");
 		List<Permisos> permisos = (List<Permisos>) manage_entity.getAll(Permisos.class.getName());
 		
 		String msg_menurolvacio ="";
