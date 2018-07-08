@@ -4,7 +4,7 @@
 	margin: 0px;
 	padding: 0px;
 	box-sizing: border-box;
-	font-family: 'Gloria Hallelujah', cursive;
+	
 	font-size:22px;
 }
 li{

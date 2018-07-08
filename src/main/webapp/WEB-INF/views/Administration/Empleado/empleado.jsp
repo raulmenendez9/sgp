@@ -74,7 +74,7 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<form:select path="idEmpresa" class="form-control" required="true">
-						<option value="" disabled selected>Selecione una empresa</option>
+						<option value="" disabled selected>Selecione una departamento</option>
 						<c:forEach items="${empresas}" var="p">
 							<c:choose>
 								<c:when test="${empleado.empresa.idEmpresa == p.idEmpresa}">
@@ -138,7 +138,7 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<form:select path="idEmpresa" class="form-control" required="true">
-						<option value="" disabled selected>Selecione una empresa</option>
+						<option value="" disabled selected>Selecione un departamento</option>
 						<c:forEach items="${empresas}" var="p">
 							<c:choose>
 								<c:when test="${empleado.empresa.idEmpresa == p.idEmpresa}">

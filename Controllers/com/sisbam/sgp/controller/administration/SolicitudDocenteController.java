@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,26 +12,26 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.sisbam.sgp.controller.variety.ObtenerPermisosPorUrl;
 import com.sisbam.sgp.dao.DaoImp;
-import com.sisbam.sgp.entity.administration.Empleado;
 import com.sisbam.sgp.entity.administration.Solicitud;
 import com.sisbam.sgp.entity.administration.Usuario;
 import com.sisbam.sgp.entity.security.Permisos;
-import com.sisbam.sgp.entity.security.Rol;
 
 @Controller
-public class SolicitudController {
+public class SolicitudDocenteController {
+
 	@Autowired
 	private DaoImp manage_entity;
 	
-	private String path = "Administration/Solicitud/";
-	private static final String IDENTIFICADOR = "tipoS";
+	private String path = "Administration/SolicitudA/";
+	private static final String IDENTIFICADOR = "tipoSo";
 	
 	private Permisos permisos;
 
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/solicitudes", method = RequestMethod.GET)
+	@RequestMapping(value = "/solicitudesapro", method = RequestMethod.GET)
 	
 	//INDEX
 	public String index(Model model, HttpServletRequest request) {
@@ -39,7 +40,7 @@ public class SolicitudController {
 		
 		HttpSession session = request.getSession();
 		ObtenerPermisosPorUrl facilitador = new ObtenerPermisosPorUrl();
-		session = facilitador.Obtener("/sgp/solicitudes", request, manage_entity,IDENTIFICADOR);
+		session = facilitador.Obtener("/sgp/solicitudesapro", request, manage_entity,IDENTIFICADOR);
 		permisos = (Permisos) session.getAttribute("permisos-de-"+IDENTIFICADOR);
 			
 		
@@ -53,13 +54,13 @@ public class SolicitudController {
 				List<Usuario> usuarios = (List<Usuario>) this.manage_entity.getAll("Usuario");
 				model.addAttribute("solicitudes", solicitudes);
 				model.addAttribute("usuarios", usuarios);
-			retorno = path+"solicitud";
+			retorno = path+"solicitudapro";
 		}
 		return retorno;
 	}
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/solicitudes/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/solicitudesapro/add", method = RequestMethod.GET)
 	public String addUsuario(Model model, HttpServletRequest request)  {
 		
 		
@@ -72,7 +73,7 @@ public class SolicitudController {
 			model.addAttribute("solicitud", null);
 			model.addAttribute("usuarios", usuarios);
 			
-			retorno = path+"solicitud-form";
+			retorno = path+"solicitudapro-form";
 		}
 		return retorno;
 		
@@ -80,7 +81,7 @@ public class SolicitudController {
 	
 	
 	//GUARDAR
-		@RequestMapping(value = "/solicitudes/add", method = RequestMethod.POST)
+		@RequestMapping(value = "/solicitudesapro/add", method = RequestMethod.POST)
 		public String saveOrUpadateSolicitud(@ModelAttribute("solicitudForm") Solicitud solicitudRecibido,Model model) throws ClassNotFoundException {
 			String retorno = "403";
 			if(permisos.isC())
@@ -93,13 +94,13 @@ public class SolicitudController {
 					}else{
 						manage_entity.update(Solicitud.class.getName(), solicitud);
 					}
-					retorno="redirect:/solicitudes";
+					retorno="redirect:/solicitudesapro";
 			}
 			return retorno;
 		}
 		
 		//ACTUALIZAR
-		@RequestMapping(value = "/solicitudes/update/{id}", method = RequestMethod.GET)
+		@RequestMapping(value = "/solicitudesapro/update/{id}", method = RequestMethod.GET)
 		public String update(@PathVariable("id") String codSolicitud, Model model, HttpServletRequest request) throws ClassNotFoundException {
 			String retorno="403";
 			if(permisos.isU()) 
@@ -111,14 +112,14 @@ public class SolicitudController {
 				
 				List<Usuario> usuarios = (List<Usuario>) this.manage_entity.getAll("Usuario");
 				model.addAttribute("usuarios", usuarios);
-				retorno=path+"solicitud-form";
+				retorno=path+"solicitudapro-form";
 			}
 			
 			return retorno;
 		}
 		
 		//ELIMINAR
-		@RequestMapping(value = "/solicitudes/delete/{id}", method = RequestMethod.GET)
+		@RequestMapping(value = "/solicitudesapro/delete/{id}", method = RequestMethod.GET)
 		public String delete(@PathVariable("id") String codSolicitud, Model model) throws ClassNotFoundException {
 			String retorno="403";
 			if(permisos.isD()) {
@@ -128,10 +129,10 @@ public class SolicitudController {
 			
 			Solicitud solicitudForm = new Solicitud();
 			model.addAttribute("SolicitudForm", solicitudForm);
-			retorno="redirect:/solicitudes";
+			retorno="redirect:/solicitudesapro";
 			}
 			return retorno;
 		}
 
-		
+
 }

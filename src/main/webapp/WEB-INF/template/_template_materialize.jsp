@@ -66,7 +66,7 @@ body{
 
 <!-- Definición de Apache Tiles para el titulo de la página -->
 <title><tiles:getAsString name="titulo" /></title>
-<link rel="icon" href="<c:url value="/resources/img/one.ico" />" />
+<link rel="icon" href="<c:url value="/resources/img/probeta.png" />" />
 
 <tiles:insertAttribute name="cabecera" />
 
@@ -94,7 +94,7 @@ body{
     <div class="nav-wrapper">
       <a href="#" data-activates="mobile-demo" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
       <a href="/sgp" class="brand-logo" ><tiles:getAsString name="titulo" /></a>
-      <a class="modal-trigger posicion" href="#modal1"><i class="material-icons">exposure</i></a>
+      <a class="modal-trigger posicion" href="#modal1"></a>
       
       <!-- class="side-nav grey darken-2" -->
       

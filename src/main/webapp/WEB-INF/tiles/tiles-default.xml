@@ -92,8 +92,12 @@
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Usuario/usuario.jsp"/>
 	</definition>
 	<definition name="Administration/Solicitud/solicitud" extends="materializeTemplateForm">
-    	<put-attribute name="titulo" value="Solicitudes" />
+    	<put-attribute name="titulo" value="Revision Solicitudes" />
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Solicitud/solicitud.jsp"/>
+	</definition>
+	<definition name="Administration/SolicitudA/solicitudapro" extends="materializeTemplateForm">
+    	<put-attribute name="titulo" value="Solicitudes Docente" />
+		<put-attribute name="content" value="/WEB-INF/views/Administration/SolicitudA/solicitudapro.jsp"/>
 	</definition>
 	
 	<definition name="Administration/Proyecto/tipoProyecto"
@@ -105,7 +109,7 @@
 		<put-attribute name="titulo" value="Registros de Especificación de Proyecto"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Proyecto/especificacionProyecto.jsp"></put-attribute></definition>
 	<definition name="Administration/Empresa/empresa" extends="materializeTemplate">
-    	<put-attribute name="titulo" value="Empresas" />
+    	<put-attribute name="titulo" value="Departamentos" />
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Empresa/empresa.jsp"/>
 	</definition>
 	

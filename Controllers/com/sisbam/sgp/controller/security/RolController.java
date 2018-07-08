@@ -3,6 +3,7 @@ package com.sisbam.sgp.controller.security;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -31,7 +32,7 @@ public class RolController {
 	private static final String IDENTIFICADOR = "rolesx23";
 	
 	private Permisos permisos;
-	//lgi
+	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/roles", method = RequestMethod.GET)
 	public String index(Model model, HttpServletRequest request) {
@@ -73,7 +74,7 @@ public class RolController {
 			model.addAttribute("rol1", null);
 			List<Vista> vistas = (List<Vista>) manage_entity.getAll("Vista");
 			List<Permisos> permisos = (List<Permisos>) manage_entity.getAll(Permisos.class.getName());
-			model.addAttribute("menusdeagregacion", manage_entity.getAll(Menu.class.getName()));
+			model.addAttribute("menusdeagregacion", (List<Menu>) manage_entity.getAll(Menu.class.getName()));
 			model.addAttribute("vistas", vistas);
 			model.addAttribute("permisos", permisos);
 			model.addAttribute("estoyguardando",true);
@@ -156,7 +157,6 @@ public class RolController {
 				String read = request.getParameter("read-" + vista.getIdVista());
 				String update = request.getParameter("update-" + vista.getIdVista());
 				String delete = request.getParameter("delete-" + vista.getIdVista());
-			
 				
 				System.out.println("Create:"+create+" Read:"+read+"Update:"+update+" Delete:"+delete+"\n");
 				
@@ -182,7 +182,7 @@ public class RolController {
 					manage_entity.save(Permisos.class.getName(), permisos);
 				}
 
-			
+				
 			}
 			
 			
@@ -205,7 +205,7 @@ public class RolController {
 
 			manage_entity.update(Rol.class.getName(), rol);
 
-			List<Vista> vistastodas = (List<Vista>) manage_entity.getAll("vistas_all");
+			List<Vista> vistastodas = (List<Vista>) manage_entity.getAll("Vista");
 			boolean permiEncontrado=true;
 				for(Vista vista: vistastodas) {
 					Permisos permisos = manage_entity.getPermisosByVistaAndRol(vista, rol);
@@ -302,7 +302,7 @@ public class RolController {
 		String username = request.getUserPrincipal().getName();
 		
 		Rol rol1 = (Rol) manage_entity.getById(Rol.class.getName(), Integer.parseInt(rolId));
-		Rol rol = new Rol();
+		
 		List<Integer> idsMenu = (List<Integer>) manage_entity.executeNativeQuery("select MENUSET_ID_MENU from menuset where ROLSET_ID_ROL = "+Integer.parseInt(rolId));
 		List<Menu> menusdelrol = new ArrayList<Menu>();
 		Menu menu = new Menu();
@@ -311,8 +311,8 @@ public class RolController {
 			menu.setActivo(true);
 			menusdelrol.add(menu);
 		}
-
-		List<Vista> vistas = (List<Vista>) manage_entity.getAll("vistas");
+		
+		List<Vista> vistas = (List<Vista>) manage_entity.getAll(Vista.class.getName());
 		List<Permisos> permisos = (List<Permisos>) manage_entity.getAll(Permisos.class.getName());
 		
 		String msg_menurolvacio ="";
@@ -330,7 +330,7 @@ public class RolController {
 		String msglistadisp = "LISTA DE MENUS DISPONIBLES";
 		String msglistaactuales = "LISTA DE MENUS ACTUALES";
 		
-		model.addAttribute("menusDisponibles",manage_entity.getMenusByRol(rol1));
+		model.addAttribute("menusDisponibles",(List<Menu>) manage_entity.getMenusByRol(rol1));
 		model.addAttribute("menusdeagregacion",menusdeagregacion);
 		model.addAttribute("msj_listaDeDisponibles",msglistadisp);
 		model.addAttribute("msj_listaActuales",msglistaactuales);
@@ -360,7 +360,7 @@ public class RolController {
 		
 					for(Vista vistita : vistas) {
 						try {	
-						permi = manage_entity.getPermisosByVistaAndRol(vistita, rol);
+						permi = (Permisos) manage_entity.getPermisosByVistaAndRol(vistita, rol);
 						if(permi.getRol().getIdRol()==rol.getIdRol()) {
 //							System.err.println("TRATANDO DE BORRAR PERMISOS-> "+rol.getIdRol()+"-> "+vistita.getNombre());
 							manage_entity.delete(Permisos.class.getName(), permi);

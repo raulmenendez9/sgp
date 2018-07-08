@@ -21,7 +21,7 @@ public class Solicitud implements java.io.Serializable {
 	private int codSolicitud;
 	private String titulo;
 //	private Proyecto codProyecto;
-	private boolean estado;
+	private boolean estado=false;
 	private String justificacion;
 	private String objeto;
 	@Transient
