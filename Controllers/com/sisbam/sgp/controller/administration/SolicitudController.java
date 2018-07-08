@@ -49,7 +49,14 @@ public class SolicitudController {
 			Solicitud solicitud = new Solicitud();
 			model.addAttribute("solicitudForm", solicitud);
 			model.addAttribute("solicitud", null);
-				List<Solicitud> solicitudes = (List<Solicitud>) this.manage_entity.getAll("Solicitud");
+			
+			
+			
+				//List<Solicitud> solicitudes = (List<Solicitud>) this.manage_entity.getAll("Solicitud");
+			
+			//String sql = "select codsoliciutud,estado,justificacion,objetivo,titulo,idusuario from Solicitud";
+			List<Solicitud> solicitudes = (List<Solicitud>) this.manage_entity.getListByName("Solicitud", "estado", "false");
+			
 				List<Usuario> usuarios = (List<Usuario>) this.manage_entity.getAll("Usuario");
 				model.addAttribute("solicitudes", solicitudes);
 				model.addAttribute("usuarios", usuarios);
