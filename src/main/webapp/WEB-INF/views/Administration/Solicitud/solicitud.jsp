@@ -21,6 +21,7 @@
 						<th>Titulo</th>
 						<th>Estado</th>
 						<th>Usuario</th>
+						<th>Fecha</th>
 						<th>Justificacion</th>
 						<th>Objeto</th>
 						<th>Opcion</th>
@@ -32,6 +33,7 @@
 							<td>${solicitud.titulo }</td>
 							 <td>${solicitud.estado }</td>
 							<td>${solicitud.usuario.username }</td>
+							<td>${solicitud.fecha }</td>
 							<td>${solicitud.justificacion }</td>
 							<td>${solicitud.objeto }</td>
 							<td width="5%">
@@ -92,6 +94,12 @@
 					</form:select>
 				</div>
 			</div>
+			<div class="date">
+				<div class="input-field col s6">
+					<form:input path="fecha" class="form-control" placeholder="fecha"
+						type="date" id="fecha" value="${solicitud.fecha }" />
+				</div>
+			</div>
 
 			<div class="row">
 				<div class="input-field col s12">
@@ -106,6 +114,7 @@
 						type="text" id="objeto" value="${solicitud.objeto }" />
 				</div>
 			</div>
+			
 			<form:hidden path="codSolicitud" value="${solicitud.idSolicitud}" />
 
 			<div class="center">
@@ -162,6 +171,13 @@
 					</form:select>
 				</div>
 			</div>
+			<div class="date">
+				<div class="input-field col s6">
+					<form:input path="fecha" class="form-control" placeholder="fecha"
+						type="date" id="fecha" value="${solicitud.fecha }" />
+				</div>
+			</div>
+			
 
 			<div class="row">
 				<div class="input-field col s12">
@@ -175,7 +191,7 @@
 						type="text" id="objeto" value="${solicitud.objeto }" />
 				</div>
 			</div>
-
+			
 			<form:hidden path="codSolicitud" value="${solicitud.codSolicitud}" />
 
 			<div class="center">

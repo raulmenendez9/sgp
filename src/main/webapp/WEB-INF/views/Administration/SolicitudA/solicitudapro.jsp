@@ -21,6 +21,7 @@
 						<th>Titulo</th>
 						<th>Estado</th>
 						<th>Usuario</th>
+						<th>Fecha</th>
 						<th>Justificacion</th>
 						<th>Objeto</th>
 						<th>Opcion</th>
@@ -32,6 +33,7 @@
 							<td>${solicitud.titulo }</td>
 							 <td>${solicitud.estado }</td>
 							<td>${solicitud.usuario.username }</td>
+							<td>${solicitud.fecha }</td>
 							<td>${solicitud.justificacion }</td>
 							<td>${solicitud.objeto }</td>
 							<td width="5%">
@@ -86,6 +88,12 @@
 							</c:choose>
 						</c:forEach>
 					</form:select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<form:input path="fecha" class="form-control" placeholder="Fecha"
+						type="date" id="fecha" value="${solicitud.fecha }" />
 				</div>
 			</div>
 
@@ -151,6 +159,12 @@
 							</c:choose>
 						</c:forEach>
 					</form:select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<form:input path="fecha" class="form-control" placeholder="Fecha"
+						type="date" id="fecha" value="${solicitud.fecha }" />
 				</div>
 			</div>
 

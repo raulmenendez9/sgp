@@ -1,5 +1,10 @@
 package com.sisbam.sgp.entity.administration;
 
+
+
+
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,7 +15,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name = "solicitud", catalog = "sgp")
@@ -22,15 +32,20 @@ public class Solicitud implements java.io.Serializable {
 	private String titulo;
 //	private Proyecto codProyecto;
 	private boolean estado=false;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(iso = ISO.DATE)
+	private Date fecha;
 	private String justificacion;
 	private String objeto;
+
+	
 	@Transient
 	private Usuario usuario;
 	
 	
 	public Solicitud() {}
 	
-	public Solicitud(int codSolicitud, String titulo,Usuario usuario, boolean estado, String justificacion,String objeto) {
+	public Solicitud(int codSolicitud, String titulo,Usuario usuario, boolean estado, String justificacion,String objeto,Date fecha) {
 		this.codSolicitud = codSolicitud;
 		this.titulo= titulo;
 		this.usuario = usuario;
@@ -38,6 +53,7 @@ public class Solicitud implements java.io.Serializable {
 		this.estado = estado;
 		this.justificacion = justificacion;
 		this.objeto = objeto;
+		this.fecha = fecha;
 	}
 	
 	@Transient
@@ -110,6 +126,17 @@ public class Solicitud implements java.io.Serializable {
 		this.estado = estado;
 	}
 	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(iso = ISO.DATE)
+	@Column(name = "fecha", nullable = false, length = 256)
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+	
 	@Column(name = "justificacion", nullable = false, length = 256)
 	public String getJustificacion() {
 		return justificacion;
@@ -132,7 +159,8 @@ public class Solicitud implements java.io.Serializable {
 	public void setTitulo(String titulo) {
 		this.titulo= titulo;
 	}
+	
+
 	}
 	
 	
-
