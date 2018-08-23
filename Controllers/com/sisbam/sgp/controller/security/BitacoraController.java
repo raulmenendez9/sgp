@@ -1,5 +1,6 @@
 package com.sisbam.sgp.controller.security;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -45,8 +46,13 @@ public class BitacoraController {
 
 		if(permisos.isR()) {
 			model.addAttribute("bitacora", null);
-			List<Bitacora> bitacoras= (List<Bitacora>) this.manage_entity.getAll(Bitacora.class.getName());
-			model.addAttribute("bitacoras", bitacoras);
+			
+			//List<Bitacora> bitacoras= (List<Bitacora>) this.manage_entity.getAll(Bitacora.class.getName());
+			List<String> consulta = new ArrayList<String>();
+			String query ="select * from bitacora order by id_bitacora desc limit 200";
+			consulta = (List<String>) manage_entity.executeNativeQuery(query);
+			
+			model.addAttribute("bitacoras", consulta);
 			retorno = path+"bitacora";
 		}
 		return retorno;

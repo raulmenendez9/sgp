@@ -5,9 +5,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <div id="contenido" class="card-panel hoverable">
+<!-- 
 <c:if test="${createtipoS}">	
 		<a class="waves-effect waves-light btn-floating modal-trigger green" href="#agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
-</c:if>	
+</c:if>
+-->	
 <c:if test="${readtipoS}">		
 		<a class="waves-effect waves-light btn-floating modal-trigger red darken-3" href="#"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>PDF</a>
 		<a class="waves-effect waves-light btn-floating modal-trigger green darken-3" href="#"><i class="fa fa-file-excel-o" aria-hidden="true"></i> EXCEL</a>
@@ -143,13 +145,16 @@
 			<div class="row">
 				<div class="input-field col s6">
 					<form:input path="titulo" class="form-control" placeholder="Titulo"
-						type="text" id="titulo" value="${solicitud.titulo}" />
+						type="text" id="titulo" value="${solicitud.titulo}" readonly="true"/>
 
 				</div>
 				<div class="input-field col s6">
-					<form:input path="estado" class="form-control"
-						placeholder="Estado" type="text" id="estado"
-						value="${solicitud.estado }" />
+					<form:select path="estado" class="form-control" placeholder="${solicitud.estado }" id="estado">
+					<option value=" " disabled selected>Seleccionar</option>
+					<option value="${solicitud.estado=true}">Aprobado</option>
+					<option value="${solicitud.estado=false}">Rechazado</option>
+					</form:select>
+			
 				</div>
 			</div>
 
@@ -174,7 +179,7 @@
 			<div class="date">
 				<div class="input-field col s6">
 					<form:input path="fecha" class="form-control" placeholder="fecha"
-						type="date" id="fecha" value="${solicitud.fecha }" />
+						type="date" id="fecha" value="${solicitud.fecha }" readonly="true"/>
 				</div>
 			</div>
 			
@@ -182,13 +187,13 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<form:input path="justificacion" class="form-control" placeholder="Justificacion"
-						type="text" id="justificacion" value="${solicitud.justificacion }" />
+						type="text" id="justificacion" value="${solicitud.justificacion }" readonly="true" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
 					<form:input path="objeto" class="form-control" placeholder="Objeto"
-						type="text" id="objeto" value="${solicitud.objeto }" />
+						type="text" id="objeto" value="${solicitud.objeto }" readonly="true"/>
 				</div>
 			</div>
 			

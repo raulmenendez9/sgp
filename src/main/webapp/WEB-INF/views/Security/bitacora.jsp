@@ -20,10 +20,10 @@
 				<tbody>
 					<c:forEach items="${bitacoras}" var="bitacora">
 						<tr style="color:#0B0B61;">
-							<td>${bitacora.fecha }</td>
-							<td>${bitacora.username }</td>
-							<td>${bitacora.accion }</td>
-							<td>${bitacora.tabla }</td>
+							<td>${bitacora[2] }</td>
+							<td>${bitacora[5] }</td>
+							<td>${bitacora[1] }</td>
+							<td>${bitacora[4] }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
