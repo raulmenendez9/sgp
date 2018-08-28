@@ -49,7 +49,7 @@ public class BitacoraController {
 			
 			//List<Bitacora> bitacoras= (List<Bitacora>) this.manage_entity.getAll(Bitacora.class.getName());
 			List<String> consulta = new ArrayList<String>();
-			String query ="select * from bitacora order by id_bitacora desc limit 200";
+			String query ="select id_bitacora, accion,to_char(fecha, 'DD/MM/YYYY' ), linea, tabla, username  from bitacora order by id_bitacora desc limit 200 ";
 			consulta = (List<String>) manage_entity.executeNativeQuery(query);
 			
 			model.addAttribute("bitacoras", consulta);

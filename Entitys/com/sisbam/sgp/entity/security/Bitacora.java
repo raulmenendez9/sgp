@@ -9,17 +9,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "bitacora")
+
 public class Bitacora {
 	private int 	idBitacora;
-	private Date 	fecha;
+
 	private String 	accion;
 	private String 	username;
 	private String 	tabla;
 	private String  linea;
-	
+	 private Date fecha;
 	
 
 	public Bitacora(int idBitacora, Date fecha, String accion, String username, String tabla) {

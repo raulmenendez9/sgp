@@ -32,6 +32,7 @@ public class DaoImp implements Dao{
 	@Autowired
 	SessionFactory sessionFactory;
 	
+	
 	@Override
 	public void EscribirBitacora(String accion,String tabla,String usuario) {
 		
@@ -42,7 +43,7 @@ public class DaoImp implements Dao{
 			
 			Bitacora bitacora = new Bitacora();
 			Date hoy = new Date();
-			SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
 			String fechahora = formater.format(hoy);
 			bitacora.setAccion(accion);
 			
