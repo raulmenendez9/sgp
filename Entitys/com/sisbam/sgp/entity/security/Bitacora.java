@@ -16,7 +16,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class Bitacora {
 	private int 	idBitacora;
-
 	private String 	accion;
 	private String 	username;
 	private String 	tabla;
