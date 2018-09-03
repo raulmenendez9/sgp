@@ -1,6 +1,7 @@
 package com.sisbam.sgp.entity.administration;
 
 
+import javax.management.Query;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,7 +24,7 @@ import org.hibernate.type.DateType;
 public class Proyecto implements java.io.Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private String codProyecto;
+	private Integer codProyecto;
 	private Solicitud solicitud;
 	private TipoProyecto tipoProyecto;
 	private String ambitoImpacto;
@@ -36,23 +37,27 @@ public class Proyecto implements java.io.Serializable{
 	private String planteamiento;
 	private String antecedentes;
 	private String metodologia;
-	private FormularioProyecto formularioProyecto;
-	private EstadoProyecto estado;
+	private Usuario usuario;
 	
+	private boolean estado=true;
+	private FormularioProyecto formularioProyecto;
+
+	private Integer duracion;
 	
 	
 	public Proyecto() {
 		
 	}
 	
-	public Proyecto(String codProyecto, Solicitud solicitud, TipoProyecto tipoProyecto, String ambitoImpacto,
+	public Proyecto(Integer codProyecto, Solicitud solicitud, TipoProyecto tipoProyecto, Usuario usuario, String ambitoImpacto,
 			DateType fechaInicio, DateType fechaFin, String tipoFinanciamiento, Float montoAprobado,
 			String patrocinadores, String resumen, String planteamiento, String antecedentes, String metodologia,
-			FormularioProyecto formularioProyecto, EstadoProyecto estado) {
+			FormularioProyecto formularioProyecto, boolean estado, Integer duracion) {
 		
 		this.codProyecto = codProyecto;
 		this.solicitud = solicitud;
 		this.tipoProyecto = tipoProyecto;
+		this.usuario=usuario;
 		this.ambitoImpacto = ambitoImpacto;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
@@ -65,6 +70,7 @@ public class Proyecto implements java.io.Serializable{
 		this.metodologia = metodologia;
 		this.formularioProyecto = formularioProyecto;
 		this.estado = estado;
+		this.duracion=duracion;
 		
 	}
 
@@ -92,6 +98,20 @@ public class Proyecto implements java.io.Serializable{
 		this.idTipoProyecto = idTipoProyecto;
 	}
 	
+	
+
+	@Transient
+	private int idUsuario;
+	@Transient
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+	@Transient
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+	
+	
 
 	@Transient
 	private int idFormulario;
@@ -105,17 +125,8 @@ public class Proyecto implements java.io.Serializable{
 	}
 	
 
-	@Transient
-	private int idEstado;
-	@Transient
-	public int getIdEstadoProyecto() {
-		return idEstado;
-	}
-	@Transient
-	public void setIdEstadoProyecto(int idEstado) {
-		this.idEstado = idEstado;
-	}
 	
+
 	
 	
 
@@ -123,11 +134,11 @@ public class Proyecto implements java.io.Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "proyecto_codProyecto")
 	@SequenceGenerator(name = "proyecto_codProyecto", sequenceName = "proyecto_codProyecto", allocationSize = 1)
 	@Column(name = "codProyecto", unique = true, nullable = false)
-	public String getCodProyecto() {
+	public Integer getCodProyecto() {
 		return codProyecto;
 	}
 
-	public void setCodProyecto(String codProyecto) {
+	public void setCodProyecto(Integer codProyecto) {
 		this.codProyecto = codProyecto;
 	}
 	
@@ -143,7 +154,7 @@ public class Proyecto implements java.io.Serializable{
 	}
 	
 
-	
+  
 	
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idTipoProyecto")
@@ -253,6 +264,16 @@ public class Proyecto implements java.io.Serializable{
 	}
 	
 	
+	@Column(name = "duracion", nullable = false)
+	public Integer getDuracion() {
+		return duracion;
+	}
+
+	public void setDuracion(Integer duracion) {
+		this.duracion = duracion;
+	}
+	
+	
 	
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idFormulario")
@@ -265,16 +286,30 @@ public class Proyecto implements java.io.Serializable{
 	}
 	
 	
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idUsuario")
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+    public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	
-    @OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idEstado")
-	public EstadoProyecto getEstadoProyecto() {
+    
+    
+	
+	@Column(name = "estado", nullable = false)
+	public boolean getEstadoProyecto() {
 		return estado;
 	}
 
-    public void setEstadoProyecto(EstadoProyecto estado) {
+    public void setEstadoProyecto(boolean estado) {
 		this.estado = estado;
 	}
+    
+    
+   
 	
 	
 }
