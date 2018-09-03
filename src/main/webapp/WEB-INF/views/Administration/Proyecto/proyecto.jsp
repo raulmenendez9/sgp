@@ -204,7 +204,7 @@
 
 			<div class="row">
 				<div class="input-field col s12">
-					<form:input path="montoAprobado" class="form-control" placeholder="MontoAprobado"
+					<form:input path="montoAprobado" class="form-control" placeholder="MontoAprobado."
 						type="number" id="montoAprobado" value="${proyecto.montoAprobado }" required="required"/>
 				</div>
 			</div>
