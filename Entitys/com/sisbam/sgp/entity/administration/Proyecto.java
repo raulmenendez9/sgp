@@ -40,7 +40,7 @@ public class Proyecto implements java.io.Serializable{
 	private Usuario usuario;
 	
 	private boolean estado=true;
-	private FormularioProyecto formularioProyecto;
+	//private FormularioProyecto formularioProyecto;
 
 	private Integer duracion;
 	
@@ -52,7 +52,7 @@ public class Proyecto implements java.io.Serializable{
 	public Proyecto(Integer codProyecto, Solicitud solicitud, TipoProyecto tipoProyecto, Usuario usuario, String ambitoImpacto,
 			DateType fechaInicio, DateType fechaFin, String tipoFinanciamiento, Float montoAprobado,
 			String patrocinadores, String resumen, String planteamiento, String antecedentes, String metodologia,
-			FormularioProyecto formularioProyecto, boolean estado, Integer duracion) {
+			/*FormularioProyecto formularioProyecto,*/ boolean estado, Integer duracion) {
 		
 		this.codProyecto = codProyecto;
 		this.solicitud = solicitud;
@@ -68,7 +68,7 @@ public class Proyecto implements java.io.Serializable{
 		this.planteamiento = planteamiento;
 		this.antecedentes = antecedentes;
 		this.metodologia = metodologia;
-		this.formularioProyecto = formularioProyecto;
+		//this.formularioProyecto = formularioProyecto;
 		this.estado = estado;
 		this.duracion=duracion;
 		
@@ -113,7 +113,7 @@ public class Proyecto implements java.io.Serializable{
 	
 	
 
-	@Transient
+	/*@Transient
 	private int idFormulario;
 	@Transient
 	public int getIdFormularioProyecto() {
@@ -122,7 +122,7 @@ public class Proyecto implements java.io.Serializable{
 	@Transient
 	public void setIdFormularioProyecto(int idFormulario) {
 		this.idFormulario = idFormulario;
-	}
+	}*/
 	
 
 	
@@ -275,7 +275,7 @@ public class Proyecto implements java.io.Serializable{
 	
 	
 	
-	@OneToOne(fetch = FetchType.EAGER)
+	/*@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idFormulario")
 	public FormularioProyecto getTipoFormularioProyecto() {
 		return formularioProyecto;
@@ -283,7 +283,7 @@ public class Proyecto implements java.io.Serializable{
 
     public void setTipoFormularioProyecto(FormularioProyecto formularioProyecto) {
 		this.formularioProyecto = formularioProyecto;
-	}
+	}*/
 	
 	
 	@OneToOne(fetch = FetchType.EAGER)

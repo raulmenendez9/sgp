@@ -66,7 +66,7 @@
 			 <h5 style="text-align: center; "> Datos Generales</h5>
 				<div class="input-field col s12">
 					<form:select path="solicitud" id="form-proyecto" class="form-control" required="true"  >
-						<option value="" disabled selected>Selecione un titulo</option>
+						<option value="" disabled selected>Seleccione un titulo</option>
 						<c:forEach items="${solicitudes}" var="p">
 							<c:choose>
 								<c:when test="${proyecto.solictud.codSolicitud == p.codSolicitud}">
@@ -201,11 +201,24 @@
 				</div>
 				</div>
 				
+				<form:select path="tipoFinanciamiento" id="tipofinanciamiento" class="form-control" value="${proyecto.tipoFinanciamiento }" required="true">
+				<option value="" disabled selected>Elige un tipo de financiamiento</option>
+				<option value="donacion">Donacion</option>
+				<option value="aporte">Aporte</option>
+				
+						
+				</form:select>
 
 			<div class="row">
 				<div class="input-field col s12">
 					<form:input path="montoAprobado" class="form-control" placeholder="MontoAprobado."
 						type="number" id="montoAprobado" value="${proyecto.montoAprobado }" required="required"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<form:textarea path="patrocinadores" class="form-control" placeholder="Patrocinadores"
+					rows="8" cols="80"	id="patrocinadores" value="${proyecto.patrocinadores }" required="required"  style="font-size:15px;"/>
 				</div>
 			</div>
 			
@@ -245,6 +258,15 @@
 					rows="8" cols="80"	id="metodologia" value="${proyecto.metodologia }" required="required"  style="font-size:15px;"/>
 				</div>
 			</div>
+			
+			<div class="row">
+				<div class="input-field col s12">
+					<form:textarea path="ambitoImpacto" class="form-control" placeholder="Beneficiarios del proyecto"
+					rows="8" cols="80"	id="ambitoImpacto" value="${proyecto.ambitoImpacto }" required="required"  style="font-size:15px;"/>
+				</div>
+			</div>
+			
+			
 					
 					
 				</div>
@@ -285,7 +307,7 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<form:select path="solicitud" id="form-proyecto" class="form-control" required="true"  >
-						<option value="" disabled selected>Selecione un titulo</option>
+						<option value="" disabled selected>Seleccione un titulo</option>
 						<c:forEach items="${solicitudes}" var="p">
 							<c:choose>
 								<c:when test="${proyecto.solictud.codSolicitud == p.codSolicitud}">
@@ -301,7 +323,7 @@
 					</form:select>
 					
 					<form:select path="solicitud" id="form-proyecto" class="form-control" required="true"  >
-						<option value="" disabled selected>Selecione un estado</option>
+						<option value="" disabled selected>Seleccione un estado</option>
 						<c:forEach items="${solicitudes}" var="p">
 							<c:choose>
 								<c:when test="${proyecto.solictud.codSolicitud == p.codSolicitud}">
@@ -323,7 +345,7 @@
 					
 					
 					<form:select path="solicitud" id="form-proyecto" class="form-control" required="true"  >
-						<option value="" disabled selected>Selecione una justificacion</option>
+						<option value="" disabled selected>Seleccione una justificacion</option>
 						<c:forEach items="${solicitudes}" var="p">
 							<c:choose>
 								<c:when test="${proyecto.solictud.codSolicitud == p.codSolicitud}">
@@ -341,7 +363,7 @@
 					
 					
 					<form:select path="tipoProyecto" id="form-proyecto" class="form-control" required="true"  >
-						<option value="" disabled selected>Selecione un tipo de Proyecto</option>
+						<option value="" disabled selected>Seleccione un tipo de Proyecto</option>
 						<c:forEach items="${tipoproyectos}" var="p">
 							<c:choose>
 								<c:when test="${proyecto.tipoproyecto.idTipoProyecto == p.idTipoProyecto}">

@@ -113,7 +113,11 @@ public class ProyectoController {
 				{
 						Proyecto proyecto = proyectoRecibido;
 						Solicitud solicitudSeleccionada = (Solicitud) this.manage_entity.getById(Solicitud.class.getName(), proyecto.getIdSolicitud());
+						TipoProyecto proyectoSeleccionado=(TipoProyecto) this.manage_entity.getById(TipoProyecto.class.getName(), proyecto.getIdTipoProyecto());
+						Usuario usuarioSeleccionado=(Usuario) this.manage_entity.getById(Usuario.class.getName(), proyecto.getIdUsuario());
 						proyecto.setSolicitud(solicitudSeleccionada);
+						proyecto.setTipoProyecto(proyectoSeleccionado);
+						proyecto.setUsuario(usuarioSeleccionado);
 						if(proyecto.getCodProyecto()==0) {
 							manage_entity.save(Proyecto.class.getName(), proyecto);
 						}else{
