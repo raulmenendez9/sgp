@@ -44,7 +44,9 @@
 							</c:if>
 							<c:if test="${deletetipoS}">		
 									<a class="" href="/sgp/solicitudes/delete/${solicitud.codSolicitud}" data-toggle="modal"data-target="#""><i class="fa fa-trash" aria-hidden="true"></i></a>
-							</c:if>						
+							</c:if>		
+							
+									
 						</td>
 						</tr>
 					</c:forEach>

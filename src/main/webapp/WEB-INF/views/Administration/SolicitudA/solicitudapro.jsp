@@ -42,7 +42,16 @@
 							</c:if>
 							<c:if test="${deletetipoSo}">		
 									<a class="" href="/sgp/solicitudesapro/delete/${solicitud.codSolicitud}" data-toggle="modal"data-target="#""><i class="fa fa-trash" aria-hidden="true"></i></a>
-							</c:if>						
+							</c:if>	
+							
+							
+									<c:choose>
+                                     <c:when test="${solicitud.estado==true}">
+                                          <a  href="/sgp/proyectos/add/"><i class="fa-folder-open" aria-hidden="true"></i></a>&nbsp;
+                                    </c:when>    
+                                     
+                                    </c:choose>
+						  					
 						</td>
 						</tr>
 					</c:forEach>
@@ -196,3 +205,9 @@
 	</div>
 </div>
 </c:forEach>
+
+
+
+
+
+

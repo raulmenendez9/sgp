@@ -4,8 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<%@ page import="java.sql.*" %>
-<% Class.forName("org.postgresql.Driver"); %>
+
 
 <div id="contenido" class="card-panel hoverable">
 
@@ -21,9 +20,10 @@
 				<thead>
 					<tr>
 						<th>Nombre</th>
-						<th>Encargado</th>
+						<th>Responsable</th>
+						<th>Tipo Proyecto</th>
 						<th>Duracion</th>
-						<th>Estado</th>
+						
 						<th>Opcion</th>
 					</tr>
 				</thead>
@@ -32,8 +32,10 @@
 						<tr style="color:#0B0B61;">
 							<td>${proyecto.solicitud.titulo }</td>
 							 <td>${proyecto.solicitud.usuario.username }</td>
+							 	<td>${proyecto.tipoProyecto.nombre }</td>
 							 <td>${proyecto.duracion }</td>
-							 <td>${proyecto.estado }</td>
+							
+							 
 							<td width="5%">
 							<c:if test="${updatetipoS}">	
 									<a class="modal-trigger" href="#-${proyecto.codProyecto}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
@@ -52,20 +54,18 @@
 
 
 
-
-
 <!-- /.col-lg-12 -->
 
 <div id="agregar" class="modal white darken-4">
 	<div class="modal-header"></div>
 	<div class="modal-content">
 		<form:form method="post" modelAttribute="proyectoForm"
-			action="/sgp/proyectos/add" id="codProyecto" autocomplete="off" accept-charset="UTF-8">
+			action="/sgp/proyectos/add" id="registro" autocomplete="off" accept-charset="UTF-8">
            
 			<div class="row">
 			 <h5 style="text-align: center; "> Datos Generales</h5>
 				<div class="input-field col s12">
-					<form:select path="solicitud" id="form-proyecto" class="form-control" required="true"  >
+					<form:select path="codSolicitud" id="form-proyecto" class="form-control" required="true"  >
 						<option value="" disabled selected>Seleccione un titulo</option>
 						<c:forEach items="${solicitudes}" var="p">
 							<c:choose>
@@ -82,75 +82,14 @@
 					</form:select>
 					
 					
+	
 					
 					
-					<form:select path="usuario" id="form-proyecto" class="form-control" required="true"  >
-						<option value="" disabled selected>Selecione Encargado</option>
-						<c:forEach items="${usuarios}" var="p">
+					<form:select path="idTipoProyecto" id="form-proyecto" class="form-control" required="true"  >
+						<option value="" disabled selected>Seleccione un tipo de Proyecto</option>
+						<c:forEach items="${tipoProyectos}" var="p">
 							<c:choose>
-								<c:when test="${proyecto.usuario.idUsuario == p.idUsuario}">
-									<form:option value="${p.idUsuario }" label="${p.username}"
-										selected="true" />
-								</c:when>
-								<c:otherwise>
-									<form:option value="${p.idUsuario }" label="${p.username}" var="selec"/>
-								</c:otherwise>
-							</c:choose>
-			
-						</c:forEach>
-					</form:select>
-					
-					
-					
-					<form:select path="solicitud" id="form-proyecto" class="form-control" required="true"  >
-						<option value="" disabled selected>Selecione un estado</option>
-						<c:forEach items="${solicitudes}" var="p">
-							<c:choose>
-								<c:when test="${proyecto.solictud.codSolicitud == p.codSolicitud}">
-									<form:option value="${p.codSolicitud }" label="${p.estado}"
-										selected="true" />
-								</c:when>
-								<c:otherwise>
-									<form:option value="${p.codSolicitud }" label="${p.estado}" var="selec"/>
-								</c:otherwise>
-							</c:choose>
-			
-						</c:forEach>
-					</form:select>
-					
-					
-					
-					
-					
-                     
-                     
-                     
-				
-					
-					
-					<form:select path="solicitud" id="form-proyecto" class="form-control" required="true"  >
-						<option value="" disabled selected>Selecione una justificacion</option>
-						<c:forEach items="${solicitudes}" var="p">
-							<c:choose>
-								<c:when test="${proyecto.solictud.codSolicitud == p.codSolicitud}">
-									<form:option value="${p.codSolicitud }" label="${p.justificacion}"
-										selected="true" />
-								</c:when>
-								<c:otherwise>
-									<form:option value="${p.codSolicitud }" label="${p.justificacion}" var="selec"/>
-								</c:otherwise>
-							</c:choose>
-			
-						</c:forEach>
-					</form:select>
-					
-					
-					
-					<form:select path="tipoProyecto" id="form-proyecto" class="form-control" required="true"  >
-						<option value="" disabled selected>Selecione un tipo de Proyecto</option>
-						<c:forEach items="${tipoproyectos}" var="p">
-							<c:choose>
-								<c:when test="${proyecto.tipoproyecto.idTipoProyecto == p.idTipoProyecto}">
+								<c:when test="${proyecto.tipoProyecto.idTipoProyecto == p.idTipoProyecto}">
 									<form:option value="${p.idTipoProyecto }" label="${p.nombre}"
 										selected="true" />
 								</c:when>
@@ -162,13 +101,12 @@
 						</c:forEach>
 					</form:select>
 					
-					
-					<div class="row">
-				<div class="input-field col s12">
-					<form:input path="ambitoImpacto" class="form-control" placeholder="Objeto"
-						type="text" id="ambitoImpacto" value="${proyecto.ambitoImpacto }" />
-				</div>
-			</div>
+					<form:select path="ambitoImpacto" id="ambitoImpacto" class="form-control" value="${proyecto.ambitoImpacto }" required="true">
++				<option value="" disabled selected>Elige un área de impacto</option>
++				<option value="nacional">Nacional</option>
++				<option value="regional">Regional</option>
++				<option value="academico">Acádemico</option>			
++		    </form:select>
 			
 			 <h5 style="text-align: center; "> Tiempo y financiamiento</h5>
 			
@@ -217,8 +155,8 @@
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-					<form:textarea path="patrocinadores" class="form-control" placeholder="Patrocinadores"
-					rows="8" cols="80"	id="patrocinadores" value="${proyecto.patrocinadores }" required="required"  style="font-size:15px;"/>
+					<form:textarea path="patrocinadores"  id="patrocinadores" class="form-control" placeholder="Patrocinadores"
+					rows="8" cols="80"	 value="${proyecto.patrocinadores }" required="required"  style="font-size:15px;"/>
 				</div>
 			</div>
 			
@@ -230,39 +168,32 @@
 					
 					<div class="row">
 				<div class="input-field col s12">
-					<form:textarea path="resumen" class="form-control" placeholder="Resumen..."
-						 rows="8" cols="80" id="resumen" value="${proyecto.resumen }" required="required" style="font-size:15px;"/>
+					<form:textarea path="resumen" id="resumen" class="form-control" placeholder="Resumen..."
+						 rows="8" cols="80"  value="${proyecto.resumen }" required="required" style="font-size:15px;"/>
 				</div>
 			</div>
 			
 			
 			<div class="row">
 				<div class="input-field col s12">
-					<form:textarea path="planteamiento" class="form-control" placeholder="Planteamiento del problema"
-						rows="8" cols="80" id="planteamiento" value="${proyecto.planteamiento }" required="required" style="font-size:15px;"/>
+					<form:textarea path="planteamiento" id="planteamiento"  class="form-control" placeholder="Planteamiento del problema"
+						rows="8" cols="80" value="${proyecto.planteamiento }" required="required" style="font-size:15px;"/>
 				</div>
 			</div>
 			
 			
 			<div class="row">
 				<div class="input-field col s12">
-					<form:textarea path="antecedentes" class="form-control" placeholder="Antecedentes del proyecto"
-						rows="8" cols="80" id="antecedentes" value="${proyecto.antecedentes }" required="required"  style="font-size:15px;"/>
+					<form:textarea path="antecedentes" id="antecedentes" class="form-control" placeholder="Antecedentes del proyecto"
+						rows="8" cols="80"  value="${proyecto.antecedentes }" required="required"  style="font-size:15px;"/>
 				</div>
 			</div>
 					
 					
 					<div class="row">
 				<div class="input-field col s12">
-					<form:textarea path="metodologia" class="form-control" placeholder="Metodologia o Tecnicas"
-					rows="8" cols="80"	id="metodologia" value="${proyecto.metodologia }" required="required"  style="font-size:15px;"/>
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="input-field col s12">
-					<form:textarea path="ambitoImpacto" class="form-control" placeholder="Beneficiarios del proyecto"
-					rows="8" cols="80"	id="ambitoImpacto" value="${proyecto.ambitoImpacto }" required="required"  style="font-size:15px;"/>
+					<form:textarea path="metodologia" id="metodologia" class="form-control" placeholder="Metodologia o Tecnicas"
+					rows="8" cols="80"	 value="${proyecto.metodologia }" required="required"  style="font-size:15px;"/>
 				</div>
 			</div>
 			
@@ -293,80 +224,31 @@
 
 
 
-
-
+<!-- /.col-lg-12 -->
 
 
 <c:forEach items="${proyectos}" var="proyecto">
 <div id="-${proyecto.codProyecto}" class="modal white darken-4">
 	<div class="modal-header"></div>
 	<div class="modal-content">
-		<form:form method="post" modelAttribute="proyectoForm"
-			action="/sgp/proyectos/add" id="codProyecto" autocomplete="off" accept-charset="UTF-8">
 
+  <form:form method="post" modelAttribute="proyectoForm"
+			action="/sgp/proyectos/add" id="registro" autocomplete="off" accept-charset="UTF-8">
+			
+			
+			
 			<div class="row">
+			 <h5 style="text-align: center; "> Datos Generales</h5>
 				<div class="input-field col s12">
-					<form:select path="solicitud" id="form-proyecto" class="form-control" required="true"  >
-						<option value="" disabled selected>Seleccione un titulo</option>
-						<c:forEach items="${solicitudes}" var="p">
-							<c:choose>
-								<c:when test="${proyecto.solictud.codSolicitud == p.codSolicitud}">
-									<form:option value="${p.codSolicitud }" label="${p.titulo}"
-										selected="true" />
-								</c:when>
-								<c:otherwise>
-									<form:option value="${p.codSolicitud }" label="${p.titulo}" var="selec"/>
-								</c:otherwise>
-							</c:choose>
+					
 			
-						</c:forEach>
-					</form:select>
-					
-					<form:select path="solicitud" id="form-proyecto" class="form-control" required="true"  >
-						<option value="" disabled selected>Seleccione un estado</option>
-						<c:forEach items="${solicitudes}" var="p">
-							<c:choose>
-								<c:when test="${proyecto.solictud.codSolicitud == p.codSolicitud}">
-									<form:option value="${p.codSolicitud }" label="${p.estado}"
-										selected="true" />
-								</c:when>
-								<c:otherwise>
-									<form:option value="${p.codSolicitud }" label="${p.estado}" var="selec"/>
-								</c:otherwise>
-							</c:choose>
+			<form:hidden path="codSolicitud" value="${proyecto.solicitud.codSolicitud}" />
 			
-						</c:forEach>
-					</form:select>
-					
-					
-					
-					
-
-					
-					
-					<form:select path="solicitud" id="form-proyecto" class="form-control" required="true"  >
-						<option value="" disabled selected>Seleccione una justificacion</option>
-						<c:forEach items="${solicitudes}" var="p">
-							<c:choose>
-								<c:when test="${proyecto.solictud.codSolicitud == p.codSolicitud}">
-									<form:option value="${p.codSolicitud }" label="${p.justificacion}"
-										selected="true" />
-								</c:when>
-								<c:otherwise>
-									<form:option value="${p.codSolicitud }" label="${p.justificacion}" var="selec"/>
-								</c:otherwise>
-							</c:choose>
-			
-						</c:forEach>
-					</form:select>
-					
-					
-					
-					<form:select path="tipoProyecto" id="form-proyecto" class="form-control" required="true"  >
+			<form:select path="idTipoProyecto" id="form-proyecto" class="form-control" required="true"  >
 						<option value="" disabled selected>Seleccione un tipo de Proyecto</option>
-						<c:forEach items="${tipoproyectos}" var="p">
+						<c:forEach items="${tipoProyectos}" var="p">
 							<c:choose>
-								<c:when test="${proyecto.tipoproyecto.idTipoProyecto == p.idTipoProyecto}">
+								<c:when test="${proyecto.tipoProyecto.idTipoProyecto == p.idTipoProyecto}">
 									<form:option value="${p.idTipoProyecto }" label="${p.nombre}"
 										selected="true" />
 								</c:when>
@@ -379,26 +261,39 @@
 					</form:select>
 					
 					
-					<div class="row">
-				<div class="input-field col s12">
-					<form:input path="ambitoImpacto" class="form-control" placeholder="Objeto"
-						type="text"   id="ambitoImpacto" value="${proyecto.ambitoImpacto }" />
-				</div>
-			</div>
+					
+					<form:select path="ambitoImpacto" id="ambitoImpacto" class="form-control" value="${proyecto.ambitoImpacto }" required="true">
++				<option value="" disabled selected>Elige un área de impacto</option>
++				<option value="nacional">Nacional</option>
++				<option value="regional">Regional</option>
++				<option value="academico">Acádemico</option>			
++		    </form:select>
+
+            <h5 style="text-align: center; "> Tiempo y financiamiento</h5>
 			
 				</div>
 			<div class="date">
+			 
 				<div class="input-field col s6">
+				 
 					<form:input path="fechaInicio" class="form-control" placeholder="fecha"
 						type="date" id="fechaInicio" value="${proyecto.fechaInicio}" required="required"/>
 				</div>
+			
 			</div>
+			
+			
 			<div class="date">
 				<div class="input-field col s6">
+				
 					<form:input path="fechaFin" class="form-control" placeholder="fecha"
 						type="date" id="fechaFin" value="${proyecto.fechaFin}" required="required"/>
 				</div>
 			</div>
+			
+			
+			
+			
 			<input type="button" class=" btn blue modal-actionwaves-effect waves-light white-text" value="Calcular Duracion del proyecto" onclick="calcularDias();">
 			<div class="row">
 				
@@ -408,27 +303,74 @@
 				</div>
 				</div>
 				
-
+			<form:select path="tipoFinanciamiento" id="tipofinanciamiento" class="form-control" value="${proyecto.tipoFinanciamiento }" required="true">
+				<option value="" disabled selected>Elige un tipo de financiamiento</option>
+				<option value="donacion">Donacion</option>
+				<option value="aporte">Aporte</option>
+				
+						
+				</form:select>
+				
+			
+			
+			
 			<div class="row">
 				<div class="input-field col s12">
-					<form:input path="montoAprobado" class="form-control" placeholder="MontoAprobado"
+					<form:input path="montoAprobado" class="form-control" placeholder="MontoAprobado."
 						type="number" id="montoAprobado" value="${proyecto.montoAprobado }" required="required"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="input-field col s12">
+					<form:input path="patrocinadores" id="patrocinadores" class="form-control" placeholder="Patrocinadores"
+					rows="8" cols="80"	 value="${proyecto.patrocinadores }" required="required"  style="font-size:15px;"/>
 				</div>
 			</div>
 			
 			
 			<form:hidden path="codProyecto" value="${proyecto.codProyecto}" />
 			
+			
 					
+					 <h5 style="text-align: center; "> Protocolo del Proyecto</h5>
 					
+					<div class="row">
+				<div class="input-field col s12">
+					<form:input path="resumen" id="resumen" class="form-control" placeholder="Resumen..."
+						 rows="8" cols="80"  value="${proyecto.resumen }" required="required" style="font-size:15px;"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="input-field col s12">
+					<form:input path="planteamiento" id="planteamiento" class="form-control" placeholder="Planteamiento del problema"
+						rows="8" cols="80" value="${proyecto.planteamiento }" required="required" style="font-size:15px;"/>
 				</div>
 			</div>
 			
 			
+			<div class="row">
+				<div class="input-field col s12">
+					<form:input path="antecedentes"  id="antecedentes" class="form-control" placeholder="Antecedentes del proyecto"
+						rows="8" cols="80"  value="${proyecto.antecedentes }" required="required"  style="font-size:15px;"/>
+				</div>
+			</div>
+				
+				
 			
-
-		
-
+					
+					<div class="row">
+				<div class="input-field col s12">
+					<form:input path="metodologia" id="metodologia" class="form-control" placeholder="Metodologia o Tecnicas"
+					rows="8" cols="80"	 value="${proyecto.metodologia }" required="required"  style="font-size:15px;"/>
+				</div>
+			</div>
+			
+				
+				</div>
+			</div>
+	
 			<div class="center">
 				<form:button type="submit"
 					class=" btn green modal-actionwaves-effect waves-light white-text" onclick="toast();">
@@ -441,7 +383,11 @@
 		</form:form>
 	</div>
 </div>
+
 </c:forEach>
+
+
+
 
 
 
@@ -474,5 +420,3 @@ function calcularDias()
 }
 
 </script>
-
-
