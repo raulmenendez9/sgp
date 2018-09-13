@@ -44,9 +44,7 @@
 							</c:if>
 							<c:if test="${deletetipoS}">		
 									<a class="" href="/sgp/solicitudes/delete/${solicitud.codSolicitud}" data-toggle="modal"data-target="#""><i class="fa fa-trash" aria-hidden="true"></i></a>
-							</c:if>		
-							
-									
+							</c:if>						
 						</td>
 						</tr>
 					</c:forEach>
@@ -65,7 +63,7 @@
 	<div class="modal-header"></div>
 	<div class="modal-content">
 		<form:form method="post" modelAttribute="solicitudForm"
-			action="/sgp/solicitudes/add" id="codSolicitud" autocomplete="off" accept-charset="ISO-8859-1"">
+			action="/sgp/solicitudes/add" id="codSolicitud" autocomplete="off" accept-charset="UTF-8">
 
 			<div class="row">
 				<div class="input-field col s6">
@@ -142,7 +140,7 @@
 	<div class="modal-header"></div>
 	<div class="modal-content">
 		<form:form method="post" modelAttribute="solicitudForm"
-			action="/sgp/solicitudes/add" id="registro" autocomplete="off" accept-charset="ISO-8859-1">
+			action="/sgp/solicitudes/add" id="registro" autocomplete="off" accept-charset="UTF-8">
 
 			<div class="row">
 				<div class="input-field col s6">
