@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -66,7 +67,7 @@
 	</div>
 	<div class="modal-content">
 		<form:form method="post" modelAttribute="empresaForm"
-			action="/sgp/empresas/add" id="registro" autocomplete="off" accept-charset="UTF-8">
+			action="/sgp/empresas/add" id="registro" autocomplete="off" accept-charset="ISO-8859-1">
 
 			<div class="row">
 				<div class="input-field col s6">
@@ -123,7 +124,7 @@
 		</div>
 		<div class="modal-content">
 			<form:form method="post" modelAttribute="empresaForm"
-				action="/sgp/empresas/add" autocomplete="off" accept-charset="UTF-8">
+				action="/sgp/empresas/add" autocomplete="off" accept-charset="ISO-8859-1">
 
 				<div class="row">
 					<div class="input-field col s6">

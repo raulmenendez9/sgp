@@ -50,7 +50,7 @@
 		<div class="modal-header"></div>
 		<div class="modal-content">
 			<form:form method="post" modelAttribute="menuForm"
-				action="/sgp/menus/add" id="registro" autocomplete="off" accept-charset="UTF-8">
+				action="/sgp/menus/add" id="registro" autocomplete="off" accept-charset="ISO-8859-1">
 
 				<div class="row">
 					<div class="input-field col s6">
@@ -92,7 +92,7 @@
 		<div class="modal-header"></div>
 		<div class="modal-content">
 			<form:form method="post" modelAttribute="menuForm"
-				action="/sgp/menus/add" id="registro" autocomplete="off" accept-charset="UTF-8">
+				action="/sgp/menus/add" id="registro" autocomplete="off" accept-charset="ISO-8859-1">
 
 				<div class="row">
 					<div class="input-field col s6">

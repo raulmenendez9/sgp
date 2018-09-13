@@ -65,7 +65,7 @@
 	</div>
 	<div class="modal-content">
 		<form:form method="post" modelAttribute="mensajeForm"
-			action="/sgp/mensajes/add" id="registro" autocomplete="off">
+			action="/sgp/mensajes/add" id="registro" autocomplete="off" accept-charset="ISO-8859-1">
 <!--  
 			<div class="row">
 				<div class="input-field col s6">
@@ -141,7 +141,7 @@
 		</div>
 		<div class="modal-content">
 			<form:form method="post" modelAttribute="mensajeForm"
-				action="/sgp/mensajes/add" autocomplete="off">
+				action="/sgp/mensajes/add" autocomplete="off" accept-charset="ISO-8859-1">
 
 	<!--  			<div class="row">
 					<div class="input-field col s6">
