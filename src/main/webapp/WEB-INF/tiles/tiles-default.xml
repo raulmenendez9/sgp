@@ -112,6 +112,12 @@
 		<put-attribute name="titulo" value="Tipo de Proyectos"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Proyecto/tipoProyecto.jsp"></put-attribute>
 	</definition>
+	<definition name="Administration/Variable/variableImpacto"
+		extends="materializeTemplate">
+		<put-attribute name="titulo" value="Variable de Impactos"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/views/Administration/Variable/variableImpacto.jsp"></put-attribute>
+	</definition>
+	
 	<definition name="Administration/Proyecto/especificacionProyecto" extends="materializeTemplate">
 		<put-attribute name="titulo" value="Registros de Especificación de Proyecto"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Proyecto/especificacionProyecto.jsp"></put-attribute></definition>
