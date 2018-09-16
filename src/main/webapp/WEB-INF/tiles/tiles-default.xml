@@ -135,7 +135,10 @@
 		<put-attribute name="titulo" value="Mensajes" />
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Mensajes/mensaje.jsp"/>
 	</definition>
-<!-- 	/ADMINISTRATION -->	
+	<definition name="Administration/Funcion/funcion" extends="materializeTemplate">
+		<put-attribute name="titulo" value="Funcion"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/views/Administration/Funcion/funcion.jsp"></put-attribute></definition>
+	<!-- 	/ADMINISTRATION -->	
 
 
 
