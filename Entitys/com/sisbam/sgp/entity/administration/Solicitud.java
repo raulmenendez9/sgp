@@ -30,13 +30,38 @@ public class Solicitud implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private int codSolicitud;
 	private String titulo;
-//	private Proyecto codProyecto;
 	private boolean estado=false;
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(iso = ISO.DATE)
 	private Date fecha;
 	private String justificacion;
 	private String objeto;
+	
+	
+	private TipoProyecto tipoProyecto;
+	@Transient
+	private int idTipoProyecto;
+	
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_TipoProyecto")
+	public TipoProyecto getTipoProyecto() {
+		return tipoProyecto;
+	}
+
+	public void setTipoProyecto(TipoProyecto tipoProyecto) {
+		this.tipoProyecto = tipoProyecto;
+	}
+
+	@Transient
+	public int getIdTipoProyecto() {
+		return idTipoProyecto;
+	}
+	@Transient
+	public void setIdTipoProyecto(int idTipoProyecto) {
+		this.idTipoProyecto = idTipoProyecto;
+	}
+
 
 	
 	@Transient
@@ -45,7 +70,7 @@ public class Solicitud implements java.io.Serializable {
 	
 	public Solicitud() {}
 	
-	public Solicitud(int codSolicitud, String titulo,Usuario usuario, boolean estado, String justificacion,String objeto,Date fecha) {
+	public Solicitud(int codSolicitud, String titulo,Usuario usuario, boolean estado, String justificacion,String objeto,Date fecha, TipoProyecto tipoProyecto) {
 		this.codSolicitud = codSolicitud;
 		this.titulo= titulo;
 		this.usuario = usuario;
@@ -54,6 +79,7 @@ public class Solicitud implements java.io.Serializable {
 		this.justificacion = justificacion;
 		this.objeto = objeto;
 		this.fecha = fecha;
+		this.tipoProyecto=tipoProyecto;
 	}
 	
 	@Transient

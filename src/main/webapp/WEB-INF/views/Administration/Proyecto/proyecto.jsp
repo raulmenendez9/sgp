@@ -32,7 +32,7 @@
 						<tr style="color:#0B0B61;">
 							<td>${proyecto.solicitud.titulo }</td>
 							 <td>${proyecto.solicitud.usuario.username }</td>
-							 	<td>${proyecto.tipoProyecto.nombre }</td>
+							 	<td>${proyecto.solicitud.tipoProyecto.nombre }</td>
 							 <td>${proyecto.duracion }</td>
 							
 							 
@@ -83,24 +83,6 @@
 					
 					
 	
-					
-					
-					<form:select path="idTipoProyecto" id="form-proyecto" class="form-control" required="true"  >
-						<option value="" disabled selected>Seleccione un tipo de Proyecto</option>
-						<c:forEach items="${tipoProyectos}" var="p">
-							<c:choose>
-								<c:when test="${proyecto.tipoProyecto.idTipoProyecto == p.idTipoProyecto}">
-									<form:option value="${p.idTipoProyecto }" label="${p.nombre}"
-										selected="true" />
-								</c:when>
-								<c:otherwise>
-									<form:option value="${p.idTipoProyecto }" label="${p.nombre}" var="selec"/>
-								</c:otherwise>
-							</c:choose>
-			
-						</c:forEach>
-					</form:select>
-					
 					<form:select path="ambitoImpacto" id="ambitoImpacto" class="form-control" value="${proyecto.ambitoImpacto }" required="true">
 +				<option value="" disabled selected>Elige un área de impacto</option>
 +				<option value="nacional">Nacional</option>
@@ -242,24 +224,7 @@
 				<div class="input-field col s12">
 					
 			
-			<form:hidden path="codSolicitud" value="${proyecto.solicitud.codSolicitud}" />
-			
-			<form:select path="idTipoProyecto" id="form-proyecto" class="form-control" required="true"  >
-						<option value="" disabled selected>Seleccione un tipo de Proyecto</option>
-						<c:forEach items="${tipoProyectos}" var="p">
-							<c:choose>
-								<c:when test="${proyecto.tipoProyecto.idTipoProyecto == p.idTipoProyecto}">
-									<form:option value="${p.idTipoProyecto }" label="${p.nombre}"
-										selected="true" />
-								</c:when>
-								<c:otherwise>
-									<form:option value="${p.idTipoProyecto }" label="${p.nombre}" var="selec"/>
-								</c:otherwise>
-							</c:choose>
-			
-						</c:forEach>
-					</form:select>
-					
+			<form:hidden path="codSolicitud" value="${proyecto.solicitud.codSolicitud}" />	
 					
 					
 					<form:select path="ambitoImpacto" id="ambitoImpacto" class="form-control" value="${proyecto.ambitoImpacto }" required="true">

@@ -27,9 +27,6 @@ public class Proyecto implements java.io.Serializable {
 
 	
 	private static final long serialVersionUID = 1L;
-	
-	
-	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(iso = ISO.DATE)
 	private int codProyecto;
@@ -45,12 +42,12 @@ public class Proyecto implements java.io.Serializable {
 	private String metodologia;
 	private int duracion;
 	
-	
-	@Transient
 	private Solicitud solicitud;
+	
+	/*
 	@Transient
 	private TipoProyecto tipoProyecto;
-	
+	*/
 	
 	public Proyecto() {
 		
@@ -59,7 +56,7 @@ public class Proyecto implements java.io.Serializable {
 	
 	public Proyecto(int codProyecto, String ambitoImpacto, Date fechaInicio, Date fechaFin, int duracion, String tipoFinanciamiento,
 			float montoAprobado, String patrocinadores, String resumen, String planteamiento, String antecedentes,
-			String metodologia, Solicitud solicitud, TipoProyecto tipoProyecto) {
+			String metodologia, Solicitud solicitud) {
 	
 		this.codProyecto = codProyecto;
 		this.ambitoImpacto = ambitoImpacto;
@@ -74,7 +71,6 @@ public class Proyecto implements java.io.Serializable {
 		this.antecedentes = antecedentes;
 		this.metodologia = metodologia;
 		this.solicitud = solicitud;
-		this.tipoProyecto = tipoProyecto;
 	
 	}
 
@@ -96,6 +92,7 @@ public class Proyecto implements java.io.Serializable {
 	}
 	
 
+	/*
 	@Transient
 	private int idTipoProyecto;
 
@@ -108,7 +105,7 @@ public class Proyecto implements java.io.Serializable {
 	public void setidTipoProyecto(int idTipoProyecto) {
 		this.idTipoProyecto = idTipoProyecto;
 	}
-	
+	*/
 	
 	
 	
@@ -138,7 +135,7 @@ public class Proyecto implements java.io.Serializable {
 	}
 	
 	
-
+/*
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "idTipoProyecto")
 	public TipoProyecto getTipoProyecto() {
@@ -149,6 +146,7 @@ public class Proyecto implements java.io.Serializable {
 		this.tipoProyecto = tipoProyecto;
 	}
 	
+	*/
 	
 
 	@Column(name = "ambitoImpacto", nullable = false, length = 256)

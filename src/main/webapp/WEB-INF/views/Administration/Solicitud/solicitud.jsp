@@ -176,6 +176,24 @@
 					</form:select>
 				</div>
 			</div>
+			
+				<div class="input-field col s6">
+					<form:select path="idTipoProyecto" class="form-control" required="true">
+						<option value="" disabled selected>Selecione un tipo de proyectos</option>
+						<c:forEach items="${tiposProyectos}" var="p">
+							<c:choose>
+								<c:when test="${solicitud.tipoProyecto.idTipoProyecto == p.idTipoProyecto}">
+									<form:option value="${p.idTipoProyecto }" label="${p.nombre}"
+										selected="true" />
+								</c:when>
+								<c:otherwise>
+									<form:option value="${p.idTipoProyecto }" label="${p.nombre}" />
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</form:select>
+				</div>
+				
 			<div class="date">
 				<div class="input-field col s6">
 					<form:input path="fecha" class="form-control" placeholder="fecha"

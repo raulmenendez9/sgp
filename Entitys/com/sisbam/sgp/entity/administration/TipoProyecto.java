@@ -9,7 +9,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tipoProyecto", catalog = "sgr")
+@Table(name = "tipoProyecto", catalog = "sgp")
 
 public class TipoProyecto implements java.io.Serializable {
 	/**

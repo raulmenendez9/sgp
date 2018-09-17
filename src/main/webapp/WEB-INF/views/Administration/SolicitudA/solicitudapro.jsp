@@ -19,6 +19,7 @@
 				<thead>
 					<tr>
 						<th>Titulo</th>
+						<th>Tipo</th>
 						<th>Estado</th>
 						<th>Usuario</th>
 						<th>Fecha</th>
@@ -31,6 +32,7 @@
 					<c:forEach items="${solicitudes}" var="solicitud">
 						<tr style="color:#0B0B61;">
 							<td>${solicitud.titulo }</td>
+							<td>${solicitud.tipoProyecto.nombre } </td>
 							 <td>${solicitud.estado }</td>
 							<td>${solicitud.usuario.username }</td>
 							<td>${solicitud.fecha }</td>
@@ -47,7 +49,7 @@
 							
 									<c:choose>
                                      <c:when test="${solicitud.estado==true}">
-                                          <a  href="/sgp/proyectos/add/"><i class="fa-folder-open" aria-hidden="true"></i></a>&nbsp;
+                                          <a  href="/sgp/proyectos"><i class="fa fa-clone" aria-hidden="true"></i></a>&nbsp;
                                     </c:when>    
                                      
                                     </c:choose>
@@ -78,7 +80,24 @@
 						type="text" id="titulo" value="${solicitud.titulo }" />
 
 				</div>
+				<div class="input-field col s6">
+					<form:select path="idTipoProyecto" class="form-control" required="true">
+						<option value="" disabled selected>Selecione un tipo de proyectos</option>
+						<c:forEach items="${tiposProyectos}" var="p">
+							<c:choose>
+								<c:when test="${solicitud.tipoProyecto.idTipoProyecto == p.idTipoProyecto}">
+									<form:option value="${p.idTipoProyecto }" label="${p.nombre}"
+										selected="true" />
+								</c:when>
+								<c:otherwise>
+									<form:option value="${p.idTipoProyecto }" label="${p.nombre}" />
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</form:select>
+				</div>
 				
+			
 			</div>
 
 			<div class="row">
@@ -119,6 +138,8 @@
 						type="text" id="objeto" value="${solicitud.objeto }" />
 				</div>
 			</div>
+			
+			
 			<form:hidden path="codSolicitud" value="${solicitud.idSolicitud}" />
 
 			<div class="center">

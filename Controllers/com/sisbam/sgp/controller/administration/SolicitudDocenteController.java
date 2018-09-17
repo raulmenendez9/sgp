@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.sisbam.sgp.controller.variety.ObtenerPermisosPorUrl;
 import com.sisbam.sgp.dao.DaoImp;
 import com.sisbam.sgp.entity.administration.Solicitud;
+import com.sisbam.sgp.entity.administration.TipoProyecto;
 import com.sisbam.sgp.entity.administration.Usuario;
 import com.sisbam.sgp.entity.security.Permisos;
 
@@ -47,11 +48,14 @@ public class SolicitudDocenteController {
 		
 		if(permisos.isR())
 		{
+			
 			Solicitud solicitud = new Solicitud();
 			model.addAttribute("solicitudForm", solicitud);
 			model.addAttribute("solicitud", null);
 				List<Solicitud> solicitudes = (List<Solicitud>) this.manage_entity.getAll("Solicitud");
 				List<Usuario> usuarios = (List<Usuario>) this.manage_entity.getAll("Usuario");
+				List<TipoProyecto> tiposProyectos = (List<TipoProyecto>) this.manage_entity.getAll("TipoProyecto");
+				model.addAttribute("tiposProyectos", tiposProyectos);
 				model.addAttribute("solicitudes", solicitudes);
 				model.addAttribute("usuarios", usuarios);
 			retorno = path+"solicitudapro";
@@ -68,7 +72,9 @@ public class SolicitudDocenteController {
 		if(permisos.isC()){
 			Solicitud solicitud = new Solicitud();
 			List<Usuario> usuarios = (List<Usuario>) this.manage_entity.getAll("Usuario");
-			
+
+			List<TipoProyecto> tiposProyectos = (List<TipoProyecto>) this.manage_entity.getAll("TipoProyecto");
+			model.addAttribute("tiposProyectos", tiposProyectos);
 			model.addAttribute("solicitudForm", solicitud);
 			model.addAttribute("solicitud", null);
 			model.addAttribute("usuarios", usuarios);
@@ -89,6 +95,8 @@ public class SolicitudDocenteController {
 					Solicitud solicitud = solicitudRecibido;
 					Usuario usuarioSeleccionado = (Usuario) this.manage_entity.getById(Usuario.class.getName(), solicitud.getIdUsuario());
 					solicitud.setUsuario(usuarioSeleccionado);
+					TipoProyecto tipoSeleccionado = (TipoProyecto)this.manage_entity.getById(TipoProyecto.class.getName(), solicitud.getIdTipoProyecto());
+					solicitud.setTipoProyecto(tipoSeleccionado);
 					if(solicitud.getCodSolicitud()==0) {
 						manage_entity.save(Solicitud.class.getName(), solicitud);
 					}else{
@@ -109,9 +117,13 @@ public class SolicitudDocenteController {
 				model.addAttribute("solicitud", solicitud);
 				Solicitud solicitudForm = new Solicitud();
 				model.addAttribute("solicitudForm", solicitudForm);
+
+				List<TipoProyecto> tiposProyectos = (List<TipoProyecto>) this.manage_entity.getAll("TipoProyecto");
+				model.addAttribute("tiposProyectos", tiposProyectos);
 				
 				List<Usuario> usuarios = (List<Usuario>) this.manage_entity.getAll("Usuario");
 				model.addAttribute("usuarios", usuarios);
+				
 				retorno=path+"solicitudapro-form";
 			}
 			
