@@ -131,6 +131,11 @@
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Proyecto/recurso.jsp"/>
 	</definition>
 	
+	<definition name="Administration/Tarea/tarea" extends="materializeTemplate">
+    	<put-attribute name="titulo" value="Tareas" />
+		<put-attribute name="content" value="/WEB-INF/views/Administration/Tarea/tarea.jsp"/>
+	</definition>
+	
 	<definition name="Administration/Empleado/empleado" extends="materializeTemplateForm">
     	<put-attribute name="titulo" value="Empleados" />
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Empleado/empleado.jsp"/>

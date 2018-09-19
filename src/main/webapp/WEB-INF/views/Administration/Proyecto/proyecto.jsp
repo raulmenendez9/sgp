@@ -22,9 +22,9 @@
 						<th>Nombre</th>
 						<th>Responsable</th>
 						<th>Tipo Proyecto</th>
-						<th>Duracion</th>
+						<th>Duración <br>[días]</br></th>
 						
-						<th>Opcion</th>
+						<th>Opción</th>
 					</tr>
 				</thead>
 				<tbody>
