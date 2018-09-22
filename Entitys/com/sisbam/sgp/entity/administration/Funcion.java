@@ -42,7 +42,7 @@ public class Funcion {
 		this.idFuncion = idFuncion;
 	}
 
-	@Column(name = "nombre", nullable = false, length = 20)
+	@Column(name = "nombre", nullable = false, length = 100)
 	public String getNombre() {
 		return nombre;
 	}
@@ -51,7 +51,7 @@ public class Funcion {
 		this.nombre = nombre;
 	}
 	
-	@Column(name = "descripcion", nullable = false, length = 100)
+	@Column(name = "descripcion", nullable = false, length = 256)
 	public String getDescripcion() {
 		return descripcion;
 	}

@@ -150,6 +150,11 @@
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Funcion/funcion.jsp">
 	    </put-attribute>
 	  </definition>
+	  
+	  <definition name="Administration/Actividad/actividad" extends="materializeTemplate">
+    	<put-attribute name="titulo" value="Actividad" />
+		<put-attribute name="content" value="/WEB-INF/views/Administration/Actividad/actividad.jsp"/>
+	</definition>
 	<!-- 	/ADMINISTRATION -->	
 
 

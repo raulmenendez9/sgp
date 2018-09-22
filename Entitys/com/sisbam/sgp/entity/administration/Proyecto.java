@@ -24,7 +24,6 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 @Entity
 @Table(name = "proyecto", catalog = "sgp")
 public class Proyecto implements java.io.Serializable {
-
 	
 	private static final long serialVersionUID = 1L;
 	@Temporal(TemporalType.DATE)
@@ -44,19 +43,15 @@ public class Proyecto implements java.io.Serializable {
 	
 	private Solicitud solicitud;
 	
-	/*
-	@Transient
-	private TipoProyecto tipoProyecto;
-	*/
+	private Actividad actividad;
 	
 	public Proyecto() {
 		
 	}
-	
-	
+		
 	public Proyecto(int codProyecto, String ambitoImpacto, Date fechaInicio, Date fechaFin, int duracion, String tipoFinanciamiento,
 			float montoAprobado, String patrocinadores, String resumen, String planteamiento, String antecedentes,
-			String metodologia, Solicitud solicitud) {
+			String metodologia, Solicitud solicitud, Actividad actividad) {
 	
 		this.codProyecto = codProyecto;
 		this.ambitoImpacto = ambitoImpacto;
@@ -71,12 +66,8 @@ public class Proyecto implements java.io.Serializable {
 		this.antecedentes = antecedentes;
 		this.metodologia = metodologia;
 		this.solicitud = solicitud;
-	
+		this.actividad= actividad;
 	}
-
-
-
-
 
 	@Transient
 	private int codSolictud;
@@ -90,25 +81,6 @@ public class Proyecto implements java.io.Serializable {
 	public void setcodSolicitud(int codSolictud) {
 		this.codSolictud = codSolictud;
 	}
-	
-
-	/*
-	@Transient
-	private int idTipoProyecto;
-
-	@Transient
-	public int getidTipoProyecto() {
-		return idTipoProyecto;
-	}
-
-	@Transient
-	public void setidTipoProyecto(int idTipoProyecto) {
-		this.idTipoProyecto = idTipoProyecto;
-	}
-	*/
-	
-	
-	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "proyecto_codproyecto_seq")
@@ -121,9 +93,6 @@ public class Proyecto implements java.io.Serializable {
 		this.codProyecto = codProyecto;
 	}
 	
-	
-	
-
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "codSolicitud")
 	public Solicitud getSolicitud() {
@@ -133,31 +102,16 @@ public class Proyecto implements java.io.Serializable {
 	public void setSolicitud(Solicitud solicitud ) {
 		this.solicitud = solicitud;
 	}
-	
-	
-/*
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idTipoProyecto")
-	public TipoProyecto getTipoProyecto() {
-		return this.tipoProyecto;
-	}
-
-	public void setTipoProyecto(TipoProyecto tipoProyecto ) {
-		this.tipoProyecto = tipoProyecto;
-	}
-	
-	*/
-	
 
 	@Column(name = "ambitoImpacto", nullable = false, length = 256)
 	public String getAmbitoImpacto() {
 		return ambitoImpacto;
 	}
+	
 	public void setAmbitoImpacto(String ambitoImpacto) {
 		this.ambitoImpacto= ambitoImpacto;
 	}
-	
-	
+		
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "fechaInicio", nullable = false, length = 256)
@@ -168,8 +122,7 @@ public class Proyecto implements java.io.Serializable {
 	public void setFechaInicio(Date fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
-	
-	
+		
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "fechaFin", nullable = false, length = 256)
@@ -180,9 +133,7 @@ public class Proyecto implements java.io.Serializable {
 	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
 	}
-	
-	
-
+		
 	@Column(name = "duracion", nullable = false, length = 256)
 	public int getDuracion() {
 		return duracion;
@@ -190,9 +141,7 @@ public class Proyecto implements java.io.Serializable {
 	public void setDuracion(int duracion) {
 		this.duracion= duracion;
 	}
-	
-	
-	
+		
 	@Column(name = "tipoFinanciamiento", nullable = false, length = 256)
 	public String getTipoFinanciamiento() {
 		return tipoFinanciamiento;
@@ -200,9 +149,7 @@ public class Proyecto implements java.io.Serializable {
 	public void setTipoFinanciamiento(String tipoFinanciamiento) {
 		this.tipoFinanciamiento= tipoFinanciamiento;
 	}
-	
-	
-
+		
 	@Column(name = "montoAprobado", nullable = false, length = 256)
 	public Float getMontoAprobado() {
 		return montoAprobado;
@@ -210,9 +157,7 @@ public class Proyecto implements java.io.Serializable {
 	public void setMontoAprobado(Float montoAprobado) {
 		this.montoAprobado= montoAprobado;
 	}
-	
-	
-
+		
 	@Column(name = "patrocinadores", nullable = true, length = 256)
 	public String getPatrocinadores() {
 		return patrocinadores;
@@ -220,12 +165,12 @@ public class Proyecto implements java.io.Serializable {
 	public void setPatrocinadores(String patrocinadores) {
 		this.patrocinadores= patrocinadores;
 	}
-	
-	
+		
 	@Column(name = "resumen", nullable = true, length = 256)
 	public String getResumen() {
 		return resumen;
 	}
+	
 	public void setResumen(String resumen) {
 		this.resumen= resumen;
 	}
@@ -234,6 +179,7 @@ public class Proyecto implements java.io.Serializable {
 	public String getPlanteamiento() {
 		return planteamiento;
 	}
+	
 	public void setPlanteamiento(String planteamiento) {
 		this.planteamiento= planteamiento;
 	}
@@ -243,21 +189,41 @@ public class Proyecto implements java.io.Serializable {
 	public String getAntecedentes() {
 		return antecedentes;
 	}
+	
 	public void setAntecedentes(String antecedentes) {
 		this.antecedentes= antecedentes;
 	}
-	
 	
 	@Column(name = "metodologia", nullable = true, length = 256)
 	public String getMetodologia() {
 		return metodologia;
 	}
+	
 	public void setMetodologia(String metodologia) {
 		this.metodologia= metodologia;
 	}
 	
-	
+	@Transient
+	private int idActividad;
 
+	@Transient
+	public int getIdActividad() {
+		return idActividad;
+	}
+
+	@Transient
+	public void setIdActividad(int idActividad) {
+		this.idActividad = idActividad;
+	}
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idActividad")
+	public Actividad getActividad() {
+		return this.actividad;
+	}
+
+	public void setActividad(Actividad actividad) {
+		this.actividad = actividad;
+	}
 	
 
 	}

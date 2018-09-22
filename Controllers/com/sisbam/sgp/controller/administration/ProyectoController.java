@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.sisbam.sgp.controller.variety.ObtenerPermisosPorUrl;
 import com.sisbam.sgp.dao.DaoImp;
+import com.sisbam.sgp.entity.administration.Actividad;
 import com.sisbam.sgp.entity.administration.Empleado;
 import com.sisbam.sgp.entity.administration.Proyecto;
 import com.sisbam.sgp.entity.administration.Solicitud;
@@ -54,11 +55,11 @@ public class ProyectoController {
 	
 			List<Proyecto> proyectos = (List<Proyecto>) this.manage_entity.getAll("Proyecto");
 			List<Solicitud> solicitudes = (List<Solicitud>) this.manage_entity.getListByName("Solicitud", "estado", "true");
-	//		List<TipoProyecto> tipoProyectos = (List<TipoProyecto>) this.manage_entity.getAll("TipoProyecto");
+			List<Actividad> actividades = (List<Actividad>) this.manage_entity.getAll("Actividad");
 				
 			model.addAttribute("proyectos", proyectos);
 			model.addAttribute("solicitudes", solicitudes);
-		//	model.addAttribute("tipoProyectos", tipoProyectos);
+			model.addAttribute("actividades", actividades);
 			retorno = path+"proyecto";
 		}
 		return retorno;
@@ -74,12 +75,12 @@ public class ProyectoController {
 		if(permisos.isC()){
 			Proyecto proyecto = new Proyecto();
 			List<Solicitud> solicitudes = (List<Solicitud>) this.manage_entity.getAll("Solicitud");
-			//List<TipoProyecto> tipoProyectos = (List<TipoProyecto>) this.manage_entity.getAll("TipoProyecto");
+			List<Actividad> actividades = (List<Actividad>) this.manage_entity.getAll("Actividad");
 			
 			model.addAttribute("proyectoForm", proyecto);
 			model.addAttribute("proyecto", null);
 			model.addAttribute("solicitudes", solicitudes);
-			//model.addAttribute("tipoProyectos", tipoProyectos);
+			model.addAttribute("actividades", actividades);
 			
 			retorno = path+"proyecto-form";
 		}
@@ -98,8 +99,8 @@ public class ProyectoController {
 					Solicitud solicitudRecibida = (Solicitud) this.manage_entity.getById(Solicitud.class.getName(), proyecto.getcodSolicitud());
 					proyecto.setSolicitud(solicitudRecibida);
 					
-					//TipoProyecto tipoProyectoRecibido = (TipoProyecto) this.manage_entity.getById(TipoProyecto.class.getName(), proyecto.getidTipoProyecto());
-				//	proyecto.setTipoProyecto(tipoProyectoRecibido);
+					Actividad actividadRecibido = (Actividad) this.manage_entity.getById(Actividad.class.getName(), proyecto.getIdActividad());
+					proyecto.setActividad(actividadRecibido);
 					
 					if(proyecto.getCodProyecto()==0) {
 						manage_entity.save(Proyecto.class.getName(), proyecto);
@@ -126,8 +127,8 @@ public class ProyectoController {
 						
 						List<Solicitud> solicitudes = (List<Solicitud>) this.manage_entity.getAll("Solicitud");
 						model.addAttribute("solicitudes", solicitudes);
-						//List<TipoProyecto> proyectos = (List<TipoProyecto>) this.manage_entity.getAll("TipoProyecto");
-						//model.addAttribute("proyectos", proyectos);
+						List<Actividad> actividades = (List<Actividad>) this.manage_entity.getAll("Actividad");
+						model.addAttribute("actividades", actividades);
 						retorno=path+"proyecto-form";
 					}
 					

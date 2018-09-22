@@ -23,7 +23,7 @@
 						<th>Responsable</th>
 						<th>Tipo Proyecto</th>
 						<th>Duración <br>[días]</br></th>
-						
+						<th>Nombre Actividad</th>
 						<th>Opción</th>
 					</tr>
 				</thead>
@@ -34,7 +34,7 @@
 							 <td>${proyecto.solicitud.usuario.username }</td>
 							 	<td>${proyecto.solicitud.tipoProyecto.nombre }</td>
 							 <td>${proyecto.duracion }</td>
-							
+							 <td>${proyecto.actividad.nombre }</td>
 							 
 							<td width="5%">
 							<c:if test="${updatetipoS}">	
@@ -79,8 +79,23 @@
 							</c:choose>
 			
 						</c:forEach>
+						
 					</form:select>
-					
+					<form:select path="idActividad" id="form-proyecto" class="form-control" required="true"  >
+						<option value="" disabled selected>Seleccione una actividad</option>
+						<c:forEach items="${actividades}" var="p">
+							<c:choose>
+								<c:when test="${proyecto.actividad.idActividad == p.idActividad}">
+									<form:option value="${p.idActividad }" label="${p.nombre}"
+										selected="true" />
+								</c:when>
+								<c:otherwise>
+									<form:option value="${p.idActividad }" label="${p.nombre}" var="selec"/>
+								</c:otherwise>
+							</c:choose>
+			
+						</c:forEach>
+					</form:select>
 					
 	
 					<form:select path="ambitoImpacto" id="ambitoImpacto" class="form-control" value="${proyecto.ambitoImpacto }" required="true">
