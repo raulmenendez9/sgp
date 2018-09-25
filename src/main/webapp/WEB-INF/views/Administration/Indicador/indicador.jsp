@@ -144,7 +144,6 @@
 </div>
 
 
-
 <!-- /.col-lg-12 -->
 					
 <c:forEach items="${indicadores}" var="indicador">

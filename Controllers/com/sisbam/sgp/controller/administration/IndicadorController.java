@@ -135,7 +135,6 @@ public class IndicadorController {
 				List<VariableImpacto> variableImpactos = (List<VariableImpacto>) this.manage_entity.getAll("VariableImpacto");
 				model.addAttribute("variableImpactos", variableImpactos);
 				
-				
 				retorno=path+"indicador-form";
 
 			}

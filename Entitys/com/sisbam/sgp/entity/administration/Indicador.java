@@ -29,7 +29,6 @@ public class Indicador implements java.io.Serializable {
 	@Transient
 	private VariableImpacto variableImpacto;
 	
-	
 	public Indicador() {
 		
 	}
