@@ -17,7 +17,7 @@
 				<thead>
 					<tr>
 						<th>Nombre</th>
-						<th>Tarea</th>
+				
 						<th>Descripción</th>
 						<th>Opciones</th>
 					</tr>
@@ -26,7 +26,7 @@
 					<c:forEach items="${actividades}" var="actividad">
 						<tr style="color:#0B0B61;">
 							<td>${actividad.nombre }</td>
-							 <td>${actividad.tarea.nombre }</td>
+				
 							 	<td>${actividad.descripcion}</td>
 							
 							
@@ -36,7 +36,9 @@
 							</c:if>
 							<c:if test="${deleteactividadP}">		
 									<a class="" href="/sgp/actividades/delete/${actividad.idActividad}" data-toggle="modal"data-target="#""><i class="fa fa-trash" aria-hidden="true"></i></a>
-							</c:if>						
+							</c:if>	
+							
+							<a class="" href="/sgp/tareas/${actividad.idActividad}" data-toggle="modal"data-target="#""><i class="fa fa-trash" aria-hidden="true"></i></a>					
 						</td>
 						</tr>
 					</c:forEach>
@@ -66,19 +68,29 @@
 				
 			</div>
 			
+			<div class="row">
+				<div class="input-field col s6">
+					<form:input path="descripcion" class="form-control" placeholder="Descripción"
+						type="text" id="descripcion" value="${actividad.descripcion }" />
+				</div>
+			</div>
+			
+			
+			
+			
 
 			<div class="row">
 				<div class="input-field col s12">
-					<form:select path="idTarea" class="form-control" required="true">
-						<option value="" disabled selected>Seleccione una Tarea</option>
-						<c:forEach items="${tareas}" var="p">
+					<form:select path="codProyecto" class="form-control" required="true">
+						<option value="" disabled selected>Seleccione un proyecto</option>
+						<c:forEach items="${proyectos}" var="p">
 							<c:choose>
-								<c:when test="${actividad.tara.idTarea == p.idTarea}">
-									<form:option value="${p.idTarea }" label="${p.nombre}"
+								<c:when test="${actividad.proyecto.codProyecto == p.codProyecto}">
+									<form:option value="${p.codProyecto }" label="${p.solicitud.titulo}"
 										selected="true" />
 								</c:when>
 								<c:otherwise>
-									<form:option value="${p.idTarea }" label="${p.nombre}" />
+									<form:option value="${p.codProyecto }" label="${p.solicitud.titulo}" />
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
@@ -86,12 +98,7 @@
 				</div>
 			</div>
 			
-			<div class="row">
-				<div class="input-field col s6">
-					<form:input path="descripcion" class="form-control" placeholder="Descripción"
-						type="text" id="descripcion" value="${actividad.descripcion }" />
-				</div>
-			</div>
+			
 
 			
 			<form:hidden path="idActividad" value="${actividad.idActividad}" />
@@ -129,24 +136,27 @@
 			</div>
 			
 
+
+			
 			<div class="row">
 				<div class="input-field col s12">
-					<form:select path="idTarea" class="form-control" required="true">
-						<option value="" disabled selected>Seleccione una Tarea</option>
-						<c:forEach items="${tareas}" var="p">
+					<form:select path="codProyecto" class="form-control" required="true">
+						<option value="" disabled selected>Seleccione un proyecto</option>
+						<c:forEach items="${proyectos}" var="p">
 							<c:choose>
-								<c:when test="${actividad.tarea.idTarea == p.idTarea}">
-									<form:option value="${p.idTarea }" label="${p.nombre}"
+								<c:when test="${actividad.proyecto.codProyecto == p.codProyecto}">
+									<form:option value="${p.codProyecto }" label="${p.solicitud.titulo}"
 										selected="true" />
 								</c:when>
 								<c:otherwise>
-									<form:option value="${p.idTarea }" label="${p.nombre}" />
+									<form:option value="${p.codProyecto }" label="${p.solicitud.titulo}" />
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
 					</form:select>
 				</div>
 			</div>
+			
 			
 			<div class="row">
 				<div class="input-field col s6">

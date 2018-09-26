@@ -17,6 +17,7 @@ import com.sisbam.sgp.controller.variety.ObtenerPermisosPorUrl;
 import com.sisbam.sgp.dao.DaoImp;
 import com.sisbam.sgp.entity.administration.Tarea;
 import com.sisbam.sgp.entity.administration.Actividad;
+import com.sisbam.sgp.entity.administration.Proyecto;
 import com.sisbam.sgp.entity.security.Permisos;
 
 @Controller
@@ -51,10 +52,11 @@ public class ActividadController {
 			model.addAttribute("actividad", null);
 
 			List<Actividad> actividades = (List<Actividad>) this.manage_entity.getAll("Actividad");
-			
-		  List<Tarea> tareas = (List<Tarea>) this.manage_entity.getAll("Tarea");
+			List<Proyecto> proyectos = (List<Proyecto>) this.manage_entity.getAll("Proyecto");
+	
+	
 				model.addAttribute("actividades", actividades);
-				model.addAttribute("tareas", tareas);
+				model.addAttribute("proyectos",proyectos);
 			retorno = path+"actividad";
 		}
 		return retorno;
@@ -68,11 +70,11 @@ public class ActividadController {
 		String retorno = "403";
 		if(permisos.isC()){
 			Actividad actividad = new Actividad();
-			List<Tarea> tareas = (List<Tarea>) this.manage_entity.getAll("Tarea");
+			List<Proyecto> proyectos = (List<Proyecto>) this.manage_entity.getAll("Proyecto");
 			
 			model.addAttribute("actividadForm", actividad);
 			model.addAttribute("actividad", null);
-			model.addAttribute("tareas", tareas);
+			model.addAttribute("proyectos", proyectos);
 			
 			retorno = path+"actividad-form";
 		}
@@ -88,8 +90,8 @@ public class ActividadController {
 			if(permisos.isC())
 			{
 					Actividad actividad = actividadRecibido;
-					Tarea tareaSeleccionada = (Tarea) this.manage_entity.getById(Tarea.class.getName(), actividad.getIdTarea());
-					actividad.setTarea(tareaSeleccionada);
+					Proyecto proyectoRecibido = (Proyecto) this.manage_entity.getById(Proyecto.class.getName(), actividad.getCodProyecto());
+					actividad.setProyecto(proyectoRecibido);
 					if(actividad.getIdActividad()==0) {
 						manage_entity.save(Actividad.class.getName(), actividad);
 					}else{
@@ -111,8 +113,8 @@ public class ActividadController {
 				Actividad actividadForm = new Actividad();
 				model.addAttribute("actividadForm", actividadForm);
 				
-				List<Tarea> tareas = (List<Tarea>) this.manage_entity.getAll("Tarea");
-				model.addAttribute("tareas", tareas);
+				List<Proyecto> proyectos = (List<Proyecto>) this.manage_entity.getAll("Proyecto");
+				model.addAttribute("proyectos", proyectos);
 				retorno=path+"actividad-form";
 			}
 			

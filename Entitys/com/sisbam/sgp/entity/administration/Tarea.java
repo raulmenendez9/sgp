@@ -32,33 +32,41 @@ public class Tarea implements java.io.Serializable {
 	private int idTarea;
 	private String nombre;
 	private String descripcion;
-	private Date fechaInicio;
-	private Date fechaFin;
-	private int duracion;
-	private String prioridad;
 	private Recurso recurso;
-	
-	
+	private Actividad actividad;
 	
 	public Tarea() {
 		
 	}
-	
+		
 
-	public Tarea(int idTarea, String nombre, String descripcion, Date fechaInicio, Date fechaFin, int duracion,
-			String prioridad, Recurso recurso) {
+ 
+   
+	public Tarea(int idTarea, String nombre, String descripcion, Recurso recurso) {
 	
 		this.idTarea = idTarea;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.fechaInicio = fechaInicio;
-		this.fechaFin = fechaFin;
-		this.duracion = duracion;
-		this.prioridad = prioridad;
 		this.recurso = recurso;
 	}
 
 
+
+	@Transient
+	private int idActividad;
+
+	@Transient
+	public int getIdActividad() {
+		return idActividad;
+	}
+
+	@Transient
+	public void setIdActividad(int idActividad) {
+		this.idActividad = idActividad;
+	}
+	
+
+	
 	@Transient
 	private int idRecurso;
 
@@ -102,6 +110,18 @@ public class Tarea implements java.io.Serializable {
 	
 	
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idActividad")
+	public Actividad getActividad() {
+		return this.actividad;
+	}
+
+	public void setActividad(Actividad actividad ) {
+		this.actividad = actividad;
+	}
+	
+	
+
 	@Column(name = "nombre", nullable = false, length = 256)
 	public String getNombre() {
 		return nombre;
@@ -110,7 +130,8 @@ public class Tarea implements java.io.Serializable {
 		this.nombre= nombre;
 	}
 	
-	@Column(name = "descripcion", nullable = false, length = 256)
+	
+	@Column(name = "descripcion", nullable = true, length = 256)
 	public String getDescripcion() {
 		return descripcion;
 	}
@@ -120,54 +141,6 @@ public class Tarea implements java.io.Serializable {
 	
 	
 	
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(iso = ISO.DATE)
-	@Column(name = "fechaInicio", nullable = false, length = 256)
-	public Date getFechaInicio() {
-		return fechaInicio;
-	}
-
-	public void setFechaInicio(Date fechaInicio) {
-		this.fechaInicio = fechaInicio;
-	}
-	
-	
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(iso = ISO.DATE)
-	@Column(name = "fechaFin", nullable = false, length = 256)
-	public Date getFechaFin() {
-		return fechaFin;
-	}
-
-	public void setFechaFin(Date fechaFin) {
-		this.fechaFin = fechaFin;
-	}
-	
-	
-
-	@Column(name = "duracion", nullable = false, length = 256)
-	public int getDuracion() {
-		return duracion;
-	}
-	public void setDuracion(int duracion) {
-		this.duracion= duracion;
-	}
-	
-	
-	
-	@Column(name = "prioridad", nullable = false, length = 50)
-	public String getPrioridad() {
-		return prioridad;
-	}
-	public void setPrioridad(String prioridad) {
-		this.prioridad= prioridad;
-	}
-	
-	
-	
-
-	
-
 	}
 	
 	

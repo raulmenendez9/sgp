@@ -19,33 +19,34 @@ public class Actividad {
 	private int idActividad;
 	private String nombre;
 	private String descripcion;
+	private Proyecto proyecto;
 	
-	@Transient
-	private Tarea tarea;
+	
+	
 	
      public Actividad() {
 		
 	  }	
 	
-	public Actividad(int idActividad, String nombre, String descripcion, Tarea tarea) {
+	public Actividad(int idActividad, String nombre, String descripcion, Proyecto proyecto) {
 		
 		this.idActividad = idActividad;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.tarea = tarea;
+		this.proyecto = proyecto;
 	}
 	
 	@Transient
-	private int idTarea;
+	private int codProyecto;
 
 	@Transient
-	public int getIdTarea() {
-		return idTarea;
+	public int getCodProyecto() {
+		return codProyecto;
 	}
 
 	@Transient
-	public void setIdTarea(int idTarea) {
-		this.idTarea = idTarea;
+	public void setCodProyecto(int codProyecto) {
+		this.codProyecto = codProyecto;
 	}
 
 	@Id
@@ -61,13 +62,13 @@ public class Actividad {
 	}
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idTarea")
-	public Tarea getTarea() {
-		return this.tarea;
+	@JoinColumn(name = "codPoyecto")
+	public Proyecto getProyecto() {
+		return this.proyecto;
 	}
 
-	public void setTarea(Tarea tarea) {
-		this.tarea = tarea;
+	public void setProyecto(Proyecto proyecto) {
+		this.proyecto = proyecto;
 	}
 
 	@Column(name = "nombre", nullable = false, length = 50)

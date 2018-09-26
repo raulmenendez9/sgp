@@ -1,4 +1,4 @@
-package com.sisbam.sgp.entity.administration;
+package com.sisbam.sgp.controller.administration;
 
 import java.util.List;
 
@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.sisbam.sgp.controller.variety.ObtenerPermisosPorUrl;
 import com.sisbam.sgp.dao.DaoImp;
+import com.sisbam.sgp.entity.administration.Actividad;
 import com.sisbam.sgp.entity.administration.Empleado;
 import com.sisbam.sgp.entity.administration.Proyecto;
+import com.sisbam.sgp.entity.administration.Recurso;
 import com.sisbam.sgp.entity.administration.Solicitud;
+import com.sisbam.sgp.entity.administration.Tarea;
 import com.sisbam.sgp.entity.administration.TipoProyecto;
 import com.sisbam.sgp.entity.administration.Usuario;
 import com.sisbam.sgp.entity.security.Permisos;
@@ -31,11 +34,11 @@ public class TareaController {
 	
 	private Permisos permisos;
 
-	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/tareas", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/tareas",  method = RequestMethod.GET)
 	
 	//INDEX
-	public String index(Model model, HttpServletRequest request) {
+	public String index( Model model, HttpServletRequest request)throws ClassNotFoundException {
 		
 		String retorno = "403";
 		
@@ -47,17 +50,25 @@ public class TareaController {
 		
 		
 		if(permisos.isR())
+			
+			
 		{
+	
+			
 			Tarea tarea = new Tarea();
 			model.addAttribute("tareaForm", tarea);
 			model.addAttribute("tarea", null);
 	
-			List<Tarea> tareas = (List<Tarea>) this.manage_entity.getAll("Tarea");
+			
+			//List<Tarea> tareas = (List<Tarea>) this.manage_entity.getListByName("Tarea", "idActividad", "idActividad");
 			List<Recurso> recursos = (List<Recurso>) this.manage_entity.getAll("Recurso");
+			List<Tarea> tareas = (List<Tarea>) this.manage_entity.getAll("Tarea");
+			List<Actividad> actividades = (List<Actividad>) this.manage_entity.getAll("Actividad");
 	
 				
 			model.addAttribute("tareas", tareas);
 			model.addAttribute("recursos", recursos);
+			model.addAttribute("actividades", actividades);
 		
 			retorno = path+"tarea";
 		}
@@ -74,10 +85,12 @@ public class TareaController {
 		if(permisos.isC()){
 			Tarea tarea = new Tarea();
 			List<Recurso> recursos = (List<Recurso>) this.manage_entity.getAll("Recurso");
+			List<Actividad> actividades = (List<Actividad>) this.manage_entity.getAll("Actividad");
 			
 	    	model.addAttribute("tareaForm", tarea);
 			model.addAttribute("tarea", null);
 			model.addAttribute("recursos", recursos);
+			model.addAttribute("actividades", actividades);
 			
 			
 			retorno = path+"tarea-form";
@@ -96,6 +109,9 @@ public class TareaController {
 					Tarea tarea = tareaRecibida;
 					Recurso recursoRecibido = (Recurso) this.manage_entity.getById(Recurso.class.getName(), tarea.getIdRecurso());
 					tarea.setRecurso(recursoRecibido);
+					
+					Actividad actividadRecibida = (Actividad) this.manage_entity.getById(Actividad.class.getName(), tarea.getIdActividad());
+					tarea.setActividad(actividadRecibida);
 					
 					
 					if(tarea.getIdTarea()==0) {
@@ -123,6 +139,9 @@ public class TareaController {
 						
 						List<Recurso> recursos = (List<Recurso>) this.manage_entity.getAll("Recurso");
 						model.addAttribute("recursos", recursos);
+						
+						List<Actividad> actividades = (List<Actividad>) this.manage_entity.getAll("Actividad");
+						model.addAttribute("actividades", actividades);
 					
 						retorno=path+"tarea-form";
 					}
