@@ -40,10 +40,14 @@ public class Proyecto implements java.io.Serializable {
 	private String antecedentes;
 	private String metodologia;
 	private int duracion;
-	
+	//
+	private String objeitovG;
+	private String objetivoE1;
+	private String objetivoE2;
+	private String lineaBase;
+	private String medidaSostenibilidad;
+	//
 	private Solicitud solicitud;
-	
-	private Actividad actividad;
 	
 	public Proyecto() {
 		
@@ -51,8 +55,12 @@ public class Proyecto implements java.io.Serializable {
 		
 	public Proyecto(int codProyecto, String ambitoImpacto, Date fechaInicio, Date fechaFin, int duracion, String tipoFinanciamiento,
 			float montoAprobado, String patrocinadores, String resumen, String planteamiento, String antecedentes,
-			String metodologia, Solicitud solicitud, Actividad actividad) {
+			String metodologia, Solicitud solicitud, String objetivoG,String objetivoE1,String objetivoE2,String medidadSostenibilidad) {
 	
+		this.objeitovG=objetivoG;
+		this.objetivoE1=objetivoE1;
+		this.objetivoE2=objetivoE2;
+		this.medidaSostenibilidad=medidaSostenibilidad;
 		this.codProyecto = codProyecto;
 		this.ambitoImpacto = ambitoImpacto;
 		this.fechaInicio = fechaInicio;
@@ -66,7 +74,6 @@ public class Proyecto implements java.io.Serializable {
 		this.antecedentes = antecedentes;
 		this.metodologia = metodologia;
 		this.solicitud = solicitud;
-		this.actividad= actividad;
 	}
 
 	@Transient
@@ -202,30 +209,53 @@ public class Proyecto implements java.io.Serializable {
 	public void setMetodologia(String metodologia) {
 		this.metodologia= metodologia;
 	}
+
+	@Column(name = "objGeneral", nullable = false, length = 256)
+	public String getObjeitovG() {
+		return objeitovG;
+	}
+
+	public void setObjeitovG(String objeitovG) {
+		this.objeitovG = objeitovG;
+	}
+
+	@Column(name = "objEsp1", nullable = false, length = 256)
+	public String getObjetivoE1() {
+		return objetivoE1;
+	}
+
 	
-	@Transient
-	private int idActividad;
-
-	@Transient
-	public int getIdActividad() {
-		return idActividad;
+	public void setObjetivoE1(String objetivoE1) {
+		this.objetivoE1 = objetivoE1;
 	}
 
-	@Transient
-	public void setIdActividad(int idActividad) {
-		this.idActividad = idActividad;
-	}
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "idActividad")
-	public Actividad getActividad() {
-		return this.actividad;
+	@Column(name = "objEsp2", nullable = false, length = 256)
+	public String getObjetivoE2() {
+		return objetivoE2;
 	}
 
-	public void setActividad(Actividad actividad) {
-		this.actividad = actividad;
+	public void setObjetivoE2(String objetivoE2) {
+		this.objetivoE2 = objetivoE2;
+	}
+
+	@Column(name = "linea", nullable = true, length = 256)
+	public String getLineaBase() {
+		return lineaBase;
+	}
+
+	public void setLineaBase(String lineaBase) {
+		this.lineaBase = lineaBase;
+	}
+
+	@Column(name = "medidas", nullable = true, length = 256)
+	public String getMedidaSostenibilidad() {
+		return medidaSostenibilidad;
+	}
+
+	public void setMedidaSostenibilidad(String medidaSostenibilidad) {
+		this.medidaSostenibilidad = medidaSostenibilidad;
 	}
 	
-
-	}
+}
 	
 	
