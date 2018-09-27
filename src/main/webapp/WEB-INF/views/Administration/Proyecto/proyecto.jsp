@@ -60,10 +60,13 @@
 		<form:form method="post" modelAttribute="proyectoForm"
 			action="/sgp/proyectos/add" id="registro" autocomplete="off" accept-charset="ISO-8859-1">
            
-			<div class="row">
-			 <h5 style="text-align: center; "> Datos Generales</h5>
+         
+			<div class="row">  
+			 <fieldset style="border-radius:15px;">
+			 <legend><h5 style="text-align: center; "> Datos Generales</h5></legend>
+				
 				<div class="input-field col s12">
-					<form:select path="codSolicitud" id="form-proyecto" class="form-control" required="true"  >
+					<form:select path="codSolicitud" id="form-proyecto" class="form-control" required="required"  >
 						<option value="" disabled selected>Seleccione un titulo</option>
 						<c:forEach items="${solicitudes}" var="p">
 							<c:choose>
@@ -79,47 +82,58 @@
 						</c:forEach>
 						
 					</form:select>
-					
-					<div class="row">
-				<div class="input-field col s12">
-					<form:input path="objeitovG" class="form-control" placeholder="Objetivo General."
-						type="text" id="objeitovG" value="${proyecto.objeitovG }" required="required"/>
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="input-field col s12">
-					<form:input path="objetivoE1" class="form-control" placeholder="Objetivo Especifico"
-						type="text" id="objetivoE1" value="${proyecto.objetivoE1 }" required="required"/>
-				</div>
-			</div>
-			
-			
-			<div class="row">
-				<div class="input-field col s12">
-					<form:input path="objetivoE2" class="form-control" placeholder="Objetivo Especifico"
-						type="text" id="objetivoE2" value="${proyecto.objetivoE2 }" required="required"/>
-				</div>
-			</div>
-							
-					<form:select path="ambitoImpacto" id="ambitoImpacto" class="form-control" value="${proyecto.ambitoImpacto }" required="true">
+												
+					<form:select path="ambitoImpacto" id="ambitoImpacto" class="form-control" value="${proyecto.ambitoImpacto }" required="required">
 +				<option value="" disabled selected>Elige un area de impacto</option>
 +				<option value="nacional">Nacional</option>
 +				<option value="regional">Regional</option>
 +				<option value="academico">Academico</option>			
 +		    </form:select>
+					
+					<div class="row">
+				<div class="input-field col s12">
+					<form:input path="objeitovG" class="validate"
+						type="text" id="objeitovG" value="${proyecto.objeitovG }" required="required"/>
+						<label for="objeitovG">Objetivo General</label>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="input-field col s12">
+					<form:input path="objetivoE1" class="validate" 
+						type="text" id="objetivoE1" value="${proyecto.objetivoE1 }" required="required"/>
+					<label for="objetivoE1">Objetivo Especifico</label>
+				</div>
+			</div>
+			
+			
+			<div class="row">
+				<div class="input-field col s12">
+					<form:input path="objetivoE2" class="validate" 
+						type="text" id="objetivoE2" value="${proyecto.objetivoE2 }" required="required"/>
+					<label for="objetivoE2">Objetivo Especifico</label>
+				</div>
+			</div>
 
 			
 			<div class="row">
 				<div class="input-field col s12">
-					<form:input path="lineaBase" class="form-control" placeholder="Linea Base"
-						type="text" id="objetivoE1" value="${proyecto.lineaBase }" required="required"/>
+					<form:input path="lineaBase" class="form-control" 
+						type="text" id="lineaBase" value="${proyecto.lineaBase }" />
+				<label for="lineaBase">Objetivo Especifico</label>
 				</div>
 			</div>
 			
-			 <h5 style="text-align: center; "> Tiempo y financiamiento</h5>
+			
+			
+			
+			 
 			
 				</div>
+				</fieldset>
+				
+				<fieldset style="border-radius:15px;">
+				<legend><h5 style="text-align: center; "> Tiempo y financiamiento</h5></legend>
 			<div class="date">
 			 
 				<div class="input-field col s6">
@@ -148,7 +162,7 @@
 				</div>
 				</div>
 				
-				<form:select path="tipoFinanciamiento" id="tipofinanciamiento" class="form-control" value="${proyecto.tipoFinanciamiento }" required="true">
+				<form:select path="tipoFinanciamiento" id="tipofinanciamiento" class="form-control" value="${proyecto.tipoFinanciamiento }" required="required">
 				<option value="" disabled selected>Elige un tipo de financiamiento</option>
 				<option value="donacion">Donacion</option>
 				<option value="aporte">Aporte</option>
@@ -158,70 +172,78 @@
 
 			<div class="row">
 				<div class="input-field col s12">
-					<form:input path="montoAprobado" class="form-control" placeholder="MontoAprobado."
-						type="decimal" id="montoAprobado" value="${proyecto.montoAprobado }" required="required"/>
+					<form:input path="montoAprobado" class="form-control" 
+						type="number" id="montoAprobado" value="${proyecto.montoAprobado }" required="required"/>
+					<label for="montoAprobado">Monto Asigando</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-					<form:textarea path="patrocinadores"  id="patrocinadores" class="form-control" placeholder="Patrocinadores"
+					<form:textarea path="patrocinadores"  id="patrocinadores" class="materialize-textarea"
 					rows="8" cols="80"	 value="${proyecto.patrocinadores }" required="required"  style="font-size:15px;"/>
+					<label for="patrocinadores">Patrocinadores</label>
 				</div>
 			</div>
-			
+			</fieldset>
 			
 			<form:hidden path="codProyecto" value="${proyecto.codProyecto}" />
 			
-					
-					 <h5 style="text-align: center; "> Protocolo del Proyecto</h5>
+	<fieldset style="border-radius:15px;">
+					 <legend><h5 style="text-align: center; "> Protocolo del Proyecto</h5></legend>
 					
 					<div class="row">
 				<div class="input-field col s12">
-					<form:textarea path="resumen" id="resumen" class="form-control" placeholder="Resumen..."
+					<form:textarea path="resumen" id="resumen" class="materialize-textarea" 
 						 rows="8" cols="80"  value="${proyecto.resumen }" required="required" style="font-size:15px;"/>
+						 <label for="resumen">Resumen</label>
 				</div>
 			</div>
 			
 			
 			<div class="row">
 				<div class="input-field col s12">
-					<form:textarea path="planteamiento" id="planteamiento"  class="form-control" placeholder="Planteamiento del problema"
+					<form:textarea path="planteamiento" id="planteamiento"  class="materialize-textarea" 
 						rows="8" cols="80" value="${proyecto.planteamiento }" required="required" style="font-size:15px;"/>
+						<label for="planteamiento">Planteamiento</label>
 				</div>
 			</div>
 			
 			
 			<div class="row">
 				<div class="input-field col s12">
-					<form:textarea path="antecedentes" id="antecedentes" class="form-control" placeholder="Antecedentes del proyecto"
-						rows="8" cols="80"  value="${proyecto.antecedentes }" required="required"  style="font-size:15px;"/>
+					<form:textarea path="antecedentes" id="antecedentes" class="materialize-textarea"
+						rows="8" cols="80"  value="${proyecto.antecedentes }" required="required" style="font-size:15px;"/>
+						<label for="antecedentes">Antecedentes</label>
 				</div>
 			</div>
 					
 					
 					<div class="row">
 				<div class="input-field col s12">
-					<form:textarea path="metodologia" id="metodologia" class="form-control" placeholder="Metodologia o Tecnicas"
-					rows="8" cols="80"	 value="${proyecto.metodologia }" required="required"  style="font-size:15px;"/>
+					<form:textarea path="metodologia" id="metodologia" class="materialize-textarea" 
+					rows="8" cols="80"	 value="${proyecto.metodologia }" style="font-size:15px;"/>
+					<label for="metodologia">Metodologia</label>
 				</div>
 			</div>
 			
 			
 			<div class="row">
 				<div class="input-field col s12">
-					<form:input path="medidaSostenibilidad" class="form-control" placeholder="Medida de sostenibilidad"
-						type="text" id="ms" value="${proyecto.medidaSostenibilidad }" required="required"/>
+					<form:textarea path="medidaSostenibilidad" class="materialize-textarea" 
+						type="text" id="ms" value="${proyecto.medidaSostenibilidad }"/>
+						<label for="medidaSostenibilidad">Medida de sostenibilidad</label>
 				</div>
 			</div>
 					
 					
 				</div>
 			</div>
-			
+
+			<br>
 			
 			
 
-		
+		</fieldset>
 
 			<div class="center">
 				<form:button type="submit"
