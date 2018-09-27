@@ -166,12 +166,11 @@
 			action="/sgp/solicitudesapro/add" id="registro" autocomplete="off" accept-charset="ISO-8859-1">
 
 			<div class="row">
-				<div class="input-field col s6">
+				<div class="input-field col s12">
 					<form:input path="titulo" class="form-control" placeholder="Titulo"
-						type="text" id="titulo" value="${solicitud.titulo}" />
+						type="text" id="titulo" value="${solicitud.titulo}"/>
 
-				</div>
-				</div>
+				</div></div>
 
 			<div class="row">
 				<div class="input-field col s12">
@@ -191,26 +190,45 @@
 					</form:select>
 				</div>
 			</div>
-			<div class="row">
+			
 				<div class="input-field col s6">
-					<form:input path="fecha" class="form-control" placeholder="Fecha"
+					<form:select path="idTipoProyecto" class="form-control" required="true">
+						<option value="" disabled selected>Selecione un tipo de proyectos</option>
+						<c:forEach items="${tiposProyectos}" var="p">
+							<c:choose>
+								<c:when test="${solicitud.tipoProyecto.idTipoProyecto == p.idTipoProyecto}">
+									<form:option value="${p.idTipoProyecto }" label="${p.nombre}"
+										selected="true" />
+								</c:when>
+								<c:otherwise>
+									<form:option value="${p.idTipoProyecto }" label="${p.nombre}" />
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</form:select>
+				</div>
+				
+			<div class="date">
+				<div class="input-field col s6">
+					<form:input path="fecha" class="form-control" placeholder="fecha"
 						type="date" id="fecha" value="${solicitud.fecha }" />
 				</div>
 			</div>
+			
 
 			<div class="row">
 				<div class="input-field col s12">
 					<form:input path="justificacion" class="form-control" placeholder="Justificacion"
-						type="text" id="justificacion" value="${solicitud.justificacion }" />
+						type="text" id="justificacion" value="${solicitud.justificacion }"/>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
 					<form:input path="objeto" class="form-control" placeholder="Objeto"
-						type="text" id="objeto" value="${solicitud.objeto }" />
+						type="text" id="objeto" value="${solicitud.objeto }"/>
 				</div>
 			</div>
-
+			
 			<form:hidden path="codSolicitud" value="${solicitud.codSolicitud}" />
 
 			<div class="center">
@@ -226,9 +244,3 @@
 	</div>
 </div>
 </c:forEach>
-
-
-
-
-
-

@@ -270,7 +270,7 @@
 	<div class="modal-content">
 
   <form:form method="post" modelAttribute="proyectoForm"
-			action="/sgp/proyectos/add" id="registro" autocomplete="off" accept-charset="ISO-8859-1">
+			action="/sgp/proyectosadd" id="registro" autocomplete="off" accept-charset="ISO-8859-1">
 			
 			
 			

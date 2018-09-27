@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -44,7 +45,8 @@ public class ProyectoController {
 		ObtenerPermisosPorUrl facilitador = new ObtenerPermisosPorUrl();
 		session = facilitador.Obtener("/sgp/proyectos", request, manage_entity,IDENTIFICADOR);
 		permisos = (Permisos) session.getAttribute("permisos-de-"+IDENTIFICADOR);
-			
+		String usuario = ""+SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		System.out.println(usuario);
 		
 		
 		if(permisos.isR())

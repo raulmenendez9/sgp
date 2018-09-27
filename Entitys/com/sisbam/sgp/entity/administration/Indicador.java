@@ -29,6 +29,8 @@ public class Indicador implements java.io.Serializable {
 	@Transient
 	private VariableImpacto variableImpacto;
 	
+	private VariableImpacto variableImpacto2;
+	
 	public Indicador() {
 		
 	}
@@ -69,6 +71,20 @@ public class Indicador implements java.io.Serializable {
 	public void setIdVariableImpacto(int idVariableImpacto) {
 		this.idVariableImpacto = idVariableImpacto;
 	}
+	
+	@Transient
+	private int idVariableImpacto2;
+
+	@Transient
+	public int getIdVariableImpacto2() {
+		return idVariableImpacto2;
+	}
+
+	@Transient
+	public void setIdVariableImpacto2(int idVariableImpacto2) {
+		this.idVariableImpacto2 = idVariableImpacto2;
+	}
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "indicador_idindicador_seq")
@@ -101,10 +117,8 @@ public class Indicador implements java.io.Serializable {
 	public void setVariableImpacto(VariableImpacto variableImpacto ) {
 		this.variableImpacto = variableImpacto;
 	}
+	
 
-	
-	
-	
 	@Column(name = "nombre", nullable = false, length = 256)
 	public String getNombre() {
 		return nombre;
@@ -119,6 +133,17 @@ public class Indicador implements java.io.Serializable {
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "idVariableImpacto2")
+	public VariableImpacto getVariableImpacto2() {
+		return variableImpacto2;
+	}
+
+	public void setVariableImpacto2(VariableImpacto variableImpacto2) {
+		this.variableImpacto2 = variableImpacto2;
 	}
 	
 	

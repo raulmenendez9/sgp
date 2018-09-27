@@ -31,7 +31,7 @@ public class IndicadorController {
 	private DaoImp manage_entity;
 	
 	private String path = "Administration/Indicador/";
-	private static final String IDENTIFICADOR = "tipoS";
+	private static final String IDENTIFICADOR = "ind2";
 	
 	private Permisos permisos;
 
@@ -107,6 +107,9 @@ public class IndicadorController {
 					VariableImpacto variableImpactoRecibido = (VariableImpacto) this.manage_entity.getById(VariableImpacto.class.getName(), indicador.getIdVariableImpacto());
 					indicador.setVariableImpacto(variableImpactoRecibido);
 					
+					VariableImpacto variableImpactoRecibido2 = (VariableImpacto) this.manage_entity.getById(VariableImpacto.class.getName(), indicador.getIdVariableImpacto2());
+					indicador.setVariableImpacto2(variableImpactoRecibido2);
+					
 					
 					if(indicador.getIdIndicador()==0) {
 						manage_entity.save(Indicador.class.getName(), indicador);
@@ -126,17 +129,17 @@ public class IndicadorController {
 			{
 				Indicador indicador = (Indicador) manage_entity.getById(Indicador.class.getName(), Integer.parseInt(idIndicador));
 				model.addAttribute("indicador", indicador);
+				
 				Indicador indicadorForm = new Indicador();
 				model.addAttribute("indicadorForm", indicadorForm);
 				
-				List<Proyecto> proyectos = (List<Proyecto>) this.manage_entity.getAll("Proyecto");
-				model.addAttribute("proyectos", proyectos);
+				List<Proyecto> Proyecto = (List<Proyecto>) this.manage_entity.getAll("Proyecto");
+				model.addAttribute("proyecto", Proyecto);
 				
-				List<VariableImpacto> variableImpactos = (List<VariableImpacto>) this.manage_entity.getAll("VariableImpacto");
-				model.addAttribute("variableImpactos", variableImpactos);
-				
-				retorno=path+"indicador-form";
 
+				List<VariableImpacto> vsi = (List<VariableImpacto>) this.manage_entity.getAll("VariableImpacto");
+				model.addAttribute("variablesimpacto", vsi);
+				retorno=path+"indicador-form";
 			}
 			
 			return retorno;
