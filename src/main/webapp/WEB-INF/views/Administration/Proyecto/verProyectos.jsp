@@ -58,7 +58,7 @@
 			<form:hidden path="codSolicitud" value="${proyecto.solicitud.codSolicitud}" />	
 					
 					
-					<form:select path="ambitoImpacto" id="ambitoImpacto" class="form-control" value="${proyecto.ambitoImpacto }" required="true" readonly="true">
+					<form:select path="ambitoImpacto" id="ambitoImpacto" class="form-control" value="${proyecto.ambitoImpacto }" required="true" >
 +				<option value="" disabled selected>Elige un area de impacto</option>
 +				<option value="nacional">Nacional</option>
 +				<option value="regional">Regional</option>
@@ -131,7 +131,7 @@
 				</div>
 				</div>
 				
-			<form:select path="tipoFinanciamiento" id="tipofinanciamiento" class="form-control" value="${proyecto.tipoFinanciamiento }" required="true" readonly="true">
+			<form:select path="tipoFinanciamiento" id="tipofinanciamiento" class="form-control" value="${proyecto.tipoFinanciamiento }" required="true" >
 				<option value="" disabled selected>Elige un tipo de financiamiento</option>
 				<option value="donacion">Donacion</option>
 				<option value="aporte">Aporte</option>
