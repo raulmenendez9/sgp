@@ -160,6 +160,11 @@
     	<put-attribute name="titulo" value="Actividad" />
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Actividad/actividad.jsp"/>
 	</definition>
+	
+	<definition name="Administration/Proyecto/verProyectos" extends="materializeTemplateForm">
+    	<put-attribute name="titulo" value="Ver Proyectos" />
+		<put-attribute name="content" value="/WEB-INF/views/Administration/Proyecto/verProyectos.jsp"/>
+	</definition>
 	<!-- 	/ADMINISTRATION -->	
 
 
