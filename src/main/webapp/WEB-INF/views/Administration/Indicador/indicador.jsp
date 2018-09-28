@@ -114,11 +114,12 @@
 
 
 								<div class="row">
+								<h5 style="text-align: center;">Cálculo de Indicador Ideal</h5>
 									<div class="input-field col s6">
+									
 										<form:select path="idVariableImpacto" id="form-indicador"
 											class="form-control" required="true">
-											<option value="" disabled selected>Seleccione
-												Variable Impacto</option>
+											<option value="" disabled selected>Seleccione Variable Impacto 1</option>
 											<c:forEach items="${variableImpactos}" var="i">
 												<c:choose>
 													<c:when
@@ -136,7 +137,7 @@
 										</form:select>
 									</div>
 									<div class="input-field col s4">
-									<input id="num1" type="number" />
+									<input id="num1" type="number"  placeholder="Valor de variable"/>
 									</div>
 									</div>
 									
@@ -144,8 +145,7 @@
 									<div class="input-field col s6">
 										<form:select path="idVariableImpacto2" id="form-indicador"
 											class="form-control" required="true">
-											<option value="" disabled selected>Seleccione
-												Variable Impacto</option>
+											<option value="" disabled selected>Seleccione Variable Impacto 2</option>
 											<c:forEach items="${variableImpactos}" var="i">
 												<c:choose>
 													<c:when
@@ -163,7 +163,7 @@
 										</form:select>
 									</div>
 									<div class="input-field col s4">
-									<input id="num2" type="number" />
+									<input id="num2" type="number"  placeholder="Valor de variable"/>
 									</div>
 									</div>
 			
@@ -175,6 +175,7 @@
 	</center>
 	<div class="row">
 <div  class="input-field col s12">
+<h5 style="text-align: left;">Indicador Ideal</h5>
 			<form:input path="indicadorR" class="form-control" placeholder="Indicador Real"
 						type="text"   value="${indicador.indicadorR}" required="required" id="resultado"/>
 				</div>
@@ -369,11 +370,11 @@ function operaciones(op)
 
 
 
-    //Comprobamos si se ha introducido números en las cajas
+    //Comprobamos si se ha introducido numeros en las cajas
 
     if (isNaN(parseFloat(document.getElementById('num1').value))) {
 
-        alert("Indique un número en 'numero1'");
+        alert("Indique un numero en 'numero1'");
 
         document.getElementById("num1").innerText = "0";
 
@@ -381,7 +382,7 @@ function operaciones(op)
 
         } else if (isNaN(parseFloat(document.getElementById('num2').value))) {
 
-        alert("Indique un número en 'numero2'");
+        alert("Indique un numero en 'numero2'");
 
         document.getElementById("num2").innerText = "0";
 
@@ -391,7 +392,7 @@ function operaciones(op)
 
     else {
 
-    //Si se han introducido los números en ámbas cajas, operamos:
+    //Si se han introducido los numeros en ambas cajas, operamos:
 
         switch(op) {
 
