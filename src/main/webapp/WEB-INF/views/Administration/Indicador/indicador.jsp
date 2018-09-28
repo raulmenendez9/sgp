@@ -24,6 +24,7 @@
 						<th>Proyecto</th>
 						<th>Variable Impacto 1</th>
 						<th>Variable Impacto 2</th>
+						<th>Indicador Ideal</th>
 						<th>Opcion</th>
 					</tr>
 				</thead>
@@ -35,7 +36,7 @@
 							<td>${indicador.proyecto.solicitud.titulo}</td>
 							<td>${indicador.variableImpacto.nomVariable}</td>
 							<td>${indicador.variableImpacto2.nomVariable}</td>
-
+							<td>${indicador.indicadorR}</td>
 
 						<td width="5%">
 							<c:if test="${updateind2}">	
@@ -68,10 +69,11 @@
 				<div class="input-field col s12">
 					<h5 style="text-align: center;">Datos de Indicador</h5>
 					<div class="row">
-						<div class="input-field col s6">
+						<div class="input-field col s12">
 							<form:input path="nombre" value="${indicador.nombre }"
-								placeholder="Nombre" id="nombre" type="text" class="validate"
+								 id="nombre" type="text" class="validate"
 								required="required" />
+								<label for="nombre">Nombre del indicador</label>
 						</div>
 					</div>
 				</div>
@@ -79,9 +81,10 @@
 					<div class="row">
 						<div class="input-field col s12">
 							<form:textarea path="descripcion" id="descripcion"
-								class="form-control" placeholder="Descripcion" rows="8"
+								class="materialize-textarea"  rows="8"
 								cols="80" value="${indicador.descripcion }" required="required"
 								style="font-size:15px;" />
+								<label for="descripcion">Descripcion</label>
 						</div>
 					</div>
 						<div class="row">
@@ -132,6 +135,9 @@
 											</c:forEach>
 										</form:select>
 									</div>
+									<div class="input-field col s4">
+									<input id="num1" type="number" />
+									</div>
 									</div>
 									
 																	<div class="row">
@@ -156,9 +162,27 @@
 											</c:forEach>
 										</form:select>
 									</div>
+									<div class="input-field col s4">
+									<input id="num2" type="number" />
 									</div>
+									</div>
+			
+		<center>
+		<input type="button" class=" btn blue modal-actionwaves-effect waves-light white-text" value="Suma" onclick="operaciones('sumar');">
+		<input type="button" class=" btn blue modal-actionwaves-effect waves-light white-text" value="restar" onclick="operaciones('restar');">
+		<input type="button" class=" btn blue modal-actionwaves-effect waves-light white-text" value="multiplicar" onclick="operaciones('multiplicar');">
+		<input type="button" class=" btn blue modal-actionwaves-effect waves-light white-text" value="dividir" onclick="operaciones('dividir');">
+	</center>
+	<div class="row">
+<div  class="input-field col s12">
+			<form:input path="indicadorR" class="form-control" placeholder="Indicador Real"
+						type="text"   value="${indicador.indicadorR}" required="required" id="resultado"/>
+				</div>
+				</div>
 
 
+
+	
 
 										<form:hidden id="idIndicador" path="idIndicador"
 											value="${indicador.idIndicador}" />
@@ -304,4 +328,103 @@
 
 </c:forEach>
 
+<script type="text/javascript">
 
+
+function operaciones(op)
+
+{
+
+    var ops = {
+
+        sumar: function sumarNumeros(n1, n2) {
+        	return (parseInt(n1) + parseInt(n2));
+
+        },
+
+        restar: function restarNumeros(n1, n2) {
+
+            return (parseInt(n1) - parseInt(n2));
+
+        },
+
+        multiplicar: function multiplicarNumeros(n1, n2) {
+
+            return (parseInt(n1) * parseInt(n2));
+
+        },
+
+        dividir: function dividirNumeros(n1, n2) {
+
+            return (parseInt(n1) / parseInt(n2));
+
+        }
+
+    };
+    
+    var num1 = document.getElementById("num1").value;
+
+    var num2 = document.getElementById("num2").value;
+
+
+
+
+    //Comprobamos si se ha introducido números en las cajas
+
+    if (isNaN(parseFloat(document.getElementById('num1').value))) {
+
+        alert("Indique un número en 'numero1'");
+
+        document.getElementById("num1").innerText = "0";
+
+        document.getElementById("num1").focus();
+
+        } else if (isNaN(parseFloat(document.getElementById('num2').value))) {
+
+        alert("Indique un número en 'numero2'");
+
+        document.getElementById("num2").innerText = "0";
+
+        document.getElementById("num2").focus();
+
+    }
+
+    else {
+
+    //Si se han introducido los números en ámbas cajas, operamos:
+
+        switch(op) {
+
+            case 'sumar':
+
+                var resultado = ops.sumar(num1, num2);
+                document.getElementById("resultado").value=resultado;
+                break;
+
+            case 'restar':
+
+                var resultado = ops.restar(num1, num2);
+                document.getElementById("resultado").value=resultado;
+                break;
+
+            case 'multiplicar':
+
+                var resultado = ops.multiplicar(num1, num2);
+                document.getElementById("resultado").value=resultado;
+                break;
+
+            case 'dividir':
+
+                var resultado = ops.dividir(num1, num2);
+                document.getElementById("resultado").value=resultado;
+
+                break;
+
+
+        	}
+    	
+    	}
+
+
+    }
+</script>

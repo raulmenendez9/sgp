@@ -22,6 +22,7 @@ public class Indicador implements java.io.Serializable {
 	private int idIndicador;
 	private String nombre;
 	private String descripcion;
+	private float indicadorR;
 
 	
 	private Proyecto proyecto;
@@ -35,14 +36,14 @@ public class Indicador implements java.io.Serializable {
 		
 	}
 	
-	public Indicador(int idIndicador, String nombre,String descripcion,Proyecto proyecto, VariableImpacto variableImpacto) {
+	public Indicador(int idIndicador, String nombre,String descripcion,Proyecto proyecto, VariableImpacto variableImpacto,VariableImpacto variableImpacto2, float indicadorR) {
 		this.idIndicador = idIndicador;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.proyecto = proyecto;
 		this.variableImpacto = variableImpacto;
-		
-	
+		this.variableImpacto2 = variableImpacto2;
+		this.indicadorR = indicadorR;
 	}
 	
 	@Transient
@@ -144,6 +145,15 @@ public class Indicador implements java.io.Serializable {
 
 	public void setVariableImpacto2(VariableImpacto variableImpacto2) {
 		this.variableImpacto2 = variableImpacto2;
+	}
+
+	@Column(name = "indicadorReal", nullable = false)
+	public float getIndicadorR() {
+		return indicadorR;
+	}
+
+	public void setIndicadorR(float indicadorR) {
+		this.indicadorR = indicadorR;
 	}
 	
 	
