@@ -56,12 +56,21 @@ public class VistaProyectoController {
 			
 			//List<Bitacora> bitacoras= (List<Bitacora>) this.manage_entity.getAll(Bitacora.class.getName());
 			List<String> consulta = new ArrayList<String>();
-			String query ="select t2.titulo,t1.codproyecto, t1.duracion, t3.nombre FROM proyecto as t1 inner join   solicitud as t2 on t1.codSolicitud = t2.codsoliciutud inner join actividad as t3 on t1.codproyecto = t3.codpoyecto";
+			String query ="select t2.titulo,t1.codproyecto, t1.duracion FROM proyecto as t1 inner join   solicitud as t2 on t1.codSolicitud = t2.codsoliciutud";
 			consulta = (List<String>) manage_entity.executeNativeQuery(query);
 			model.addAttribute("vistapros", consulta);
 			
 			List<Proyecto> proyectos = (List<Proyecto>) this.manage_entity.getAll("Proyecto");	
 			model.addAttribute("proyectos", proyectos);
+			
+			List<String> consulta2 = new ArrayList<String>();
+			String query2 ="select t1.codproyecto,t2.titulo, t2.justificacion, t1.ambitoimpacto,t1.antecedentes,t1.linea,t1.medidas,t1.metodologia,\r\n" + 
+					"t1.montoaprobado,t1.objgeneral,t1.objesp1,t1.objesp2,t1.patrocinadores,t1.planteamiento,t1.resumen,t1.tipofinanciamiento,  t1.duracion, t3.nombre, r.nombre as tarea, rr.nombre as recurso,t4.nombre as tipoproyecto\r\n" + 
+					"FROM proyecto as t1 full outer join   solicitud as t2 on t1.codSolicitud = t2.codsoliciutud full outer join tipoproyecto as t4 on t2.id_tipoproyecto = t4.idtipoproyecto full outer join actividad as t3 on t1.codproyecto = t3.codpoyecto \r\n" + 
+					"full outer join tarea as r on t3.idactividad = r.idactividad full outer join recurso as rr on r.idrecurso=rr.idrecurso";
+			consulta2 = (List<String>) manage_entity.executeNativeQuery(query2);
+			
+			model.addAttribute("vistaproyecto", consulta2);
 			retorno = path+"verProyectos";
 		}
 		return retorno;
@@ -94,13 +103,24 @@ public class VistaProyectoController {
 		String retorno="403";
 		if(permisos.isU()) 
 		{
-			Proyecto proyecto = (Proyecto) manage_entity.getById(Proyecto.class.getName(), Integer.parseInt(codProyecto));
+			/*Proyecto proyecto = (Proyecto) manage_entity.getById(Proyecto.class.getName(), Integer.parseInt(codProyecto));
 			model.addAttribute("solicitud", proyecto);
 			Proyecto proyectoForm = new Proyecto();
 			model.addAttribute("proyectoForm", proyectoForm);
 			
 			List<Solicitud> solicitudes = (List<Solicitud>) this.manage_entity.getAll("Solicitud");
-			model.addAttribute("solicitudes", solicitudes);
+			model.addAttribute("solicitudes", solicitudes);*/
+			
+			List<String> consulta2 = new ArrayList<String>();
+			String query2 ="select t1.codproyecto,t2.titulo, t2.justificacion, t1.ambitoimpacto,t1.antecedentes,t1.linea,t1.medidas,t1.metodologia,\r\n" + 
+					"t1.montoaprobado,t1.objgeneral,t1.objesp1,t1.objesp2,t1.patrocinadores,t1.planteamiento,t1.resumen,t1.tipofinanciamiento,  t1.duracion, t3.nombre, r.nombre as tarea, rr.nombre as recurso,t4.nombre as tipoproyecto\r\n" + 
+					"FROM proyecto as t1 full outer join   solicitud as t2 on t1.codSolicitud = t2.codsoliciutud full outer join tipoproyecto as t4 on t2.id_tipoproyecto = t4.idtipoproyecto full outer join actividad as t3 on t1.codproyecto = t3.codpoyecto \r\n" + 
+					"full outer join tarea as r on t3.idactividad = r.idactividad full outer join recurso as rr on r.idrecurso=rr.idrecurso";
+			System.out.println(query2);
+			consulta2 = (List<String>) manage_entity.executeNativeQuery(query2);
+			System.out.println(consulta2);
+			model.addAttribute("vistaproyecto", consulta2);
+			
 			retorno=path+"verproyecto-form";
 		}
 		

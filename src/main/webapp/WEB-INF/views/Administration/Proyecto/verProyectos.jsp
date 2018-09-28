@@ -12,7 +12,7 @@
 				<thead>
 					<tr>
 						<th>Proyecto</th>
-					    <th>Actividades</th>
+					    
 					    <th>Duración en días</th>
 					    <th>Opcion</th>
 					    
@@ -22,7 +22,6 @@
 					<c:forEach items="${vistapros}" var="vistapro">
 						<tr style="color:#0B0B61;">
 							<td>${vistapro[0] }</td>
-							<td>${vistapro[3] }</td>
 							<td>${vistapro[2] }</td>
 							
 							<td width="5%">
@@ -40,170 +39,173 @@
 	</div>
 </div>
 
-<c:forEach items="${proyectos}" var="proyecto">
-<div id="-${proyecto.codProyecto}" class="modal white darken-4">
+<c:forEach items="${vistaproyecto}" var="vistaproyecto">
+<div id="-${vistaproyecto[0]}" class="modal white darken-4">
 	<div class="modal-header"></div>
 	<div class="modal-content">
 
-  <form:form method="post" modelAttribute="proyectoForm"
+  
+			<form:form method="post" modelAttribute="proyectoForm"
 			action="/sgp/verProyectos/add" id="registro" autocomplete="off" accept-charset="ISO-8859-1">
 			
 			
-			
 			<div class="row">
-			 <h5 style="text-align: center; "> Datos Generales</h5>
+			<fieldset style="border-radius:15px;">
+			<legend> <h5 style="text-align: center; "> Datos Generales</h5></legend>
 				<div class="input-field col s12">
 					
-			
-			<form:hidden path="codSolicitud" value="${proyecto.solicitud.codSolicitud}" />	
-					
-					
-					<form:select path="ambitoImpacto" id="ambitoImpacto" class="form-control" value="${proyecto.ambitoImpacto }" required="true" >
-+				<option value="" disabled selected>Elige un area de impacto</option>
-+				<option value="nacional">Nacional</option>
-+				<option value="regional">Regional</option>
-+				<option value="academico">Academico</option>			
-+		    </form:select>
+					<div class="row">
+				<div class="input-field col s12">
+				<B>Nombre del proyecto:</B>
+					<input  name="titulo"
+						type="text" id="titulo" value="${vistaproyecto[1]}" readonly="true"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+				<B>Justificación:</B>
+					<input  name="titulo"
+						type="text" id="justificacion" value="${vistaproyecto[2]}" readonly="true"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+				<B>Ambito de impacto:</B>
+					<input name="ambito impacto" id="ambitoImpacto"  value="${vistaproyecto[3] }" required="true" readonly="true" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+				<B>Antecedentes:</B>
+					<input name="antecedentes" id="antecedentes"  value="${vistaproyecto[4] }" required="true" readonly="true" >
+				</div>
+			</div>
 
 			
 			<div class="row">
 				<div class="input-field col s12">
-					<form:input path="lineaBase" class="form-control" placeholder="Linea Base"
-						type="text" id="objetivoE1" value="${proyecto.lineaBase }" required="required" readonly="true"/>
+				<B>Linea base:</B>
+					<input  name="linea base" 
+						type="text" id="lineabase" value="${vistaproyecto[5] }" required="required" readonly="true"/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="input-field col s12">
+				<B>Objetivo general:</B>
+					<input  name="objgeneral" 
+						type="text" id="objgeneral" value="${vistaproyecto[9] }" required="required" readonly="true"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+				<B>Objetivos especificos:</B>
+					<input  name="objesp1" 
+						type="text" id="objesp1" value="${vistaproyecto[10] }" required="required" readonly="true"/>
+						<input  name="objesp2" 
+						type="text" id="objesp2" value="${vistaproyecto[11] }" required="required" readonly="true"/>
 				</div>
 			</div>
 			
 
 				<div class="row">
 				<div class="input-field col s12">
-					<form:input path="objeitovG" class="form-control" placeholder="Objetivo General."
-						type="text" id="objeitovG" value="${proyecto.objeitovG }" required="required" readonly="true"/>
+				<B>Medidas:</B>
+					<input name="medidas" id="medidas"  value="${vistaproyecto[6] }" required="true" readonly="true" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+				<B>Tipo de proyecto:</B>
+					<input name="tipoproyecto" id="tipoproyecto"  value="${vistaproyecto[20] }" required="true" readonly="true" >
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="input-field col s12">
-					<form:input path="objetivoE1" class="form-control" placeholder="Objetivo Especifico"
-						type="text" id="objetivoE1" value="${proyecto.objetivoE1 }" required="required" readonly="true"/>
+				<B>Metodologia:</B>
+					<input name="metodologia" id="metodologia"  value="${vistaproyecto[7] }" required="true" readonly="true" >
 				</div>
 			</div>
 			
 			
-			<div class="row">
-				<div class="input-field col s12">
-					<form:input path="objetivoE2" class="form-control" placeholder="Objetivo Especifico"
-						type="text" id="objetivoE2" value="${proyecto.objetivoE2 }" required="required" readonly="true"/>
-				</div>
-			</div>
+			
 			
 
             <h5 style="text-align: center; "> Tiempo y financiamiento</h5>
 			
 				</div>
-			<div class="date">
-			 
-				<div class="input-field col s6">
-				 
-					<form:input path="fechaInicio" class="form-control" placeholder="fecha"
-						type="date" id="fechaInicio" value="${proyecto.fechaInicio}" required="required" readonly="true"/>
-				</div>
-			
-			</div>
-			
-			
-			<div class="date">
-				<div class="input-field col s6">
-				
-					<form:input path="fechaFin" class="form-control" placeholder="fecha"
-						type="date" id="fechaFin" value="${proyecto.fechaFin}" required="required" readonly="true"/>
-				</div>
-			</div>
-			
-			
-			
-			
-			<input type="button" class=" btn blue modal-actionwaves-effect waves-light white-text" value="Calcular Duracion del proyecto" onclick="calcularDias(); " readonly="true">
-			<div class="row">
-				
-			<div  class="input-field col s12">
-			<form:input path="duracion" class="form-control" placeholder="Duracion"
-						type="text"   value="${proyecto.duracion}" required="required" id="resultado" readonly="true"/>
-				</div>
-				</div>
-				
-			<form:select path="tipoFinanciamiento" id="tipofinanciamiento" class="form-control" value="${proyecto.tipoFinanciamiento }" required="true" >
-				<option value="" disabled selected>Elige un tipo de financiamiento</option>
-				<option value="donacion">Donacion</option>
-				<option value="aporte">Aporte</option>
-				
-						
-				</form:select>
-				
-			
-			
-			
 			<div class="row">
 				<div class="input-field col s12">
-					<form:input path="montoAprobado" class="form-control" placeholder="MontoAprobado."
-						type="number" id="montoAprobado" value="${proyecto.montoAprobado }" required="required" readonly="true"/>
+				<B>Duración del proyecto:</B>
+					<input name="duracion" id="duracion"  value="${vistaproyecto[16] }" required="true" readonly="true" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+				<B>Tipo de finaciamiento:</B>
+					<input name="tipofinan" id="tipofinan"  value="${vistaproyecto[15] }" required="true" readonly="true" >
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="input-field col s12">
-					<form:input path="patrocinadores" id="patrocinadores" class="form-control" placeholder="Patrocinadores"
-					rows="8" cols="80"	 value="${proyecto.patrocinadores }" required="required"  style="font-size:15px;" readonly="true"/>
-				</div>
-			</div>
-			
-			
-			<form:hidden path="codProyecto" value="${proyecto.codProyecto}" />
-			
-			
-					
-					 <h5 style="text-align: center; "> Protocolo del Proyecto</h5>
-					
-					<div class="row">
-				<div class="input-field col s12">
-					<form:input path="resumen" id="resumen" class="form-control" placeholder="Resumen..."
-						 rows="8" cols="80"  value="${proyecto.resumen }" required="required" style="font-size:15px;" readonly="true"/>
+				<B>Monto aprobado:</B>
+					<input name="montoapro" id="montoapro"  value="${vistaproyecto[8] }" required="true" readonly="true" >
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="input-field col s12">
-					<form:input path="planteamiento" id="planteamiento" class="form-control" placeholder="Planteamiento del problema"
-						rows="8" cols="80" value="${proyecto.planteamiento }" required="required" style="font-size:15px;" readonly="true"/>
+				<B>Patrocinadores:</B>
+					<input name="patrocinadres" id="patrocinadores"  value="${vistaproyecto[12] }" required="true" readonly="true" >
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="input-field col s12">
+				<B>Patrocinadores:</B>
+					<input name="patrocinadores" id="patrocinadores"  value="${vistaproyecto[12] }" required="true" readonly="true" >
 				</div>
 			</div>
 			
 			
 			<div class="row">
 				<div class="input-field col s12">
-					<form:input path="antecedentes"  id="antecedentes" class="form-control" placeholder="Antecedentes del proyecto"
-						rows="8" cols="80"  value="${proyecto.antecedentes }" required="required"  style="font-size:15px;" readonly="true"/>
+				<B>Planteamiento:</B>
+					<input name="planteamiento" id="planteamiento"  value="${vistaproyecto[13] }" required="true" readonly="true" >
 				</div>
 			</div>
-				
-				
-			
-					
-					<div class="row">
-				<div class="input-field col s12">
-					<form:input path="metodologia" id="metodologia" class="form-control" placeholder="Metodologia o Tecnicas"
-					rows="8" cols="80"	 value="${proyecto.metodologia }" required="required"  style="font-size:15px;" readonly="true"/>
-				</div>
-			</div>
-
 			<div class="row">
 				<div class="input-field col s12">
-					<form:input path="medidaSostenibilidad" class="form-control" placeholder="Medida de sostenibilidad"
-						type="text" id="ms" value="${proyecto.medidaSostenibilidad }" required="required" readonly="true"/>
+				<B>Resumen:</B>
+					<input name="resumen" id="resumen"  value="${vistaproyecto[14] }" required="true" readonly="true" >
 				</div>
-			</div>			
+			</div>	
+			
+			<h5 style="text-align: center; "> Actividades</h5>
+			<div class="row">
+				<div class="input-field col s12">
+					<input name="actividad" id="actividad"  value="${vistaproyecto[17] }" required="true" readonly="true" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+				<B>tareas:</B>
+					<input name="tarea" id="tarea"  value="${vistaproyecto[18] }" required="true" readonly="true" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+				<B>Recursos:</B>
+					<input name="recursos" id="recursos"  value="${vistaproyecto[19] }" required="true" readonly="true" >
+				</div>
+			</div>
+				
 				
 				</div>
 			</div>
+			
 	
 			
 				
