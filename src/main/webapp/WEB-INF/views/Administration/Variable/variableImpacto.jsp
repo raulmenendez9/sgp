@@ -39,13 +39,14 @@
 						<td>${variableImpacto.descripcion }</td>						
 						
 						<td>
-							<c:if test="${updatetipoP}">	
+							<c:if test="${updatetipov}">	
 									<a class=" modal-trigger" href="#-${variableImpacto.idVariableImpacto }"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
-							<c:if test="${deletetipoP}">		
+							<c:if test="${deletetipov}">		
 									<a class="" href="/sgp/variableImpactos/delete/${variableImpacto.idVariableImpacto }" data-toggle="modal"data-target="#" ><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>						
 						</td>
+						
 						
 												
 					
