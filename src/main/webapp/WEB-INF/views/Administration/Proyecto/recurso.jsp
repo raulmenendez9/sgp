@@ -35,7 +35,7 @@
 									<a class="modal-trigger" href="#-${recurso.idRecurso}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${deletetipoS}">		
-									<a class="" href="/sgp/recursos/delete/${recurso.idRecurso}" data-toggle="modal"data-target="#""><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a class="" href="/sgp/recursos/delete/${recurso.idRecurso}" data-toggle="modal"data-target="#"" onclick="Borrar('${recurso.idRecurso}');"><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>						
 						</td>
 						</tr>
@@ -59,7 +59,7 @@
 
 			<div class="row">
 				<div class="input-field col s6">
-					<form:input path="nombre" class="form-control" placeholder="Nombre"
+					<form:input path="nombre" class="form-control" placeholder="Nombre del recurso"
 						type="text" id="nombre" value="${recurso.nombre}" />
 
 				</div>
@@ -121,7 +121,7 @@
 
 			<div class="row">
 				<div class="input-field col s6">
-					<form:input path="nombre" class="form-control" placeholder="Nombre"
+					<form:input path="nombre" class="form-control" placeholder="Nombre de recurso"
 						type="text" id="nombre" value="${recurso.nombre}" />
 
 				</div>
@@ -174,6 +174,24 @@
 
 
 
+<script>
+
+function Borrar(idRecurso)
+{
+
+ var resul = confirm('¿Desea borrar el recurso seleccionado?');
+ if(resul=true)
+	 {
+	   location.href="/sgp/recursos/delete/"+idRecurso;
+	 }
+ else (resul=false)
+ {
+	 location.href="/sgp/recursos";
+	}
+ 
+} 
+
+</script>
 
 
 

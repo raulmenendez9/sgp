@@ -35,7 +35,7 @@
 									<a class="modal-trigger" href="#-${tarea.idTarea}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${deletetipoS}">		
-									<a class="" href="/sgp/tareas/delete/${tarea.idTarea}" data-toggle="modal"data-target="#""><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a class="" href="/sgp/tareas/delete/${tarea.idTarea}" data-toggle="modal"data-target="#"" onclick="Borrar('${tarea.idTarea}');"><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>						
 						</td>
 						</tr>
@@ -96,7 +96,7 @@
 					
 					<div class="row">
 				<div class="input-field col s12">
-					<form:input path="nombre" class="form-control" placeholder="Nombre."
+					<form:input path="nombre de recurso" class="form-control" placeholder="Nombre."
 						type="text" id="nombre" value="${tarea.nombre }" required="required"/>
 				</div>
 			   </div>
@@ -225,7 +225,23 @@
 
 
 
+<script>
+function Borrar(idTarea)
+{
 
+ var resul = confirm('¿Desea borrar la tarea seleccionada?');
+ if(resul=true)
+	 {
+	   location.href="/sgp/tareas/delete/"+idTarea;
+	 }
+ else (resul=false)
+ {
+	 location.href="/sgp/tareas";
+	}
+ 
+} 
+
+</script>
 
 
 

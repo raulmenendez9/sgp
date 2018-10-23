@@ -43,7 +43,7 @@
 									<a class=" modal-trigger" href="#-${variableImpacto.idVariableImpacto }"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${deletetipoP}">		
-									<a class="" href="/sgp/variableImpactos/delete/${variableImpacto.idVariableImpacto }" data-toggle="modal"data-target="#" ><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a class="" href="/sgp/variableImpactos/delete/${variableImpacto.idVariableImpacto }" data-toggle="modal"data-target="#" onclick="Borrar('${variableImpacto.idVariableImpacto}');" ><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>						
 						</td>
 						
@@ -146,3 +146,24 @@
 	</div>
 
 </c:forEach>
+
+
+<script>
+
+function Borrar(idVariableImpacto)
+{
+
+ var resul = confirm('¿Desea borrar el variable de impacto seleccionada?');
+ if(resul=true)
+	 {
+	   location.href="/sgp/variableImpactos/delete/"+idVariableImpacto;
+	 }
+ else (resul=false)
+ {
+	 location.href="/sgp/variableImpactos";
+	}
+ 
+} 
+
+</script>
+

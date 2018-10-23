@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.sisbam.sgp.controller.variety.ObtenerPermisosPorUrl;
 import com.sisbam.sgp.dao.DaoImp;
 import com.sisbam.sgp.entity.administration.Funcion;
+import com.sisbam.sgp.entity.administration.TipoProyecto;
 import com.sisbam.sgp.entity.security.Permisos;
 
 @Controller
@@ -57,11 +58,11 @@ public class FuncionController {
 	
 	//GUARDAR
 	@RequestMapping(value = "/funciones/add", method = RequestMethod.POST)
-	public String saveOrUpadateFuncion(@ModelAttribute("funcionForm") Funcion funcionRecibido,Model model) throws ClassNotFoundException {
+	public String saveOrUpadateFunciones(@ModelAttribute("funcionesForm") Funcion funcionRecibida,Model model) throws ClassNotFoundException {
 		String retorno = "403";
 		if(permisos.isC())
 		{
-				Funcion funcion = funcionRecibido;
+				Funcion funcion = funcionRecibida;
 				if(funcion.getIdFuncion()==0) {
 					manage_entity.save(Funcion.class.getName(), funcion);
 				}else{
@@ -82,11 +83,12 @@ public class FuncionController {
 			model.addAttribute("funcion", funcion);
 			Funcion funcionForm = new Funcion();
 			model.addAttribute("funcionForm", funcionForm);
-			retorno=path+"funcion-form";
+			retorno=path+"funcionForm-form";
 		}
 		
 		return retorno;
 	}
+	
 	
 	//ELIMINAR
 	@RequestMapping(value = "/funciones/delete/{id}", method = RequestMethod.GET)

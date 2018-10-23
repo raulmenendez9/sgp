@@ -39,7 +39,7 @@
 									<a class="modal-trigger" href="#-${proyecto.codProyecto}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${deletetipoS}">		
-									<a class="" href="/sgp/proyectos/delete/${proyecto.codProyecto}" data-toggle="modal"data-target="#""><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a class="" href="/sgp/proyectos/delete/${proyecto.codProyecto}" data-toggle="modal"data-target="#"" onclick="Borrar('${proyecto.codProyecto}');"><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>						
 						</td>
 						</tr>
@@ -157,7 +157,7 @@
 			<div class="row">
 				
 			<div  class="input-field col s12">
-			<form:input path="duracion" class="form-control" placeholder="Duracion"
+			<form:input path="duracion" class="form-control" placeholder="En dias"
 						type="text"   value="${proyecto.duracion}" required="required" id="resultado"/>
 				</div>
 				</div>
@@ -476,6 +476,26 @@ function calcularDias()
 	
 	document.getElementById("resultado").value=resultado;
 }
+
+</script>
+
+
+<script>
+
+function Borrar(codProyecto)
+{
+
+ var resul = confirm('¿Desea borrar el proyecto seleccionado?');
+ if(resul=true)
+	 {
+	   location.href="/sgp/proyectos/delete/"+codProyecto;
+	 }
+ else (resul=false)
+ {
+	 location.href="/sgp/proyectos";
+	}
+ 
+} 
 
 </script>
 

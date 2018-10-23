@@ -138,7 +138,7 @@ public class IndicadorController {
 				
 
 				List<VariableImpacto> vsi = (List<VariableImpacto>) this.manage_entity.getAll("VariableImpacto");
-				model.addAttribute("variablesimpacto", vsi);
+				model.addAttribute("vsi", vsi);
 				retorno=path+"indicador-form";
 			}
 			
@@ -162,6 +162,26 @@ public class IndicadorController {
 			}
 			return retorno;
 		}
-
+		
+		@SuppressWarnings("unchecked")
+		@RequestMapping(value = "/indicador/ayuda", method = RequestMethod.GET)
+		public String ayuda(Model model, HttpServletRequest request)  {
+			
+			
+			String retorno = "403";
+			if(permisos.isC()){
+				Indicador indicador = new Indicador();
+				
+			
+			
+				model.addAttribute("indicadorForm", indicador);
+				model.addAttribute("indicador", null);
+			
+				
+				retorno = path+"indicador-form";
+			}
+			return retorno;
+			
+		}
 		
 }
