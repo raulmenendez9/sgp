@@ -43,13 +43,14 @@
 									<a class="modal-trigger" href="#-${solicitud.codSolicitud}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${deletetipoSo}">		
-									<a class="" href="/sgp/solicitudesapro/delete/${solicitud.codSolicitud}" data-toggle="modal"data-target="#""><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a class="" href="/sgp/solicitudesapro/delete/${solicitud.codSolicitud}" data-toggle="modal"data-target="#"" onclick="Borrar('${solicitud.codSolicitud}');"><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>	
 							
 							
 									<c:choose>
                                      <c:when test="${solicitud.estado==true}">
-                                          <a  href="/sgp/proyectos"><i class="fa fa-clone" aria-hidden="true"></i></a>&nbsp;
+                                        <!--  <a  href="/sgp/proyecto/add"><i class="fa fa-edit" aria-hidden="true"></i>Registro de Proyectos</a>&nbsp;-->
+                                          <a  href="#agregar"><i class="waves-effect waves-light btn-floating modal-trigger green" aria-hidden="true"></i>Registro de Proyectos</a>&nbsp;
                                     </c:when>    
                                      
                                     </c:choose>
@@ -244,3 +245,28 @@
 	</div>
 </div>
 </c:forEach>
+
+
+<script>
+
+function Borrar(codSolicitud)
+{
+
+ var resul = confirm('¿Desea borrar la solicitud seleccionado?');
+ if(resul=true)
+	 {
+	   location.href="/sgp/solicitudes/delete/"+codSolicitud;
+	 }
+ else (resul=false)
+ {
+	 location.href="/sgp/solicitudes";
+	}
+ 
+} 
+
+</script>
+
+
+
+
+

@@ -1,5 +1,6 @@
 package com.sisbam.sgp.controller.administration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,7 +53,9 @@ public class SolicitudDocenteController {
 			Solicitud solicitud = new Solicitud();
 			model.addAttribute("solicitudForm", solicitud);
 			model.addAttribute("solicitud", null);
-				List<Solicitud> solicitudes = (List<Solicitud>) this.manage_entity.getAll("Solicitud");
+			List<Solicitud> solicitudes = (List<Solicitud>) this.manage_entity.getAll("Solicitud");
+			
+			
 				List<Usuario> usuarios = (List<Usuario>) this.manage_entity.getAll("Usuario");
 				List<TipoProyecto> tiposProyectos = (List<TipoProyecto>) this.manage_entity.getAll("TipoProyecto");
 				model.addAttribute("tiposProyectos", tiposProyectos);

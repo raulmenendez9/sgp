@@ -12,6 +12,9 @@
 		<a class="waves-effect waves-light btn-floating modal-trigger green"
 			href="#agregar"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
 </c:if>
+
+
+		
 	<hr>
 	<div class="container">
 		<c:if test="${readind2}">
@@ -43,7 +46,7 @@
 							<a class="modal-trigger" href="#-${indicador.idIndicador}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${deleteind2}">		
-									<a class="" href="/sgp/indicadores/delete/${indicador.idIndicador}" data-toggle="modal"data-target="#""><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a class="" href="/sgp/indicadores/delete/${indicador.idIndicador}" data-toggle="modal"data-target="#"" onclick="Borrar('${indicador.idIndicador}');"><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>						
 						</td>
 						</tr>
@@ -429,3 +432,24 @@ function operaciones(op)
 
     }
 </script>
+
+
+<script>
+
+function Borrar(idIndicador)
+{
+
+ var resul = confirm('¿Desea borrar el indicador seleccionado?');
+ if(resul=true)
+	 {
+	   location.href="/sgp/indicadores/delete/"+idIndicador;
+	 }
+ else (resul=false)
+ {
+	 location.href="/sgp/indicadores";
+	}
+ 
+} 
+
+</script>
+

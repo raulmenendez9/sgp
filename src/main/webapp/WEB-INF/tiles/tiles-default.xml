@@ -123,6 +123,14 @@
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Indicador/indicador.jsp"></put-attribute>
 	</definition>
 	
+		<definition name="Administration/Indicador/ayuda"
+		extends="materializeTemplate">
+		<put-attribute name="titulo" value="Ayuda"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/views/Administration/Indicador/ayuda.jsp"></put-attribute>
+	</definition>
+	
+	
+	
 	<definition name="Administration/Proyecto/especificacionProyecto" extends="materializeTemplate">
 		<put-attribute name="titulo" value="Registros de Especificación de Proyecto"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Proyecto/especificacionProyecto.jsp"></put-attribute></definition>

@@ -42,7 +42,7 @@
 									<a class=" modal-trigger" href="#-${funcion.idFuncion }"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${deletefuncionR}">		
-									<a class="" href="/sgp/funciones/delete/${funcion.idFuncion }" data-toggle="modal"data-target="#" ><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a class="" href="/sgp/funciones/delete/${funcion.idFuncion }" data-toggle="modal"data-target="#" onclick="Borrar('${funcion.idFuncion}');"><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>						
 						</td>															
 					</tr>
@@ -63,7 +63,7 @@
 			<div class="row">
 				<div class="input-field col s6">
 					<form:input path="nombre" value="${funcion.nombre }"
-						placeholder="Nombre" id="nombre" type="text" class="validate"
+						placeholder="Funcion a ingresar" id="nombre" type="text" class="validate"
 						required="required" />
 				</div>
 				<div class="input-field col s6">
@@ -93,6 +93,7 @@
 	<!-- Modal Structure -->
 	<div id="-${funcion.idFuncion }" class="modal  white darken-4">
 		<div class="modal-header">
+			<!-- 		<h4>Agregar Empresa</h4> -->
 		</div>
 		<div class="modal-content">
 			<form:form method="post" modelAttribute="funcionForm"
@@ -103,28 +104,56 @@
 						<form:input path="nombre" value="${funcion.nombre }"
 							placeholder="Nombre" id="nombre" type="text" class="validate"
 							required="required" />
-					</divs>
+					</div>
+					
+				</div>
+                 
+                 <div class="row">
 					<div class="input-field col s6">
 						<form:input path="descripcion" value="${funcion.descripcion }"
-						placeholder="Descripción" id="descripcion" type="text" class="validate"
-						required="required" />
-					</div>				
+							placeholder="Descripción..." id="descripcion" type="text" class="validate"
+							required="required" />
+					</div>
+					
 				</div>
+				
 
+				
 				<form:hidden path="idFuncion" value="${funcion.idFuncion}" />
 
-			<div class="center">
-				<form:button type="submit"
-					class=" btn green modal-actionwaves-effect waves-light white-text" onclick="toast();">
-					<i class="fa fa-floppy-o" aria-hidden="true" ></i> Guardar </form:button>
+				<div class="center">
+					<form:button type="submit"
+						class=" btn green modal-actionwaves-effect waves-light white-text" onclick="toast();">
+						<i class="fa fa-floppy-o" aria-hidden="true"></i> Actualizar </form:button>
 
-				<form:button href="#!"
-					class=" btn red modal-action modal-close waves-effect waves-light white-text">
-					<i class="fa fa-reply" aria-hidden="true"></i> Cerrar </form:button>
-			</div>
+					<form:button href="#!"
+						class=" btn red modal-action modal-close waves-effect waves-light white-text">
+						<i class="fa fa-reply" aria-hidden="true"></i> Cerrar </form:button>
+				</div>
 			</form:form>
 		</div>
 	</div>
 
 </c:forEach>
 
+
+
+
+<script>
+
+function Borrar(idFuncion)
+{
+
+ var resul = confirm('¿Desea borrar la  seleccionada?');
+ if(resul=true)
+	 {
+	   location.href="/sgp/funciones/delete/"+idFuncion;
+	 }
+ else (resul=false)
+ {
+	 location.href="/sgp/funciones";
+	}
+ 
+} 
+
+</script>
