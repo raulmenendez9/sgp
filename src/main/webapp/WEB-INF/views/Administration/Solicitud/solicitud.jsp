@@ -33,8 +33,10 @@
 					<c:forEach items="${solicitudes}" var="solicitud">
 						<tr style="color:#0B0B61;">
 							<td>${solicitud.titulo }</td>
-							 <td>${solicitud.estado }</td>
-							<td>${solicitud.usuario.username }</td>
+							 <td>
+								<c:if test="${!solicitud.estado}">Pendiente</c:if>
+							 </td>						 
+							<td>${solicitud.usuario.username}</td>
 							<td>${solicitud.fecha }</td>
 							<td>${solicitud.justificacion }</td>
 							<td>${solicitud.objeto }</td>

@@ -33,7 +33,10 @@
 						<tr style="color:#0B0B61;">
 							<td>${solicitud.titulo }</td>
 							<td>${solicitud.tipoProyecto.nombre } </td>
-							 <td>${solicitud.estado }</td>
+							 <td>
+								<c:if test="${solicitud.estado}">Aprobado</c:if>
+								<c:if test="${!solicitud.estado}">Desaprobado</c:if>
+							 </td>
 							<td>${solicitud.usuario.username }</td>
 							<td>${solicitud.fecha }</td>
 							<td>${solicitud.justificacion }</td>

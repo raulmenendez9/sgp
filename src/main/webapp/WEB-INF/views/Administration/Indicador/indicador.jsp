@@ -167,14 +167,23 @@
 									</div>
 									<div class="input-field col s4">
 									<input id="num2" type="number"  placeholder="Valor de variable"/>
+												<!-- FUNCION DE IDENTIFICACION -->
+
+									</div>			
 									</div>
-									</div>
-			
+									<div>
+		<h4>Operacion:
+		
+		<h5 id="demo" class="center-align red-text"></5>
+		
+		</h4>
+			</div>
 		<center>
-		<input type="button" class=" btn blue modal-actionwaves-effect waves-light white-text" value="Suma" onclick="operaciones('sumar');">
-		<input type="button" class=" btn blue modal-actionwaves-effect waves-light white-text" value="restar" onclick="operaciones('restar');">
-		<input type="button" class=" btn blue modal-actionwaves-effect waves-light white-text" value="multiplicar" onclick="operaciones('multiplicar');">
-		<input type="button" class=" btn blue modal-actionwaves-effect waves-light white-text" value="dividir" onclick="operaciones('dividir');">
+		
+		<input type="button" onmousemove="myFunction(event)"  class=" btn blue modal-actionwaves-effect waves-light white-text" value="Suma" id="suma" onclick="operaciones('sumar');">
+		<input type="button" onmousemove="restarmove(event)" class=" btn blue modal-actionwaves-effect waves-light white-text" value="restar" onclick="operaciones('restar');">
+		<input type="button" onmousemove="multiplicarmove(event)" class=" btn blue modal-actionwaves-effect waves-light white-text" value="multiplicar" onclick="operaciones('multiplicar');">
+		<input type="button" onmousemove="dividirmove(event)" class=" btn blue modal-actionwaves-effect waves-light white-text" value="dividir" onclick="operaciones('dividir');">
 	</center>
 	<div class="row">
 <div  class="input-field col s12">
@@ -453,3 +462,50 @@ function Borrar(idIndicador)
 
 </script>
 
+<script>
+$('#num1').focusout(function() {
+	 var x = $(this).val();
+	 document.getElementById('entrada').innerHTML= x;
+     
+
+	});
+
+$('#num2').focusout(function() {
+	 var y = $(this).val();
+	 document.getElementById('entrada2').innerHTML= y;
+	});
+</script>
+
+
+
+<script>
+function myFunction(e) {	
+    var x = document.getElementById("num1").value ;
+    var y = document.getElementById("num2").value;
+    var coor = "Suma : " + x + "+" + y + "";
+    document.getElementById("demo").innerHTML = coor;
+}
+
+function restarmove(e) {	
+    var x = document.getElementById("num1").value ;
+    var y = document.getElementById("num2").value;
+    var coor = "Restar : " + x + "-" + y + "";
+    document.getElementById("demo").innerHTML = coor;
+}
+
+function multiplicarmove(e) {	
+    var x = document.getElementById("num1").value ;
+    var y = document.getElementById("num2").value;
+    var coor = "Multiplicar : " + x + "x" + y + "";
+    document.getElementById("demo").innerHTML = coor;
+}
+function dividirmove(e) {	
+    var x = document.getElementById("num1").value ;
+    var y = document.getElementById("num2").value;
+    var coor = "Dividir : " + x + "/" + y + "";
+    document.getElementById("demo").innerHTML = coor;
+}
+function clearCoor() {
+    document.getElementById("demo").innerHTML = "";
+}
+</script>
