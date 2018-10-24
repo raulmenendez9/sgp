@@ -18,6 +18,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -44,7 +45,9 @@ public class Proyecto implements java.io.Serializable {
 	private String objeitovG;
 	private String objetivoE1;
 	private String objetivoE2;
-	private String lineaBase;
+	private String objetivoE3;
+	private String objetivoE4;
+	private String objetivoE5;
 	private String medidaSostenibilidad;
 	//
 	private Solicitud solicitud;
@@ -55,11 +58,14 @@ public class Proyecto implements java.io.Serializable {
 		
 	public Proyecto(int codProyecto, String ambitoImpacto, Date fechaInicio, Date fechaFin, int duracion, String tipoFinanciamiento,
 			float montoAprobado, String patrocinadores, String resumen, String planteamiento, String antecedentes,
-			String metodologia, Solicitud solicitud, String objetivoG,String objetivoE1,String objetivoE2,String medidadSostenibilidad) {
+			String metodologia, Solicitud solicitud, String objetivoG,String objetivoE1,String objetivoE2,String objetivoE3,String objetivoE4,String objetivoE5,String medidaSostenibilidad) {
 	
 		this.objeitovG=objetivoG;
 		this.objetivoE1=objetivoE1;
 		this.objetivoE2=objetivoE2;
+		this.objetivoE3=objetivoE3;
+		this.objetivoE4=objetivoE4;
+		this.objetivoE5=objetivoE5;
 		this.medidaSostenibilidad=medidaSostenibilidad;
 		this.codProyecto = codProyecto;
 		this.ambitoImpacto = ambitoImpacto;
@@ -237,14 +243,30 @@ public class Proyecto implements java.io.Serializable {
 	public void setObjetivoE2(String objetivoE2) {
 		this.objetivoE2 = objetivoE2;
 	}
-
-	@Column(name = "linea", nullable = true, length = 256)
-	public String getLineaBase() {
-		return lineaBase;
+	@Column(name = "objEsp3", nullable = false, length = 256)
+	public String getObjetivoE3() {
+		return objetivoE3;
+	}
+	
+	public void setObjetivoE3(String objetivoE3) {
+		this.objetivoE3 = objetivoE3;
 	}
 
-	public void setLineaBase(String lineaBase) {
-		this.lineaBase = lineaBase;
+	@Column(name = "objEsp4", nullable = true, length = 256)
+	public String getObjetivoE4() {
+		return objetivoE4;
+	}
+
+	public void setObjetivoE4(String objetivoE4) {
+		this.objetivoE4 = objetivoE4;
+	}
+	@Column(name = "objEsp5", nullable = true, length = 256)
+	public String getObjetivoE5() {
+		return objetivoE5;
+	}
+
+	public void setObjetivoE5(String objetivoE5) {
+		this.objetivoE5 = objetivoE5;
 	}
 
 	@Column(name = "medidas", nullable = true, length = 256)

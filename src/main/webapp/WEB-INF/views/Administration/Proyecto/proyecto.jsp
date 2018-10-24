@@ -102,7 +102,7 @@
 				<div class="input-field col s12">
 					<form:input path="objetivoE1" class="validate" 
 						type="text" id="objetivoE1" value="${proyecto.objetivoE1 }" required="required"/>
-					<label for="objetivoE1">Objetivo Especifico</label>
+					<label for="objetivoE1">Objetivo Especifico 1 (OBLIGATORIO)</label>
 				</div>
 			</div>
 			
@@ -111,23 +111,34 @@
 				<div class="input-field col s12">
 					<form:input path="objetivoE2" class="validate" 
 						type="text" id="objetivoE2" value="${proyecto.objetivoE2 }" required="required"/>
-					<label for="objetivoE2">Objetivo Especifico</label>
+					<label for="objetivoE2">Objetivo Especifico 2 (OBLIGATORIO)</label>
 				</div>
 			</div>
-
+			<div class="row">
+				<div class="input-field col s12">
+					<form:input path="objetivoE3" class="validate" 
+						type="text" id="objetivoE3" value="${proyecto.objetivoE3 }" required="required"/>
+					<label for="objetivoE3">Objetivo Especifico 3 (OBLIGATORIO)</label>
+				</div>
+			</div>
+			
 			
 			<div class="row">
 				<div class="input-field col s12">
-					<form:input path="lineaBase" class="form-control" 
-						type="text" id="lineaBase" value="${proyecto.lineaBase }" />
-				<label for="lineaBase">Objetivo Especifico</label>
+					<form:input path="objetivoE4" class="validate" 
+						type="text" id="objetivoE4" value="${proyecto.objetivoE4 }"/>
+					<label for="objetivoE4">Objetivo Especifico 4 (OPCIONAL)</label>
 				</div>
 			</div>
 			
+			<div class="row">
+				<div class="input-field col s12">
+					<form:input path="objetivoE5" class="validate" 
+						type="text" id="objetivoE2" value="${proyecto.objetivoE5 }" />
+					<label for="objetivoE5">Objetivo Especifico 5 (OPCIONAL)</label>
+				</div>
+			</div>
 			
-			
-			
-			 
 			
 				</div>
 				</fieldset>
@@ -289,15 +300,6 @@
 +				<option value="academico">Academico</option>			
 +		    </form:select>
 
-			
-			<div class="row">
-				<div class="input-field col s12">
-					<form:input path="lineaBase" class="form-control" placeholder="Linea Base"
-						type="text" id="objetivoE1" value="${proyecto.lineaBase }" required="required"/>
-				</div>
-			</div>
-			
-
 				<div class="row">
 				<div class="input-field col s12">
 					<form:input path="objeitovG" class="form-control" placeholder="Objetivo General."
@@ -312,11 +314,28 @@
 				</div>
 			</div>
 			
-			
 			<div class="row">
 				<div class="input-field col s12">
 					<form:input path="objetivoE2" class="form-control" placeholder="Objetivo Especifico"
 						type="text" id="objetivoE2" value="${proyecto.objetivoE2 }" required="required"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<form:input path="objetivoE3" class="form-control" placeholder="Objetivo Especifico"
+						type="text" id="objetivoE3" value="${proyecto.objetivoE3 }" required="required"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<form:input path="objetivoE4" class="form-control" placeholder="Objetivo Especifico"
+						type="text" id="objetivoE4" value="${proyecto.objetivoE4 }" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<form:input path="objetivoE5" class="form-control" placeholder="Objetivo Especifico"
+						type="text" id="objetivoE5" value="${proyecto.objetivoE5 }" />
 				</div>
 			</div>
 			

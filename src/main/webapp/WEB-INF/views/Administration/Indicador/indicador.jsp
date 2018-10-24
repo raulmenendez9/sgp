@@ -429,6 +429,8 @@ function operaciones(op)
             case 'dividir':
 
                 var resultado = ops.dividir(num1, num2);
+                resultado = Number(resultado.toFixed(2));
+                console.log(resultado);
                 document.getElementById("resultado").value=resultado;
 
                 break;
