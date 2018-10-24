@@ -96,7 +96,7 @@
 					
 					<div class="row">
 				<div class="input-field col s12">
-					<form:input path="nombre de recurso" class="form-control" placeholder="Nombre."
+					<form:input path="nombre" class="form-control" placeholder="Nombre."
 						type="text" id="nombre" value="${tarea.nombre }" required="required"/>
 				</div>
 			   </div>
