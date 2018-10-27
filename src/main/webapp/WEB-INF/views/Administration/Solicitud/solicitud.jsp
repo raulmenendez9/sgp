@@ -37,7 +37,7 @@
 								<c:if test="${!solicitud.estado}">Pendiente</c:if>
 							 </td>						 
 							<td>${solicitud.usuario.username}</td>
-							<td>${solicitud.fecha }</td>
+							<td><fmt:formatDate value="${solicitud.fecha }" pattern="dd-MM-YYYY"/></td>
 							<td>${solicitud.justificacion }</td>
 							<td>${solicitud.objeto }</td>
 							<td width="5%">
