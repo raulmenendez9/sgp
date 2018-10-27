@@ -122,6 +122,9 @@ public class ProyectoController {
 						Proyecto proyectoForm = new Proyecto();
 						model.addAttribute("proyectoForm", proyectoForm);
 						
+						/*List<Proyecto> proyecto = (List<Proyecto>) this.manage_entity.getListByName("Proyecto", "codProyecto", codProyecto);
+						model.addAttribute("solicitud", proyecto);*/
+						
 						List<Solicitud> solicitudes = (List<Solicitud>) this.manage_entity.getAll("Solicitud");
 						model.addAttribute("solicitudes", solicitudes);
 						retorno=path+"proyecto-form";

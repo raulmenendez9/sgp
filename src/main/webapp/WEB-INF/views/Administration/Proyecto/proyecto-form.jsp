@@ -4,64 +4,232 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-
-
 <div id="contenido" class="card-panel hoverable">
+<div class="container">
+		<form:form method="post" modelAttribute="proyectoForm"
+			action="/sgp/proyectos/add" id="registro" autocomplete="off" accept-charset="ISO-8859-1">
+           
+         
+			<div class="row">  
+			 <fieldset style="border-radius:15px;">
+			 <legend><h5 style="text-align: center; "> Datos Generales</h5></legend>
+				
+				<div class="input-field col s12">
+					<form:select path="codSolicitud" id="form-proyecto" class="form-control" required="required"  >
+						<option value="" disabled selected>Seleccione un titulo</option>
+						<c:forEach items="${solicitudes}" var="p">
+							<c:choose>
+								<c:when test="${proyecto.solictud.codSolicitud == p.codSolicitud}">
+									<form:option value="${p.codSolicitud }" label="${p.titulo}"
+										selected="true" />
+								</c:when>
+								<c:otherwise>
+									<form:option value="${p.codSolicitud }" label="${p.titulo}" var="selec"/>
+								</c:otherwise>
+							</c:choose>
+			
+						</c:forEach>
+						
+					</form:select>
+												
+					<form:select path="ambitoImpacto" id="ambitoImpacto" class="form-control" value="${proyecto.ambitoImpacto }" required="required">
++				<option value="" disabled selected>Elige un area de impacto</option>
++				<option value="nacional">Nacional</option>
++				<option value="regional">Regional</option>
++				<option value="academico">Academico</option>			
++		    </form:select>
+					
+					<div class="row">
+				<div class="input-field col s12">
+					<form:input path="objeitovG" class="validate"
+						type="text" id="objeitovG" value="${proyecto.objeitovG }" required="required"/>
+						<label for="objeitovG">Objetivo General</label>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="input-field col s12">
+					<form:input path="objetivoE1" class="validate" 
+						type="text" id="objetivoE1" value="${proyecto.objetivoE1 }" required="required"/>
+					<label for="objetivoE1">Objetivo Especifico 1 (OBLIGATORIO)</label>
+				</div>
+			</div>
+			
+			
+			<div class="row">
+				<div class="input-field col s12">
+					<form:input path="objetivoE2" class="validate" 
+						type="text" id="objetivoE2" value="${proyecto.objetivoE2 }" required="required"/>
+					<label for="objetivoE2">Objetivo Especifico 2 (OBLIGATORIO)</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<form:input path="objetivoE3" class="validate" 
+						type="text" id="objetivoE3" value="${proyecto.objetivoE3 }" required="required"/>
+					<label for="objetivoE3">Objetivo Especifico 3 (OBLIGATORIO)</label>
+				</div>
+			</div>
+			
+			
+			<div class="row">
+				<div class="input-field col s12">
+					<form:input path="objetivoE4" class="validate" 
+						type="text" id="objetivoE4" value="${proyecto.objetivoE4 }"/>
+					<label for="objetivoE4">Objetivo Especifico 4 (OPCIONAL)</label>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="input-field col s12">
+					<form:input path="objetivoE5" class="validate" 
+						type="text" id="objetivoE2" value="${proyecto.objetivoE5 }" />
+					<label for="objetivoE5">Objetivo Especifico 5 (OPCIONAL)</label>
+				</div>
+			</div>
+			
+			
+				</div>
+				</fieldset>
+				
+				<fieldset style="border-radius:15px;">
+				<legend><h5 style="text-align: center; "> Tiempo y financiamiento</h5></legend>
+			<div class="date">
+			 
+				<div class="input-field col s6">
+				 
+					<form:input path="fechaInicio" class="form-control" placeholder="fecha"
+						type="date" id="fechaInicio" value="${proyecto.fechaInicio}" required="required"/>
+				</div>
+			
+			</div>
+			
+			<div class="date">
+				<div class="input-field col s6">
+				
+					<form:input path="fechaFin" class="form-control" placeholder="fecha"
+						type="date" id="fechaFin" value="${proyecto.fechaFin}" required="required"/>
+				</div>
+			</div>
+			
+			
+			<input type="button" class=" btn blue modal-actionwaves-effect waves-light white-text" value="Calcular Duracion del proyecto" onclick="calcularDias();">
+			<div class="row">
+				
+			<div  class="input-field col s12">
+			<form:input path="duracion" class="form-control" placeholder="En dias"
+						type="text"   value="${proyecto.duracion}" required="required" id="resultado"/>
+				</div>
+				</div>
+				
+				<form:select path="tipoFinanciamiento" id="tipofinanciamiento" class="form-control" value="${proyecto.tipoFinanciamiento }" required="required">
+				<option value="" disabled selected>Elige un tipo de financiamiento</option>
+				<option value="donacion">Donacion</option>
+				<option value="aporte">Aporte</option>
+				
+						
+				</form:select>
 
-<c:if test="${createtipoS}">	
-		<a class="waves-effect waves-light btn-floating modal-trigger green" href="/sgp/proyecto/add/"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
-</c:if>
+			<div class="row">
+				<div class="input-field col s12">
+					<form:input path="montoAprobado" class="form-control" 
+						type="number" id="montoAprobado" value="${proyecto.montoAprobado }" required="required"/>
+					<label for="montoAprobado">Monto Asigando</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<form:textarea path="patrocinadores"  id="patrocinadores" class="materialize-textarea"
+					rows="8" cols="80"	 value="${proyecto.patrocinadores }" required="required"  style="font-size:15px;"/>
+					<label for="patrocinadores">Patrocinadores</label>
+				</div>
+			</div>
+			</fieldset>
+			
+			<form:hidden path="codProyecto" value="${proyecto.codProyecto}" />
+			
+	<fieldset style="border-radius:15px;">
+					 <legend><h5 style="text-align: center; "> Protocolo del Proyecto</h5></legend>
+					
+					<div class="row">
+				<div class="input-field col s12">
+					<form:textarea path="resumen" id="resumen" class="materialize-textarea" 
+						 rows="8" cols="80"  value="${proyecto.resumen }" required="required" style="font-size:15px;"/>
+						 <label for="resumen">Resumen</label>
+				</div>
+			</div>
+			
+			
+			<div class="row">
+				<div class="input-field col s12">
+					<form:textarea path="planteamiento" id="planteamiento"  class="materialize-textarea" 
+						rows="8" cols="80" value="${proyecto.planteamiento }" required="required" style="font-size:15px;"/>
+						<label for="planteamiento">Planteamiento</label>
+				</div>
+			</div>
+			
+			
+			<div class="row">
+				<div class="input-field col s12">
+					<form:textarea path="antecedentes" id="antecedentes" class="materialize-textarea"
+						rows="8" cols="80"  value="${proyecto.antecedentes }" required="required" style="font-size:15px;"/>
+						<label for="antecedentes">Antecedentes</label>
+				</div>
+			</div>
+					
+					
+					<div class="row">
+				<div class="input-field col s12">
+					<form:textarea path="metodologia" id="metodologia" class="materialize-textarea" 
+					rows="8" cols="80"	 value="${proyecto.metodologia }" style="font-size:15px;"/>
+					<label for="metodologia">Metodologia</label>
+				</div>
+			</div>
+			
+			
+			<div class="row">
+				<div class="input-field col s12">
+					<form:textarea path="medidaSostenibilidad" class="materialize-textarea" 
+						type="text" id="ms" value="${proyecto.medidaSostenibilidad }"/>
+						<label for="medidaSostenibilidad">Medida de sostenibilidad</label>
+				</div>
+			</div>
+					
+					
+				</div>
+			
+			
+			
 
+			<br>
+			
+			
+
+		</fieldset>
+
+			<div class="center">
+				<form:button type="submit"
+					class=" btn green modal-actionwaves-effect waves-light white-text" onclick="toast();">
+					<i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </form:button>
+
+				<form:button href="#!"
+					class=" btn red modal-action modal-close waves-effect waves-light white-text">
+					<i class="fa fa-reply" aria-hidden="true"></i> Cerrar </form:button>
+			</div>
+		</form:form>
+		</div>
+		</div>
 		
-		<hr>	
-	 	<div class="container">	
-<c:if test="${readtipoS}">	
-			<table id="tabla" class="display hover cell-border"  cellspacing="0" width="100%">
-				<thead>
-					<tr>
-						<th>Nombre</th>
-						<th>Responsable</th>
-						<th>Tipo Proyecto</th>
-						<th>Duracion <br>[dias]</br></th>
-						<th>Opcion</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${proyectos}" var="proyecto">
-						<tr style="color:#0B0B61;">
-							<td>${proyecto.solicitud.titulo }</td>
-							 <td>${proyecto.solicitud.usuario.username }</td>
-							 	<td>${proyecto.solicitud.tipoProyecto.nombre }</td>
-							 <td>${proyecto.duracion }</td>
-		
-							<td width="5%">
-							<c:if test="${updatetipoS}">	
-									<a class="modal-trigger" href="#-${proyecto.codProyecto}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
-							</c:if>
-							<c:if test="${deletetipoS}">		
-									<a class="" href="/sgp/proyectos/delete/${proyecto.codProyecto}" data-toggle="modal"data-target="#"" onclick="Borrar('${proyecto.codProyecto}');"><i class="fa fa-trash" aria-hidden="true"></i></a>
-							</c:if>						
-						</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-</c:if>		
-	</div>
-</div>
-
-
-
-<!-- /.col-lg-12 -->
+	
+		<!-- /.col-lg-12 -->
 
 
 <c:forEach items="${proyectos}" var="proyecto">
 <div id="-${proyecto.codProyecto}" class="modal white darken-4">
-<div class="modal-header"></div>
+	<div class="modal-header"></div>
 	<div class="modal-content">
-	
 <form:form method="post" modelAttribute="proyectoForm"
-			action="/sgp/proyectosadd" id="registro" autocomplete="off" accept-charset="ISO-8859-1">
+			action="/sgp/proyectosadd/${proyecto.codProyecto}" id="registro" autocomplete="off" accept-charset="ISO-8859-1">
   
 			
 			
@@ -227,7 +395,7 @@
 			</div>			
 				
 				</div>
-			<!--  </div>-->
+			</div>
 	
 			<div class="center">
 				<form:button type="submit"
@@ -241,7 +409,6 @@
 		</form:form>
 	</div>
 </div>
-
 
 </c:forEach>
 
@@ -299,10 +466,4 @@ function Borrar(codProyecto)
 } 
 
 </script>
-
-
-
-
-
-
-
+		
