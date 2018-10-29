@@ -3,13 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
 <head>
 
 </head>
-
-<!-- Modal Trigger -->
-  
+ 
 
 <div id="contenido" class="card-panel hoverable">
 <c:if test="${createfuncionR}">
@@ -43,7 +40,7 @@
 							</c:if>
 							<c:if test="${deletefuncionR}">		
 									<a class="" href="/sgp/funciones/delete/${funcion.idFuncion }" data-toggle="modal"data-target="#" onclick="Borrar('${funcion.idFuncion}');"><i class="fa fa-trash" aria-hidden="true"></i></a>
-							</c:if>						
+							</c:if>																								
 						</td>															
 					</tr>
 				</c:forEach>
@@ -115,9 +112,7 @@
 							required="required" />
 					</div>
 					
-				</div>
-				
-
+				</div>	
 				
 				<form:hidden path="idFuncion" value="${funcion.idFuncion}" />
 
@@ -135,9 +130,6 @@
 	</div>
 
 </c:forEach>
-
-
-
 
 <script>
 
@@ -157,3 +149,5 @@ function Borrar(idFuncion)
 } 
 
 </script>
+
+

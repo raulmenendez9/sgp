@@ -93,7 +93,9 @@ body{
  <!-- ****************/ FIN IMPORTACIONES****************************** -->
  
  <body>
+ <!-- -->
 <div class="loader">
+
 </div>
  <nav>
     <div class="nav-wrapper">

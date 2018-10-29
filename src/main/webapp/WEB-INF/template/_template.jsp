@@ -18,9 +18,10 @@
 <title><tiles:getAsString name="titulo" /></title>
 
 <!-- Librerias CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link
 	href="<c:url value="/resources/vendor/bootstrap/css/bootstrap.min.css"/>"
-	rel="stylesheet" type="text/css" />
+	rel="stylesheet" type="text/css" /> 
 <link href="<c:url value="/resources/vendor/metisMenu/metisMenu.min.css"/>" rel="stylesheet" type="text/css" />
 <link href="<c:url value="/resources/dist/css/sb-admin-2.css" />"
 	rel="stylesheet" type="text/css" />
@@ -107,12 +108,14 @@
 	<!-- Librerias JavaScript -->
 	
 	
-	<script
-		src="<c:url value="resources/vendor/jquery/jquery.js"/>" /></script>
+  <script src="<c:url value="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"/>" /></script>
+
 		<script src="<c:url value="resources/vendor/ckeditor/ckeditor.js"/>" /></script>
-	
-	<script
-		src="<c:url value="resources/vendor/bootstrap/js/bootstrap.min.js"/>" /></script>
+
+ 
+  <script src="<c:url value=" https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"/>" /></script>
+<!-- <script
+		src="<c:url value="resources/vendor/bootstrap/js/bootstrap.min.js"/>" /></script> -->
 	<script
 		src="<c:url value="resources/vendor/metisMenu/metisMenu.min.js"/>" /></script>
 	<script src="<c:url value="resources/dist/js/sb-admin-2.js"/> "></script>
@@ -120,7 +123,7 @@
 		src="<c:url value="resources/vendor/datatables/js/jquery.dataTables.min.js"/> "></script>
 	<script
 		src="<c:url value="resources/vendor/datatables-plugins/dataTables.bootstrap.min.js"/> "></script>
-	<script
+	<scriptx
 		src="<c:url value="resources/vendor/datatables-responsive/dataTables.responsive.js"/> "></script>
 	
 	<script src="<c:url value="	resources/vendor/bootstrap/dist/bootstrap-toggle.min.js"/> "></script>
@@ -168,6 +171,47 @@ $('#modal_eliminar').on('show.bs.modal', function (event) {
 </script>
 
 	<tiles:insertAttribute name="content_javascript" />
+
+
+<!-- Modal Indicadores -->
+<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">¿Qué son y cómo se construyen los indicadores en la evaluación de impacto?</h4>
+        </div>
+        <div class="modal-body">
+          <p>Un indicador es una comparación entre dos o más tipos de datos que sirve para elaborar una medida cuantitativa o una observación cualitativa. Esta comparación arroja un valor, una magnitud o un criterio, que tiene significado para quien lo analiza.
+          </p>
+          <p>Los indicadores se utilizan en diversos ámbitos. Un ejemplo básico de indicador es el porcentaje. Otros indicadores comunes pueden ser la tasa de empleo, la tasa de desempleo, la tasa de actividad, la tasa de informalidad, por mencionar algunos.
+          </p>
+          <img class="responsive-img" src="resources/img/indicador1.png" style="width:300px; height:100"><br><br>
+          <p>Los indicadores para medir el incremento de proyectos se determinan a través de variables de impacto como se detalla a continuación:
+          </p>
+           <img class="responsive-img" src="resources/img/indicador2.png" style="width:400; height:100">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function(){
+    $("#myBtn").click(function(){
+        $("#myModal").modal();
+    });
+});
+</script>
+
+
 
 </body>
 </html>
