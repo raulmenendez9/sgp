@@ -10,8 +10,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "especificacionProyecto", catalog = "sgr")
-public class EspecificacionProyecto implements java.io.Serializable{
-	
+public class EspecificacionProyecto implements java.io.Serializable {
+
 	/**
 	 * 
 	 */
@@ -19,11 +19,9 @@ public class EspecificacionProyecto implements java.io.Serializable{
 	private int idEspecificacion;
 	private int cantidadRegistro;
 
-	
-	public EspecificacionProyecto(){
-		
+	public EspecificacionProyecto() {
+
 	}
-	
 
 	public EspecificacionProyecto(int idEspecificacion, int cantidadRegistro) {
 		this.idEspecificacion = idEspecificacion;
@@ -52,5 +50,4 @@ public class EspecificacionProyecto implements java.io.Serializable{
 		this.cantidadRegistro = cantidadRegistro;
 	}
 
-	
 }
