@@ -1,5 +1,7 @@
 package com.sisbam.sgp.entity.administration;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,7 +12,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name = "actividad", catalog = "sgp")
@@ -19,6 +26,9 @@ public class Actividad {
 	private int idActividad;
 	private String nombre;
 	private String descripcion;
+	private Date fechaInicio;
+	private Date fechaFin;
+	private String estado;
 	private Proyecto proyecto;
 	
 	
@@ -28,11 +38,14 @@ public class Actividad {
 		
 	  }	
 	
-	public Actividad(int idActividad, String nombre, String descripcion, Proyecto proyecto) {
+	public Actividad(int idActividad, String nombre, String descripcion, Date fechaInicio, Date fechaFin, String estado, Proyecto proyecto) {
 		
 		this.idActividad = idActividad;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
+		this.fechaInicio=fechaInicio;
+		this.fechaFin=fechaFin;
+		this.estado=estado;
 		this.proyecto = proyecto;
 	}
 	
@@ -88,5 +101,37 @@ public class Actividad {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(iso = ISO.DATE)
+	@Column(name = "fechaInicio", nullable = false, length = 256)
+	public Date getFechaInicio() {
+		return fechaInicio;
+	}
 
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+		
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(iso = ISO.DATE)
+	@Column(name = "fechaFin", nullable = false, length = 256)
+	public Date getFechaFin() {
+		return fechaFin;
+	}
+
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+	
+	
+	@Column(name = "estado", nullable = true, length = 100)
+	public String getEstado() {
+		return estado;
+	}
+	
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	
 }

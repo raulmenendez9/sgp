@@ -17,8 +17,9 @@
 				<thead>
 					<tr>
 						<th>Nombre</th>
-				
 						<th>Descripción</th>
+						<th>Estado</th>
+						<th>Fecha Inicio</th>
 						<th>Opciones</th>
 					</tr>
 				</thead>
@@ -28,6 +29,8 @@
 							<td>${actividad.nombre }</td>
 				
 							 	<td>${actividad.descripcion}</td>
+							 	<td>${actividad.estado}</td>
+							 	<td>${actividad.fechaInicio}</td>
 							
 							
 							<td width="5%">
@@ -69,7 +72,7 @@
 			</div>
 			
 			<div class="row">
-				<div class="input-field col s6">
+				<div class="input-field col s12">
 					<form:input path="descripcion" class="form-control" placeholder="Descripción"
 						type="text" id="descripcion" value="${actividad.descripcion }" />
 				</div>
@@ -97,11 +100,49 @@
 					</form:select>
 				</div>
 			</div>
+	
+			<div class="row">
+				<div class="input-field col s6">
+			
+               <form:select path="estado" id="estado" class="form-control" value="${actvidad.estado }" required="required">
+				<option value="" disabled selected>Estado de la Actividad</option>
+				<option value="Iniciado">Iniciado</option>
+				<option value="Intermedio">Intermedio</option>
+				<option value="Finalizado">Finalizado</option>
+				
+						
+				</form:select>
+           
+			
+            </div>
+			</div>
+           
+			
+	
+			
+			<label for="FechaInicio">Fecha Inicio:</label>
+			<div class="date">
+			 
+				<div class="input-field col s6">
+					
+				 
+					<form:input path="fechaInicio" class="form-control" placeholder="fecha"
+						type="date" id="fechaInicio" value="${proyecto.fechaInicio}" required="required"/>
+				</div>
+			
+			</div>
 			
 			
-
+			<label for="FechaFin">Fecha Fin:</label>
+			<div class="date">
+				<div class="input-field col s6">
+				
+					<form:input path="fechaFin" class="form-control" placeholder="fecha"
+						type="date" id="fechaFin" value="${proyecto.fechaFin}" required="required"/>
+				</div>
+			</div>
 			
-			<form:hidden path="idActividad" value="${actividad.idActividad}" />
+					<form:hidden path="idActividad" value="${actividad.idActividad}" />
 
 			<div class="center">
 				<form:button type="submit"
@@ -159,14 +200,50 @@
 			
 			
 			<div class="row">
-				<div class="input-field col s6">
+				<div class="input-field col s12">
 					<form:input path="descripcion" class="form-control" placeholder="Descripción"
 						type="text" id="descripcion" value="${actividad.descripcion }" />
 				</div>
 			</div>
-
+		
+			<div class="row">
+				<div class="input-field col s6">
+			
+               <form:select path="estado" id="estado" class="form-control" value="${actvidad.estado }" required="required">
+				<option value="" disabled selected>Estado de la Actividad</option>
+				<option value="Iniciado">Iniciado</option>
+				<option value="Intermedio">Intermedio</option>
+				<option value="Finalizado">Finalizado</option>
+				
+						
+				</form:select>
+           
+			
+            </div>
+			</div>
 			
 			<form:hidden path="idActividad" value="${actividad.idActividad}" />
+				<label for="FechaInicio">Fecha Inicio:</label>
+				<div class="date">
+			 
+				<div class="input-field col s6">
+				
+				 
+					<form:input path="fechaInicio" class="form-control" placeholder="fecha"
+						type="date" id="fechaInicio" value="${proyecto.fechaInicio}" required="required"/>
+				</div>
+			
+			</div>
+				<label for="FechaFin">Fecha Fin:</label>
+			
+			<div class="date">
+				<div class="input-field col s6">
+				
+					<form:input path="fechaFin" class="form-control" placeholder="fecha"
+						type="date" id="fechaFin" value="${proyecto.fechaFin}" required="required"/>
+				</div>
+			</div>
+			
 
 			<div class="center">
 				<form:button type="submit"
