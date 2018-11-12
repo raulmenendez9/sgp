@@ -15,16 +15,16 @@
 			 <legend><h5 style="text-align: center; "> Datos Generales</h5></legend>
 				
 				<div class="input-field col s12">
-					<form:select path="codSolicitud" id="form-proyecto" class="form-control" required="required"  >
+			<form:select path="codSolicitud" id="form-proyecto" class="form-control" required="required"  >
 						<option value="" disabled selected>Seleccione un titulo</option>
 						<c:forEach items="${solicitudes}" var="p">
 							<c:choose>
-								<c:when test="${proyecto.solictud.codSolicitud == p.codSolicitud}">
-									<form:option value="${p.codSolicitud }" label="${p.titulo}"
+								<c:when test="${proyecto.solicitud.codSolicitud == p[0]}">
+									<form:option value="${p[0] }" label="${p[5]}"
 										selected="true" />
 								</c:when>
 								<c:otherwise>
-									<form:option value="${p.codSolicitud }" label="${p.titulo}" var="selec"/>
+									<form:option value="${p[0]}" label="${p[5]}" var="selec"/>
 								</c:otherwise>
 							</c:choose>
 			

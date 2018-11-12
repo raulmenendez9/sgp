@@ -1,5 +1,6 @@
 package com.sisbam.sgp.controller.administration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,11 +57,9 @@ public class ProyectoController {
 			model.addAttribute("proyecto", null);
 	
 			List<Proyecto> proyectos = (List<Proyecto>) this.manage_entity.getAll("Proyecto");
-			List<Solicitud> solicitudes = (List<Solicitud>) this.manage_entity.getListByName("Solicitud", "estado", "true");
-		
-				
-			model.addAttribute("proyectos", proyectos);
+			List<Solicitud> solicitudes = (List<Solicitud>) this.manage_entity.getAll("Solicitud");
 			model.addAttribute("solicitudes", solicitudes);
+			model.addAttribute("proyectos", proyectos);
 			retorno = path+"proyecto";
 		}
 		return retorno;
@@ -75,11 +74,13 @@ public class ProyectoController {
 		String retorno = "403";
 		if(permisos.isC()){
 			Proyecto proyecto = new Proyecto();
-			List<Solicitud> solicitudes = (List<Solicitud>) this.manage_entity.getAll("Solicitud");
-			
+
+			List<String> consulta = new ArrayList<String>();
+			String sql = "SELECT s.codsoliciutud, s.estado, s.fecha, s.justificacion,s.objetivo, s.titulo FROM Solicitud as s WHERE NOT EXISTS (SELECT null FROM Proyecto as z WHERE z.codSolicitud = s.codsoliciutud)";
+			consulta = (List<String>) manage_entity.executeNativeQuery(sql);		
+			model.addAttribute("solicitudes", consulta);
 			model.addAttribute("proyectoForm", proyecto);
 			model.addAttribute("proyecto", null);
-			model.addAttribute("solicitudes", solicitudes);
 			
 			
 			retorno = path+"proyecto-form";
