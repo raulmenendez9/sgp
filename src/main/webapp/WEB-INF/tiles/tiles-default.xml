@@ -173,6 +173,10 @@
     	<put-attribute name="titulo" value="Actividad" />
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Actividad/actividad.jsp"/>
 	</definition>
+	<definition name="Administration/Actividad/progresoActividades" extends="materializeTemplate">
+    	<put-attribute name="titulo" value="Progreso de Actividad" />
+		<put-attribute name="content" value="/WEB-INF/views/Administration/Actividad/progresoActividades.jsp"/>
+	</definition>
 	
 	<definition name="Administration/Proyecto/verProyectos" extends="materializeTemplateForm">
     	<put-attribute name="titulo" value="Ver Proyectos" />
