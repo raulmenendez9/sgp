@@ -28,7 +28,7 @@ public class Actividad {
 	private String descripcion;
 	private Date fechaInicio;
 	private Date fechaFin;
-	private String estado;
+	private int estado;
 	private Proyecto proyecto;
 	
 	
@@ -38,7 +38,7 @@ public class Actividad {
 		
 	  }	
 	
-	public Actividad(int idActividad, String nombre, String descripcion, Date fechaInicio, Date fechaFin, String estado, Proyecto proyecto) {
+	public Actividad(int idActividad, String nombre, String descripcion, Date fechaInicio, Date fechaFin, int estado, Proyecto proyecto) {
 		
 		this.idActividad = idActividad;
 		this.nombre = nombre;
@@ -126,11 +126,11 @@ public class Actividad {
 	
 	
 	@Column(name = "estado", nullable = true, length = 100)
-	public String getEstado() {
+	public int getEstado() {
 		return estado;
 	}
 	
-	public void setEstado(String estado) {
+	public void setEstado(int estado) {
 		this.estado = estado;
 	}
 	
