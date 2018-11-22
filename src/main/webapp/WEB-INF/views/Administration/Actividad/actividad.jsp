@@ -18,7 +18,7 @@
 					<tr>
 						<th>Nombre</th>
 						<th>Descripción</th>
-						<th>Estado</th>
+						<th>Progreso</th>
 						<th>Fecha Inicio</th>
 						<th>Opciones</th>
 					</tr>
@@ -105,19 +105,13 @@
 			</div>
 	
 			<div class="row">
-				<div class="input-field col s6">
-			
-               <form:select path="estado" id="estado" class="form-control" value="${actvidad.estado }" required="required">
-				<option value="" disabled selected>Estado de la Actividad</option>
-				<option value="Iniciado">Iniciado</option>
-				<option value="Intermedio">Intermedio</option>
-				<option value="Finalizado">Finalizado</option>
+				<div class="input-field col s12">
+				<label for="estado">Ingrese valor de 1 a 100 de acuerdo al progreso de la actividad</label>
+				<br>
 				
-						
-				</form:select>
-           
-			
-            </div>
+					<form:input path="estado" class="form-control" placeholder="Ingrese valor de 1 a 100 de acuerdo al progreso de la actividad"
+						 id="estado" type="number" min="0" max="100"  value="${actividad.estado }" />
+				</div>
 			</div>
            
 			
@@ -209,20 +203,13 @@
 				</div>
 			</div>
 		
-			<div class="row">
-				<div class="input-field col s6">
-			
-               <form:select path="estado" id="estado" class="form-control" value="${actvidad.estado }" required="required">
-				<option value="" disabled selected>Estado de la Actividad</option>
-				<option value="Iniciado">Iniciado</option>
-				<option value="Intermedio">Intermedio</option>
-				<option value="Finalizado">Finalizado</option>
-				
-						
-				</form:select>
-           
-			
-            </div>
+				<div class="row">
+				<div class="input-field col s12">
+				<label for="estado">Ingrese valor de 1 a 100 de acuerdo al progreso de la actividad</label>
+				<br>
+					<form:input path="estado" class="form-control" placeholder="Ingrese valor de 1 a 100 de acuerdo al progreso de la actividad"
+						 id="estado" type="number" min="0" max="100"  value="${actividad.estado }" />
+				</div>
 			</div>
 			
 			<form:hidden path="idActividad" value="${actividad.idActividad}" />
