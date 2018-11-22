@@ -226,127 +226,156 @@
 </div>
 
 
-<c:forEach items="${indicadores}" var="I">
-	<div id="-${I.idIndicador}" class="modal white darken-4">
-		<div class="modal-header"></div>
-		<div class="modal-content">
+<c:forEach items="${indicadores}" var="indicador">
+<div id="-${indicador.idIndicador}" class="modal white darken-4">
+	<div class="modal-header"></div>
+	<div class="modal-content">
 
-			<form:form method="post" modelAttribute="indicadorForm"
-				action="/sgp/indicadores/add" id="registro" autocomplete="off"
-				accept-charset="ISO-8859-1">
-
-
-				<div class="row">
-					<div class="input-field col s12">
-						<h5 style="text-align: center;">Datos de Indicador</h5>
-						<div class="row">
-							<div class="input-field col s6">
-								<form:input path="nombre" value="${I.nombre }"
-									placeholder="Nombre" id="nombre" type="text" class="validate"
-									required="required" />
-							</div>
+  <form:form method="post" modelAttribute="indicadorForm"
+			action="/sgp/indicadores/add" id="registro" autocomplete="off" accept-charset="ISO-8859-1">
+			
+			
+			<div class="row">
+				<div class="input-field col s12">
+					<h5 style="text-align: center;">Datos de Indicador</h5>
+					<div class="row">
+						<div class="input-field col s6">
+							<form:input path="nombre" value="${indicador.nombre }"
+								placeholder="Nombre" id="nombre" type="text" class="validate"
+								required="required" />
 						</div>
 					</div>
 				</div>
-
-				<div class="row">
-					<div class="input-field col s12">
-						<form:textarea path="descripcion" id="descripcion"
-							class="form-control" placeholder="Descripcion" rows="8" cols="80"
-							value="${I.descripcion}" required="required"
-							style="font-size:15px;" />
+				</div>
+					
+					<div class="row">
+						<div class="input-field col s12">
+							<form:input path="descripcion" id="descripcion"
+								class="form-control" placeholder="Descripcion" rows="8"
+								cols="80" value = "${indicador.descripcion}" required="required"
+								style="font-size:15px;" />
+						</div>
 					</div>
+					
+						<div class="row">
+							<div class="input-field col s12">
+								<form:select path="codProyecto" id="form-indicador"
+									class="form-control" required="true">
+									<option value="" disabled selected>Seleccione Proyecto</option>
+									<c:forEach items="${proyectos}" var="i">
+										<c:choose>
+											<c:when
+												test="${indicador.proyecto.codProyecto == i.codProyecto}">
+												<form:option value="${i.codProyecto}"
+													label="${i.solicitud.titulo}" selected="true" />
+											</c:when>
+											<c:otherwise>
+												<form:option value="${i.codProyecto }"
+													label="${i.solicitud.titulo}" var="selec" />
+											</c:otherwise>
+										</c:choose>
+
+									</c:forEach>
+
+								</form:select>
+							</div>
+							
+							</div>
+
+
+								<div class="row">
+								<h5 style="text-align: center;">Cálculo de Indicador Ideal</h5>
+									<div class="input-field col s6">
+									
+										<form:select path="idVariableImpacto" id="form-indicador"
+											class="form-control" required="true">
+											<option value="" disabled selected>Seleccione Variable Impacto 1</option>
+											<c:forEach items="${variableImpactos}" var="i">
+												<c:choose>
+													<c:when
+														test="${indicador.variableImpacto.idVariableImpacto == i.idVariableImpacto}">
+														<form:option value="${i.idVariableImpacto }"
+															label="${i.nomVariable}" selected="true" />
+													</c:when>
+													<c:otherwise>
+														<form:option value="${i.idVariableImpacto }"
+															label="${i.nomVariable}" var="selec" />
+													</c:otherwise>
+												</c:choose>
+
+											</c:forEach>
+										</form:select>
+									</div>
+									<div class="input-field col s4">
+									<input id="num1" type="number"  placeholder="Valor de variable"/>
+									</div>
+									</div>
+									
+									<div class="input-field col s6">
+									
+										
+										<form:select path="idVariableImpacto2" id="form-indicador"
+											class="form-control" required="true">
+											<option value="" disabled selected>Seleccione Variable Impacto 2</option>
+											<c:forEach items="${variableImpactos}" var="i">
+												<c:choose>
+													<c:when
+														test="${indicador.variableImpacto2.idVariableImpacto == i.idVariableImpacto}">
+														<form:option value="${i.idVariableImpacto }"
+															label="${i.nomVariable}" selected="true" />
+													</c:when>
+													<c:otherwise>
+														<form:option value="${i.idVariableImpacto}"
+															label="${i.nomVariable}" var="selec" />
+													</c:otherwise>
+												</c:choose>
+
+											</c:forEach>
+										</form:select>
+									</div>
+									<div class="input-field col s4">
+									<input path="num2" type="number" placeholder="Valor de variable"/>
+									</div>
+									</div>
+									<div>
+		<h4>Operacion:
+		
+		<h5 id="demo" class="center-align red-text"/>
+		
+		</h4>
+			</div>
+		<center>
+		
+		<input type="button" onmousemove="myFunction(event)"  class=" btn blue modal-actionwaves-effect waves-light white-text" value="Suma" id="suma" onclick="operaciones('sumar');">
+		<input type="button" onmousemove="restarmove(event)" class=" btn blue modal-actionwaves-effect waves-light white-text" value="restar" onclick="operaciones('restar');">
+		<input type="button" onmousemove="multiplicarmove(event)" class=" btn blue modal-actionwaves-effect waves-light white-text" value="multiplicar" onclick="operaciones('multiplicar');">
+		<input type="button" onmousemove="dividirmove(event)" class=" btn blue modal-actionwaves-effect waves-light white-text" value="dividir" onclick="operaciones('dividir');">
+	</center>
+	<div class="row">
+<div  class="input-field col s12">
+<h5 style="text-align: left;">Indicador Ideal</h5>
+			<form:input path="indicadorR" class="form-control" placeholder="Indicador Real"
+						type="text"   value="${indicador.indicadorR}" required="required" id="resultado"/>
+				</div>
 				</div>
 
-				<div class="row">
-					<div class="input-field col s12">
-						<form:select path="codProyecto" id="form-indicador"
-							class="form-control" required="true">
-							<option value="" disabled selected>Seleccione Proyecto</option>
-							<c:forEach items="${proyectos}" var="i">
-								<c:choose>
-									<c:when
-										test="${indicador.proyecto.codProyecto == i.codProyecto}">
-										<form:option value="${i.codProyecto}"
-											label="${i.solicitud.titulo}" selected="true" />
-									</c:when>
-									<c:otherwise>
-										<form:option value="${i.codProyecto }"
-											label="${i.solicitud.titulo}" var="selec" />
-									</c:otherwise>
-								</c:choose>
+										<form:hidden id="idIndicador" path="idIndicador"
+											value="${indicador.idIndicador}" />
 
-							</c:forEach>
+										<div class="center">
+											<form:button type="submit"
+												class=" btn green modal-actionwaves-effect waves-light white-text"
+												onclick="toast();">
+												<i class="fa fa-floppy-o" aria-hidden="true"></i> Editar </form:button>
 
-						</form:select>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="input-field col s6">
-						<form:select path="idVariableImpacto" id="form-indicador"
-							class="form-control" required="true">
-							<option value="" disabled selected>Seleccione Variable
-								Impacto</option>
-							<c:forEach items="${variableImpactos}" var="i">
-								<c:choose>
-									<c:when
-										test="${indicador.variableImpacto.idVariableImpacto == i.idVariableImpacto}">
-										<form:option value="${i.idVariableImpacto }"
-											label="${i.nomVariable}" selected="true" />
-									</c:when>
-									<c:otherwise>
-										<form:option value="${i.idVariableImpacto }"
-											label="${i.nomVariable}" var="selec" />
-									</c:otherwise>
-								</c:choose>
-
-							</c:forEach>
-						</form:select>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="input-field col s6">
-						<form:select path="idVariableImpacto2" id="form-indicador"
-							class="form-control" required="true">
-							<option value="" disabled selected>Seleccione Variable
-								Impacto</option>
-							<c:forEach items="${variableImpactos}" var="i">
-								<c:choose>
-									<c:when
-										test="${indicador.variableImpacto2.idVariableImpacto2 == i.idVariableImpacto}">
-										<form:option value="${i.idVariableImpacto }"
-											label="${i.nomVariable}" selected="true" />
-									</c:when>
-									<c:otherwise>
-										<form:option value="${i.idVariableImpacto }"
-											label="${i.nomVariable}" var="selec" />
-									</c:otherwise>
-								</c:choose>
-
-							</c:forEach>
-						</form:select>
-					</div>
-				</div>
-
-				<form:hidden id="idIndicador" path="idIndicador"
-					value="${indicador.idIndicador}" />
-
-				<div class="center">
-					<form:button type="submit"
-						class=" btn green modal-actionwaves-effect waves-light white-text"
-						onclick="toast();">
-						<i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </form:button>
-
-					<form:button href="#!"
-						class=" btn red modal-action modal-close waves-effect waves-light white-text">
-						<i class="fa fa-reply" aria-hidden="true"></i> Cerrar </form:button>
-				</div>
-
-			</form:form>
-		</div>
+											<form:button href="#!"
+												class=" btn red modal-action modal-close waves-effect waves-light white-text">
+												<i class="fa fa-reply" aria-hidden="true"></i> Cerrar </form:button>
+										</div>
+		</form:form>
 	</div>
+</div>
+
 
 </c:forEach>
 
