@@ -29,7 +29,10 @@
 							<td>${actividad.nombre }</td>
 				
 							 	<td>${actividad.descripcion}</td>
-							 	<td>${actividad.estado}</td>
+							 	<td><div class="progress">
+      						<div class="determinate" style="width:${actividad.estado}%"></div>
+      						</div>
+  							</td>
 							 	<td>${actividad.fechaInicio}</td>
 							
 							
