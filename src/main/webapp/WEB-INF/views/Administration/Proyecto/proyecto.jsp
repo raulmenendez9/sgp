@@ -39,6 +39,7 @@
 									<a class="modal-trigger" href="#-${proyecto.codProyecto}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${deletetipoS}">		
+									<a class="" href="/sgp/pi/${proyecto.codProyecto}"><i class="fa fa-line-chart" aria-hidden="true"></i></a>
 									<a class="" href="/sgp/proyectos/delete/${proyecto.codProyecto}" data-toggle="modal"data-target="#"" onclick="Borrar('${proyecto.codProyecto}');"><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>						
 						</td>

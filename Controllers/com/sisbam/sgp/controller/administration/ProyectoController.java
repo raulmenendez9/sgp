@@ -17,6 +17,7 @@ import com.sisbam.sgp.controller.variety.ObtenerPermisosPorUrl;
 import com.sisbam.sgp.dao.DaoImp;
 import com.sisbam.sgp.entity.administration.Actividad;
 import com.sisbam.sgp.entity.administration.Empleado;
+import com.sisbam.sgp.entity.administration.Indicador;
 import com.sisbam.sgp.entity.administration.Proyecto;
 import com.sisbam.sgp.entity.administration.Solicitud;
 import com.sisbam.sgp.entity.administration.TipoProyecto;
@@ -151,6 +152,16 @@ public class ProyectoController {
 				}
 		
 		
-		
+				@RequestMapping(value = "/pi/{id}", method =  RequestMethod.GET)
+				public String indicador(@PathVariable("id") String codProyecto, Model model, HttpServletRequest request) throws ClassNotFoundException {
+					String retorno="403";
+					if(permisos.isD()) {
+					
+					List<Indicador> indicadores = (List<Indicador>) this.manage_entity.getListByName("Indicador", "codProyecto", codProyecto);
+					model.addAttribute("indicadores", indicadores);
+					retorno=path+"proyectosindicador";
+					}
+					return retorno;
+				}
 		
 }

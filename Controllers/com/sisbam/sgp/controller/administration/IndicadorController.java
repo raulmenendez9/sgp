@@ -121,6 +121,35 @@ public class IndicadorController {
 			return retorno;
 		}
 		
+		
+		@RequestMapping(value = "/ind/add", method = {RequestMethod.POST, RequestMethod.GET})
+		public String saveOrUpadateInd(@ModelAttribute("indicadorForm") Indicador indicadorRecibido,Model model) throws ClassNotFoundException {
+			String retorno = "403";
+			
+					Indicador indicador = indicadorRecibido;
+					
+					Proyecto proyectoRecibido = (Proyecto) this.manage_entity.getById(Proyecto.class.getName(), indicador.getCodProyecto());
+					indicador.setProyecto(proyectoRecibido);
+					
+					VariableImpacto variableImpactoRecibido = (VariableImpacto) this.manage_entity.getById(VariableImpacto.class.getName(), indicador.getIdVariableImpacto());
+					indicador.setVariableImpacto(variableImpactoRecibido);
+					
+					VariableImpacto variableImpactoRecibido2 = (VariableImpacto) this.manage_entity.getById(VariableImpacto.class.getName(), indicador.getIdVariableImpacto2());
+					indicador.setVariableImpacto2(variableImpactoRecibido2);
+					
+					
+					if(indicador.getIdIndicador()==0) {
+						manage_entity.save(Indicador.class.getName(), indicador);
+					}else{
+						manage_entity.update(Indicador.class.getName(), indicador);
+					}
+					retorno="redirect:/proyectos";
+			
+			return retorno;
+		}
+		
+		
+		
 		//ACTUALIZAR
 		@RequestMapping(value = "/indicadores/update/{id}", method = RequestMethod.GET)
 		public String update(@PathVariable("id") String idIndicador, Model model, HttpServletRequest request) throws ClassNotFoundException {
@@ -183,5 +212,37 @@ public class IndicadorController {
 			return retorno;
 			
 		}
+		
+	
+		@RequestMapping(value = "/indact/{id}", method = RequestMethod.GET)
+		public String updateReal(@PathVariable("id") String idIndicador, Model model, HttpServletRequest request) throws ClassNotFoundException {
+			String retorno="403";
+			
+				List<Indicador> indicadores = (List<Indicador>) this.manage_entity.getAll("Indicador");
+				model.addAttribute("indicadores", indicadores);
+				
+				Indicador indicador = (Indicador) manage_entity.getById(Indicador.class.getName(), Integer.parseInt(idIndicador));
+				model.addAttribute("indicador", indicador);
+				
+				Indicador indicadorForm = new Indicador();
+				model.addAttribute("indicadorForm", indicadorForm);
+				
+				List<Proyecto> Proyecto = (List<Proyecto>) this.manage_entity.getAll("Proyecto");
+				model.addAttribute("proyecto", Proyecto);
+				
+				model.addAttribute("proyectos", Proyecto);
+				
+
+				List<VariableImpacto> vsi = (List<VariableImpacto>) this.manage_entity.getAll("VariableImpacto");
+				model.addAttribute("vsi", vsi);
+				
+				List<VariableImpacto> variableImpactos = (List<VariableImpacto>) this.manage_entity.getAll("VariableImpacto");
+				model.addAttribute("variableImpactos", variableImpactos);
+				
+				retorno=path+"real";
+			
+			return retorno;
+		}
+
 		
 }

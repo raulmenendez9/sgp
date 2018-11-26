@@ -42,6 +42,7 @@
 							<td>${indicador.variableImpacto.nomVariable}</td>
 							<td>${indicador.variableImpacto2.nomVariable}</td>
 							<td>${indicador.indicadorR}</td>
+							
 
 							<td width="5%"><c:if test="${updateind2}">
 									<a class="modal-trigger" href="#-${indicador.idIndicador}"><i
@@ -145,7 +146,7 @@
 					</form:select>
 				</div>
 				<div class="input-field col s4">
-					<input id="num1" type="number" placeholder="Valor de variable" />
+					<form:input path="datoa" id="num1" type="number" placeholder="Valor de variable" />
 				</div>
 			</div>
 
@@ -172,7 +173,7 @@
 					</form:select>
 				</div>
 				<div class="input-field col s4">
-					<input id="num2" type="number" placeholder="Valor de variable" />
+					<form:input path="datob" id="num2" type="number" placeholder="Valor de variable" />
 					<!-- FUNCION DE IDENTIFICACION -->
 
 				</div>
@@ -305,10 +306,12 @@
 
 											</c:forEach>
 										</form:select>
+									
 									</div>
 									<div class="input-field col s4">
-									<input id="num1" type="number"  placeholder="Valor de variable"/>
+									<form:input path="datoa" id="num1" type="text"  value="${indicador.datoa}" placeholder="Valor de variable"/>
 									</div>
+									
 									</div>
 									
 									<div class="input-field col s6">
@@ -334,7 +337,7 @@
 										</form:select>
 									</div>
 									<div class="input-field col s4">
-									<input path="num2" type="number" placeholder="Valor de variable"/>
+									<form:input path="datob" type="text"  value="${indicador.datob}" placeholder="Valor de variable"/>
 									</div>
 									</div>
 									<div>
@@ -361,6 +364,18 @@
 
 										<form:hidden id="idIndicador" path="idIndicador"
 											value="${indicador.idIndicador}" />
+											
+										
+										<form:hidden id="datoc" path="datoc"
+											value="${indicador.datoc}" />
+										
+										
+										<form:hidden id="datod" path="datod"
+											value="${indicador.datod}" />
+											
+											
+										<form:hidden id="indicadorReal" path="indicadorReal"
+											value="${indicador.indicadorReal}" />
 
 										<div class="center">
 											<form:button type="submit"

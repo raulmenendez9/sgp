@@ -23,7 +23,11 @@ public class Indicador implements java.io.Serializable {
 	private String nombre;
 	private String descripcion;
 	private float indicadorR;
-
+	private float datoa;
+	private float datob;
+	private float datoc;
+	private float datod;
+	private float indicadorReal;
 	
 	private Proyecto proyecto;
 	
@@ -36,7 +40,8 @@ public class Indicador implements java.io.Serializable {
 		
 	}
 	
-	public Indicador(int idIndicador, String nombre,String descripcion,Proyecto proyecto, VariableImpacto variableImpacto,VariableImpacto variableImpacto2, float indicadorR) {
+	public Indicador(int idIndicador, String nombre,String descripcion,Proyecto proyecto, VariableImpacto variableImpacto,VariableImpacto variableImpacto2, 
+			float indicadorR, float datoa, float datob, float indicadorReal, float datoc, float datod) {
 		this.idIndicador = idIndicador;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -44,6 +49,11 @@ public class Indicador implements java.io.Serializable {
 		this.variableImpacto = variableImpacto;
 		this.variableImpacto2 = variableImpacto2;
 		this.indicadorR = indicadorR;
+		this.datoa = datoa;
+		this.datob = datob;
+		this.datoc = 0;
+		this.datod =0;
+		this.indicadorReal = 0;
 	}
 	
 	@Transient
@@ -154,6 +164,50 @@ public class Indicador implements java.io.Serializable {
 
 	public void setIndicadorR(float indicadorR) {
 		this.indicadorR = indicadorR;
+	}
+
+	@Column(name = "datoa", nullable = false)
+	public float getDatoa() {
+		return datoa;
+	}
+
+	public void setDatoa(float datoa) {
+		this.datoa = datoa;
+	}
+	@Column(name = "datob", nullable = false)
+	public float getDatob() {
+		return datob;
+	}
+
+	public void setDatob(float datob) {
+		this.datob = datob;
+	}
+
+	@Column(name = "datoc", nullable = false)
+	public float getDatoc() {
+		return datoc;
+	}
+
+	public void setDatoc(float datoc) {
+		this.datoc = datoc;
+	}
+
+	@Column(name = "datod", nullable = false)
+	public float getDatod() {
+		return datod;
+	}
+
+	public void setDatod(float datod) {
+		this.datod = datod;
+	}
+
+	@Column(name = "indicadorIdeal", nullable = false)
+	public float getIndicadorReal() {
+		return indicadorReal;
+	}
+
+	public void setIndicadorReal(float indicadorReal) {
+		this.indicadorReal = indicadorReal;
 	}
 	
 	
