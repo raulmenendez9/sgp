@@ -75,7 +75,7 @@ if( g ) {
 	    for ( i in nombres )
 		 {  
 	       
-	g.AddTaskItem(new JSGantt.TaskItem(id[i], nombres[i], fechainicio[i], fechafin[i], colores[i], "link", 0, "", duracion[i], 0, 3, 1));
+	g.AddTaskItem(new JSGantt.TaskItem(id[i], nombres[i], fechainicio[i], fechafin[i], colores[i], "", 0, "", duracion[i], 0, 3, 1));
 		 
 	
 		 } 
