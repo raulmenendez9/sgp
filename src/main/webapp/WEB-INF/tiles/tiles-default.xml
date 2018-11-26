@@ -140,6 +140,13 @@
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Proyecto/proyectosindicador.jsp"></put-attribute>
 	</definition>
 	
+	
+		<definition name="Administration/Proyecto/matriz"
+		extends="materializeTemplateForm">
+		<put-attribute name="titulo" value="Matriz de indicadores"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/views/Administration/Proyecto/matriz.jsp"></put-attribute>
+	</definition>
+	
 		<definition name="Administration/Indicador/ayuda"
 		extends="materializeTemplate">
 		<put-attribute name="titulo" value="Ayuda"></put-attribute>

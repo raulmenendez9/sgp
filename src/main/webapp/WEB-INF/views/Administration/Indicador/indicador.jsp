@@ -337,7 +337,7 @@
 										</form:select>
 									</div>
 									<div class="input-field col s4">
-									<form:input path="datob" type="text"  value="${indicador.datob}" placeholder="Valor de variable"/>
+									<form:input path="datob" type="text" id="num3" value="${indicador.datob}" placeholder="Valor de variable"/>
 									</div>
 									</div>
 									<div>
@@ -549,6 +549,7 @@
 		document.getElementById("demo").innerHTML = "";
 	}
 </script>
+
 <!-- Modal Indicadores -->
 <div class="container">
   <!-- Modal -->
@@ -590,18 +591,3 @@ $(document).ready(function(){
 });
 </script>
 	<tiles:insertAttribute name="content_javascript" />
-
-<!-- Modal Indicadores  
-<div id="ex1" class="modal">
-  <h4 class="modal-title">¿Qué son y cómo se construyen los indicadores en la evaluación de impacto?</h4>
-  <div class="modal-body">
-  <p>Un indicador es una comparación entre dos o más tipos de datos que sirve para elaborar una medida cuantitativa o una observación cualitativa. Esta comparación arroja un valor, una magnitud o un criterio, que tiene significado para quien lo analiza.<br><br>
-     Los indicadores se utilizan en diversos ámbitos. Un ejemplo básico de indicador es el porcentaje. Otros indicadores comunes pueden ser la tasa de empleo, la tasa de desempleo, la tasa de actividad, la tasa de informalidad, por mencionar algunos.<br><br>
-	 <img class="responsive-img" src="resources/img/indicador1.png" style="width:300px; height:100"><br><br>
-     Los indicadores para medir el incremento de proyectos se determinan a través de variables de impacto como se detalla a continuación:
-  </p>
-     <img class="responsive-img" src="resources/img/indicador2.png" style="width:400; height:100">
-  <a href="#" rel="modal:close">Cerrar</a>
-  </div>
-</div> 
--->

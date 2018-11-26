@@ -23,7 +23,7 @@
 						<th>Responsable</th>
 						<th>Tipo Proyecto</th>
 						<th>Duracion <br>[dias]</br></th>
-						<th>Opcion</th>
+						<th>Opciones</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -31,16 +31,19 @@
 						<tr style="color:#0B0B61;">
 							<td>${proyecto.solicitud.titulo }</td>
 							 <td>${proyecto.solicitud.usuario.username }</td>
-							 	<td>${proyecto.solicitud.tipoProyecto.nombre }</td>
+							 <td>${proyecto.solicitud.tipoProyecto.nombre }</td>
 							 <td>${proyecto.duracion }</td>
 		
-							<td width="5%">
+							<td style="width:20%;">
+						
 							<c:if test="${updatetipoS}">	
-									<a class="modal-trigger" href="#-${proyecto.codProyecto}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
+									<a class="modal-trigger tooltipped" href="#-${proyecto.codProyecto}" data-position="left" data-tooltip="Actualizar"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${deletetipoS}">		
-									<a class="" href="/sgp/pi/${proyecto.codProyecto}"><i class="fa fa-line-chart" aria-hidden="true"></i></a>
-									<a class="" href="/sgp/proyectos/delete/${proyecto.codProyecto}" data-toggle="modal"data-target="#"" onclick="Borrar('${proyecto.codProyecto}');"><i class="fa fa-trash" aria-hidden="true"></i></a>
+							<a class="tooltipped" href="/sgp/proyectos/delete/${proyecto.codProyecto}" data-toggle="modal"data-target="#"" onclick="Borrar('${proyecto.codProyecto}');" data-position="bottom" data-tooltip="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;
+							<a class="tooltipped" href="/sgp/matriz/${proyecto.codProyecto}" data-position="bottom" data-tooltip="Matriz"><i class="fa fa-th-large red-text" aria-hidden="true"></i></a>&nbsp;
+							<a class="tooltipped" href="/sgp/pi/${proyecto.codProyecto}" data-position="right" data-tooltip="Indicador"><i class="fa fa-line-chart green-text"></i></a>
+									
 							</c:if>						
 						</td>
 						</tr>
@@ -298,11 +301,22 @@ function Borrar(codProyecto)
 	}
  
 } 
-
 </script>
 
 
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.tooltipped');
+    var instances = M.Tooltip.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.tooltipped').tooltip();
+  });
+</script>
 
 
 

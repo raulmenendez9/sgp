@@ -163,5 +163,18 @@ public class ProyectoController {
 					}
 					return retorno;
 				}
+				
+				@RequestMapping(value = "/matriz/{id}", method =  RequestMethod.GET)
+				public String matriz(@PathVariable("id") String codProyecto, Model model, HttpServletRequest request) throws ClassNotFoundException {
+					String retorno="403";
+					double estado=0;
+					if(permisos.isD()) {
+					
+					List<Indicador> indicadores = (List<Indicador>) this.manage_entity.getListByName("Indicador", "codProyecto", codProyecto);
+					model.addAttribute("indicadores", indicadores);
+					retorno=path+"matriz";
+					}
+					return retorno;
+				}
 		
 }
