@@ -29,6 +29,11 @@
 									<a class="" href="/sgp/verproyectos/update/${vistapro[1]}"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							
+							<c:if test="${createvistaprox23}">	
+		
+		                           <a class="" href="/sgp/proyecto/gantt/${vistapro[1]}"><i class="fa fa-calendar" aria-hidden="true"></i></a>&nbsp;
+                              </c:if>
+							
 							</td>
 						</tr>
 						

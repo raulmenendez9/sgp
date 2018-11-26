@@ -7,7 +7,7 @@
 <div id="contenido" class="card-panel hoverable">
 <div class="container">
 		<form:form method="post" modelAttribute="proyectoForm"
-			action="/sgp/proyectos/add" id="registro" autocomplete="off" accept-charset="ISO-8859-1">
+			action="/sgp/proyectos/add" id="codProyecto" autocomplete="off" accept-charset="ISO-8859-1">
            
          
 			<div class="row">  

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -75,6 +76,62 @@ public class VistaProyectoController {
 		}
 		return retorno;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/proyecto/gantt/{id}", method = RequestMethod.GET)
+	 public String gantt(@PathVariable("id") String codProyecto, Model model, HttpServletRequest request)
+	 {
+		 String retorno = "403";
+			
+			HttpSession session = request.getSession();
+			ObtenerPermisosPorUrl facilitador = new ObtenerPermisosPorUrl();
+			session = facilitador.Obtener("/sgp/proyectos", request, manage_entity,IDENTIFICADOR);
+			permisos = (Permisos) session.getAttribute("permisos-de-"+IDENTIFICADOR);
+			String usuario = ""+SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			System.out.println(usuario);
+			
+			if(permisos.isC()){
+				
+				List<String> actividades = new ArrayList<String>();	
+				String query ="select fechafin from actividad where codpoyecto="+Integer.parseInt(codProyecto);
+				actividades = (List<String>) manage_entity.executeNativeQuery(query);
+				model.addAttribute("actividades", actividades);
+				
+				List<Actividad> actividad = new ArrayList<Actividad>();
+				String query2 ="select nombre from actividad where codpoyecto="+Integer.parseInt(codProyecto);
+				actividad = (List<Actividad>) manage_entity.executeNativeQuery(query2);
+				model.addAttribute("actividad", actividad);
+		
+				List<Actividad> actividad3 = new ArrayList<Actividad>();
+				String query3 ="select fechafin from actividad where codpoyecto="+Integer.parseInt(codProyecto);
+				actividad3 = (List<Actividad>) manage_entity.executeNativeQuery(query3);
+				model.addAttribute("fechafin", actividad3);
+		
+				List<Actividad> actividad4 = new ArrayList<Actividad>();
+				String query4 ="select fechainicio from actividad where codpoyecto="+Integer.parseInt(codProyecto);
+				actividad4 = (List<Actividad>) manage_entity.executeNativeQuery(query4);
+				model.addAttribute("fechainicio", actividad4);
+				
+				List<Actividad> actividad5 = new ArrayList<Actividad>();
+				String query5="select estado from actividad where codpoyecto="+Integer.parseInt(codProyecto);
+				actividad5 = (List<Actividad>) manage_entity.executeNativeQuery(query5);
+				model.addAttribute("estado", actividad5);
+				 
+				List<Actividad> actividad6 = new ArrayList<Actividad>();
+				String query6="select idactividad from actividad where codpoyecto="+Integer.parseInt(codProyecto);
+				actividad6 = (List<Actividad>) manage_entity.executeNativeQuery(query6);
+				model.addAttribute("codigo", actividad6);
+				
+				System.out.println(actividad);
+				System.out.println(actividad4);
+				System.out.println(actividad3);
+				System.out.println(actividad6);
+				System.out.println(actividad5);
+			retorno = path+"gantt";
+			}
+			
+		 return retorno;
+	 }
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/verProyectos/add", method = {RequestMethod.POST, RequestMethod.GET})
