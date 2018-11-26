@@ -28,7 +28,7 @@
 							<td>${indicador.nombre }</td>
 							<td>${indicador.indicadorR}</td>
 							<td>${indicador.indicadorReal}</td>
-							<td <c:if test="${indicador.indicadorR > indicador.indicadorReal } "> style="background-color:Skyblue;"</c:if>>
+							<td <c:if test="${indicador.indicadorR > indicador.indicadorReal}"> style="background-color:yellow;"</c:if>>
 								<h5 class="white-text">Menor</h5>
 							</td>
 							<td <c:if test="${indicador.indicadorR == indicador.indicadorReal}"> style="background-color:green;"</c:if>>
