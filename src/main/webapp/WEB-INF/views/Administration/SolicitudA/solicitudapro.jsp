@@ -81,7 +81,7 @@
 			<div class="row">
 				<div class="input-field col s6">
 					<form:input path="titulo" class="form-control" placeholder="Titulo"
-						type="text" id="titulo" value="${solicitud.titulo }" />
+						type="text" id="titulo" value="${solicitud.titulo }" required="true"/>
 
 				</div>
 				<div class="input-field col s6">
@@ -91,7 +91,7 @@
 							<c:choose>
 								<c:when test="${solicitud.tipoProyecto.idTipoProyecto == p.idTipoProyecto}">
 									<form:option value="${p.idTipoProyecto }" label="${p.nombre}"
-										selected="true" />
+										selected="true" required="true"/>
 								</c:when>
 								<c:otherwise>
 									<form:option value="${p.idTipoProyecto }" label="${p.nombre}" />
@@ -112,7 +112,7 @@
 							<c:choose>
 								<c:when test="${solicitud.usuario.idUsuario == p.idUsuario}">
 									<form:option value="${p.idUsuario }" label="${p.username}"
-										selected="true" />
+										selected="true" required="true"/>
 								</c:when>
 								<c:otherwise>
 									<form:option value="${p.idUsuario }" label="${p.username}" />
@@ -125,21 +125,21 @@
 			<div class="row">
 				<div class="input-field col s6">
 					<form:input path="fecha" class="form-control" placeholder="Fecha"
-						type="date" id="fecha" value="${solicitud.fecha }" />
+						type="date" id="fecha" value="${solicitud.fecha }" required="true"/>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="input-field col s12">
 					<form:input path="justificacion" class="form-control" placeholder="Justificacion"
-						type="text" id="justificacion" value="${solicitud.justificacion }" />
+						type="text" id="justificacion" value="${solicitud.justificacion }" required="true"/>
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="input-field col s12">
-					<form:input path="objeto" class="form-control" placeholder="Objeto"
-						type="text" id="objeto" value="${solicitud.objeto }" />
+					<form:input path="objeto" class="form-control" placeholder="Objetivo"
+						type="text" id="objeto" value="${solicitud.objeto }" required="true"/>
 				</div>
 			</div>
 			
@@ -172,19 +172,19 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<form:input path="titulo" class="form-control" placeholder="Titulo"
-						type="text" id="titulo" value="${solicitud.titulo}"/>
+						type="text" id="titulo" value="${solicitud.titulo}" required="true"/>
 
 				</div></div>
 
 			<div class="row">
 				<div class="input-field col s12">
 					<form:select path="idUsuario" class="form-control" required="true">
-						<option value="" disabled selected>Selecione un usuario</option>
+						<option value="" disabled selected>Seleccione un usuario</option>
 						<c:forEach items="${usuarios}" var="p">
 							<c:choose>
 								<c:when test="${solicitud.usuario.idUsuario == p.idUsuario}">
 									<form:option value="${p.idUsuario }" label="${p.username}"
-										selected="true" />
+										selected="true" required="true"/>
 								</c:when>
 								<c:otherwise>
 									<form:option value="${p.idUsuario }" label="${p.username}" />
@@ -197,12 +197,12 @@
 			
 				<div class="input-field col s6">
 					<form:select path="idTipoProyecto" class="form-control" required="true">
-						<option value="" disabled selected>Selecione un tipo de proyectos</option>
+						<option value="" disabled selected>Seleccione un tipo de proyectos</option>
 						<c:forEach items="${tiposProyectos}" var="p">
 							<c:choose>
 								<c:when test="${solicitud.tipoProyecto.idTipoProyecto == p.idTipoProyecto}">
 									<form:option value="${p.idTipoProyecto }" label="${p.nombre}"
-										selected="true" />
+										selected="true" required="true"/>
 								</c:when>
 								<c:otherwise>
 									<form:option value="${p.idTipoProyecto }" label="${p.nombre}" />
@@ -215,7 +215,7 @@
 			<div class="date">
 				<div class="input-field col s6">
 					<form:input path="fecha" class="form-control" placeholder="fecha"
-						type="date" id="fecha" value="${solicitud.fecha }" />
+						type="date" id="fecha" value="${solicitud.fecha }" required="true"/>
 				</div>
 			</div>
 			
@@ -223,13 +223,13 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<form:input path="justificacion" class="form-control" placeholder="Justificacion"
-						type="text" id="justificacion" value="${solicitud.justificacion }"/>
+						type="text" id="justificacion" value="${solicitud.justificacion }" required="true"/>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-					<form:input path="objeto" class="form-control" placeholder="Objeto"
-						type="text" id="objeto" value="${solicitud.objeto }"/>
+					<form:input path="objeto" class="form-control" placeholder="Objetivo"
+						type="text" id="objeto" value="${solicitud.objeto }" required="true"/>
 				</div>
 			</div>
 			
@@ -258,11 +258,11 @@ function Borrar(codSolicitud)
  var resul = confirm('¿Desea borrar la solicitud seleccionado?');
  if(resul=true)
 	 {
-	   location.href="/sgp/solicitudes/delete/"+codSolicitud;
+	   location.href="/sgp/solicitudesapro/delete/"+codSolicitud;
 	 }
  else (resul=false)
  {
-	 location.href="/sgp/solicitudes";
+	 location.href="/sgp/solicitudesapro";
 	}
  
 } 
