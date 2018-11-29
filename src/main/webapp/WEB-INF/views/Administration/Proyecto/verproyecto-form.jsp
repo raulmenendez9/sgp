@@ -188,3 +188,14 @@
 			</div>
 		</form:form>
 </c:forEach>
+
+			<B>Promedio de Actividades en dias:</B>
+				
+			<div class="row">
+				<div class="input-field col s6">
+					<input name="promedio" id="promedio"  value="${promedio}" required="true" readonly="true" >
+					
+				</div>
+				</div>
+
+

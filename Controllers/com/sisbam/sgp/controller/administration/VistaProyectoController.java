@@ -122,6 +122,17 @@ public class VistaProyectoController {
 				actividad6 = (List<Actividad>) manage_entity.executeNativeQuery(query6);
 				model.addAttribute("codigo", actividad6);
 				
+				List<Actividad> actividad8 = new ArrayList<Actividad>();
+				String query8="select round(avg(estado),2) from actividad where codpoyecto="+Integer.parseInt(codProyecto);
+				actividad8 = (List<Actividad>) manage_entity.executeNativeQuery(query8);
+				model.addAttribute("codigo", actividad8);
+				
+				query ="select round(avg(estado),2) from actividad where codpoyecto="+Integer.parseInt(codProyecto);
+				//actividades = (List<String>) manage_entity.executeNativeQuery(query);
+				model.addAttribute("actividades", actividad8);
+		
+				System.out.println(actividad8);
+				
 				System.out.println(actividad);
 				System.out.println(actividad4);
 				System.out.println(actividad3);
@@ -176,6 +187,14 @@ public class VistaProyectoController {
 			
 			model.addAttribute("vistaproyecto", consulta2);
 			
+			List<Actividad> actividad8 = new ArrayList<Actividad>();
+			String query8="select round(avg(estado),2) from actividad where codpoyecto="+Integer.parseInt(codProyecto);
+			actividad8 = (List<Actividad>) manage_entity.executeNativeQuery(query8);
+			model.addAttribute("promedio", actividad8);
+			
+			
+			System.out.println(actividad8);
+			
 			/*List<String> consulta = new ArrayList<String>();
 			String query ="SELECT  nombre, codpoyecto\r\n" + 
 					"	FROM actividad where codpoyecto="+Integer.parseInt(codProyecto);
@@ -199,7 +218,9 @@ public class VistaProyectoController {
 		}
 		
 		return retorno;
-	}
+		}
+		
+	
 	
 	/*@RequestMapping(value = "/reporteBitacora", method = RequestMethod.GET)
 	public void reporte(Model model, HttpServletRequest request,HttpServletResponse response) throws Exception {
