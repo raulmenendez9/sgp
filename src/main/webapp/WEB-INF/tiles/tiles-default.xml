@@ -100,6 +100,10 @@
 		<put-attribute name="content" value="/WEB-INF/views/Administration/SolicitudA/solicitudapro.jsp"/>
 	</definition>
 	
+	<definition name="Administration/Proyecto/estadisticas" extends="materializeTemplateForm">
+    	<put-attribute name="titulo" value="Estadisticas" />
+		<put-attribute name="content" value="/WEB-INF/views/Administration/Proyecto/estadisticas.jsp"/>
+	</definition>
 	
 	<definition name="Administration/Proyecto/proyecto" extends="materializeTemplate">
 		<put-attribute name="titulo" value="Registro de Proyectos"></put-attribute>
