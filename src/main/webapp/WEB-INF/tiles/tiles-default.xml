@@ -151,6 +151,12 @@
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Proyecto/matriz.jsp"></put-attribute>
 	</definition>
 	
+	<definition name="Administration/Proyecto/upload"
+		extends="materializeTemplateForm">
+		<put-attribute name="titulo" value="Subir archivo"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/views/Administration/Proyecto/upload.jsp"></put-attribute>
+	</definition>
+	
 		<definition name="Administration/Indicador/ayuda"
 		extends="materializeTemplate">
 		<put-attribute name="titulo" value="Ayuda"></put-attribute>
