@@ -12,6 +12,8 @@
 		<a class="waves-effect waves-light btn-floating modal-trigger green" href="/sgp/proyecto/add/"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
 </c:if>
 
+<a class="waves-effect waves-light btn-floating modal-trigger green" href="/sgp/upload/"><i class="material-icons" aria-hidden="true">cloud_upload</i></a>
+
 		
 		<hr>	
 	 	<div class="container">	
