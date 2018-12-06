@@ -12,7 +12,7 @@
 		<a class="waves-effect waves-light btn-floating modal-trigger green" href="/sgp/proyecto/add/"><i class="fa fa-plus-circle" aria-hidden="true"></i>Agregar</a>&nbsp;&nbsp;
 </c:if>
 
-<a class="waves-effect waves-light btn-floating modal-trigger green" href="/sgp/upload/"><i class="material-icons" aria-hidden="true">cloud_upload</i></a>
+<a class="waves-effect waves-light btn-floating modal-trigger green" href="#upload"><i class="material-icons" aria-hidden="true">cloud_upload</i></a>
 
 		
 		<hr>	
@@ -55,7 +55,53 @@
 </c:if>		
 	</div>
 </div>
+<!-- SUBIDA DE ARCHIVO -->
+<div id="upload" class="modal white darken-4">
+	<div class="modal-header"></div>
+<div id="contenido" class="card-panel hoverable">
 
+ <div class="container-fluid">
+  <div class="row-fluid">
+   <div class="col-md-6">
+     <fieldset style="border-radius:15px;">
+     <form method="POST" action="/sgp/uploadFile?${_csrf.parameterName}=${_csrf.token}" enctype="multipart/form-data">
+     
+     
+     <div class = "row">
+     
+               <label>Documento:</label>
+     <div class = "file-field input-field">
+     
+                  <div class = "btn">
+                  <i class="material-icons left">cloud_upload</i>
+                     <span>seleccionar archivo</span>
+                     <input type = "file" class="form-control" name="file"/>
+                  </div>
+                  
+                  <div class = "file-path-wrapper">
+                     <input class = "file-path validate" type = "text"
+                        placeholder = "Ningún archivo seleccionado" />
+                  </div>
+               </div>
+               
+            </div>
+
+      <!--  <div class="form-group">
+       <label for="Documento">Documento: </label>
+       
+       <input  type="file" class="form-control" name="file"/> 
+      </div>
+      <div class="form-group">-->
+       <input type="submit" class="form-control btn btn-success" value="Subir"/>
+       </fieldset>
+      </div>
+     </form>
+   </div>
+  </div>
+ </div>
+ </div>
+ 
+ <!-- TERMINA SUBIDA -->
 
 
 <!-- /.col-lg-12 -->

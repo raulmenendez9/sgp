@@ -1,10 +1,16 @@
 package com.sisbam.sgp.controller.administration;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -13,6 +19,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.sisbam.sgp.controller.variety.ObtenerPermisosPorUrl;
 import com.sisbam.sgp.dao.DaoImp;
 import com.sisbam.sgp.entity.administration.Actividad;
@@ -32,7 +42,7 @@ public class ProyectoController {
 	
 	private String path = "Administration/Proyecto/";
 	private static final String IDENTIFICADOR = "tipoS";
-	
+	private static final Logger logger = LoggerFactory.getLogger(ProyectoController.class);
 	private Permisos permisos;
 
 	@SuppressWarnings("unchecked")
@@ -176,5 +186,49 @@ public class ProyectoController {
 					}
 					return retorno;
 				}
+				@SuppressWarnings("unchecked")
+				@RequestMapping(value = "/upload", method = RequestMethod.GET)
+				
+				
+				public String subir(Model model, HttpServletRequest request) throws ClassNotFoundException{
+					
+					String retorno = "403";
+					retorno = path+"upload";
+					return retorno;
+				}
+				
+				//subir archivo
+				 @RequestMapping(value = "/uploadFile", method = {RequestMethod.POST,  RequestMethod.GET})
+				 
+				 public @ResponseBody String uploadFile(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws ClassNotFoundException{
+					 String retorno = "403"; 
+
+				  if (!file.isEmpty()) {
+				   try {
+				    byte[] bytes = file.getBytes();
+				    // Crear el directorio para almacenar el archivo
+				    String rootPath = System.getProperty("catalina.home");
+				    File dir = new File(rootPath + File.separator + "tmpFiles");
+				    
+				    if (!dir.exists())
+				     dir.mkdirs();
+
+				    // Crear documento en el servidor
+				    File serverFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
+				    BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+				    stream.write(bytes);
+				    stream.close();
+
+				    logger.info("Ubicación de documento = " + serverFile.getAbsolutePath());
+
+				    retorno = "Documento subido correctamente = " + file.getOriginalFilename() + " Ubicacion del Archivo = " + serverFile.getAbsolutePath();
+				   } catch (Exception e) {
+					   retorno = "Ocurrio un error al subir documento" + file.getOriginalFilename() + " => " + e.getMessage();
+				   }
+				  } else {
+					  retorno = "Ocurrio un error al subir " + file.getOriginalFilename() + " documento vacio.";
+				  }
+					 return retorno;
+				 }
 		
 }
