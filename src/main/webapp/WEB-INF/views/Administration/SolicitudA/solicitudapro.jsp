@@ -211,11 +211,12 @@
 						</c:forEach>
 					</form:select>
 				</div>
-				
+			
 			<div class="date">
 				<div class="input-field col s6">
+				
 					<form:input path="fecha" class="form-control" placeholder="fecha"
-						type="date" id="fecha" value="${solicitud.fecha }" required="true"/>
+						type="date" id="fecha" value="${solicitud.fecha}" required="required"/>
 				</div>
 			</div>
 			

@@ -33,17 +33,16 @@
       						<div class="determinate" style="width:${actividad.estado}%"></div>
       						</div>
   							</td>
-							 	<td>${actividad.fechaInicio}</td>
-							
+  							<td><fmt:formatDate value="${actividad.fechaInicio }" pattern="dd-MM-YYYY"/></td>
 							
 							<td width="5%">
 							<c:if test="${updateactividadP}">	
 									<a class="modal-trigger" href="#-${actividad.idActividad}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${deleteactividadP}">		
-									<a class="" href="/sgp/actividades/delete/${actividad.idActividad}" data-toggle="modal"data-target="#"" onclick="Borrar('${actividad.idActividad}');"><i class="fa fa-trash" aria-hidden="true"></i></a>
-							</c:if>	
-							
+									<a class="" href="/sgp/actividades/delete/${actividad.idActividad}" data-toggle="modal"data-target="#" onclick="Borrar('${actividad.idActividad}');" id="resultado"><i class="fa fa-trash" aria-hidden="true"></i></a>
+							</c:if>
+						
 							<a class="" href="/sgp/tareas" data-toggle="modal"data-target="#""><i class="fa fa-edit" aria-hidden="true">Registro de tareas</i></a>					
 						</td>
 						</tr>
@@ -213,14 +212,15 @@
 			</div>
 			
 			<form:hidden path="idActividad" value="${actividad.idActividad}" />
+				
 				<label for="FechaInicio">Fecha Inicio:</label>
-				<div class="date">
+				
+			<div class="date">
 			 
 				<div class="input-field col s6">
-				
 				 
 					<form:input path="fechaInicio" class="form-control" placeholder="fecha"
-						type="date" id="fechaInicio" value="${proyecto.fechaInicio}" required="required"/>
+						type="date" id="fechaInicio" value="${actividad.fechaInicio}" required="required"/>
 				</div>
 			
 			</div>
@@ -230,9 +230,10 @@
 				<div class="input-field col s6">
 				
 					<form:input path="fechaFin" class="form-control" placeholder="fecha"
-						type="date" id="fechaFin" value="${proyecto.fechaFin}" required="required"/>
+						type="date" id="fechaFin" value="${actividad.fechaFin}" required="required"/>
 				</div>
 			</div>
+			
 			
 
 			<div class="center">

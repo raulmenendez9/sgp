@@ -198,8 +198,9 @@
 				
 			<div class="date">
 				<div class="input-field col s6">
+				
 					<form:input path="fecha" class="form-control" placeholder="fecha"
-						type="date" id="fecha" value="${solicitud.fecha }" readonly="true"/>
+						type="date" id="fecha" value="${solicitud.fecha}" required="required"/>
 				</div>
 			</div>
 			
