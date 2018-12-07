@@ -32,7 +32,7 @@
   							</td>
   							<td><fmt:formatDate value="${actividad.fechaInicio }" pattern="dd-MM-YYYY"/></td>
   							
-							
+			
 							<td width="5%">
 							<c:if test="${updateactividadP}">	
 									<a class="modal-trigger" href="#-${actividad.idActividad}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
