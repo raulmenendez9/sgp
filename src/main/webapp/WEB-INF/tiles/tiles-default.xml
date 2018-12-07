@@ -143,6 +143,11 @@
 		<put-attribute name="titulo" value="Registro de indicadores por proyecto"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/views/Administration/Proyecto/proyectosindicador.jsp"></put-attribute>
 	</definition>
+	<definition name="Administration/Proyecto/proyectosact"
+		extends="materializeTemplateForm">
+		<put-attribute name="titulo" value="Evaluacion de actividades"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/views/Administration/Proyecto/proyectosact.jsp"></put-attribute>
+	</definition>
 	
 	
 		<definition name="Administration/Proyecto/matriz"

@@ -45,6 +45,7 @@
 							<a class="tooltipped" href="/sgp/proyectos/delete/${proyecto.codProyecto}" data-toggle="modal"data-target="#"" onclick="return confirmDel('${proyecto.codProyecto}');" data-position="bottom" data-tooltip="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;
 							<a class="tooltipped" href="/sgp/matriz/${proyecto.codProyecto}" data-position="bottom" data-tooltip="Matriz"><i class="fa fa-th-large red-text" aria-hidden="true"></i></a>&nbsp;
 							<a class="tooltipped" href="/sgp/pi/${proyecto.codProyecto}" data-position="right" data-tooltip="Indicador"><i class="fa fa-line-chart green-text"></i></a>
+							<a class="tooltipped" href="/sgp/actividad/${proyecto.codProyecto}" data-position="right" data-tooltip="Actividades"><i class="fa fa-folder green-text"></i>Ir a actividades</a>
 									
 							</c:if>						
 						</td>
