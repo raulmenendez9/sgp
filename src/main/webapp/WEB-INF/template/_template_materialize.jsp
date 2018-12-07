@@ -15,6 +15,16 @@
 
 <!-- *********************************************************** -->
 
+<!-- LIBRERIAS JS -->
+
+<script src="<c:url value="resources/Report/button.html5.min.js" />"></script>
+<script src="<c:url value="resources/Report/buttons.flash.min.js" />"></script>
+<script src="<c:url value="resources/Report/buttons.print.min.js" />"></script>
+<script src="<c:url value="resources/Report/dataTables.buttons.min.js" />"></script>
+<script src="<c:url value="resources/Report/jszip.min.js" />"></script>
+<script src="<c:url value="resources/Report/pdfmake.min.js" />"></script>
+<script src="<c:url value="resources/Report/vfs_fonts.js" />"></script>
+<!-- FIN DE LIBERIAS JS -->
 
 
 

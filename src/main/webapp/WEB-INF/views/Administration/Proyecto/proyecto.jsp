@@ -374,5 +374,21 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+	
+	$('#tabla').DataTable({
+		dom:'Bfrtip',
+		buttons:[
+			'copy', 'csv', 'excel', 'pdf', 'print'
+		]
+	});
+});
+
+</script>
+
+
 
 
