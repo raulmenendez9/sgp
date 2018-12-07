@@ -35,7 +35,7 @@
 									<a class="modal-trigger" href="#-${recurso.idRecurso}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${deletetipoS}">		
-									<a class="" href="/sgp/recursos/delete/${recurso.idRecurso}" data-toggle="modal"data-target="#"" onclick="Borrar('${recurso.idRecurso}');"><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a class="" href="/sgp/recursos/delete/${recurso.idRecurso}" data-toggle="modal"data-target="#"" onclick="return confirmDel('${recurso.idRecurso}');"><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>						
 						</td>
 						</tr>
@@ -189,7 +189,12 @@ function Borrar(idRecurso)
 	 location.href="/sgp/recursos";
 	}
  
-} 
+}
+function confirmDel(){
+	  var agree=confirm("¿Realmente desea eliminarlo? ");
+	  if (agree) return true ;
+	  return false;
+	}
 
 </script>
 

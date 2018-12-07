@@ -15,7 +15,7 @@
 		
 		<hr>	
 	 	<div class="container">	
-<c:if test="${readtipoS}">	
+	<c:if test="${readtipoS}">	
 			<table id="tabla" class="display hover cell-border"  cellspacing="0" width="100%">
 				<thead>
 					<tr>
@@ -35,7 +35,7 @@
 									<a class="modal-trigger" href="#-${tarea.idTarea}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${deletetipoS}">		
-									<a class="" href="/sgp/tareas/delete/${tarea.idTarea}" data-toggle="modal"data-target="#"" onclick="Borrar('${tarea.idTarea}');"><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a class="" href="/sgp/tareas/delete/${tarea.idTarea}" data-toggle="modal"data-target="#"" onclick="return confirmDel('${tarea.idTarea}')"><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>						
 						</td>
 						</tr>
@@ -226,21 +226,11 @@
 
 
 <script>
-function Borrar(idTarea)
-{
-
- var resul = confirm('¿Desea borrar la tarea seleccionada?');
- if(resul=true)
-	 {
-	   location.href="/sgp/tareas/delete/"+idTarea;
-	 }
- else (resul=false)
- {
-	 location.href="/sgp/tareas";
+function confirmDel(){
+	  var agree=confirm("¿Realmente desea eliminarlo? ");
+	  if (agree) return true ;
+	  return false;
 	}
- 
-} 
-
 </script>
 
 

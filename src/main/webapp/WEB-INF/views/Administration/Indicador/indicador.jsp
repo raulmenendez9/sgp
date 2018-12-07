@@ -51,7 +51,7 @@
 									<a class=""
 										href="/sgp/indicadores/delete/${indicador.idIndicador}"
 										data-toggle="modal" data-target="#"
-										" onclick="Borrar('${indicador.idIndicador}');"><i
+										" onclick="return confirmDel('${indicador.idIndicador}');"><i
 										class="fa fa-trash" aria-hidden="true"></i></a>
 								</c:if> 
 								<!-- Link to open the modal-->
@@ -589,5 +589,12 @@ $(document).ready(function(){
         $("#myModal").modal();
     });
 });
+
+function confirmDel(){
+	  var agree=confirm("¿Realmente desea eliminarlo? ");
+	  if (agree) return true ;
+	  return false;
+	}
+
 </script>
 	<tiles:insertAttribute name="content_javascript" />

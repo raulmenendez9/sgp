@@ -39,7 +39,7 @@
 									<a class=" modal-trigger" href="#-${funcion.idFuncion }"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${deletefuncionR}">		
-									<a class="" href="/sgp/funciones/delete/${funcion.idFuncion }" data-toggle="modal"data-target="#" onclick="Borrar('${funcion.idFuncion}');"><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a class="" href="/sgp/funciones/delete/${funcion.idFuncion }" data-toggle="modal"data-target="#" onclick="return confirmDel('${funcion.idFuncion}');"><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>																								
 						</td>															
 					</tr>
@@ -133,20 +133,11 @@
 
 <script>
 
-function Borrar(idFuncion)
-{
-
- var resul = confirm('¿Desea borrar la  seleccionada?');
- if(resul=true)
-	 {
-	   location.href="/sgp/funciones/delete/"+idFuncion;
-	 }
- else (resul=false)
- {
-	 location.href="/sgp/funciones";
+function confirmDel(){
+	  var agree=confirm("¿Realmente desea eliminarlo? ");
+	  if (agree) return true ;
+	  return false;
 	}
- 
-} 
 
 </script>
 

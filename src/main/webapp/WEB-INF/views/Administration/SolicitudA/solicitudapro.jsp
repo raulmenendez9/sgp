@@ -46,7 +46,7 @@
 									<a class="modal-trigger" href="#-${solicitud.codSolicitud}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${deletetipoSo}">		
-									<a class="" href="/sgp/solicitudesapro/delete/${solicitud.codSolicitud}" data-toggle="modal"data-target="#"" onclick="Borrar('${solicitud.codSolicitud}');"><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a class="" href="/sgp/solicitudesapro/delete/${solicitud.codSolicitud}" data-toggle="modal"data-target="#"" onclick="return confirmDel('${solicitud.codSolicitud}');"><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>	
 							
 							
@@ -267,6 +267,11 @@ function Borrar(codSolicitud)
 	}
  
 } 
+function confirmDel(){
+	  var agree=confirm("¿Realmente desea eliminarlo? ");
+	  if (agree) return true ;
+	  return false;
+	}
 
 </script>
 

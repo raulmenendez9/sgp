@@ -46,7 +46,7 @@
 							
 
 							<c:if test="${deletetipov}">		
-									<a class="" href="/sgp/variableImpactos/delete/${variableImpacto.idVariableImpacto }" data-toggle="modal"data-target="#" onclick="Borrar('${variableImpacto.idVariableImpacto}');" ><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a class="" href="/sgp/variableImpactos/delete/${variableImpacto.idVariableImpacto }" data-toggle="modal"data-target="#" onclick="return confirmDel('${variableImpacto.idVariableImpacto}');" ><i class="fa fa-trash" aria-hidden="true"></i></a>
 
 							</c:if>						
 						</td>
@@ -169,6 +169,12 @@ function Borrar(idVariableImpacto)
 	}
  
 } 
+function confirmDel(){
+	  var agree=confirm("¿Realmente desea eliminarlo? ");
+	  if (agree) return true ;
+	  return false;
+	}
+
 
 </script>
 

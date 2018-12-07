@@ -41,7 +41,7 @@
 									<a class=" modal-trigger" href="#-${tipoProyecto.idTipoProyecto }"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${deletetipoP}">		
-									<a class="" href="/sgp/tipoproyectos/delete/${tipoProyecto.idTipoProyecto }" data-toggle="modal"data-target="#" ><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a class="" href="/sgp/tipoproyectos/delete/${tipoProyecto.idTipoProyecto }" data-toggle="modal"data-target="#" onclick="return confirmDel('${proyecto.idTipoProyecto}');" id="resultado" ><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>						
 						</td>
 												
@@ -130,4 +130,13 @@
 	</div>
 
 </c:forEach>
+<script>
+function confirmDel(){
+	  var agree=confirm("¿Realmente desea eliminarlo? ");
+	  if (agree) return true ;
+	  return false;
+	}
+
+</script>
+
 

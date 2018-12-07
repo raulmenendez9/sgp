@@ -40,7 +40,7 @@
 									<a class="modal-trigger" href="#-${actividad.idActividad}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${deleteactividadP}">		
-									<a class="" href="/sgp/actividades/delete/${actividad.idActividad}" data-toggle="modal"data-target="#" onclick="Borrar('${actividad.idActividad}');" id="resultado"><i class="fa fa-trash" aria-hidden="true"></i></a>
+									<a class="" href="/sgp/actividades/delete/${actividad.idActividad}" data-toggle="modal"data-target="#" onclick="return confirmDel('${actividad.idActividad}');" id="resultado"><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>
 						
 							<a class="" href="/sgp/tareas" data-toggle="modal"data-target="#""><i class="fa fa-edit" aria-hidden="true">Registro de tareas</i></a>					
@@ -251,20 +251,11 @@
 </c:forEach>
 
 <script>
-function Borrar(idActividad)
-{
-
- var resul = confirm('¿Desea borrar la actividad seleccionada?');
- if(resul=true)
-	 {
-	   location.href="/sgp/actividades/delete/"+idActividad;
-	 }
- else (resul=false)
- {
-	 location.href="/sgp/actividades";
+function confirmDel(){
+	  var agree=confirm("¿Realmente desea eliminarlo? ");
+	  if (agree) return true ;
+	  return false;
 	}
- 
-} 
 
 </script>
 
