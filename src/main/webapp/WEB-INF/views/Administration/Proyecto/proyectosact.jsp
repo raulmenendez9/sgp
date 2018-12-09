@@ -17,9 +17,10 @@
 						<th>Progreso</th>
 						<th>Fecha Inicio</th>
 						
-						<th>Opciones</th>
+						
 					</tr>
 				</thead>
+				
 				<tbody>
 					<c:forEach items="${actividades}" var="actividad">
 						<tr style="color:#0B0B61;">
@@ -31,30 +32,29 @@
       						</div>
   							</td>
   							<td><fmt:formatDate value="${actividad.fechaInicio }" pattern="dd-MM-YYYY"/></td>
-  							
-			
-							<td width="5%">
-							<c:if test="${updateactividadP}">	
-									<a class="modal-trigger" href="#-${actividad.idActividad}"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
-							</c:if>
-							<c:if test="${deleteactividadP}">		
-									<a class="" href="/sgp/actividades/delete/${actividad.idActividad}" data-toggle="modal"data-target="#" onclick="return confirmDel('${actividad.idActividad}');" id="resultado"><i class="fa fa-trash" aria-hidden="true"></i></a>
-							</c:if>
-						
-							<a class="" href="/sgp/tareas" data-toggle="modal"data-target="#""><i class="fa fa-edit" aria-hidden="true">Registro de tareas</i></a>					
-						</td>
 						</tr>
 					</c:forEach>
+							
 				</tbody>
-			</table>
-			<B>Promedio de progreso de Actividades:</B>
+				<tfoot>
+				<tr>
+				<td><B>Avance del proyeto: "${promedio}"</B></td>
 				
-			<div class="row">
-				<div class="input-field col s6">
-					<input name="promedio" id="promedio"  value="${promedio}" required="true" readonly="true" >
-					
-				</div>
-				</div>
+				<td></td>
+				<td></td>
+				<td>
+				<c:if test="${promedio==100}">
+				<a class="btn-floating btn-large waves-effect waves-light green tooltipped" data-position="left" data-tooltip="Finalizar"><i class="material-icons">beenhere</i></a>
+				</c:if>
+				</td>
+				</tr>
+				</tfoot>
+				
+			</table>
+			
+			
+				
+			
 				
 
 	</div>

@@ -177,18 +177,27 @@ public class ProyectoController {
 				@RequestMapping(value = "/actividad/{id}", method =  RequestMethod.GET)
 				public String actividad(@PathVariable("id") String codProyecto, Model model, HttpServletRequest request) throws ClassNotFoundException {
 					String retorno="403";
+					Double promedio = 0.0;
 					if(permisos.isD()) {
 					
 					List<Actividad> actividades = (List<Actividad>) this.manage_entity.getListByName("Actividad", "codpoyecto", codProyecto);
 					model.addAttribute("actividades", actividades);
-					List<Actividad> actividad8 = new ArrayList<Actividad>();
-					String query8="select round(avg(estado),2) from actividad where codpoyecto="+Integer.parseInt(codProyecto);
-					actividad8 = (List<Actividad>) manage_entity.executeNativeQuery(query8);
-					model.addAttribute("promedio", actividad8);
+					
+					for(Actividad act : actividades)
+					{
+						promedio = promedio + act.getEstado();
+					}
+					
+					promedio = promedio / actividades.size();
+					model.addAttribute("promedio",promedio);
 					retorno=path + "proyectosact";
 					}
 					return retorno;
 				}
+				
+				
+				
+				
 				//Matriz
 				@RequestMapping(value = "/matriz/{id}", method =  RequestMethod.GET)
 				public String matriz(@PathVariable("id") String codProyecto, Model model, HttpServletRequest request) throws ClassNotFoundException {
@@ -202,6 +211,8 @@ public class ProyectoController {
 					}
 					return retorno;
 				}
+				
+				
 				@SuppressWarnings("unchecked")
 				@RequestMapping(value = "/upload", method = RequestMethod.GET)
 				

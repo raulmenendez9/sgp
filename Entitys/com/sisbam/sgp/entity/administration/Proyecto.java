@@ -41,6 +41,7 @@ public class Proyecto implements java.io.Serializable {
 	private String antecedentes;
 	private String metodologia;
 	private int duracion;
+	private boolean habilitado;
 	//
 	private String objeitovG;
 	private String objetivoE1;
@@ -58,7 +59,7 @@ public class Proyecto implements java.io.Serializable {
 		
 	public Proyecto(int codProyecto, String ambitoImpacto, Date fechaInicio, Date fechaFin, int duracion, String tipoFinanciamiento,
 			float montoAprobado, String patrocinadores, String resumen, String planteamiento, String antecedentes,
-			String metodologia, Solicitud solicitud, String objetivoG,String objetivoE1,String objetivoE2,String objetivoE3,String objetivoE4,String objetivoE5,String medidaSostenibilidad) {
+			String metodologia, Solicitud solicitud, String objetivoG,String objetivoE1,String objetivoE2,String objetivoE3,String objetivoE4,String objetivoE5,String medidaSostenibilidad, boolean habilitado) {
 	
 		this.objeitovG=objetivoG;
 		this.objetivoE1=objetivoE1;
@@ -80,6 +81,7 @@ public class Proyecto implements java.io.Serializable {
 		this.antecedentes = antecedentes;
 		this.metodologia = metodologia;
 		this.solicitud = solicitud;
+		this.habilitado = true;
 	}
 
 	@Transient
@@ -155,10 +157,23 @@ public class Proyecto implements java.io.Serializable {
 		this.duracion= duracion;
 	}
 		
+	//
+	@Column(name = "habilitado", nullable = false)
+	public boolean isHabilitado() {
+		return habilitado;
+	}
+
+	public void setHabilitado(boolean habilitado) {
+		this.habilitado = habilitado;
+	}
+	
+	 //
+	
 	@Column(name = "tipoFinanciamiento", nullable = false, length = 256)
 	public String getTipoFinanciamiento() {
 		return tipoFinanciamiento;
 	}
+
 	public void setTipoFinanciamiento(String tipoFinanciamiento) {
 		this.tipoFinanciamiento= tipoFinanciamiento;
 	}
