@@ -88,7 +88,7 @@ public class ProyectoController {
 			Proyecto proyecto = new Proyecto();
 
 			List<String> consulta = new ArrayList<String>();
-			String sql = "SELECT s.codsoliciutud, s.estado, s.fecha, s.justificacion,s.objetivo, s.titulo FROM Solicitud as s WHERE NOT EXISTS (SELECT null FROM Proyecto as z WHERE z.codSolicitud = s.codsoliciutud)";
+			String sql = "SELECT s.codsoliciutud, s.estado, s.fecha, s.justificacion,s.objetivo, s.titulo FROM Solicitud as s WHERE s.estado="+true+" and NOT EXISTS (SELECT null FROM Proyecto as z WHERE z.codSolicitud = s.codsoliciutud) ";
 			consulta = (List<String>) manage_entity.executeNativeQuery(sql);		
 			model.addAttribute("solicitudes", consulta);
 			model.addAttribute("proyectoForm", proyecto);

@@ -216,7 +216,7 @@
 				<div class="input-field col s6">
 				
 					<form:input path="fecha" class="form-control" placeholder="fecha"
-						type="date" id="fecha" value="${solicitud.fecha}" required="required"/>
+						type="date" id="datapicker" value="${solicitud.fecha}" required="required"/>
 				</div>
 			</div>
 			
@@ -272,6 +272,9 @@ function confirmDel(){
 	  if (agree) return true ;
 	  return false;
 	}
+
+</script>
+<script type="text/javascript">
 
 </script>
 

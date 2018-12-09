@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<!-- JEFE DE DEPARTAMENTO -->
 <div id="contenido" class="card-panel hoverable">
 <!-- 
 <c:if test="${createtipoS}">	
@@ -19,6 +19,7 @@
 <c:if test="${readtipoS}">	
 			<table id="tabla" class="display hover cell-border"  cellspacing="0" width="100%">
 				<thead>
+				
 					<tr>
 						<th>Titulo</th>
 						<th>Estado</th>
@@ -162,7 +163,7 @@
 
 			<div class="row">
 				<div class="input-field col s12">
-					<form:select path="idUsuario" class="form-control" required="true">
+					<form:select path="idUsuario" class="form-control" required="true" id="elusuario">
 						<option value="" disabled selected>Selecione un usuario</option>
 						<c:forEach items="${usuarios}" var="p">
 							<c:choose>
@@ -180,7 +181,7 @@
 			</div>
 			
 				<div class="input-field col s6">
-					<form:select path="idTipoProyecto" class="form-control" required="true">
+					<form:select path="idTipoProyecto" class="form-control" required="true" id="eltipo">
 						<option value="" disabled selected>Selecione un tipo de proyectos</option>
 						<c:forEach items="${tiposProyectos}" var="p">
 							<c:choose>
@@ -200,7 +201,7 @@
 				<div class="input-field col s6">
 				
 					<form:input path="fecha" class="form-control" placeholder="fecha"
-						type="date" id="fecha" value="${solicitud.fecha}" required="required"/>
+						type="date" id="fechasoli" value="${solicitud.fecha}" required="required"/>
 				</div>
 			</div>
 			
@@ -239,5 +240,12 @@ function confirmDel(){
 	  if (agree) return true ;
 	  return false;
 	}
+
+</script>
+
+<script>
+
+document.getElementById("elusuario").disabled = true;
+document.getElementById("eltipo").disabled = true;
 
 </script>

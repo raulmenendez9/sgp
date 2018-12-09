@@ -17,6 +17,20 @@
 <!-- Definición de Apache Tiles para el titulo de la página -->
 <title><tiles:getAsString name="titulo" /></title>
 
+
+<!-- pdf -->
+<script src="<c:url value="resources/Report/button.html5.min.js" />"></script>
+<script src="<c:url value="resources/Report/buttons.flash.min.js" />"></script>
+<script src="<c:url value="resources/Report/buttons.print.min.js" />"></script>
+<script src="<c:url value="resources/Report/dataTables.buttons.min.js" />"></script>
+<script src="<c:url value="resources/Report/jszip.min.js" />"></script>
+<script src="<c:url value="resources/Report/pdfmake.min.js" />"></script>
+<script src="<c:url value="resources/Report/vfs_fonts.js" />"></script>
+
+<!-- fin pdf -->
+
+
+
 <!-- Librerias CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link
@@ -123,7 +137,7 @@
 		src="<c:url value="resources/vendor/datatables/js/jquery.dataTables.min.js"/> "></script>
 	<script
 		src="<c:url value="resources/vendor/datatables-plugins/dataTables.bootstrap.min.js"/> "></script>
-	<scriptx
+	<script
 		src="<c:url value="resources/vendor/datatables-responsive/dataTables.responsive.js"/> "></script>
 	
 	<script src="<c:url value="	resources/vendor/bootstrap/dist/bootstrap-toggle.min.js"/> "></script>

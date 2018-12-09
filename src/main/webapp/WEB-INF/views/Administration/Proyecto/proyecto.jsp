@@ -18,13 +18,13 @@
 		<hr>	
 	 	<div class="container">	
 <c:if test="${readtipoS}">	
-			<table id="tabla" class="display hover cell-border"  cellspacing="0" width="100%">
+			<table id="example" class="display hover cell-border"  cellspacing="0" width="100%">
 				<thead>
 					<tr>
 						<th>Nombre</th>
 						<th>Responsable</th>
 						<th>Tipo Proyecto</th>
-						<th>Duracion <br>[dias]</br></th>
+						<th>Duracion <br>[dias]</th>
 						<th>Opciones</th>
 					</tr>
 				</thead>
@@ -42,10 +42,10 @@
 									<a class="modal-trigger tooltipped" href="#-${proyecto.codProyecto}" data-position="left" data-tooltip="Actualizar"><i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp;
 							</c:if>
 							<c:if test="${deletetipoS}">		
-							<a class="tooltipped" href="/sgp/proyectos/delete/${proyecto.codProyecto}" data-toggle="modal"data-target="#"" onclick="return confirmDel('${proyecto.codProyecto}');" data-position="bottom" data-tooltip="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;
+							<a class="tooltipped" href="/sgp/proyectos/delete/${proyecto.codProyecto}" data-toggle="modal"data-target="#" onclick="return confirmDel('${proyecto.codProyecto}');" data-position="bottom" data-tooltip="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;
 							<a class="tooltipped" href="/sgp/matriz/${proyecto.codProyecto}" data-position="bottom" data-tooltip="Matriz"><i class="fa fa-th-large red-text" aria-hidden="true"></i></a>&nbsp;
-							<a class="tooltipped" href="/sgp/pi/${proyecto.codProyecto}" data-position="right" data-tooltip="Indicador"><i class="fa fa-line-chart green-text"></i></a>
-							<a class="tooltipped" href="/sgp/actividad/${proyecto.codProyecto}" data-position="right" data-tooltip="Actividades"><i class="fa fa-folder green-text"></i>Ir a actividades</a>
+							<a class="tooltipped" href="/sgp/pi/${proyecto.codProyecto}" data-position="right" data-tooltip="Indicador"><i class="fa fa-line-chart green-text"></i></a>&nbsp;
+							<a class="tooltipped" href="/sgp/actividad/${proyecto.codProyecto}" data-position="right" data-tooltip="Actividades"><i class="fa fa-folder green-text"></i></a>
 									
 							</c:if>						
 						</td>
@@ -375,11 +375,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <script type="text/javascript">
-
-
 $(document).ready(function(){
-	
-	$('#tabla').DataTable({
+	$('#example').DataTable({
 		dom:'Bfrtip',
 		buttons:[
 			'copy', 'csv', 'excel', 'pdf', 'print'

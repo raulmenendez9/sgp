@@ -17,7 +17,8 @@
 				<thead>
 					<tr>
 						<th>Nombre</th>
-						<th>Descripción</th>
+						<th>Proyecto</th>
+						
 						<th>Progreso</th>
 						<th>Fecha Inicio</th>
 						<th>Opciones</th>
@@ -27,8 +28,8 @@
 					<c:forEach items="${actividades}" var="actividad">
 						<tr style="color:#0B0B61;">
 							<td>${actividad.nombre }</td>
-				
-							 	<td>${actividad.descripcion}</td>
+							<td>${actividad.proyecto.solicitud.titulo }</td>
+							 	
 							 	<td><div class="progress">
       						<div class="determinate" style="width:${actividad.estado}%"></div>
       						</div>
@@ -43,7 +44,7 @@
 									<a class="" href="/sgp/actividades/delete/${actividad.idActividad}" data-toggle="modal"data-target="#" onclick="return confirmDel('${actividad.idActividad}');" id="resultado"><i class="fa fa-trash" aria-hidden="true"></i></a>
 							</c:if>
 						
-							<a class="" href="/sgp/tareas" data-toggle="modal"data-target="#""><i class="fa fa-edit" aria-hidden="true">Registro de tareas</i></a>					
+							<a class="" href="/sgp/tareas" data-toggle="modal"data-target="#""><i class="fa fa-edit" aria-hidden="true"></i></a>					
 						</td>
 						</tr>
 					</c:forEach>
@@ -220,7 +221,7 @@
 				<div class="input-field col s6">
 				 
 					<form:input path="fechaInicio" class="form-control" placeholder="fecha"
-						type="date" id="fechaInicio" value="${actividad.fechaInicio}" required="required"/>
+						type="date" id="fechaact1" value="${actividad.fechaInicio}" required="required"/>
 				</div>
 			
 			</div>
@@ -230,7 +231,7 @@
 				<div class="input-field col s6">
 				
 					<form:input path="fechaFin" class="form-control" placeholder="fecha"
-						type="date" id="fechaFin" value="${actividad.fechaFin}" required="required"/>
+						type="date" id="fechaact2" value="${actividad.fechaFin}" required="required"/>
 				</div>
 			</div>
 			
@@ -260,5 +261,10 @@ function confirmDel(){
 </script>
 
 
+<script>
 
+    document.getElementById("fechaact1").disabled = true;
+    document.getElementById("fechaact2").disabled = true;
+
+</script>
 
