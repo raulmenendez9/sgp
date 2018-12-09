@@ -67,7 +67,8 @@ public class ProyectoController {
 			model.addAttribute("proyectoForm", proyecto);
 			model.addAttribute("proyecto", null);
 	
-			List<Proyecto> proyectos = (List<Proyecto>) this.manage_entity.getAll("Proyecto");
+			//List<Proyecto> proyectos = (List<Proyecto>) this.manage_entity.getAll("Proyecto");
+			List<Indicador> proyectos = (List<Indicador>) this.manage_entity.getListByName("Proyecto", "habilitado", "true");
 			List<Solicitud> solicitudes = (List<Solicitud>) this.manage_entity.getAll("Solicitud");
 			model.addAttribute("solicitudes", solicitudes);
 			model.addAttribute("proyectos", proyectos);
@@ -173,7 +174,7 @@ public class ProyectoController {
 					}
 					return retorno;
 				}
-				//Actividades
+				//Actividades Gabriel
 				@RequestMapping(value = "/actividad/{id}", method =  RequestMethod.GET)
 				public String actividad(@PathVariable("id") String codProyecto, Model model, HttpServletRequest request) throws ClassNotFoundException {
 					String retorno="403";
@@ -182,6 +183,9 @@ public class ProyectoController {
 					
 					List<Actividad> actividades = (List<Actividad>) this.manage_entity.getListByName("Actividad", "codpoyecto", codProyecto);
 					model.addAttribute("actividades", actividades);
+					
+					Proyecto proyecto = (Proyecto) manage_entity.getById(Proyecto.class.getName(), Integer.parseInt(codProyecto));
+					model.addAttribute("idProyecto", proyecto.getCodProyecto());
 					
 					for(Actividad act : actividades)
 					{
@@ -195,10 +199,26 @@ public class ProyectoController {
 					return retorno;
 				}
 				
+				//Terminar proyecto Gabriel
+				@RequestMapping(value = "/proyectos/end/{id}", method =  RequestMethod.GET)
+				public String proyectoEnd(@PathVariable("id") String codProyecto, Model model) throws ClassNotFoundException {
+				
+					String retorno ="403";
+					Proyecto proyecto = (Proyecto) manage_entity.getById(Proyecto.class.getName(), Integer.parseInt(codProyecto));
+					System.out.println(proyecto.getDuracion());
+					proyecto.setHabilitado(false);
+					manage_entity.update(Proyecto.class.getName(), proyecto);
+					model.addAttribute("proyecto", proyecto);
+				Proyecto proyectoForm = new Proyecto();
+				model.addAttribute("proyectoForm", proyectoForm);
+					retorno="redirect:/proyectos";
+					return retorno;
+					
+				}
+		
 				
 				
-				
-				//Matriz
+				//Matriz Gabriel
 				@RequestMapping(value = "/matriz/{id}", method =  RequestMethod.GET)
 				public String matriz(@PathVariable("id") String codProyecto, Model model, HttpServletRequest request) throws ClassNotFoundException {
 					String retorno="403";

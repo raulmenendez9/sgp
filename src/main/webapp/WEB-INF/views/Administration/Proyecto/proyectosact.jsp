@@ -44,7 +44,7 @@
 				<td></td>
 				<td>
 				<c:if test="${promedio==100}">
-				<a class="btn-floating btn-large waves-effect waves-light green tooltipped" data-position="left" data-tooltip="Finalizar"><i class="material-icons">beenhere</i></a>
+				<a class="btn-floating btn-large waves-effect waves-light green tooltipped" href="/sgp/proyectos/end/${idProyecto}" data-position="left" data-tooltip="Finalizar"><i class="material-icons">beenhere</i></a>
 				</c:if>
 				</td>
 				</tr>

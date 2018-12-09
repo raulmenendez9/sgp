@@ -41,7 +41,7 @@ public class Proyecto implements java.io.Serializable {
 	private String antecedentes;
 	private String metodologia;
 	private int duracion;
-	private boolean habilitado;
+	private boolean habilitado =true;
 	//
 	private String objeitovG;
 	private String objetivoE1;
