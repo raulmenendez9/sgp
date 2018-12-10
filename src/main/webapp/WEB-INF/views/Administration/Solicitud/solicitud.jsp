@@ -243,9 +243,4 @@ function confirmDel(){
 
 </script>
 
-<script>
 
-document.getElementById("elusuario").disabled = true;
-document.getElementById("eltipo").disabled = true;
-
-</script>

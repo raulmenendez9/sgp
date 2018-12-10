@@ -174,7 +174,7 @@ public class ProyectoController {
 					}
 					return retorno;
 				}
-				//Actividades Gabriel
+				//Actividades Raul
 				@RequestMapping(value = "/actividad/{id}", method =  RequestMethod.GET)
 				public String actividad(@PathVariable("id") String codProyecto, Model model, HttpServletRequest request) throws ClassNotFoundException {
 					String retorno="403";
