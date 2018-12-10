@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class ExceptionsController {
 
-	
+/*	
 	//COMERNTAR ESTOS METODOS CUANDO SE ESTE DEPURANDO, PARA OBTENER UN ERROR MAS DETALLADO
 
 	 @ExceptionHandler(Exception.class)
@@ -76,7 +76,7 @@ public class ExceptionsController {
 	    }
 	 
 	 
-	
+	*/
 }
 
 

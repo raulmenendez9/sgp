@@ -143,6 +143,15 @@
 				</div>
 			</div>
 			
+				<div class="row">
+				<div class="input-field col s10 center-align">
+				<i class="material-icons prefix red-text">email</i>
+					<form:input path="correo" class="form-control"
+						type="email" id="Correo" value="${solicitud.correo }" required="true"/>
+						<label for="Correo">Digite el correo del jefe de departamento</label>
+				</div>
+			</div>
+			
 			
 			<form:hidden path="codSolicitud" value="${solicitud.idSolicitud}" />
 

@@ -36,6 +36,7 @@ public class Solicitud implements java.io.Serializable {
 	private Date fecha;
 	private String justificacion;
 	private String objeto;
+	private String correo;
 	
 	
 	private TipoProyecto tipoProyecto;
@@ -184,6 +185,14 @@ public class Solicitud implements java.io.Serializable {
 	}
 	public void setTitulo(String titulo) {
 		this.titulo= titulo;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 	
 
