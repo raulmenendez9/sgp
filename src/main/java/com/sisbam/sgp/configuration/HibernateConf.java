@@ -21,9 +21,9 @@ public class HibernateConf {
 	public DataSource restDataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("org.postgresql.Driver");
-		dataSource.setUrl("jdbc:postgresql://localhost:5432/quimica");
-		dataSource.setUsername("sisbam_user");
-		dataSource.setPassword("bryan2422");
+		dataSource.setUrl("jdbc:postgresql://localhost:5432/d9g01ahadabair");
+		dataSource.setUsername("onvyfzfzktljub");
+		dataSource.setPassword("e4061346fb8bdca4a4e71ad26d56cce0283e90e1a3e610b43828e0e5cf7b1dce");
 
 
 		return dataSource;
